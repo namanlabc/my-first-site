@@ -1,945 +1,141 @@
 ---
-const features = [
-  {
-    title: "Find content opportunities",
-    description:
-      "Discover useful topics, keywords, and pages your competitors are missing.",
-  },
-  {
-    title: "Create stronger briefs",
-    description:
-      "Turn a simple keyword into a clear content structure your writers can use.",
-  },
-  {
-    title: "Improve existing pages",
-    description:
-      "Identify weak sections, missing questions, and opportunities to improve rankings.",
-  },
-];
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
 
-const stats = [
-  { value: "10×", label: "faster research" },
-  { value: "24/7", label: "AI assistance" },
-  { value: "1", label: "simple workspace" },
-];
+// Query blog posts and sort by pubDate (newest first)
+const posts = await getCollection('blog');
+const recentPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5); // Show up to 5 recent posts
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <meta
-      name="description"
-      content="RankPilot helps creators and businesses research, plan, and improve SEO content."
-    />
-    <title>RankPilot — AI SEO Workspace</title>
-  </head>
+<Layout>
+  <!-- Personal Introduction Section -->
+  <section class="mb-14" aria-label="Introduction">
+    <h2 class="text-xl font-serif font-bold text-text mb-4">Hello, I'm Luffy.</h2>
+    <p class="text-base text-text/85 leading-relaxed font-serif mb-4">
+      I make things on the internet, tell stories, and write to make sense of the world. 
+      This is my quiet corner of the web. I build simple software, think about how tech shapes 
+      our lives, and share whatever sparks my curiosity.
+    </p>
+    <p class="text-base text-text/85 leading-relaxed font-serif">
+      No tracking scripts, no advertisements, and no algorithms. Just words, code, and thoughts 
+      cast out into the digital ether.
+    </p>
+  </section>
 
-  <body>
-    <header class="navbar">
-      <a href="/" class="logo">
-        <span class="logo-mark">R</span>
-        RankPilot
+  <!-- Recent Writing Section -->
+  <section class="mb-14" aria-labelledby="recent-writing-heading">
+    <div class="flex items-baseline justify-between mb-6 pb-2 border-b border-border-subtle/30">
+      <h3 id="recent-writing-heading" class="text-xs font-mono font-semibold tracking-wider uppercase text-text/55">
+        Recent Writing
+      </h3>
+      <a href={`${baseUrl}archive`} class="text-xs font-mono text-accent hover:text-accent-hover transition-colors no-underline">
+        All Posts &rarr;
       </a>
+    </div>
 
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#workflow">How it works</a>
-        <a href="#pricing">Pricing</a>
-      </nav>
+    {recentPosts.length === 0 ? (
+      <p class="text-sm font-mono text-text/50">No posts published yet.</p>
+    ) : (
+      <div class="space-y-8">
+        {recentPosts.map((post) => {
+          const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
 
-      <a href="#cta" class="button button-small">Start free</a>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <div class="eyebrow">AI-powered SEO workspace</div>
-
-          <h1>
-            Turn scattered ideas into
-            <span>content that can rank.</span>
-          </h1>
-
-          <p class="hero-description">
-            Research keywords, create content briefs, and improve existing pages
-            without jumping between ten different SEO tools.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#cta" class="button">Build your first brief</a>
-            <a href="#workflow" class="button button-secondary">
-              See how it works
-            </a>
-          </div>
-
-          <div class="trust-line">
-            No credit card required · Beginner friendly · Built for speed
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="browser-bar">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <div class="tool-preview">
-            <div class="tool-sidebar">
-              <div class="sidebar-logo">RP</div>
-              <div class="sidebar-item active"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-            </div>
-
-            <div class="tool-main">
-              <div class="preview-header">
-                <div>
-                  <small>New project</small>
-                  <h3>AI SEO Content Brief</h3>
+          return (
+            <article class="group relative flex flex-col gap-1">
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                <h4 class="text-lg font-serif font-semibold text-text group-hover:text-accent transition-colors">
+                  <a href={`${baseUrl}blog/${post.id}`} class="no-underline block">
+                    {post.data.title}
+                  </a>
+                </h4>
+                <time datetime={post.data.pubDate.toISOString()} class="text-xs font-mono text-text/45 shrink-0">
+                  {formattedDate}
+                </time>
+              </div>
+              <p class="text-sm text-text/75 leading-relaxed font-serif">
+                {post.data.description}
+              </p>
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="flex gap-2 mt-1">
+                  {post.data.tags.map((tag) => (
+                    <span class="text-[11px] font-mono text-accent/70 bg-card-bg/40 px-1.5 py-0.5 rounded">
+                      #{tag}
+                    </span>
+                  ))}
                 </div>
-
-                <span class="status">Ready</span>
-              </div>
-
-              <div class="search-box">
-                best running shoes for beginners
-                <span>Generate</span>
-              </div>
-
-              <div class="preview-grid">
-                <div class="preview-panel">
-                  <small>Search intent</small>
-                  <strong>Commercial investigation</strong>
-                  <div class="bar long"></div>
-                  <div class="bar medium"></div>
-                </div>
-
-                <div class="preview-panel">
-                  <small>Content score</small>
-                  <strong class="score">87</strong>
-                  <div class="progress">
-                    <div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="preview-panel outline">
-                <small>Recommended outline</small>
-                <div class="outline-row">01 · How to choose running shoes</div>
-                <div class="outline-row">02 · Best options for beginners</div>
-                <div class="outline-row">03 · Common buying mistakes</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="stats">
-        {
-          stats.map((stat) => (
-            <div class="stat">
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </div>
-          ))
-        }
-      </section>
-
-      <section class="section" id="features">
-        <div class="section-heading">
-          <span>Everything in one place</span>
-          <h2>Spend less time researching and more time publishing.</h2>
-          <p>
-            RankPilot keeps the important parts of your SEO workflow together
-            in one clean dashboard.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          {
-            features.map((feature, index) => (
-              <article class="feature-card">
-                <div class="feature-number">0{index + 1}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
-      <section class="section workflow" id="workflow">
-        <div class="workflow-copy">
-          <span class="section-label">A simpler workflow</span>
-          <h2>From keyword to publish-ready plan in minutes.</h2>
-          <p>
-            Enter a topic, review the AI-generated strategy, and turn it into a
-            page your audience actually wants to read.
-          </p>
-        </div>
-
-        <div class="steps">
-          <div class="step">
-            <span>1</span>
-            <div>
-              <h3>Enter your topic</h3>
-              <p>Start with a keyword, question, product, or competitor.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <span>2</span>
-            <div>
-              <h3>Review the strategy</h3>
-              <p>See intent, structure, questions, and content opportunities.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <span>3</span>
-            <div>
-              <h3>Create and improve</h3>
-              <p>Use the plan to write a stronger and more useful page.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="pricing-section" id="pricing">
-        <div class="pricing-card">
-          <div>
-            <span class="section-label">Simple pricing</span>
-            <h2>Start free. Upgrade when the tool proves useful.</h2>
-            <p>
-              Explore the basic workflow first. No complicated contracts or
-              expensive enterprise setup.
-            </p>
-          </div>
-
-          <div class="price">
-            <strong>$0</strong>
-            <span>to begin</span>
-            <a href="#cta" class="button">Create free account</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta" id="cta">
-        <span>Ready to build smarter?</span>
-        <h2>Your next high-ranking page starts with a better plan.</h2>
-        <p>
-          Join the early-access list and be among the first to try RankPilot.
-        </p>
-
-        <form class="email-form">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            aria-label="Email address"
-          />
-          <button type="button">Join early access</button>
-        </form>
-      </section>
-    </main>
-
-    <footer>
-      <a href="/" class="logo">
-        <span class="logo-mark">R</span>
-        RankPilot
-      </a>
-
-      <p>© 2026 RankPilot. Built with Astro.</p>
-    </footer>
-  </body>
-</html>
-
-<style>
-  :global(*) {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  :global(html) {
-    scroll-behavior: smooth;
-  }
-
-  :global(body) {
-    min-height: 100vh;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(109, 94, 252, 0.13), transparent 28%),
-      radial-gradient(circle at 85% 20%, rgba(48, 207, 208, 0.1), transparent 24%),
-      #080b14;
-    color: #f7f8fb;
-    font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      sans-serif;
-  }
-
-  :global(a) {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .navbar {
-    width: min(1180px, calc(100% - 40px));
-    height: 82px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.05rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
-
-  .logo-mark {
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #7667ff, #3ed1c5);
-    color: white;
-  }
-
-  nav {
-    display: flex;
-    gap: 32px;
-    color: #adb3c5;
-    font-size: 0.92rem;
-  }
-
-  nav a:hover {
-    color: white;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50px;
-    padding: 0 22px;
-    border: 0;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #7667ff, #5a49e8);
-    color: white;
-    font: inherit;
-    font-weight: 700;
-    box-shadow: 0 12px 35px rgba(95, 78, 230, 0.25);
-    cursor: pointer;
-  }
-
-  .button:hover {
-    transform: translateY(-2px);
-  }
-
-  .button-small {
-    min-height: 42px;
-    padding: 0 18px;
-    font-size: 0.9rem;
-  }
-
-  .button-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: none;
-  }
-
-  .hero {
-    width: min(1180px, calc(100% - 40px));
-    min-height: 690px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 0.95fr 1.05fr;
-    align-items: center;
-    gap: 70px;
-    padding: 75px 0 100px;
-  }
-
-  .eyebrow,
-  .section-label,
-  .section-heading > span,
-  .cta > span {
-    display: inline-flex;
-    margin-bottom: 20px;
-    color: #8f86ff;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-  }
-
-  h1 {
-    max-width: 650px;
-    font-size: clamp(3.2rem, 6vw, 5.8rem);
-    line-height: 0.98;
-    letter-spacing: -0.065em;
-  }
-
-  h1 span {
-    color: #8d84ff;
-  }
-
-  .hero-description {
-    max-width: 580px;
-    margin-top: 28px;
-    color: #adb3c5;
-    font-size: 1.1rem;
-    line-height: 1.75;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    margin-top: 36px;
-  }
-
-  .trust-line {
-    margin-top: 22px;
-    color: #747b8e;
-    font-size: 0.83rem;
-  }
-
-  .hero-card {
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px);
-    transform: rotate(1deg);
-  }
-
-  .browser-bar {
-    height: 44px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0 16px;
-  }
-
-  .browser-bar span {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #323849;
-  }
-
-  .tool-preview {
-    min-height: 470px;
-    display: grid;
-    grid-template-columns: 68px 1fr;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #f7f8fb;
-    color: #141722;
-  }
-
-  .tool-sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    padding-top: 22px;
-    background: #111522;
-  }
-
-  .sidebar-logo {
-    width: 35px;
-    height: 35px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 14px;
-    border-radius: 10px;
-    background: #7767ff;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 800;
-  }
-
-  .sidebar-item {
-    width: 27px;
-    height: 7px;
-    border-radius: 10px;
-    background: #2c3242;
-  }
-
-  .sidebar-item.active {
-    background: #7868ff;
-  }
-
-  .tool-main {
-    padding: 30px;
-  }
-
-  .preview-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .preview-header small,
-  .preview-panel small {
-    color: #868b99;
-  }
-
-  .preview-header h3 {
-    margin-top: 5px;
-    font-size: 1.2rem;
-  }
-
-  .status {
-    padding: 7px 10px;
-    border-radius: 30px;
-    background: #e3f8ef;
-    color: #27855f;
-    font-size: 0.7rem;
-    font-weight: 700;
-  }
-
-  .search-box {
-    height: 55px;
-    margin-top: 25px;
-    padding: 0 8px 0 17px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #dfe2e9;
-    border-radius: 11px;
-    color: #666c7a;
-    font-size: 0.78rem;
-  }
-
-  .search-box span {
-    padding: 11px 14px;
-    border-radius: 8px;
-    background: #7667ff;
-    color: white;
-    font-weight: 700;
-  }
-
-  .preview-grid {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 15px;
-  }
-
-  .preview-panel {
-    padding: 18px;
-    border: 1px solid #e7e9ee;
-    border-radius: 12px;
-    background: white;
-  }
-
-  .preview-panel strong {
-    display: block;
-    margin-top: 9px;
-    font-size: 0.83rem;
-  }
-
-  .bar {
-    height: 7px;
-    margin-top: 14px;
-    border-radius: 20px;
-    background: #eceef3;
-  }
-
-  .bar.long {
-    width: 90%;
-  }
-
-  .bar.medium {
-    width: 65%;
-  }
-
-  .score {
-    font-size: 2rem !important;
-    color: #7667ff;
-  }
-
-  .progress {
-    height: 7px;
-    margin-top: 15px;
-    overflow: hidden;
-    border-radius: 20px;
-    background: #eceef3;
-  }
-
-  .progress div {
-    width: 87%;
-    height: 100%;
-    background: #7667ff;
-  }
-
-  .outline {
-    margin-top: 15px;
-  }
-
-  .outline-row {
-    margin-top: 13px;
-    padding: 11px;
-    border-radius: 8px;
-    background: #f5f6f9;
-    color: #545a68;
-    font-size: 0.75rem;
-  }
-
-  .stats {
-    width: min(900px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 35px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid rgba(255, 255, 255, 0.09);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .stat strong {
-    font-size: 2rem;
-  }
-
-  .stat span {
-    color: #7f8699;
-    font-size: 0.85rem;
-  }
-
-  .section {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 140px 0;
-  }
-
-  .section-heading {
-    max-width: 720px;
-    margin: 0 auto 60px;
-    text-align: center;
-  }
-
-  .section-heading h2,
-  .workflow-copy h2,
-  .pricing-card h2,
-  .cta h2 {
-    font-size: clamp(2.2rem, 4vw, 3.7rem);
-    line-height: 1.08;
-    letter-spacing: -0.05em;
-  }
-
-  .section-heading p,
-  .workflow-copy p,
-  .pricing-card p,
-  .cta p {
-    margin-top: 20px;
-    color: #969db0;
-    line-height: 1.75;
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-
-  .feature-card {
-    min-height: 280px;
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.035);
-  }
-
-  .feature-number {
-    color: #7767ff;
-    font-size: 0.78rem;
-    font-weight: 800;
-  }
-
-  .feature-card h3 {
-    margin-top: 70px;
-    font-size: 1.35rem;
-  }
-
-  .feature-card p {
-    margin-top: 13px;
-    color: #8e95a8;
-    line-height: 1.65;
-  }
-
-  .workflow {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 90px;
-    align-items: start;
-  }
-
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .step {
-    display: flex;
-    gap: 18px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.035);
-  }
-
-  .step > span {
-    width: 38px;
-    height: 38px;
-    flex: 0 0 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 10px;
-    background: #7667ff;
-    font-weight: 800;
-  }
-
-  .step h3 {
-    font-size: 1rem;
-  }
-
-  .step p {
-    margin-top: 7px;
-    color: #8990a2;
-    line-height: 1.55;
-  }
-
-  .pricing-section {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding-bottom: 130px;
-  }
-
-  .pricing-card {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 70px;
-    align-items: center;
-    padding: 55px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, #161a2a, #10131e);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .price {
-    min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .price strong {
-    font-size: 4rem;
-    letter-spacing: -0.07em;
-  }
-
-  .price span {
-    margin-bottom: 22px;
-    color: #8e95a8;
-  }
-
-  .cta {
-    width: min(900px, calc(100% - 40px));
-    margin: 0 auto 100px;
-    padding: 90px 40px;
-    border-radius: 30px;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(119, 103, 255, 0.3), transparent 45%),
-      #121624;
-    text-align: center;
-  }
-
-  .cta p {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .email-form {
-    max-width: 520px;
-    margin: 32px auto 0;
-    padding: 7px;
-    display: flex;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .email-form input {
-    flex: 1;
-    min-width: 0;
-    padding: 0 15px;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    color: white;
-    font: inherit;
-  }
-
-  .email-form button {
-    min-height: 46px;
-    padding: 0 18px;
-    border: 0;
-    border-radius: 9px;
-    background: white;
-    color: #151824;
-    font: inherit;
-    font-weight: 800;
-    cursor: pointer;
-  }
-
-  footer {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 30px 0 45px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  footer p {
-    color: #697083;
-    font-size: 0.82rem;
-  }
-
-  @media (max-width: 900px) {
-    nav {
-      display: none;
-    }
-
-    .hero {
-      grid-template-columns: 1fr;
-      gap: 60px;
-    }
-
-    .hero-content {
-      text-align: center;
-    }
-
-    .hero-description {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-actions {
-      justify-content: center;
-    }
-
-    .feature-grid,
-    .workflow {
-      grid-template-columns: 1fr;
-    }
-
-    .workflow {
-      gap: 45px;
-    }
-
-    .pricing-card {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .navbar {
-      width: min(100% - 24px, 1180px);
-    }
-
-    .navbar > .button {
-      display: none;
-    }
-
-    .hero {
-      width: min(100% - 24px, 1180px);
-      padding-top: 50px;
-    }
-
-    h1 {
-      font-size: 3.3rem;
-    }
-
-    .hero-actions {
-      flex-direction: column;
-    }
-
-    .hero-actions .button {
-      width: 100%;
-    }
-
-    .tool-main {
-      padding: 18px;
-    }
-
-    .tool-preview {
-      grid-template-columns: 45px 1fr;
-    }
-
-    .preview-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .stats {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-
-    .feature-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .section,
-    .pricing-section {
-      width: min(100% - 24px, 1120px);
-      padding-top: 100px;
-    }
-
-    .pricing-card,
-    .cta {
-      padding: 40px 24px;
-    }
-
-    .email-form {
-      flex-direction: column;
-      background: transparent;
-      border: 0;
-    }
-
-    .email-form input {
-      min-height: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    footer {
-      flex-direction: column;
-      gap: 20px;
-    }
-  }
-</style>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    )}
+  </section>
+
+  <!-- Currently Section (Signature Element) -->
+  <section class="mb-14 p-5 rounded-lg border border-border-subtle/40 bg-card-bg/25 relative overflow-hidden" aria-labelledby="currently-heading">
+    <!-- Pulsing Active LED Indicator -->
+    <div class="absolute top-5 right-5 flex items-center gap-1.5" aria-hidden="true">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+      </span>
+      <span class="text-[10px] font-mono uppercase text-accent font-semibold tracking-wider">Live</span>
+    </div>
+
+    <h3 id="currently-heading" class="text-xs font-mono font-bold uppercase tracking-wider text-text/60 mb-4 flex items-center gap-1.5">
+      [ Luffy: Live Status ]
+    </h3>
+    
+    <ul class="space-y-3 text-sm font-mono text-text/80 leading-normal">
+      <li class="flex items-start gap-2">
+        <span class="text-accent select-none">&bull;</span>
+        <span><strong class="text-text font-semibold">Building:</strong> A clean personal ecosystem using Astro 7 and Tailwind v4.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent select-none">&bull;</span>
+        <span><strong class="text-text font-semibold">Reading:</strong> <em class="italic">The Anthropocene Reviewed</em> by John Green.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent select-none">&bull;</span>
+        <span><strong class="text-text font-semibold">Thinking:</strong> The profound value of owning your own platform in an age of rented audiences.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="p-6 rounded-lg border border-dashed border-border-subtle/80 bg-card-bg/10" aria-labelledby="newsletter-heading">
+    <h3 id="newsletter-heading" class="text-sm font-serif font-bold text-text mb-2">Subscribe to Luffy's Notes</h3>
+    <p class="text-xs font-mono text-text/60 mb-4 leading-relaxed">
+      No tracking. No analytics. Unsubscribe with one click. I'll email you only when I publish new writing here.
+    </p>
+
+    <!-- Visual Mock Only Form -->
+    <form class="flex flex-col sm:flex-row gap-2" onsubmit="event.preventDefault(); alert('This is a visual-only mockup! No backend is connected.');">
+      <input 
+        type="email" 
+        placeholder="your.email@address.com" 
+        required
+        class="flex-1 px-3 py-2 text-sm font-mono bg-bg border border-border-subtle/60 rounded focus:border-accent focus:outline-none placeholder:text-text/30"
+        aria-label="Email Address"
+      />
+      <button 
+        type="submit" 
+        class="px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider text-bg bg-accent hover:bg-accent-hover rounded cursor-pointer transition-all active:scale-[0.98]"
+      >
+        Subscribe
+      </button>
+    </form>
+    
+    <p class="text-[10px] font-mono text-accent/60 mt-2 text-right">
+      * Mock signup (no data is stored or transmitted)
+    </p>
+  </section>
+</Layout>

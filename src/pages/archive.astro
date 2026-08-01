@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+// Query blog posts and sort by pubDate (newest first)
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Group posts by year of publication
+const postsByYear: Record<number, typeof posts> = {};
+for (const post of sortedPosts) {
+  const year = new Date(post.data.pubDate).getFullYear();
+  if (!postsByYear[year]) {
+    postsByYear[year] = [];
+  }
+  postsByYear[year].push(post);
+}
+
+// Sort years descending
+const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<Layout title="Archive" description="A chronological index of everything Luffy has published, cataloged neatly by year.">
+  <div class="w-full">
+    <header class="mb-10">
+      <h1 class="text-3xl font-serif font-bold tracking-tight text-text mb-3">
+        Archive
+      </h1>
+      <p class="text-sm font-mono text-text/50">
+        A chronological index of everything I've written on this blog.
+      </p>
+    </header>
+
+    {years.length === 0 ? (
+      <p class="text-sm font-mono text-text/50">No notes written yet.</p>
+    ) : (
+      <div class="space-y-12">
+        {years.map((year) => (
+          <section aria-labelledby={`year-heading-${year}`}>
+            <h2 id={`year-heading-${year}`} class="text-sm font-mono font-bold text-accent border-b border-border-subtle/30 pb-1.5 mb-5 select-none">
+              {year}
+            </h2>
+
+            <ul class="space-y-4" role="list">
+              {postsByYear[year].map((post) => {
+                const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                });
+
+                return (
+                  <li class="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                    <span class="text-base font-serif font-medium text-text group-hover:text-accent transition-colors">
+                      <a href={`${baseUrl}blog/${post.id}`} class="no-underline block">
+                        {post.data.title}
+                      </a>
+                    </span>
+                    <time datetime={post.data.pubDate.toISOString()} class="text-xs font-mono text-text/40 shrink-0 select-none">
+                      {formattedDate}
+                    </time>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

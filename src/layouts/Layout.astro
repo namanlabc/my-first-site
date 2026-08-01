@@ -1,23 +1,137 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Luffy", 
+  description = "Notes on building things, the internet, stories, and figuring life out." 
+} = Astro.props;
+
+// Ensure base path is properly formatted
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <link rel="icon" href={`${baseUrl}favicon.ico`} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO and Social Metadata -->
+    <title>{title === "Luffy" ? title : `${title} | Luffy`}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    
+    <!-- RSS Feed Discovery -->
+    <link rel="alternate" type="application/rss+xml" title="Luffy's Notes" href={`${baseUrl}rss.xml`} />
+
+    <!-- Inlined theme initialization script to prevent FOUC -->
+    <script is:inline>
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="selection:bg-accent/20 min-h-screen flex flex-col items-center">
+    <div class="main-container w-full max-w-2xl px-6 py-10 flex-1 flex flex-col">
+      <!-- Navigation Header -->
+      <header class="mb-14">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4">
+          <div>
+            <a href={baseUrl} class="text-2xl font-bold tracking-tight text-text hover:text-accent font-serif transition-colors no-underline">
+              Luffy
+            </a>
+            <p class="text-xs text-text/60 mt-1 font-mono tracking-tight leading-normal">
+              Notes on building things, the internet, stories, and figuring life out.
+            </p>
+          </div>
+
+          <nav class="flex items-center gap-4 text-sm font-mono tracking-tight self-start sm:self-auto">
+            <a href={baseUrl} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
+              Home
+            </a>
+            <a href={`${baseUrl}about`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
+              About
+            </a>
+            <a href={`${baseUrl}archive`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
+              Archive
+            </a>
+            <a href={`${baseUrl}rss.xml`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors" target="_blank">
+              RSS
+            </a>
+            
+            <!-- Dark Mode Toggle Button -->
+            <button 
+              id="theme-toggle" 
+              class="ml-2 p-1.5 rounded-md hover:bg-card-bg text-text/70 hover:text-text border border-border-subtle/50 hover:border-border-subtle cursor-pointer transition-all duration-150"
+              aria-label="Toggle theme"
+            >
+              <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+              <svg id="theme-toggle-light-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95a1 1 0 11-1.414-1.414 1 1 0 011.414 1.414zm-9.9-9.9a1 1 0 011.414-1.414 1 1 0 01-1.414 1.414zm2.22 9.9a1 1 0 11-1.414 1.414 1 1 0 011.414-1.414zm9.9-9.9a1 1 0 00-1.414 1.414 1 1 0 001.414-1.414zM11 15a1 1 0 110 2 1 1 0 010-2zm-6-5a1 1 0 100-2 1 1 0 000 2zm11 0a1 1 0 100-2 1 1 0 000 2z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Slot Content -->
+      <main class="flex-1 flex flex-col">
+        <slot />
+      </main>
+
+      <!-- Simple Footer -->
+      <footer class="mt-16 pt-6 border-t border-border-subtle/40 text-xs font-mono text-text/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          &copy; {new Date().getFullYear()} Luffy.
+        </div>
+        <div class="flex gap-4">
+          <span class="text-accent">●</span> Crafted with curiosity &amp; Astro.
+        </div>
+      </footer>
+    </div>
+
+    <!-- Theme Toggler Execution Script -->
+    <script>
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      function updateIcons() {
+        if (document.documentElement.classList.contains('dark')) {
+          darkIcon?.classList.add('hidden');
+          lightIcon?.classList.remove('hidden');
+        } else {
+          lightIcon?.classList.add('hidden');
+          darkIcon?.classList.remove('hidden');
+        }
+      }
+
+      // Initial icon state
+      updateIcons();
+
+      themeToggleBtn?.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateIcons();
+      });
+    </script>
+  </body>
+</html>

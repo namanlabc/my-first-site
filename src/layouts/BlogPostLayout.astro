@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from './Layout.astro';
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags } = post.data;
+
+const baseUrl = import.meta.env.BASE_URL;
+
+// Dynamically compute reading time (approx. 200 words per minute)
+const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Query and sort posts to find Previous and Next navigation links
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const currentIndex = sortedPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+
+// Date formatter
+const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={title} description={description}>
+  <article class="w-full">
+    <!-- Post Header -->
+    <header class="mb-8 pb-6 border-b border-border-subtle/40">
+      <div class="flex items-center gap-2 mb-3">
+        <a href={baseUrl} class="text-xs font-mono text-accent hover:text-accent-hover transition-colors no-underline">
+          &larr; Back Home
+        </a>
+      </div>
+      
+      <h1 class="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-text leading-tight mb-4">
+        {title}
+      </h1>
+
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-text/50">
+        <time datetime={pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+        <span class="text-text/30">•</span>
+        <span>
+          {readingTime} min read
+        </span>
+        {tags && tags.length > 0 && (
+          <>
+            <span class="text-text/30">•</span>
+            <div class="flex gap-2">
+              {tags.map((tag: string) => (
+                <span class="text-accent/80">#{tag}</span>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- Post Body (Prose Style) -->
+    <div class="prose w-full mb-12">
+      <slot />
+    </div>
+
+    <!-- Navigation & Footer Actions -->
+    <nav class="pt-8 border-t border-border-subtle/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-xs">
+      {prevPost ? (
+        <a href={`${baseUrl}blog/${prevPost.id}`} class="flex-1 text-left p-4 rounded-lg border border-border-subtle/30 hover:border-accent/40 bg-card-bg/20 hover:bg-card-bg/50 transition-all group no-underline">
+          <div class="text-text/40 mb-1">&larr; Previous Post</div>
+          <div class="text-text font-serif font-semibold group-hover:text-accent transition-colors line-clamp-1">
+            {prevPost.data.title}
+          </div>
+        </a>
+      ) : (
+        <div class="flex-1 hidden sm:block"></div>
+      )}
+
+      {nextPost ? (
+        <a href={`${baseUrl}blog/${nextPost.id}`} class="flex-1 text-right p-4 rounded-lg border border-border-subtle/30 hover:border-accent/40 bg-card-bg/20 hover:bg-card-bg/50 transition-all group no-underline">
+          <div class="text-text/40 mb-1">Next Post &rarr;</div>
+          <div class="text-text font-serif font-semibold group-hover:text-accent transition-colors line-clamp-1">
+            {nextPost.data.title}
+          </div>
+        </a>
+      ) : (
+        <div class="flex-1 hidden sm:block"></div>
+      )}
+    </nav>
+  </article>
+</Layout>
