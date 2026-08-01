@@ -26,7 +26,7 @@ export async function GET(context) {
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Luffy's Notes</title>
+  <title>Naman's Notes</title>
   <link>${siteUrl}/</link>
   <description>Notes on building things, the internet, stories, and figuring life out.</description>
   <language>en-us</language>

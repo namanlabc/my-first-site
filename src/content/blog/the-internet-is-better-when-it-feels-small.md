@@ -23,7 +23,7 @@ When you write on a small, personal blog like this one, the pressure evaporates.
 ```html
 <!-- A simple, cozy web link -->
 <a href="https://namanlabc.github.io/my-first-site" class="custom-link">
-  Luffy's Blog
+  Naman's Blog
 </a>
 ```
 

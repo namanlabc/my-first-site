@@ -7,12 +7,13 @@ interface Props {
 }
 
 const { 
-  title = "Luffy", 
+  title = "Naman", 
   description = "Notes on building things, the internet, stories, and figuring life out." 
 } = Astro.props;
 
 // Ensure base path is properly formatted
-const baseUrl = import.meta.env.BASE_URL;
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
 ---
 
 <!doctype html>
@@ -25,14 +26,14 @@ const baseUrl = import.meta.env.BASE_URL;
     <meta name="generator" content={Astro.generator} />
     
     <!-- SEO and Social Metadata -->
-    <title>{title === "Luffy" ? title : `${title} | Luffy`}</title>
+    <title>{title === "Naman" ? title : `${title} | Naman`}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     
     <!-- RSS Feed Discovery -->
-    <link rel="alternate" type="application/rss+xml" title="Luffy's Notes" href={`${baseUrl}rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title="Naman's Notes" href={`${baseUrl}rss.xml`} />
 
     <!-- Inlined theme initialization script to prevent FOUC -->
     <script is:inline>
@@ -53,7 +54,7 @@ const baseUrl = import.meta.env.BASE_URL;
         <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4">
           <div>
             <a href={baseUrl} class="text-2xl font-bold tracking-tight text-text hover:text-accent font-serif transition-colors no-underline">
-              Luffy
+              Naman
             </a>
             <p class="text-xs text-text/60 mt-1 font-mono tracking-tight leading-normal">
               Notes on building things, the internet, stories, and figuring life out.
@@ -77,11 +78,23 @@ const baseUrl = import.meta.env.BASE_URL;
             <!-- Dark Mode Toggle Button -->
             <button 
               id="theme-toggle" 
-              class="ml-2 p-1.5 rounded-md hover:bg-card-bg text-text/70 hover:text-text border border-border-subtle/50 hover:border-border-subtle cursor-pointer transition-all duration-150"
+              class="ml-2 p-1.5 rounded-md hover:bg-card-bg text-text/70 hover:text-text border border-border-subtle/50 hover:border-border-subtle cursor-pointer transition-all duration-150 flex items-center justify-center"
               aria-label="Toggle theme"
             >
-              <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-              <svg id="theme-toggle-light-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95a1 1 0 11-1.414-1.414 1 1 0 011.414 1.414zm-9.9-9.9a1 1 0 011.414-1.414 1 1 0 01-1.414 1.414zm2.22 9.9a1 1 0 11-1.414 1.414 1 1 0 011.414-1.414zm9.9-9.9a1 1 0 00-1.414 1.414 1 1 0 001.414-1.414zM11 15a1 1 0 110 2 1 1 0 010-2zm-6-5a1 1 0 100-2 1 1 0 000 2zm11 0a1 1 0 100-2 1 1 0 000 2z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+              <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+              <svg id="theme-toggle-light-icon" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
             </button>
           </nav>
         </div>
@@ -95,10 +108,7 @@ const baseUrl = import.meta.env.BASE_URL;
       <!-- Simple Footer -->
       <footer class="mt-16 pt-6 border-t border-border-subtle/40 text-xs font-mono text-text/50 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          &copy; {new Date().getFullYear()} Luffy.
-        </div>
-        <div class="flex gap-4">
-          <span class="text-accent">●</span> Crafted with curiosity &amp; Astro.
+          &copy; {new Date().getFullYear()} Naman.
         </div>
       </footer>
     </div>

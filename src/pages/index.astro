@@ -8,13 +8,14 @@ const recentPosts = posts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5); // Show up to 5 recent posts
 
-const baseUrl = import.meta.env.BASE_URL;
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
 ---
 
 <Layout>
   <!-- Personal Introduction Section -->
   <section class="mb-14" aria-label="Introduction">
-    <h2 class="text-xl font-serif font-bold text-text mb-4">Hello, I'm Luffy.</h2>
+    <h2 class="text-xl font-serif font-bold text-text mb-4">Hello, I'm Naman.</h2>
     <p class="text-base text-text/85 leading-relaxed font-serif mb-4">
       I make things on the internet, tell stories, and write to make sense of the world. 
       This is my quiet corner of the web. I build simple software, think about how tech shapes 
@@ -91,7 +92,7 @@ const baseUrl = import.meta.env.BASE_URL;
     </div>
 
     <h3 id="currently-heading" class="text-xs font-mono font-bold uppercase tracking-wider text-text/60 mb-4 flex items-center gap-1.5">
-      [ Luffy: Live Status ]
+      [ Naman: Live Status ]
     </h3>
     
     <ul class="space-y-3 text-sm font-mono text-text/80 leading-normal">
@@ -112,7 +113,7 @@ const baseUrl = import.meta.env.BASE_URL;
 
   <!-- Newsletter Section -->
   <section class="p-6 rounded-lg border border-dashed border-border-subtle/80 bg-card-bg/10" aria-labelledby="newsletter-heading">
-    <h3 id="newsletter-heading" class="text-sm font-serif font-bold text-text mb-2">Subscribe to Luffy's Notes</h3>
+    <h3 id="newsletter-heading" class="text-sm font-serif font-bold text-text mb-2">Subscribe to Naman's Notes</h3>
     <p class="text-xs font-mono text-text/60 mb-4 leading-relaxed">
       No tracking. No analytics. Unsubscribe with one click. I'll email you only when I publish new writing here.
     </p>
