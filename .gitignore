@@ -22,3 +22,21 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# AI coding tools and local instructions
+.agents/
+.gemini/
+.cline/
+.opencode/
+GEMINI.md
+AGENTS.md
+skills-lock.json
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/
+Thumbs.db
