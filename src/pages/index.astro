@@ -21,6 +21,11 @@ const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
       This is my quiet corner of the web. I build simple software, think about how tech shapes 
       our lives, and share whatever sparks my curiosity.
     </p>
+    <p class="text-base text-text/85 leading-relaxed font-serif mb-4">
+      When I'm not building things, I'm usually watching anime — and <em class="italic">One Piece</em> 
+      has been my favorite for as long as I can remember. Luffy and the crew are a constant 
+      reminder to chase what matters and never give up.
+    </p>
     <p class="text-base text-text/85 leading-relaxed font-serif">
       No tracking scripts, no advertisements, and no algorithms. Just words, code, and thoughts 
       cast out into the digital ether.
@@ -82,23 +87,17 @@ const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
 
   <!-- Currently Section (Signature Element) -->
   <section class="mb-14 p-5 rounded-lg border border-border-subtle/40 bg-card-bg/25 relative overflow-hidden" aria-labelledby="currently-heading">
-    <!-- Pulsing Active LED Indicator -->
-    <div class="absolute top-5 right-5 flex items-center gap-1.5" aria-hidden="true">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-      </span>
-      <span class="text-[10px] font-mono uppercase text-accent font-semibold tracking-wider">Live</span>
-    </div>
+    <!-- Quiet static accent dot (no more "live" pulse) -->
+    <span class="absolute top-5 right-5 inline-flex rounded-full h-2 w-2 bg-accent" aria-hidden="true"></span>
 
     <h3 id="currently-heading" class="text-xs font-mono font-bold uppercase tracking-wider text-text/60 mb-4 flex items-center gap-1.5">
-      [ Naman: Live Status ]
+      [ Naman &middot; Right Now ]
     </h3>
     
     <ul class="space-y-3 text-sm font-mono text-text/80 leading-normal">
       <li class="flex items-start gap-2">
         <span class="text-accent select-none">&bull;</span>
-        <span><strong class="text-text font-semibold">Building:</strong> A clean personal ecosystem using Astro 7 and Tailwind v4.</span>
+        <span><strong class="text-text font-semibold">Watching:</strong> <em class="italic">One Piece</em> — still sailing with Luffy and the crew. It's my all-time favorite anime.</span>
       </li>
       <li class="flex items-start gap-2">
         <span class="text-accent select-none">&bull;</span>
@@ -106,7 +105,7 @@ const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
       </li>
       <li class="flex items-start gap-2">
         <span class="text-accent select-none">&bull;</span>
-        <span><strong class="text-text font-semibold">Thinking:</strong> The profound value of owning your own platform in an age of rented audiences.</span>
+        <span><strong class="text-text font-semibold">Enjoying:</strong> Warm chai, late-night anime marathons, and building this corner of the web.</span>
       </li>
     </ul>
   </section>
