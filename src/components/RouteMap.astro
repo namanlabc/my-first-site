@@ -1,49 +1,7 @@
 ---
 import MakerAtlas from './MakerAtlas.astro';
-
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-const routes = [
-  { label: 'building', detail: 'tools + Calm WP', href: `${base}projects/`, icon: 'build' },
-  { label: 'SEO work', detail: 'search + content', href: `${base}about/#exploring`, icon: 'search' },
-  { label: 'writing', detail: 'notes + lessons', href: `${base}archive/`, icon: 'write' },
-  { label: 'off-screen', detail: 'One Piece + chai', href: `${base}about/#off-screen`, icon: 'rest' },
-];
 ---
 
-<nav class="route-map" aria-label="Explore Naman's interests">
-  <div class="route-map__heading">
-    <div>
-      <p class="route-map__origin">maker’s atlas</p>
-      <p class="route-map__caption">projects, search & side quests</p>
-    </div>
-  </div>
+<div class="route-map">
   <MakerAtlas />
-  <ul>
-    {routes.map((route) => (
-      <li>
-        <a href={route.href}>
-          <span class="route-map__waypoint" aria-hidden="true">
-            {route.icon === 'build' && (
-              <svg viewBox="0 0 24 24"><path d="m14 7 3-3 3 3-3 3M4 20l7.5-7.5M8 7l9 9M5 4l3 3-3 3-3-3 3-3Z" /></svg>
-            )}
-            {route.icon === 'search' && (
-              <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5M7 12l2.5-3 2 2 3-4" /></svg>
-            )}
-            {route.icon === 'write' && (
-              <svg viewBox="0 0 24 24"><path d="m4 20 4.5-1 10-10-3.5-3.5-10 10L4 20ZM13.5 7l3.5 3.5M4 20h7" /></svg>
-            )}
-            {route.icon === 'rest' && (
-              <svg viewBox="0 0 24 24"><path d="M5 8h11v7a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5V8ZM16 10h1a3 3 0 0 1 0 6h-1M8 4c0 1 1 1 1 2M12 3c0 1 1 1 1 2" /></svg>
-            )}
-          </span>
-          <span class="route-map__copy">
-            <strong>{route.label}</strong>
-            <small>{route.detail}</small>
-          </span>
-        </a>
-      </li>
-    ))}
-  </ul>
-</nav>
+</div>

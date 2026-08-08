@@ -506,282 +506,286 @@ button {
   isolation: isolate;
   min-width: 0;
   overflow: hidden;
-  padding: 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--lagoon) 55%, #ffffff);
-  border-radius: 1rem;
-  color: #ffffff;
-  background: linear-gradient(
-    145deg,
-    var(--blue-field),
-    color-mix(in srgb, var(--blue-field) 76%, var(--lagoon))
-  );
-  box-shadow: 0 1.4rem 3rem -2.25rem color-mix(in srgb, var(--blue-field) 82%, transparent);
-}
-
-.route-map::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  background: repeating-radial-gradient(
-    ellipse at 112% -8%,
-    transparent 0 1.05rem,
-    rgba(255, 255, 255, 0.1) 1.1rem 1.16rem,
-    transparent 1.21rem 2rem
-  );
-  pointer-events: none;
-}
-
-.route-map__heading {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.15rem;
-}
-
-.route-map__origin {
-  margin: 0;
-  color: color-mix(in srgb, #ffffff 82%, transparent);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.route-map__caption {
-  margin: 0.25rem 0 0;
-  color: rgba(255, 255, 255, 0.72);
-  font-family: var(--reading);
-  font-size: 0.86rem;
-}
-
-.route-map ul {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.55rem;
-  margin: 0;
   padding: 0;
-  list-style: none;
-}
-
-.route-map li + li {
-  margin-top: 0;
-}
-
-.route-map a {
-  min-height: 4.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--lagoon) 55%, #ffffff);
+  border-radius: 1.4rem;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-  text-decoration: none;
-  transition: background-color 160ms ease, border-color 160ms ease, transform 260ms var(--ease-out);
+  background: var(--blue-field);
+  box-shadow: 0 1.7rem 3.5rem -2.15rem color-mix(in srgb, var(--blue-field) 90%, transparent);
 }
 
-.route-map a:hover,
-.route-map a:focus-visible {
-  border-color: color-mix(in srgb, var(--yellow) 62%, #ffffff);
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+/* Character-led editorial illustration with a loose, hand-drawn shape language. */
+.route-map {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.route-map__waypoint {
-  width: 2.2rem;
-  height: 2.2rem;
-  flex: 0 0 2.2rem;
-  display: grid;
-  place-items: center;
-  border-radius: 0.65rem;
-  color: #12171f;
-  background: var(--yellow);
-  transform: rotate(-2deg);
-  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
-}
-
-.route-map__waypoint svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.route-map a:hover .route-map__waypoint,
-.route-map a:focus-visible .route-map__waypoint {
-  transform: rotate(4deg) translateY(-2px);
-  box-shadow: -0.3rem 0.3rem 0 rgba(255, 255, 255, 0.16);
-}
-
-.route-map__copy {
-  min-width: 0;
-  display: grid;
-}
-
-.route-map__copy strong {
-  font-family: var(--display);
-  font-size: 0.98rem;
-  line-height: 1.2;
-}
-
-.route-map__copy small {
-  color: rgba(255, 255, 255, 0.82);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  overflow-wrap: anywhere;
-}
-
-/* The maker's atlas: one custom illustration, no image request or JS bundle. */
 .maker-atlas {
-  position: relative;
-  z-index: 1;
+  display: block;
   width: 100%;
   height: auto;
-  margin: -0.15rem 0 0.45rem;
+  aspect-ratio: 640 / 650;
   overflow: visible;
+  filter: drop-shadow(0 1.5rem 1.25rem rgba(3, 52, 61, 0.12));
 }
 
-.maker-atlas * {
+.maker-atlas path,
+.maker-atlas circle,
+.maker-atlas rect {
   vector-effect: non-scaling-stroke;
 }
 
-.maker-atlas__orbit {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.35);
-  stroke-width: 2;
-  stroke-dasharray: 5 8;
-  animation: atlas-route 14s linear infinite;
-}
-
-.maker-atlas__orbit--short {
-  stroke: color-mix(in srgb, var(--yellow) 72%, transparent);
-  animation-direction: reverse;
-}
-
-.maker-atlas__stars {
-  fill: var(--yellow);
-  stroke: var(--yellow);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.maker-atlas__plane {
-  fill: var(--yellow);
-  stroke: var(--blue-field);
-  stroke-width: 1.5;
+.maker-scene__backdrop {
+  fill: #fff8df;
+  stroke: #12282d;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transform-origin: center;
-  animation: atlas-float 4.5s ease-in-out infinite;
 }
 
-.maker-atlas__shadow {
-  fill: rgba(0, 0, 0, 0.23);
-}
-
-.maker-atlas__island {
+.maker-scene__doodles {
   fill: var(--yellow);
-  stroke: #12171f;
-  stroke-width: 2;
+  stroke: var(--coral-field);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.maker-atlas__island-edge {
+.maker-scene__pages > g {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: maker-page-float 6s ease-in-out infinite;
+}
+
+.maker-scene__page--two {
+  animation-delay: -2s !important;
+}
+
+.maker-scene__page--three {
+  animation-delay: -4s !important;
+}
+
+.maker-scene__pages path:first-child {
+  fill: #fffdf7;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.maker-scene__pages circle {
+  fill: var(--coral-field);
+  stroke: #12282d;
+  stroke-width: 1.5;
+}
+
+.maker-scene__pages path:not(:first-child) {
   fill: none;
+  stroke: #0a6375;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__pages .maker-scene__chart {
   stroke: var(--coral-field);
+  stroke-width: 4;
+}
+
+.maker-scene__lens > circle:first-child {
+  fill: var(--yellow);
+  stroke: #12282d;
+  stroke-width: 4;
+}
+
+.maker-scene__lens > circle:nth-child(2) {
+  fill: color-mix(in srgb, var(--lagoon) 22%, #fffdf7);
+  stroke: #12282d;
+  stroke-width: 3;
+}
+
+.maker-scene__lens > path {
+  fill: none;
+  stroke: #12282d;
+  stroke-width: 15;
+  stroke-linecap: round;
+}
+
+.maker-scene__lens .maker-scene__lens-signal {
+  stroke: #0a6375;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.maker-scene__lens .maker-scene__lens-dot {
+  fill: var(--coral-field);
+  stroke: #fffdf7;
+  stroke-width: 3;
+}
+
+.maker-scene__back-arm,
+.maker-scene__front-arm,
+.maker-scene__back-hand,
+.maker-scene__front-hand,
+.maker-scene__neck,
+.maker-scene__head,
+.maker-scene__ear,
+.maker-scene__leg-back,
+.maker-scene__leg-front {
+  fill: var(--yellow);
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__hair {
+  fill: #12282d;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.maker-scene__face {
+  fill: none;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.maker-scene__shirt {
+  fill: #e85e55;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__shirt-texture {
+  fill: none;
+  stroke: #b83f43;
+  stroke-width: 10;
+  stroke-dasharray: 2 11;
+  stroke-linecap: round;
+  opacity: 0.32;
+}
+
+.maker-scene__shirt-mark {
+  fill: none;
+  stroke: #fff8df;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__trousers {
+  fill: var(--lagoon);
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.maker-scene__trouser-texture {
+  fill: none;
+  stroke: color-mix(in srgb, var(--lagoon) 65%, #003942);
+  stroke-width: 9;
+  stroke-dasharray: 2 12;
+  stroke-linecap: round;
+  opacity: 0.33;
+}
+
+.maker-scene__shoe-back,
+.maker-scene__shoe-front {
+  fill: #fffdf7;
+  stroke: #12282d;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__flying-idea {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: maker-idea-float 4s ease-in-out infinite;
+}
+
+.maker-scene__idea-trail {
+  fill: none;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-dasharray: 6 9;
+  stroke-linecap: round;
+}
+
+.maker-scene__plane {
+  fill: var(--coral-field);
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.maker-scene__flying-idea path:last-child {
+  fill: none;
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.maker-scene__companion-body,
+.maker-scene__companion-tail,
+.maker-scene__companion-ear {
+  fill: var(--blue);
+  stroke: #12282d;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-scene__companion circle {
+  fill: #12282d;
+}
+
+.maker-scene__companion-leg {
+  fill: none;
+  stroke: #12282d;
   stroke-width: 4;
   stroke-linecap: round;
 }
 
-.maker-atlas__flag path:first-child {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 3;
-  stroke-linecap: round;
-}
-
-.maker-atlas__flag path:nth-child(2) {
-  fill: var(--coral-field);
-  stroke: #ffffff;
-  stroke-width: 2;
-  stroke-linejoin: round;
-}
-
-.maker-atlas__flag path:last-child {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.maker-atlas__browser rect {
+.maker-scene__cursor {
   fill: #fffdf7;
-  stroke: #102a30;
-  stroke-width: 2;
-}
-
-.maker-atlas__browser path {
-  fill: none;
-  stroke: #073d55;
+  stroke: #12282d;
   stroke-width: 2.5;
-  stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.maker-atlas__browser circle {
-  fill: var(--coral-field);
-}
-
-.maker-atlas__search {
-  fill: none;
-  stroke: var(--yellow);
+.maker-scene__chai path:first-child {
+  fill: var(--yellow);
+  stroke: #12282d;
   stroke-width: 3;
-  stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.maker-atlas__search circle:last-child {
-  fill: var(--coral);
-  stroke: #ffffff;
-  stroke-width: 1.5;
-}
-
-.maker-atlas__tool {
+.maker-scene__steam {
   fill: none;
-  stroke: #ffffff;
-  stroke-width: 3;
+  stroke: var(--coral-field);
+  stroke-width: 4;
   stroke-linecap: round;
-  stroke-linejoin: round;
+  animation: maker-steam 3s ease-in-out infinite;
 }
 
-.maker-atlas__note rect {
-  fill: #fffdf7;
-  stroke: #102a30;
-  stroke-width: 2;
+@keyframes maker-page-float {
+  50% { transform: translateY(-8px) rotate(1.5deg); }
 }
 
-.maker-atlas__note path {
-  fill: none;
-  stroke: #0a6375;
-  stroke-width: 2;
-  stroke-linecap: round;
+@keyframes maker-idea-float {
+  50% { transform: translate(-6px, -9px) rotate(-2deg); }
 }
 
-@keyframes atlas-route {
-  to { stroke-dashoffset: -78; }
-}
-
-@keyframes atlas-float {
-  50% { transform: translateY(-5px) rotate(2deg); }
+@keyframes maker-steam {
+  50% { opacity: 0.35; transform: translateY(-5px); }
 }
 
 .home-dispatch {
