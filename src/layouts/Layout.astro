@@ -1,171 +1,82 @@
 ---
 import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  type?: 'website' | 'article';
 }
 
-const { 
-  title = "Naman", 
-  description = "Building, writing, and watching One Piece — a personal corner of the web." 
+const {
+  title = 'Naman.blog',
+  description = 'Naman builds small things for the internet and writes about what he discovers.',
+  type = 'website',
 } = Astro.props;
 
-// Ensure base path is properly formatted
-const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+const pageTitle = title === 'Naman.blog' ? title : `${title} · Naman.blog`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const rssUrl = new URL('rss.xml', Astro.site);
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
-    <link rel="icon" href={`${baseUrl}favicon.ico`} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta id="theme-color" name="theme-color" content="#f4f7f3" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Naman.blog RSS" href={rssUrl} />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- SEO and Social Metadata -->
-    <title>{title === "Naman" ? title : `${title} | Naman`}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    
-    <!-- RSS Feed Discovery -->
-    <link rel="alternate" type="application/rss+xml" title="Naman's Notes" href={`${baseUrl}rss.xml`} />
 
-    <!-- Inlined theme initialization script to prevent FOUC -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Naman.blog" />
+    <meta name="twitter:card" content="summary" />
+
     <script is:inline>
-      (function() {
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+        document.querySelector('#theme-color')?.setAttribute('content', dark ? '#0f1520' : '#f4f7f3');
       })();
     </script>
   </head>
-  <body class="selection:bg-accent/20 min-h-screen flex flex-col items-center">
-    <div class="main-container w-full max-w-2xl px-6 py-10 flex-1 flex flex-col">
-      <!-- Navigation Header -->
-      <header class="mb-14">
-        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4">
-          <div>
-            <a href={baseUrl} class="text-2xl font-bold tracking-tight text-text hover:text-accent font-serif transition-colors no-underline">
-              Naman
-            </a>
-            <p class="text-xs text-text/60 mt-1 font-mono tracking-tight leading-normal">
-              Builder, writer, and anime fan — currently sailing the Grand Line.
-            </p>
-          </div>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
 
-          <nav class="flex items-center gap-4 text-sm font-mono tracking-tight self-start sm:self-auto">
-            <a href={baseUrl} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
-              Home
-            </a>
-            <a href={`${baseUrl}about`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
-              About
-            </a>
-            <a href={`${baseUrl}archive`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors">
-              Archive
-            </a>
-            <a href={`${baseUrl}rss.xml`} class="hover:text-accent underline decoration-border-subtle hover:decoration-accent underline-offset-4 transition-colors" target="_blank">
-              RSS
-            </a>
-
-            <span class="w-px h-4 bg-border-subtle/60" aria-hidden="true"></span>
-
-            <a href="https://github.com/namanlabc/" class="text-text/60 hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.14-.02-2.06-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-              </svg>
-            </a>
-            <a href="https://x.com/namanlabs" class="text-text/60 hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) profile">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/>
-              </svg>
-            </a>
-
-            <!-- Dark Mode Toggle Button -->
-            <button 
-              id="theme-toggle" 
-              class="ml-2 p-1.5 rounded-md hover:bg-card-bg text-text/70 hover:text-text border border-border-subtle/50 hover:border-border-subtle cursor-pointer transition-all duration-150 flex items-center justify-center"
-              aria-label="Toggle theme"
-            >
-              <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-              </svg>
-              <svg id="theme-toggle-light-icon" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="4"></circle>
-                <path d="M12 2v2"></path>
-                <path d="M12 20v2"></path>
-                <path d="m4.93 4.93 1.41 1.41"></path>
-                <path d="m17.66 17.66 1.41 1.41"></path>
-                <path d="M2 12h2"></path>
-                <path d="M20 12h2"></path>
-                <path d="m6.34 17.66-1.41 1.41"></path>
-                <path d="m19.07 4.93-1.41 1.41"></path>
-              </svg>
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      <!-- Main Slot Content -->
-      <main class="flex-1 flex flex-col">
-        <slot />
-      </main>
-
-      <!-- Footer with Social Links -->
-      <footer class="mt-16 pt-6 border-t border-border-subtle/40 text-xs font-mono text-text/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          &copy; {new Date().getFullYear()} Naman.
-        </div>
-        <div class="flex items-center gap-4">
-          <a href="https://github.com/namanlabc/" class="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.14-.02-2.06-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-            </svg>
-          </a>
-          <a href="https://x.com/namanlabs" class="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) profile">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/>
-            </svg>
-          </a>
-        </div>
-      </footer>
-    </div>
-
-    <!-- Theme Toggler Execution Script -->
     <script>
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      const darkIcon = document.getElementById('theme-toggle-dark-icon');
-      const lightIcon = document.getElementById('theme-toggle-light-icon');
+      const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
 
-      function updateIcons() {
-        if (document.documentElement.classList.contains('dark')) {
-          darkIcon?.classList.add('hidden');
-          lightIcon?.classList.remove('hidden');
-        } else {
-          lightIcon?.classList.add('hidden');
-          darkIcon?.classList.remove('hidden');
-        }
+      function updateThemeControl() {
+        const isDark = document.documentElement.classList.contains('dark');
+        button?.setAttribute('aria-pressed', String(isDark));
+        button?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#0f1520' : '#f4f7f3');
       }
 
-      // Initial icon state
-      updateIcons();
-
-      themeToggleBtn?.addEventListener('click', () => {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        }
-        updateIcons();
+      updateThemeControl();
+      button?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeControl();
       });
     </script>
   </body>

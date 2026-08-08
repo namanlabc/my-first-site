@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectItem from '../components/ProjectItem.astro';
+import { projects } from '../data/projects';
+---
+
+<Layout title="Projects" description="Websites, tools, and experiments Naman has actually built.">
+  <div class="shell shell--content page-intro">
+    <h1>Things I’ve put on the internet.</h1>
+    <p>
+      A short collection of projects that made it far enough to become real, useful, or worth learning from.
+    </p>
+  </div>
+
+  <section class="shell shell--wide projects-page" aria-labelledby="projects-list-title">
+    <h2 id="projects-list-title" class="visually-hidden">Current projects</h2>
+    <div class="project-list">
+      {projects.map((project) => <ProjectItem project={project} />)}
+    </div>
+  </section>
+</Layout>

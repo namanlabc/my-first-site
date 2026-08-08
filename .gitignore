@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # AI coding tools and local instructions
 .agents/
+.impeccable/
 .gemini/
 .cline/
 .opencode/

@@ -1,0 +1,94 @@
+# Naman.blog V2 design direction
+
+## Visual personality
+
+V2 is a **curiosity route map**: part personal web log, part expedition board for ideas Naman is building, testing, and writing about. It should feel screen-native and handmade without resembling a retro terminal, a résumé, or a themed anime fan site. The homepage may be energetic; articles remain quiet.
+
+The signature is a route line with named waypoints—`building`, `learning`, `writing`, `elsewhere`—that connects the homepage rather than enclosing everything in cards. It expresses movement and curiosity using only CSS and small, accessible interactions.
+
+## Layout system
+
+- Reading width: `44rem` / 704px.
+- Primary content width: `64rem` / 1024px.
+- Wide content width: `74rem` / 1184px.
+- Gutters: `clamp(1.25rem, 4vw, 3rem)`.
+- Spacing rhythm: 4, 8, 12, 16, 24, 32, 48, 72, 96px.
+- Breakpoints: 640px, 768px, 1024px, 1280px.
+- Desktop homepage: a 12-column grid with asymmetric 7/5 and 8/4 compositions.
+- Mobile: one reading column; navigation wraps without a hamburger; the route becomes a compact edge/separator motif.
+
+## Typography
+
+- Display/headlines: `Trebuchet MS`, a humanist face made for screens, used boldly but not at billboard scale.
+- Reading: Georgia, chosen for long-form legibility and continuity with V1's strong serif reading tone.
+- UI/meta: `ui-monospace`, `SFMono-Regular`, Consolas, monospace for dates, route labels, and status—not body copy.
+- Display hierarchy: `clamp(2.65rem, 6.8vw, 6rem)` for the homepage introduction; page titles `clamp(2.6rem, 7vw, 5.5rem)`; section headings `clamp(1.65rem, 3vw, 2.45rem)`.
+- Body: 1rem–1.125rem, line-height 1.65. Articles: 1.1rem–1.2rem, line-height 1.8.
+
+## Color system
+
+Light mode uses a cool workshop sheet rather than the familiar cream-and-terracotta portfolio palette.
+
+- Canvas — `#f4f7f3`
+- Ink — `#12171f`
+- Muted ink — `#5c6775`
+- Rule — `#c9d2dc`
+- Route blue — `#2456d8`
+- Signal yellow — `#ffd447`
+- Note coral — `#c43828`
+- Paper white — `#ffffff`
+
+Dark mode equivalents:
+
+- Canvas — `#0f1520`
+- Ink — `#f1f5ee`
+- Muted ink — `#aab5c4`
+- Rule — `#3a4656`
+- Route blue — `#9ab1ff`
+- Signal yellow — `#ffe16a`
+- Note coral — `#ff9382`
+- Paper — `#171f2b`
+
+Blue owns meaningful regions and navigation states; yellow marks current activity; coral is reserved for personal asides and errors. Links never rely on color alone.
+
+## Reusable components
+
+- `SiteHeader`: wordmark, compact route-aware navigation, RSS/social links, accessible theme control.
+- `SiteFooter`: small personal sign-off, useful routes, social links.
+- `SectionHeading`: eyebrow, title, optional destination link.
+- `RouteMap`: the homepage signature linking four truthful areas of interest.
+- `ProjectItem`: editorial strip for a real project with status, description, and destination.
+- `WritingItem`: calm post row with title, description, date, and tags.
+- `NowNote`: small current-interest dispatch; no fake status claims.
+- Article navigation: back-to-archive plus next/previous posts when available.
+
+## Motion and interaction
+
+- Route markers move a few pixels on hover/focus to suggest travel.
+- Link underlines and arrows respond consistently on hover and keyboard focus.
+- The theme transition is brief and applies to colors, not layout.
+- No scroll-jacking, animation library, cursor replacement, or autoplay.
+- Under `prefers-reduced-motion: reduce`, all non-essential movement and smooth scrolling stop.
+
+## Mobile strategy
+
+- Preserve the main introduction before any decorative element.
+- Keep navigation visible and wrap it into two short rows when needed.
+- Convert multi-column project strips into a single readable flow with 44px minimum interactive targets.
+- Let code blocks scroll inside their own region; long URLs, headings, tags, and metadata wrap safely.
+- Avoid hover-only meaning; every playful response also works on focus.
+
+## Content and implementation direction
+
+- Homepage order: compact introduction → curiosity route → selected real projects → recent writing → personal now note.
+- Add `/projects/` as a maintainable index using a small typed data file; include only verified projects.
+- Rewrite About as a personal note, not a résumé.
+- Keep Archive chronological and efficient.
+- Keep article pages visually quieter than the homepage and preserve every existing slug.
+- Remove the mock newsletter form because it implies a working subscription that does not exist.
+- Preserve Astro, Markdown content collections, RSS, canonical URLs, favicon, domain, and GitHub Pages workflow.
+- Use semantic Astro/HTML, global CSS variables, and only tiny vanilla JavaScript for the theme and one restrained signature interaction.
+
+## Reference boundary
+
+Borrow from Vijay Verma's site only the principles of fast personal orientation, portfolio-and-writing rhythm, visible personality, compact navigation, and delightful small details. Do not copy its sidebar composition, project grid, fonts, gradients, graphics, logos, copy, or interaction code.
