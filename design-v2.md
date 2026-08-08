@@ -22,6 +22,7 @@ The signature is a route line with named waypoints—`building`, `exploring`, `w
 - Display/headlines: `Trebuchet MS`, a humanist face made for screens, used boldly but not at billboard scale.
 - Reading: Georgia, chosen for long-form legibility and continuity with V1's strong serif reading tone.
 - UI/meta: `ui-monospace`, `SFMono-Regular`, Consolas, monospace for dates, route labels, and status—not body copy.
+- Header wordmark: a custom lockup pairing bold Trebuchet for `Naman` with italic Georgia for `Patel`, finished with a trail underline and route diamond. It uses the existing local font system while giving the name its own recognizable shape.
 - Display hierarchy: `clamp(2.65rem, 6.8vw, 6rem)` for the homepage introduction; page titles `clamp(2.6rem, 7vw, 5.5rem)`; section headings `clamp(1.65rem, 3vw, 2.45rem)`.
 - Body: 1rem–1.125rem, line-height 1.65. Articles: 1.1rem–1.2rem, line-height 1.8.
 

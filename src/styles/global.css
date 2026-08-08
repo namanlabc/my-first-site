@@ -225,14 +225,59 @@ button {
 }
 
 .site-brand__name {
-  font-family: var(--display);
-  font-size: 1.55rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.22rem;
+  line-height: 1;
 }
 
-.site-brand__name span {
+.site-brand__first {
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+}
+
+.site-brand__last {
+  position: relative;
   color: var(--coral);
+  font-family: var(--reading);
+  font-size: 1.58rem;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.075em;
+  transform: rotate(-2deg) translateY(0.02em);
+  transform-origin: left center;
+  transition: transform 260ms var(--ease-out);
+}
+
+.site-brand__last::after {
+  content: "";
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.16em;
+  left: 0.04em;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--coral) 0 0.45rem,
+    transparent 0.45rem 0.62rem
+  );
+  transform: rotate(-1deg);
+}
+
+.site-brand:hover .site-brand__last,
+.site-brand:focus-visible .site-brand__last {
+  transform: rotate(-3.5deg) translateY(-0.04em);
+}
+
+.site-brand__trail {
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-left: 0.12rem;
+  border: 2px solid var(--yellow);
+  background: var(--blue-field);
+  transform: rotate(45deg) translateY(-0.05em);
 }
 
 .site-brand__note {
@@ -707,7 +752,7 @@ button {
   transition: transform 300ms var(--ease-out), background-color 160ms ease;
 }
 
-.project-item:hover .project-item__marker,
+.project-item--linked:hover .project-item__marker,
 .project-item:focus-within .project-item__marker {
   transform: translateX(0.3rem);
   background: var(--yellow);

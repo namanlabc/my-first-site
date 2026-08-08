@@ -19,9 +19,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 <Layout>
   <section class="home-hero shell shell--wide" aria-labelledby="home-title">
     <div class="home-hero__copy">
-      <h1 id="home-title">I’m Naman. I build small things and document the <span class="home-hero__trail-word">detours.</span></h1>
+      <h1 id="home-title">I’m Naman. I keep building things to see how far an <span class="home-hero__trail-word">idea can go.</span></h1>
       <p class="home-hero__intro">
-        Lately that means websites, small tools, AI experiments, SEO rabbit holes, and the occasional thought that refuses to fit in a social post.
+        Usually it starts with one small annoyance or a random thought. Then I’m opening too many tabs, testing AI, checking search data, fixing CSS—and somehow there’s a new website.
       </p>
     </div>
     <RouteMap />
@@ -30,16 +30,16 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   <div class="home-dispatch" aria-label="Current dispatch">
     <div class="shell shell--wide home-dispatch__inner">
       <strong>Current dispatch</strong>
-      <span>Keeping an eye on AI, search, and tiny tools that solve one annoying thing well.</span>
-      <span class="home-dispatch__stamp">now / exploring</span>
+      <span>Adding more useful tools to Get Random Letter and slowly shaping Calm WP into a theme I’d actually want to use.</span>
+      <span class="home-dispatch__stamp">now / making</span>
     </div>
   </div>
 
   <section class="page-section shell shell--wide" aria-labelledby="selected-work-title">
     <SectionHeading
       id="selected-work-title"
-      title="Things I’ve built"
-      description="A small shelf of websites and tools, each built to answer a real itch."
+      title="Things I’m making"
+      description="The websites, tools, and experiments I’m actually spending my time on."
       href={`${base}projects/`}
       linkLabel="All projects"
     />
@@ -52,7 +52,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <SectionHeading
       id="recent-writing-title"
       title="Recent writing"
-      description="Notes from whatever I’m trying to understand right now."
+      description="I write when I learn something worth remembering—or when an opinion refuses to leave me alone."
       href={`${base}archive/`}
       linkLabel="Full archive"
     />
@@ -73,7 +73,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <div>
       <h2 id="now-title">Away from the keyboard</h2>
       <p>
-        Usually watching <em>One Piece</em>, drinking chai, or opening one browser tab that somehow becomes fourteen.
+        If I’m not building something, I’m probably watching <em>One Piece</em>, drinking chai, or telling myself I’ll stop after one more chapter.
       </p>
     </div>
     <a class="arrow-link" href={`${base}about/#off-screen`}>More about me <span aria-hidden="true">→</span></a>
