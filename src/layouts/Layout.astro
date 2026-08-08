@@ -11,13 +11,15 @@ interface Props {
 }
 
 const {
-  title = 'Naman.blog',
-  description = 'Naman builds useful web tools, works on SEO and WordPress, and writes down what he learns.',
+  title = 'Naman Patel',
+  description = 'Naman Patel works on SEO, builds websites and small web tools, and writes about what he learns along the way.',
   type = 'website',
   image,
 } = Astro.props;
 
-const pageTitle = title === 'Naman.blog' ? title : `${title} · Naman.blog`;
+const pageTitle = title === 'Naman Patel'
+  ? 'Naman Patel — SEO, websites and small tools'
+  : `${title} · Naman Patel`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const rssUrl = new URL('rss.xml', Astro.site);
 const socialImage = image ? new URL(image, Astro.site) : undefined;
@@ -45,7 +47,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="Naman.blog" />
+    <meta property="og:site_name" content="Naman Patel" />
     {socialImage && <meta property="og:image" content={socialImage} />}
     <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
