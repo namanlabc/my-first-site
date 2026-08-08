@@ -22,8 +22,8 @@ No assets, graphics, code, exact layouts, brand treatments, or proprietary inter
 - Wide content width: `76rem`.
 - Gutters: `clamp(1.15rem, 4vw, 3rem)`.
 - Spacing rhythm: 4, 8, 12, 16, 24, 32, 48, 72, and 96px.
-- Desktop homepage: a small identity column beside a generous editorial introduction.
-- Mobile: one intentional column with the identity note above the introduction.
+- Homepage: a generous editorial introduction without a separate bio block competing for space.
+- Mobile: one intentional column that starts directly with the main introduction.
 - Breakpoints: 576px, 832px, and 1072px.
 
 ## Typography
