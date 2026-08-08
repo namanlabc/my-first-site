@@ -4,7 +4,7 @@
 
 V2 is a **curiosity route map**: part personal web log, part expedition board for ideas Naman is building, testing, and writing about. It should feel screen-native and handmade without resembling a retro terminal, a résumé, or a themed anime fan site. The homepage may be energetic; articles remain quiet.
 
-The signature is a route line with named waypoints—`building`, `learning`, `writing`, `elsewhere`—that connects the homepage rather than enclosing everything in cards. It expresses movement and curiosity using only CSS and small, accessible interactions.
+The signature is a route line with named waypoints—`building`, `exploring`, `writing`, `off-screen`—that connects the homepage rather than enclosing everything in cards. A compact compass and topographic lines make the route feel like Naman's expedition board rather than a generic navigation card. It expresses movement and curiosity using only CSS and small, accessible interactions.
 
 ## Layout system
 
@@ -27,29 +27,33 @@ The signature is a route line with named waypoints—`building`, `learning`, `wr
 
 ## Color system
 
-Light mode uses a cool workshop sheet rather than the familiar cream-and-terracotta portfolio palette.
+Light mode uses sea mist, deep ocean, lagoon, treasure gold, and a restrained sunset red. The combination is adventurous without becoming nautical cosplay or a generic gradient portfolio.
 
-- Canvas — `#f4f7f3`
-- Ink — `#12171f`
-- Muted ink — `#5c6775`
-- Rule — `#c9d2dc`
-- Route blue — `#2456d8`
-- Signal yellow — `#ffd447`
-- Note coral — `#c43828`
-- Paper white — `#ffffff`
+- Sea-mist canvas — `#edf5f3`
+- Deep ink — `#102a30`
+- Muted ink — `#4f6970`
+- Rule — `#bed1ce`
+- Route teal — `#0a6375`
+- Deep-ocean field — `#073d55`
+- Lagoon — `#0a8f8f`
+- Treasure gold — `#f5c451`
+- Sunset red — `#a83240`
+- Paper — `#fffdf7`
 
 Dark mode equivalents:
 
-- Canvas — `#0f1520`
-- Ink — `#f1f5ee`
-- Muted ink — `#aab5c4`
-- Rule — `#3a4656`
-- Route blue — `#9ab1ff`
-- Signal yellow — `#ffe16a`
-- Note coral — `#ff9382`
-- Paper — `#171f2b`
+- Night-ocean canvas — `#071a22`
+- Ink — `#f5f2e8`
+- Muted ink — `#a9c5c7`
+- Rule — `#294851`
+- Route teal — `#69d7d1`
+- Deep-ocean field — `#0a3b4d`
+- Lagoon — `#44beb6`
+- Treasure gold — `#ffd166`
+- Sunset red — `#ff9a89`
+- Paper — `#0d2730`
 
-Blue owns meaningful regions and navigation states; yellow marks current activity; coral is reserved for personal asides and errors. Links never rely on color alone.
+Ocean and lagoon colors own navigation and route structure; gold marks current activity; sunset red is reserved for Naman's personal asides and small moments of emphasis. Links never rely on color alone.
 
 ## Reusable components
 
