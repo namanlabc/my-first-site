@@ -1,72 +1,49 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import WritingItem from '../components/WritingItem.astro';
 
-// Query blog posts and sort by pubDate (newest first)
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-// Group posts by year of publication
 const postsByYear: Record<number, typeof posts> = {};
+
 for (const post of sortedPosts) {
-  const year = new Date(post.data.pubDate).getFullYear();
-  if (!postsByYear[year]) {
-    postsByYear[year] = [];
-  }
+  const year = post.data.pubDate.getFullYear();
+  postsByYear[year] ??= [];
   postsByYear[year].push(post);
 }
 
-// Sort years descending
 const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
-const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
-<Layout title="Archive" description="A chronological index of everything Naman has published, cataloged neatly by year.">
-  <div class="w-full">
-    <header class="mb-10">
-      <h1 class="text-3xl font-serif font-bold tracking-tight text-text mb-3">
-        Archive
-      </h1>
-      <p class="text-sm font-mono text-text/50">
-        A chronological index of everything I've written on this blog.
-      </p>
-    </header>
+<Layout title="Writing archive" description="A chronological archive of everything Naman has published on Naman.blog.">
+  <div class="shell shell--content page-intro page-intro--archive">
+    <h1>Writing, in chronological order.</h1>
+    <p>{sortedPosts.length} notes so far. Browse from newest to oldest, with no algorithm deciding what comes next.</p>
+  </div>
 
+  <div class="shell shell--content archive">
     {years.length === 0 ? (
-      <p class="text-sm font-mono text-text/50">No notes written yet.</p>
-    ) : (
-      <div class="space-y-12">
-        {years.map((year) => (
-          <section aria-labelledby={`year-heading-${year}`}>
-            <h2 id={`year-heading-${year}`} class="text-sm font-mono font-bold text-accent border-b border-border-subtle/30 pb-1.5 mb-5 select-none">
-              {year}
-            </h2>
-
-            <ul class="space-y-4" role="list">
-              {postsByYear[year].map((post) => {
-                const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                });
-
-                return (
-                  <li class="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                    <span class="text-base font-serif font-medium text-text group-hover:text-accent transition-colors">
-                      <a href={`${baseUrl}blog/${post.id}`} class="no-underline block">
-                        {post.data.title}
-                      </a>
-                    </span>
-                    <time datetime={post.data.pubDate.toISOString()} class="text-xs font-mono text-text/40 shrink-0 select-none">
-                      {formattedDate}
-                    </time>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
-    )}
+      <p class="empty-state">Nothing published yet. The first note is still finding its way here.</p>
+    ) : years.map((year) => (
+      <section class="archive-year" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <div class="writing-list writing-list--archive">
+          {postsByYear[year].map((post) => (
+            <WritingItem
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              href={`${base}blog/${post.id}/`}
+              tags={post.data.tags}
+              compact
+            />
+          ))}
+        </div>
+      </section>
+    ))}
   </div>
 </Layout>

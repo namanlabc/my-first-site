@@ -1,0 +1,28 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const routes = [
+  { label: 'building', detail: 'websites + small tools', href: `${base}projects/` },
+  { label: 'exploring', detail: 'AI + SEO ideas', href: `${base}about/#exploring` },
+  { label: 'writing', detail: 'lessons + opinions', href: `${base}archive/` },
+  { label: 'off-screen', detail: 'anime + rabbit holes', href: `${base}about/#off-screen` },
+];
+---
+
+<nav class="route-map" aria-label="Explore Naman's interests">
+  <p class="route-map__origin">current coordinates</p>
+  <ul>
+    {routes.map((route, index) => (
+      <li>
+        <a href={route.href}>
+          <span class="route-map__dot" aria-hidden="true">{index + 1}</span>
+          <span class="route-map__copy">
+            <strong>{route.label}</strong>
+            <small>{route.detail}</small>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

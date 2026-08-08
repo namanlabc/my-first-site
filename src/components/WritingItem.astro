@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  href: string;
+  tags?: string[];
+  compact?: boolean;
+}
+
+const { title, description, pubDate, href, tags = [], compact = false } = Astro.props;
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class:list={['writing-item', { 'writing-item--compact': compact }]}>
+  <a class="writing-item__link" href={href}>
+    <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+    <div class="writing-item__body">
+      <h3>{title}</h3>
+      {description && <p>{description}</p>}
+      {tags.length > 0 && (
+        <ul class="tag-list" aria-label="Tags">
+          {tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+    </div>
+    <span class="writing-item__arrow" aria-hidden="true">→</span>
+  </a>
+</article>
