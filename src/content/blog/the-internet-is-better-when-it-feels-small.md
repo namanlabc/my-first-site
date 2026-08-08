@@ -1,38 +1,38 @@
 ---
 title: "The Internet Is Better When It Feels Small"
-description: "Why the massive, algorithmically driven platforms feel exhausting, and why we should build tiny, cozy corners on the web instead."
+description: "A personal site does not need to perform like a content machine. It can simply be a useful, slightly strange place that feels like its owner."
 pubDate: 2026-08-01
-tags: ["the internet", "philosophy", "cozy-web"]
+tags: ["the internet", "personal sites", "writing"]
 ---
 
-There is a specific kind of exhaustion that comes from spending too much time on the modern web. Every feed is a stream of hyper-optimized content designed to catch and hold your attention for three extra seconds. Everything is loud, everything is urgent, and everything is sorted by an algorithm that doesn't care about you.
+The internet feels enormous until you find a page that was clearly made by one person.
 
-But the internet didn't start this way, and it doesn't have to feel this way.
+Maybe the navigation has an odd label. Maybe there is a tiny illustration that serves no conversion goal. Maybe the person writes about search traffic on Monday and *One Piece* on Friday. The page is not trying to become a universal platform. It is just someone’s corner.
 
-The internet is at its absolute best when it feels small. It’s better when you stumble upon a blog that looks like it was handmade in an afternoon, dedicated entirely to someone's obsession with mechanical keyboards, sourdough starters, or vintage transit maps. It's better when you read the words of someone who isn't trying to sell you a course, build a personal brand, or optimize their conversion rate.
+Those are usually the sites I remember.
 
-### The Rise of the Cozy Web
+## A website can have fingerprints
 
-We are seeing a slow but steady migration toward what people are calling the "cozy web." These are the spaces that aren't indexed by Google, aren't monetized, and aren't visible to the public feed:
-* Private group chats and newsletters
-* Tiny forums dedicated to niche hobbies
-* Small personal blogs connected via old-school webrings
+Most modern websites are competent. They have a centered headline, a row of rounded cards, a gradient, and a sentence about “unlocking potential.” Five minutes later, I cannot remember which one I visited.
 
-When you write on a small, personal blog like this one, the pressure evaporates. You don't have to write for search engines. You don't have to keep a "consistent publishing schedule" to appease a machine. You can just write because you have something on your mind, and you want to share it with whoever happens to wander by.
+The problem is not that those patterns are always bad. The problem is that personality gets removed along with the rough edges.
 
-```html
-<!-- A simple, cozy web link -->
-<a href="https://namanlabc.github.io/my-first-site" class="custom-link">
-  Naman's Blog
-</a>
-```
+A personal site should have fingerprints. Mine can contain project notes, SEO observations, small tools, unfinished questions, and an unreasonable amount of yellow. That mixture would be messy for a company homepage. Here, the mixture is the point.
 
-### Building Your Own Cabin
+## Small does not mean invisible
 
-If you feel overwhelmed by the noise of the public square, my recommendation is simple: build your own cabin. 
+I work on SEO, so I obviously want useful pages to be discoverable. But discoverability and personality are not enemies.
 
-It doesn't need to be fancy. It doesn't need to use a complex framework. Just put up a few words, list your current thoughts, and let it sit there. It will be quiet, it will be slow, and it will be yours.
+Search can help someone find the front door. It should not decide the furniture.
 
-> "The web is not a utility. It is a canvas. Go paint something."
+I can write a clear title, use sensible URLs, and make pages easy to navigate without turning every thought into a 2,000-word keyword article. Some notes can answer a specific question. Others can exist because I noticed something and wanted to remember it.
 
-Let's make the internet feel like a collection of small villages again, rather than one giant, crowded airport terminal.
+That balance feels healthier than choosing between “write only for algorithms” and “pretend nobody should ever find this.”
+
+## My rule for this place
+
+If a page could be moved to a completely different personal website without changing a word, it probably needs more of me in it.
+
+That does not mean sharing every detail of my life. It means having an opinion. Showing the real project. Admitting when an experiment is still a beta. Using language I would actually say instead of borrowing a founder costume.
+
+The web becomes interesting when lots of people build small places with their own rules. This is mine: useful when possible, playful when appropriate, and personal even when it would be easier to use the default template.
