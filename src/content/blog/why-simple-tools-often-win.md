@@ -1,45 +1,50 @@
 ---
 title: "Why Simple Tools Often Win"
-description: "Why the tools that do one thing beautifully almost always outlast the massive, feature-packed platforms that try to do everything at once."
+description: "A focused tool can look small from the outside while hiding dozens of thoughtful decisions. Simplicity is not less work—it is better-directed work."
 pubDate: 2026-07-15
-tags: ["minimalism", "tools", "productivity"]
+tags: ["tools", "product", "simplicity"]
 ---
 
-Every few months, a new productivity tool or software framework arrives with the promise of changing everything. It has forty integrations, an AI copilot, an interactive dashboard, and a sleek dark mode with glowing pink borders.
+A tool that does one thing can sound almost too small to build.
 
-And every few months, I find myself migrating back to a plain text file.
+Pick a random letter. Spin a yes-or-no wheel. Choose an animal. How complicated could it be?
 
-Why does this happen? Why do we constantly seek out the most complex, feature-rich tools only to find that they get in our way, while the simplest tools—the ones that feel almost primitive—end up being the ones we actually use for years?
+Then you build it and discover the real job. The result must be genuinely random. The wheel must not throw labels outside the circle. The animation needs enough anticipation to feel fun without wasting time. It has to work with a thumb on a narrow phone, load quickly, explain itself, and remain accessible to someone who does not experience the animation at all.
 
-### The Burden of Options
+Simple on the outside is not the same as simple-minded.
 
-When a tool can do everything, it forces you to make decisions before you can even begin. 
+## One clear promise
 
-Imagine you want to jot down a quick thought. 
-* In a complex app, you must first open it, choose a workspace, create a document, select a template, add tags, and decide on a folder.
-* In a simple text file, you just open it and start typing.
+The best small tools make a promise you can understand in a few seconds.
 
-The friction is zero.
+That clarity removes a lot of decisions for the visitor. There is no onboarding tour and no empty dashboard asking you to create a workspace. You arrive, do the thing, and leave with the result.
 
-Simple tools win because they respect your cognitive bandwidth. They don't ask you to configure them. They don't send you notifications reminding you to "stay on track." They don't change their interface every three weeks to satisfy a product manager.
+When I add something to a tool, I now ask:
 
-### The Longevity of Plain Text
+- Does this make the main action better?
+- Does it help a real variation of the same task?
+- Can someone ignore it and still use the page immediately?
 
-Think about the files you created ten years ago. If you wrote them in a proprietary note-taking app, there’s a decent chance that app no longer exists, or has transitioned to a paid subscription model, or changed its format so your notes are locked away.
+If the answer is no, the feature may be more useful as a separate tool than another switch inside the first one.
 
-If you wrote them in a `.txt` or `.md` file, you can open them today on literally any device on Earth. 
+## The invisible work is the product
 
-```bash
-# This simple command works now, and will work in 50 years
-cat journal.txt
-```
+A focused interface creates nowhere for weak details to hide. If the page has one wheel, that wheel has to be excellent.
 
-### Choosing Simplicity
+This is where most of the work goes:
 
-When building things, whether it's a website, a software project, or a personal habit, try to lean toward the simplest possible foundation:
+1. Making the first action obvious.
+2. Giving immediate visual feedback.
+3. Handling long labels and unusual screen sizes.
+4. Keeping the result readable after the motion stops.
+5. Testing repeat use, not just the perfect first click.
 
-1. **Prefer text over databases** where possible.
-2. **Prefer standards over trends** (HTML/CSS over proprietary bundlers).
-3. **Prefer focus over flexibility**.
+None of those points makes the feature list look bigger. Together, they decide whether the tool feels trustworthy.
 
-A tool that does one thing perfectly is a quiet partner in your work. It doesn't ask for your attention; it just lets you do your job.
+## Focus can scale
+
+The alternative to one giant tool is not staying tiny forever. It can be a collection of focused pages connected by a shared design and a clear purpose.
+
+That is the direction I like: each page solves its own job well, while related tools remain one click away. The collection grows, but an individual visitor never has to carry all of its complexity.
+
+Simplicity is not the absence of ambition. It is the discipline to put the ambition where people can feel it—in speed, clarity, and the small moment of delight when the tool does exactly what they came for.
