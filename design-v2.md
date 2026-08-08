@@ -4,7 +4,7 @@
 
 V2 is a **curiosity route map**: part personal web log, part expedition board for ideas Naman is building, testing, and writing about. It should feel screen-native and handmade without resembling a retro terminal, a résumé, or a themed anime fan site. The homepage may be energetic; articles remain quiet.
 
-The signature is a route line with named waypoints—`building`, `exploring`, `writing`, `off-screen`—that connects the homepage rather than enclosing everything in cards. A compact compass and topographic lines make the route feel like Naman's expedition board rather than a generic navigation card. It expresses movement and curiosity using only CSS and small, accessible interactions.
+The signature is a maker's atlas: a custom inline SVG floating workshop combines a browser, code, an SEO magnifier, build tools, and a dotted expedition path. Four compact icon waypoints—`building`, `SEO work`, `writing`, `off-screen`—keep the illustration useful as navigation without falling back to a numbered list.
 
 ## Layout system
 

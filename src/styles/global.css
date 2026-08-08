@@ -506,7 +506,7 @@ button {
   isolation: isolate;
   min-width: 0;
   overflow: hidden;
-  padding: 1.6rem 1.5rem 1.7rem;
+  padding: 1.35rem;
   border: 1px solid color-mix(in srgb, var(--lagoon) 55%, #ffffff);
   border-radius: 1rem;
   color: #ffffff;
@@ -516,17 +516,6 @@ button {
     color-mix(in srgb, var(--blue-field) 76%, var(--lagoon))
   );
   box-shadow: 0 1.4rem 3rem -2.25rem color-mix(in srgb, var(--blue-field) 82%, transparent);
-}
-
-.route-map::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 4.6rem;
-  bottom: 3rem;
-  left: 2.25rem;
-  width: 2px;
-  background: color-mix(in srgb, var(--yellow) 68%, transparent);
 }
 
 .route-map::after {
@@ -548,9 +537,8 @@ button {
   z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.15rem;
 }
 
 .route-map__origin {
@@ -562,89 +550,76 @@ button {
   text-transform: uppercase;
 }
 
-.route-map__compass {
-  position: relative;
-  width: 2.35rem;
-  height: 2.35rem;
-  flex: 0 0 2.35rem;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 50%;
-  color: var(--yellow);
-  transform: rotate(8deg);
-}
-
-.route-map__compass::before {
-  content: "";
-  width: 0.45rem;
-  height: 1.45rem;
-  background: linear-gradient(to bottom, var(--yellow) 0 50%, #ffffff 50% 100%);
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-}
-
-.route-map__compass span {
-  position: absolute;
-  top: -0.72rem;
-  left: 50%;
-  color: var(--yellow);
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-weight: 800;
-  transform: translateX(-50%);
+.route-map__caption {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--reading);
+  font-size: 0.86rem;
 }
 
 .route-map ul {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .route-map li + li {
-  margin-top: 0.4rem;
+  margin-top: 0;
 }
 
 .route-map a {
-  min-height: 4.35rem;
+  min-height: 4.2rem;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.5rem;
+  gap: 0.65rem;
+  padding: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 0.75rem;
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 260ms var(--ease-out);
 }
 
 .route-map a:hover,
 .route-map a:focus-visible {
-  background: rgba(255, 255, 255, 0.11);
+  border-color: color-mix(in srgb, var(--yellow) 62%, #ffffff);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 
-.route-map__dot {
-  position: relative;
-  z-index: 1;
-  width: 1.55rem;
-  height: 1.55rem;
-  flex: 0 0 1.55rem;
+.route-map__waypoint {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 2.2rem;
   display: grid;
   place-items: center;
-  border: 2px solid var(--yellow);
-  border-radius: 50%;
+  border-radius: 0.65rem;
   color: #12171f;
   background: var(--yellow);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 800;
-  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+  transform: rotate(-2deg);
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
 }
 
-.route-map a:hover .route-map__dot,
-.route-map a:focus-visible .route-map__dot {
-  transform: translateX(0.38rem);
-  box-shadow: -0.45rem 0 0 rgba(255, 255, 255, 0.2);
+.route-map__waypoint svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.route-map a:hover .route-map__waypoint,
+.route-map a:focus-visible .route-map__waypoint {
+  transform: rotate(4deg) translateY(-2px);
+  box-shadow: -0.3rem 0.3rem 0 rgba(255, 255, 255, 0.16);
 }
 
 .route-map__copy {
@@ -654,7 +629,7 @@ button {
 
 .route-map__copy strong {
   font-family: var(--display);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   line-height: 1.2;
 }
 
@@ -663,6 +638,150 @@ button {
   font-family: var(--mono);
   font-size: 0.75rem;
   overflow-wrap: anywhere;
+}
+
+/* The maker's atlas: one custom illustration, no image request or JS bundle. */
+.maker-atlas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  margin: -0.15rem 0 0.45rem;
+  overflow: visible;
+}
+
+.maker-atlas * {
+  vector-effect: non-scaling-stroke;
+}
+
+.maker-atlas__orbit {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 2;
+  stroke-dasharray: 5 8;
+  animation: atlas-route 14s linear infinite;
+}
+
+.maker-atlas__orbit--short {
+  stroke: color-mix(in srgb, var(--yellow) 72%, transparent);
+  animation-direction: reverse;
+}
+
+.maker-atlas__stars {
+  fill: var(--yellow);
+  stroke: var(--yellow);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.maker-atlas__plane {
+  fill: var(--yellow);
+  stroke: var(--blue-field);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-origin: center;
+  animation: atlas-float 4.5s ease-in-out infinite;
+}
+
+.maker-atlas__shadow {
+  fill: rgba(0, 0, 0, 0.23);
+}
+
+.maker-atlas__island {
+  fill: var(--yellow);
+  stroke: #12171f;
+  stroke-width: 2;
+}
+
+.maker-atlas__island-edge {
+  fill: none;
+  stroke: var(--coral-field);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.maker-atlas__flag path:first-child {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.maker-atlas__flag path:nth-child(2) {
+  fill: var(--coral-field);
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.maker-atlas__flag path:last-child {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-atlas__browser rect {
+  fill: #fffdf7;
+  stroke: #102a30;
+  stroke-width: 2;
+}
+
+.maker-atlas__browser path {
+  fill: none;
+  stroke: #073d55;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-atlas__browser circle {
+  fill: var(--coral-field);
+}
+
+.maker-atlas__search {
+  fill: none;
+  stroke: var(--yellow);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-atlas__search circle:last-child {
+  fill: var(--coral);
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+.maker-atlas__tool {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.maker-atlas__note rect {
+  fill: #fffdf7;
+  stroke: #102a30;
+  stroke-width: 2;
+}
+
+.maker-atlas__note path {
+  fill: none;
+  stroke: #0a6375;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@keyframes atlas-route {
+  to { stroke-dashoffset: -78; }
+}
+
+@keyframes atlas-float {
+  50% { transform: translateY(-5px) rotate(2deg); }
 }
 
 .home-dispatch {
