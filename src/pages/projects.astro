@@ -15,7 +15,7 @@ import { projects } from '../data/projects';
   <section class="shell shell--wide projects-page" aria-labelledby="projects-list-title">
     <h2 id="projects-list-title" class="visually-hidden">Current projects</h2>
     <div class="project-list">
-      {projects.map((project) => <ProjectItem project={project} />)}
+      {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
     </div>
   </section>
 </Layout>
