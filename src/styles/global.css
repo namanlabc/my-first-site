@@ -275,6 +275,7 @@ main:focus {
   font-size: 0.68rem;
 }
 
+.site-tools__icon,
 .theme-toggle {
   width: 2.35rem;
   height: 2.35rem;
@@ -284,13 +285,25 @@ main:focus {
   border-radius: 50%;
   color: var(--muted);
   background: transparent;
-  cursor: pointer;
+  text-decoration: none;
   transition: color 150ms ease, background-color 150ms ease;
 }
 
+.theme-toggle {
+  cursor: pointer;
+}
+
+.site-tools__icon:hover,
+.site-tools__icon:focus-visible,
 .theme-toggle:hover {
   color: var(--ink);
   background: var(--surface-soft);
+}
+
+.site-tools__icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
 }
 
 .theme-toggle svg {
@@ -828,6 +841,19 @@ main:focus {
   font-size: 0.68rem;
 }
 
+.article-featured {
+  margin: 2.25rem 0 0;
+}
+
+.article-featured img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 0.55rem;
+  background: var(--surface-soft);
+}
+
 .prose {
   color: var(--ink);
   font-family: var(--reading);
@@ -1197,10 +1223,21 @@ main:focus {
     min-width: 0;
     flex: 1;
     justify-content: space-between;
+    gap: 0.35rem;
   }
 
   .primary-nav a {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .site-tools {
+    gap: 0.1rem;
+  }
+
+  .site-tools__icon,
+  .theme-toggle {
+    width: 2.1rem;
+    height: 2.1rem;
   }
 
   .site-tools__text {

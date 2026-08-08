@@ -3,6 +3,8 @@ title: "The Internet Is Better When It Feels Small"
 description: "A personal site does not need to perform like a content machine. It can simply be a useful, slightly strange place that feels like its owner."
 pubDate: 2026-08-01
 tags: ["the internet", "personal sites", "writing"]
+image: "/images/posts/internet-feels-small.webp"
+imageAlt: "A small browser window, chai, notebook, and cable arranged on a desk."
 ---
 
 The internet feels enormous until you find a page that was clearly made by one person.

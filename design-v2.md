@@ -60,11 +60,11 @@ The palette uses one warm orange-red accent. There are no rainbow gradients or d
 
 ## Component system
 
-- Sticky, translucent header with a plain wordmark and unboxed navigation.
+- Sticky, translucent header with a plain wordmark, unboxed navigation, and compact GitHub/X links.
 - Editorial project rows with number, status, description, and useful details.
 - Compact writing rows with date, summary, and tags.
 - A simple “right now” line instead of a product-status widget.
-- Quiet article layout with strong typography and next/previous navigation.
+- Quiet article layout with strong typography, optional editorial featured images, and next/previous navigation.
 - An open, ruled personal note instead of a decorative card.
 - Accessible theme control and visible focus treatment.
 
