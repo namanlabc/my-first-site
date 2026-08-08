@@ -11,7 +11,12 @@ const routes = [
 ---
 
 <nav class="route-map" aria-label="Explore Naman's interests">
-  <p class="route-map__origin">current coordinates</p>
+  <div class="route-map__heading">
+    <p class="route-map__origin">current coordinates</p>
+    <span class="route-map__compass" aria-hidden="true">
+      <span>N</span>
+    </span>
+  </div>
   <ul>
     {routes.map((route, index) => (
       <li>
