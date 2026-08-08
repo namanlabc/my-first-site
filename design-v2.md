@@ -1,19 +1,19 @@
-# Naman.blog — modern playful design direction
+# Naman.blog — indie personal design direction
 
 ## Visual personality
 
-Naman.blog should feel like a small, polished product made by one curious person: technically precise, visibly alive, and personal without becoming a themed portfolio. The interface borrows the discipline of Vercel, the dark technical depth of Supabase, the playful product storytelling of CodeRabbit, and the handcrafted personality of Vijay Verma.
+Naman.blog should feel like Naman’s own corner of the web: modern and carefully made, but not polished into a startup landing page. It is an indie builder’s portfolio and notebook—quietly playful, direct, warm, and a little nerdy.
 
-Creativity comes from composition, language, state, and interaction—not from a mascot, giant illustration, or decorative infographic.
+Creativity comes from asymmetry, typography, small details, and honest language. The site does not need a dashboard, mascot, giant illustration, or marketing performance to feel memorable.
 
 ## Reference principles
 
-- **Vercel:** exact spacing, strong sans-serif type, thin rules, and confident restraint.
-- **Supabase:** dark product surfaces, green signal color, subtle grid depth, and technical atmosphere.
-- **CodeRabbit:** real UI as visual storytelling, small motion, and human product language.
-- **Vijay Verma:** asymmetric rhythm, personal details, and memorable moments that do not resemble a template.
+- **Vercel:** precise spacing, thin rules, and confident restraint.
+- **Supabase:** care in dark mode and technical detail, without copying its product surfaces.
+- **CodeRabbit:** friendly language and small moments of personality, without mascot-led storytelling.
+- **Vijay Verma:** personal rhythm, unexpected composition, and the confidence to leave space.
 
-Do not copy any source site’s assets, graphics, code, exact layout, brand treatment, or proprietary interaction.
+No assets, graphics, code, exact layouts, brand treatments, or proprietary interactions are copied from any reference.
 
 ## Layout system
 
@@ -21,18 +21,18 @@ Do not copy any source site’s assets, graphics, code, exact layout, brand trea
 - Primary content width: `66rem`.
 - Wide content width: `76rem`.
 - Gutters: `clamp(1.15rem, 4vw, 3rem)`.
-- Spacing rhythm: 4, 8, 12, 16, 24, 32, 48, 72, 96px.
-- Desktop homepage: balanced split hero with type on the left and the workbench on the right.
-- Mobile: one intentional column; the workbench remains usable and project rows preserve hierarchy.
+- Spacing rhythm: 4, 8, 12, 16, 24, 32, 48, 72, and 96px.
+- Desktop homepage: a small identity column beside a generous editorial introduction.
+- Mobile: one intentional column with the identity note above the introduction.
 - Breakpoints: 576px, 832px, and 1072px.
 
 ## Typography
 
-- Display and UI: local system sans stack led by Inter/Geist when installed, with Segoe UI and system fallbacks.
-- Reading: Georgia/Cambria for long-form article body only.
-- Meta and technical state: SFMono/Consolas monospace.
-- Homepage title: tight, confident sans typography with one restrained green-to-violet emphasis.
-- Article typography remains calmer and prioritizes reading over visual drama.
+- Display and UI: a local system sans stack led by Inter/Geist when installed, with Segoe UI and system fallbacks.
+- Reading: Georgia/Cambria for introductions and long-form body copy.
+- Meta: SFMono/Consolas monospace, used sparingly.
+- Homepage title: large but not slogan-like; the words remain Naman’s previous, more natural introduction.
+- Article typography stays calm and prioritises reading.
 
 No external font requests are required.
 
@@ -40,67 +40,50 @@ No external font requests are required.
 
 Light mode:
 
-- Canvas: `#f7f8f6`
-- Surface: `#ffffff`
-- Ink: `#111514`
-- Muted: `#59625e`
-- Rule: `#d9ddd8`
-- Signal green: `#087a5b`
-- Bright green: `#24b985`
-- Violet: `#6856d9`
-- Warm yellow: `#f1c75b`
-- Coral: `#df6658`
+- Canvas: `#f5f3ed`
+- Surface: `#fffdf8`
+- Ink: `#1b1a18`
+- Muted: `#66635c`
+- Rule: `#d8d4ca`
+- Accent: `#bd3e28`
 
 Dark mode:
 
-- Canvas: `#090b0b`
-- Surface: `#101312`
-- Ink: `#f3f6f4`
-- Muted: `#9ca6a1`
-- Rule: `#272d2a`
-- Signal green: `#48d8a4`
-- Violet: `#a997ff`
-- Warm yellow: `#f5cf6d`
-- Coral: `#f28a7d`
+- Canvas: `#11110f`
+- Surface: `#181815`
+- Ink: `#f4f1e9`
+- Muted: `#aaa69d`
+- Rule: `#302f2a`
+- Accent: `#ff7658`
 
-Green communicates active work and links. Violet adds creative depth. Yellow and coral appear only as small human accents.
-
-## Signature component
-
-The homepage visual anchor is a **workbench interface**, not an illustration. It truthfully shows:
-
-- Get Random Letter as a live project.
-- Calm WP as a beta.
-- Field notes as ongoing writing.
-- Building, search, and learning as the current activity loop.
-
-It uses window chrome, tabs, a subtle activity signal, project queue, and terminal line. It should feel like a plausible product surface while remaining a concise personal snapshot.
+The palette uses one warm orange-red accent. There are no rainbow gradients or different colors assigned to every idea.
 
 ## Component system
 
-- Sticky translucent site header with compact wordmark and visible navigation.
-- Workbench product surface in the homepage hero.
-- Editorial project rows with number, status, description, and details.
+- Sticky, translucent header with a plain wordmark and unboxed navigation.
+- Editorial project rows with number, status, description, and useful details.
 - Compact writing rows with date, summary, and tags.
+- A simple “right now” line instead of a product-status widget.
 - Quiet article layout with strong typography and next/previous navigation.
-- Personal now-note with restrained colored depth.
-- Accessible theme control and clear focus treatment.
+- An open, ruled personal note instead of a decorative card.
+- Accessible theme control and visible focus treatment.
 
 ## Motion
 
-- Status pulse, terminal cursor, and quiet activity bars inside the workbench.
-- Small arrow and row movement on hover/focus.
-- No scroll-jacking, cursor replacement, animation library, parallax, or autoplay.
-- All non-essential animation stops under `prefers-reduced-motion`.
+- Small arrow and row movement on hover or focus.
+- A restrained navigation underline.
+- No looping dashboard animation, scroll-jacking, cursor replacement, parallax, or animation library.
+- All non-essential motion stops under `prefers-reduced-motion`.
 
 ## Explicitly rejected directions
 
+- Product dashboard or fake workbench in the hero.
 - Giant character or editorial illustration.
 - SVG feature infographic or route map.
-- Generic centered SaaS hero.
-- Endless rounded cards, glassmorphism, or dashboard grid.
-- Loud rainbow gradients and excessive glow.
+- Generic centred SaaS hero and conversion-style CTA buttons.
+- Endless rounded cards, glassmorphism, dashboard grids, glow, or rainbow gradients.
 - Fake metrics, testimonials, projects, or expertise claims.
+- “Shipping,” “systems,” “stack,” and other startup language where ordinary words sound more human.
 - Generic developer résumé language.
 
 ## Content and technical constraints
