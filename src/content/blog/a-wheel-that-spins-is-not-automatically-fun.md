@@ -3,6 +3,8 @@ title: "A Wheel That Spins Is Not Automatically Fun"
 description: "What fixing a stubborn web wheel taught me about animation, anticipation, readable labels, and the difference between working code and a good interaction."
 pubDate: 2026-08-08
 tags: ["building", "interaction design", "tools"]
+image: "/images/posts/wheel-not-automatically-fun.webp"
+imageAlt: "A handmade prize wheel spinning beside sketches and paper scraps."
 ---
 
 I recently worked on a wheel that had two very reasonable objections to being called a wheel:

@@ -3,6 +3,8 @@ title: "When Fewer Search Impressions Are Good News"
 description: "SEO charts need context. After cleaning spam URLs from a site, falling impressions can be evidence of recovery rather than failure."
 pubDate: 2026-08-07
 tags: ["SEO", "search", "field notes"]
+image: "/images/posts/fewer-search-impressions.webp"
+imageAlt: "A noisy field of signals becoming one clear path beside a magnifying glass."
 ---
 
 SEO reports train us to celebrate lines that go up and explain lines that go down.
