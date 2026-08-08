@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ProjectItem from '../components/ProjectItem.astro';
-import RouteMap from '../components/RouteMap.astro';
+import Workbench from '../components/Workbench.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import WritingItem from '../components/WritingItem.astro';
 import { projects } from '../data/projects';
@@ -19,19 +19,29 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 <Layout>
   <section class="home-hero shell shell--wide" aria-labelledby="home-title">
     <div class="home-hero__copy">
-      <h1 id="home-title">I’m Naman. I work on SEO, build things, and follow ideas <span class="home-hero__trail-word">a little too far.</span></h1>
+      <p class="hero-eyebrow"><span aria-hidden="true"></span> Independent maker · SEO</p>
+      <h1 id="home-title">I build useful things for the web—and help people <span>find them.</span></h1>
       <p class="home-hero__intro">
-        Most days I’m improving a real project, turning a random idea into a small tool, or figuring out why a useful page isn’t ranking. AI usually ends up somewhere in the process.
+        I’m Naman. I work across SEO, small web products, and WordPress—shipping real projects and writing down the lessons that survive the experiment.
       </p>
+      <div class="home-hero__actions">
+        <a class="button-link" href={`${base}projects/`}>Explore projects <span aria-hidden="true">→</span></a>
+        {recentPosts[0] && <a class="text-link" href={`${base}blog/${recentPosts[0].id}/`}>Read the latest note</a>}
+      </div>
+      <ul class="hero-stack" aria-label="Areas Naman works in">
+        <li>SEO systems</li>
+        <li>Web tools</li>
+        <li>WordPress</li>
+      </ul>
     </div>
-    <RouteMap />
+    <Workbench />
   </section>
 
   <div class="home-dispatch" aria-label="Current dispatch">
     <div class="shell shell--wide home-dispatch__inner">
-      <strong>Current dispatch</strong>
-      <span>Adding more useful tools to Get Random Letter and slowly shaping Calm WP into a theme I’d actually want to use.</span>
-      <span class="home-dispatch__stamp">now / making</span>
+      <strong><i aria-hidden="true"></i> Current loop</strong>
+      <span>Growing Get Random Letter · shaping Calm WP · solving search problems</span>
+      <span class="home-dispatch__stamp">Mandla / online</span>
     </div>
   </div>
 
@@ -44,7 +54,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       linkLabel="All projects"
     />
     <div class="project-list">
-      {projects.map((project) => <ProjectItem project={project} />)}
+      {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
     </div>
   </section>
 
