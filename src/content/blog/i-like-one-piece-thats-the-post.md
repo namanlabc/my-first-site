@@ -3,7 +3,7 @@ title: "I Like One Piece. That's the Post."
 description: "I have a blog now, so obviously I had to use it to talk about One Piece, break weeks, Dragon looking east, and why I love this ridiculous pirate story."
 pubDate: 2026-08-10
 tags: ["One Piece", "personal", "anime"]
-image: "/images/posts/i-like-one-piece.webp"
+image: "/images/posts/i-like-one-piece.jpg"
 imageAlt: "A straw-hatted pirate sitting on a grassy cliff looking out at a pirate ship on a calm sea."
 ---
 
