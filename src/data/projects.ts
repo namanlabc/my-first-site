@@ -10,6 +10,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: 'Astro SEO Audit',
+    description:
+      'An open-source CLI I built to check the final HTML an Astro site ships, find site-wide SEO issues, and catch real errors before deployment.',
+    href: 'https://github.com/namanlabc/astro-seo-audit',
+    status: 'Open source',
+    kind: 'Developer tool',
+    external: true,
+    details: ['Astro-native CLI', 'Site-wide HTML audit', 'CI quality gates'],
+  },
+  {
     name: 'Get Random Letter',
     description:
       'It started as one random-letter wheel and somehow turned into six small browser tools for games, classrooms, quick decisions, and wonderfully pointless fun.',
