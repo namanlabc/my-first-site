@@ -44,7 +44,7 @@ Visitors may arrive on the homepage, an individual article from search, the arch
 - Three existing published Markdown posts in `src/content/blog/`.
 - Existing About, Archive, RSS, and article routes.
 - Existing public links to Naman's GitHub and X profiles.
-- Real projects include Naman.blog itself and the public Get Random Letter website; project descriptions must remain factual and modest.
+- Real projects include Naman.blog itself, the public Get Random Letter website, and the open-source Astro SEO Audit CLI; project descriptions must remain factual and modest.
 - No testimonials, client logos, traffic claims, performance claims, or project metrics are available and none may be invented.
 
 ## Product Principles
