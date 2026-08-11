@@ -22,8 +22,8 @@ No assets, graphics, code, exact layouts, brand treatments, or proprietary inter
 - Wide content width: `76rem`.
 - Gutters: `clamp(1.15rem, 4vw, 3rem)`.
 - Spacing rhythm: 4, 8, 12, 16, 24, 32, 48, 72, and 96px.
-- Homepage: a generous editorial introduction without a separate bio block competing for space.
-- Mobile: one intentional column that starts directly with the main introduction.
+- Homepage: a compact personal introduction followed immediately by the work itself.
+- Mobile: a one-row identity header, a plain introduction, and the first project visible within the opening screen.
 - Breakpoints: 576px, 832px, and 1072px.
 
 ## Typography
@@ -31,7 +31,7 @@ No assets, graphics, code, exact layouts, brand treatments, or proprietary inter
 - Display and UI: a local system sans stack led by Inter/Geist when installed, with Segoe UI and system fallbacks.
 - Reading: Georgia/Cambria for introductions and long-form body copy.
 - Meta: SFMono/Consolas monospace, used sparingly.
-- Homepage title: large but not slogan-like; the words remain Naman’s previous, more natural introduction.
+- Homepage title: a simple serif “Hi, I’m Naman.” rather than a slogan.
 - Article typography stays calm and prioritises reading.
 
 No external font requests are required.
@@ -61,7 +61,7 @@ The palette uses one warm orange-red accent. There are no rainbow gradients or d
 ## Component system
 
 - Sticky, translucent header with a plain wordmark, unboxed navigation, and compact GitHub/X links.
-- Editorial project rows with number, status, description, and useful details.
+- Poster-like homepage projects with visuals derived from the actual product; editorial rows remain on the full projects page.
 - Compact writing rows with date, summary, and tags.
 - A simple “right now” line instead of a product-status widget.
 - Quiet article layout with strong typography, optional editorial featured images, and next/previous navigation.

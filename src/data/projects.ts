@@ -6,6 +6,7 @@ export interface Project {
   kind: string;
   external?: boolean;
   details: string[];
+  visual?: 'audit' | 'wheel' | 'calm' | 'notes';
 }
 
 export const projects: Project[] = [
@@ -18,6 +19,7 @@ export const projects: Project[] = [
     kind: 'Developer tool',
     external: true,
     details: ['Astro-native CLI', 'Site-wide HTML audit', 'CI quality gates'],
+    visual: 'audit',
   },
   {
     name: 'Get Random Letter',
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     kind: 'Web tools',
     external: true,
     details: ['6 live tools', 'No sign-up', 'Works in the browser'],
+    visual: 'wheel',
   },
   {
     name: 'Calm WP',
@@ -36,6 +39,7 @@ export const projects: Project[] = [
     status: 'Beta',
     kind: 'WordPress theme',
     details: ['WordPress theme', 'Beta build', 'Still evolving'],
+    visual: 'calm',
   },
   {
     name: 'Naman.blog',
@@ -45,5 +49,6 @@ export const projects: Project[] = [
     status: 'Ongoing',
     kind: 'Personal web',
     details: ['Astro + Markdown', 'Writing + projects', 'Always being tweaked'],
+    visual: 'notes',
   },
 ];
