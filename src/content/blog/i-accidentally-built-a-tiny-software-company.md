@@ -1,39 +1,23 @@
 ---
-title: "I Accidentally Built a Tiny Software Company"
-description: "I put a chief of staff, designer, engineer, architect, QA reviewer and SEO lead on a server, gave them one product idea, and watched a surprisingly real software company appear."
+title: "I Built a Tiny Software Team on a VPS"
+description: "I set up a chief of staff, designer, engineer, architect, QA reviewer and SEO lead on one VPS. Here is what they built, what broke, and what I learned."
 pubDate: 2026-08-12
 tags: ["building", "AI agents", "Paperclip", "personal"]
 image: "/images/posts/tiny-software-company.webp"
 imageAlt: "A handmade paper-collage software shipyard where a small crew designs, builds and checks websites, databases and mobile apps."
 ---
 
-I saw a screenshot of a few AI agents giving stand-up updates to each other.
+A few days ago, I saw a screenshot of several AI agents giving stand-up updates to each other.
 
-One was the software agent.
+There was a software agent, a designer and someone handling operations. It looked a little funny, but the idea stayed with me.
 
-One was the designer.
+I use AI tools while building things already. What I had not tried was giving them an actual organisation: separate jobs, shared context, reporting lines, budgets, permissions and a process for reviewing one another's work.
 
-One was handling operations.
+So I rented a VPS, installed Paperclip and decided to see how far I could take it.
 
-My first thought was not, *interesting experiment*.
+## Setting up the team
 
-My first thought was:
-
-**Bruh. I can make agents like them.**
-
-This is generally how new problems enter my life.
-
-## It started with a server and unreasonable confidence
-
-I had never used a VPS before.
-
-Naturally, I bought one, installed Paperclip on it and decided we were now a company.
-
-The company had one human employee.
-
-That was me.
-
-The rest of the organisation appeared very quickly:
+I created six roles:
 
 - Atlas, the chief of staff
 - a Product Architect
@@ -42,185 +26,84 @@ The rest of the organisation appeared very quickly:
 - a QA and Release Engineer
 - a Growth and SEO Lead
 
-I gave them reporting lines, permissions, budgets and rules about who could touch which branch.
+The names were the easy part. The useful work was deciding what each agent was allowed to do.
 
-Atlas was told to coordinate the work, not quietly become six employees wearing one coat.
+Atlas could plan and delegate, but was not supposed to implement the whole product. The engineer could write production code, but could not approve its own work. QA had to inspect real pages in a browser rather than reading a confident implementation summary. Mira owned the design direction and could send weak visual work back.
 
-The engineer could write production code but could not approve its own work.
+I also limited how many agents could work simultaneously and made them use blockers, branches and pull requests. When a task ended, the agent had to record what happened next instead of leaving a vague update behind.
 
-QA had to inspect the real rendered product in a browser.
+It was less like writing one clever prompt and more like designing a workflow that happened to be staffed by models.
 
-Mira could reject generic purple-gradient SaaS nonsense.
+## Giving them a real project
 
-Everyone had to leave a clear next step when a task ended, because apparently even artificial employees can finish a meeting without deciding what happens next.
+For the first full run, I gave the team Playtester.
 
-At some point I looked at the organisation chart and realised I had spent my morning creating middle management for computers.
+The concept was a community for independent Android developers going through Google Play closed testing. Sixteen developers join one hub. Each brings one app, and everyone helps test the other fifteen.
 
-Excellent use of time.
+The product needed more than a landing page. It required authentication, onboarding, private tester emails, hub membership, app pages, progress tracking, private chat, screenshot uploads, feedback, notifications, moderation, a PWA, public content and an admin area.
 
-## The first mission was not small
+Before engineering began, the Product Architect turned the idea into user journeys, database entities, routes and acceptance criteria. Mira created a visual system around a round table of sixteen developers. The engineer then built against those two documents instead of inventing the product while writing code.
 
-I did not ask them to make a to-do app.
+Once the first implementation was ready, QA, design and SEO reviewed it separately. Their findings returned to the engineer, fixes were committed, and QA checked the final state again.
 
-That would have been sensible.
+I could follow the whole process from my phone while the VPS kept running.
 
-Instead, I gave them Playtester.
+## What the team actually produced
 
-The idea was a community for independent Android developers going through Google Play closed testing. Sixteen developers join one hub. Each brings one app. Everyone helps test the other fifteen apps.
+The result was a real Next.js application connected to Supabase, not a collection of static screens.
 
-No fake installs. No paid-review nonsense. No coins, XP or complicated marketplace.
+The repository included database migrations, Row Level Security, authentication boundaries, private storage, chat, hub membership, admin tools, tests and deployment documentation.
 
-Just sixteen people making a small promise to show up for one another.
+The hub engine was tested against concurrent joins. If two developers tried to take the final seat at the same time, the database had to place one in the current hub and the other in the next one. It could never create a 17/16 hub.
 
-The product needed authentication, onboarding, private tester emails, atomic hub filling, app pages, community progress, private chat, screenshots, feedback, notifications, moderation, a small thank-you system, a PWA, public pages, SEO and an admin area.
+The team also tested whether private emails could appear in public pages, whether anonymous users could call protected database functions, and whether suspended users or unrelated hub members could access data they should not see.
 
-In other words, a perfectly reasonable little afternoon project.
+By the final hosted run, the project had more than 200 automated tests, browser checks, accessibility checks, responsive checks and a complete golden-path test against a real Supabase staging project.
 
-## Then the machine started moving
+The model cost for the main build stayed in the single digits. The VPS cost more than the agents did.
 
-The Product Architect turned the idea into routes, database entities, product rules and acceptance criteria.
+That ratio was probably the first thing that made the experiment feel less like a toy.
 
-Mira studied references and created a visual direction around a round table of sixteen developers. She defined the typography, colours, mobile behaviour and the exact kind of generic design the engineer was forbidden to produce.
+## Real infrastructure changed the result
 
-The Founding Engineer built the application.
+Local tests passed long before the product was genuinely ready.
 
-QA attacked it.
+When we connected the hosted database, one onboarding write failed because the local test database had more generous permissions than Supabase. The code looked correct and the tests were green, but the production-like environment exposed the difference immediately.
 
-Growth checked the public copy and search structure.
+Google login later redirected to `0.0.0.0:3000` because the callback trusted Hostinger's internal server address behind its reverse proxy. Another browser issue exposed how Next.js responses could behave badly around caching.
 
-Mira came back and judged the actual rendered screens instead of trusting the design document.
+These problems were frustrating, but they were also the most useful part of the run. They forced the agents to diagnose evidence from a real system instead of declaring success from source code alone.
 
-The engineer fixed what they found.
+The engineer proposed corrections. QA reproduced the failures and verified the fixes independently. Each incident left behind a better test or a clearer deployment rule.
 
-QA attacked it again.
+That review loop mattered more than the speed of the first implementation.
 
-Atlas stood above the whole pipeline asking for commits, evidence, blockers, costs and clear dispositions every few minutes like a tiny digital manager who had recently discovered performance reviews.
+## What I learned
 
-I watched all of this from my phone.
+The biggest lesson was that more agents do not automatically produce better work.
 
-There were moments when two agents were working in parallel, four tasks were waiting behind blockers, and I genuinely had no useful reason to interfere.
+They need clear ownership. If everyone is allowed to plan, design, implement and approve, they mostly create overlapping answers. Separating those responsibilities made the disagreements useful.
 
-No rest for the labourers.
+They also need durable context. Product rules, design decisions and security boundaries cannot live only inside one long conversation. Writing them into the repository gave later runs something stable to follow.
 
-Kha kha.
+The model choice mattered less than I expected for routine work. A relatively inexpensive coding model handled most of the implementation and testing. I spent the more capable model budget where visual judgment mattered most.
 
-I mean agents.
+Most importantly, the human role did not disappear. I still had to decide what the product should be, which trade-offs were acceptable, when credentials could be used, whether a migration should run and when code was ready to merge.
 
-## They did not just generate some pages
+The agents increased how much work I could coordinate. They did not remove the need to understand what I was approving.
 
-The final repository had a real Next.js application connected to Supabase.
+## The reusable part
 
-It included database migrations, Row Level Security, authentication boundaries, private storage, chat, onboarding, hub membership, admin tools, structured tests and deployment documentation.
+Playtester gave me more than one codebase.
 
-The hub engine was tested against concurrent joins so two people trying to take the final seat could never create a 17/16 hub.
+It gave me a repeatable way to move an idea through product planning, visual design, engineering, security review, QA and deployment.
 
-Private emails were checked against accidental public exposure.
+The next project will not begin with an empty prompt. The team already has rules for GitHub, design quality, browser testing, permissions, costs and handoffs. The Supabase foundation also contains patterns we can reuse for authentication, roles, private data, chat, uploads and admin workflows.
 
-Security functions were tested as anonymous users, authenticated users, suspended users and admins.
+That does not mean every future idea deserves a full build. If anything, this experiment made early validation more important. The system can produce software quickly, so deciding what is worth producing becomes the harder job.
 
-The final pipeline ran more than 200 tests, browser flows, accessibility checks, responsive checks and a hosted golden path against the real Supabase staging project.
+I started because a screenshot made me curious.
 
-All of this cost roughly single-digit dollars in model usage, plus the server I had already rented for the experiment.
+I ended with a small software team running on a server, a real application, and a way of working that I want to keep improving.
 
-That sentence still feels slightly ridiculous.
-
-## The bugs were the most useful part
-
-The agents did not produce perfection on the first attempt.
-
-Good.
-
-That would have taught me almost nothing.
-
-The first serious QA pass found privacy, accessibility and interaction problems.
-
-The hosted database behaved differently from the local test database because local permissions were accidentally more generous.
-
-Google login worked, then redirected me to `0.0.0.0:3000` because the app trusted the server's internal address behind Hostinger's proxy.
-
-Another time the browser displayed a raw React Server Component response like it had briefly forgotten it was supposed to be a website.
-
-Every one of those problems forced the system to do something more valuable than writing code.
-
-It had to diagnose reality.
-
-The engineer proposed a fix. QA independently verified it. The tests grew. The deployment assumptions became more honest.
-
-That is the difference between asking a model to "build me a SaaS" and building a small organisation that can disagree with its own output.
-
-## The prompt was not the superpower
-
-The tempting conclusion is that one enormous prompt built the product.
-
-It did not.
-
-The prompt mattered, but the useful part was everything around it:
-
-- one canonical product specification
-- clear ownership
-- specialised skills
-- separate design and engineering responsibility
-- branches and pull requests
-- independent QA
-- real browser evidence
-- real infrastructure
-- spending limits
-- human approval before migrations and merges
-
-Without those constraints, six agents can simply produce six confident versions of the same mistake.
-
-The models were workers inside the system.
-
-The system was the product I was actually building.
-
-## Now we can reuse the factory
-
-Playtester gave us more than one application.
-
-It gave us a repeatable way to take an idea through product planning, visual design, engineering, security review, QA, deployment and founder approval.
-
-The next project does not begin with an empty chat box anymore.
-
-It begins with an organisation that already knows:
-
-- how I want products to feel
-- what design patterns I reject
-- how GitHub work should move
-- who is allowed to change production code
-- what evidence QA must provide
-- when an agent must stop and ask me
-- how to report cost and unfinished work
-
-The product idea can change.
-
-The operating system remains.
-
-That is the part I am most excited about.
-
-## Anyway, I apparently run a software company now
-
-It has no office.
-
-Most employees are paid in API tokens.
-
-The chief of staff is stricter than me.
-
-The designer has already exceeded her budget once.
-
-The engineer worked for hours and then received another defect report immediately.
-
-And the founder spent much of the day taking screenshots and messaging his friend:
-
-**"Bro, what is happening?"**
-
-Very professional operation.
-
-But we went from a screenshot that made me laugh to a functioning product pipeline, a deployed application, a hosted database and a reusable way to build the next thing.
-
-I still do not think the interesting future is pressing one button and waking up rich.
-
-I think it is one curious person being able to organise far more skill, judgment and execution than they could carry alone.
-
-That feels real now.
-
-Zehahahahahaha.
+That is a much more interesting result than I expected from one VPS.
