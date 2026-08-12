@@ -1,64 +1,73 @@
-# Naman's Notes
+# Naman.blog
 
-A quiet, personal blog built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com). No tracking scripts, no advertisements, and no algorithms — just words, code, and thoughts.
+A small personal site for things I build, things I learn, and thoughts that refuse to leave quietly.
 
-## 🚀 Project Structure
+**[Visit naman.blog](https://naman.blog)**
 
-```text
-/
-├── public/
-│   └── favicon.ico, favicon.svg
-├── src/
-│   ├── content/
-│   │   └── blog/
-│   │       └── *.md              # Markdown blog posts
-│   ├── layouts/
-│   │   ├── Layout.astro          # Main layout (header, nav, theme toggle, footer)
-│   │   └── BlogPostLayout.astro  # Post layout (reading time, prev/next, tags)
-│   ├── pages/
-│   │   ├── index.astro           # Homepage
-│   │   ├── about.astro           # About page
-│   │   ├── archive.astro         # Posts grouped by year
-│   │   ├── 404.astro             # Custom 404 page
-│   │   ├── rss.xml.js            # RSS feed endpoint
-│   │   └── blog/[id].astro       # Dynamic blog post route
-│   ├── styles/
-│   │   └── global.css            # Tailwind v4 theme + prose styles
-│   └── content.config.ts         # Blog collection schema
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+It runs on [Astro](https://astro.build) with a little Tailwind CSS. There are no ads, trackers, cookie banners, fake numbers, or mysterious growth popups. The recommendation algorithm is mostly me remembering to write another post.
+
+## What lives here
+
+- Notes about websites, SEO, AI experiments, and whatever I am currently curious about
+- Small tools I built because the existing option annoyed me
+- Project pages with the honest version of what worked
+- An About page for anyone wondering who left all this lying around
+
+Posts are plain Markdown. The rest is mostly Astro, CSS, and restraint.
+
+## Run it locally
+
+```bash
+pnpm install
+pnpm dev
 ```
 
-## 🧞 Commands
+Astro will open the site at `http://localhost:4321`.
 
-All commands are run from the root of the project, from a terminal:
+Useful commands:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`            | Installs dependencies                            |
-| `pnpm dev`                | Starts local dev server at `localhost:4321`      |
-| `pnpm build`              | Build your production site to `./dist/`          |
-| `pnpm preview`            | Preview your build locally, before deploying     |
-| `pnpm astro ...`          | Run CLI commands like `astro add`, `astro check` |
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Start the local development server |
+| `pnpm build` | Build the production site into `dist/` |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm astro ...` | Run Astro CLI commands |
 
-## 🚢 Deployment
+## Write a post
 
-Deployment is handled automatically by [GitHub Actions](.github/workflows/deploy.yml) on every push to `master`. The site is built with `withastro/action` and published to GitHub Pages, then served at `https://naman.blog`.
-
-## ✍️ Writing a Post
-
-Create a new Markdown file in `src/content/blog/` with the following frontmatter:
+Add a Markdown file inside `src/content/blog/`:
 
 ```md
 ---
 title: "My New Post"
-description: "A short summary."
-pubDate: 2026-08-02
-tags: ["tag1", "tag2"]
+description: "A short, useful summary."
+pubDate: 2026-08-12
+tags: ["building", "notes"]
 ---
 
-Your content here.
+Write the actual post here.
 ```
 
-The `tags` field is optional. Posts appear automatically on the homepage, archive, RSS feed, and get prev/next navigation.
+Posts automatically appear on the homepage, archive, RSS feed, sitemap, and previous/next navigation. An optional `image` and `imageAlt` can be added for a featured image.
+
+## Project map
+
+```text
+.
+├── public/                 # Favicons and images
+├── src/
+│   ├── components/         # Reusable Astro components
+│   ├── content/blog/       # Markdown posts
+│   ├── data/projects.ts    # Real projects shown on the site
+│   ├── layouts/            # Shared page and article layouts
+│   ├── pages/              # Routes, RSS, and sitemap
+│   └── styles/global.css   # The visual system
+├── astro.config.mjs
+└── package.json
+```
+
+## Deployment
+
+Every push to `master` runs the GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). It builds the Astro site and publishes it to GitHub Pages at [naman.blog](https://naman.blog).
+
+If the build turns red, the website has politely declined the latest idea.
