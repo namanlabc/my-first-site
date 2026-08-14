@@ -1,0 +1,747 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const tools = [
+  'SEO',
+  'Keyword research',
+  'Content strategy',
+  'Search Console',
+  'Google Analytics',
+  'WordPress',
+  'Astro',
+  'HTML & CSS',
+  'Tailwind',
+  'Git & GitHub',
+  'SEMrush',
+  'Ahrefs',
+];
+---
+
+<Layout
+  title="Experience"
+  description="Naman Patel’s experience across SEO, content, web products, WordPress, and the tools and workflows he uses to turn ideas into finished work."
+>
+  <section class="experience-hero shell shell--wide" aria-labelledby="experience-title">
+    <div class="experience-hero__copy">
+      <span class="experience-kicker">Experience</span>
+      <h1 id="experience-title">I learned most of this by doing it.</h1>
+      <p class="experience-lede">
+        I started with SEO and content, then kept following the work into websites, WordPress, product thinking, and building my own tools.
+      </p>
+      <p>
+        I’m largely self-taught. The pattern has usually been the same: find something worth understanding, work on it long enough to get useful at it, then keep refining the parts that matter.
+      </p>
+      <a class="arrow-link" href={`${base}projects/`}>See what I’ve built <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="experience-hero__art" aria-hidden="true">
+      <div class="field-notes">
+        <div class="field-notes__top"><span>FIELD NOTES</span><i></i></div>
+        <strong>Learn it.<br />Use it.<br />Make it better.</strong>
+        <div class="field-notes__lines"><i></i><i></i><i></i></div>
+        <small>still figuring things out →</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section shell shell--wide" aria-labelledby="areas-title">
+    <div class="experience-heading">
+      <span>01 / THE WORK</span>
+      <div>
+        <h2 id="areas-title">Where I’ve spent the most time</h2>
+        <p>Not a list of badges. Just the areas I keep coming back to and have real hands-on experience with.</p>
+      </div>
+    </div>
+
+    <div class="experience-cards">
+      <article class="experience-card experience-card--seo">
+        <div class="experience-card__art" aria-hidden="true">
+          <div class="seo-board">
+            <div class="seo-board__query">how do people find this?</div>
+            <div class="seo-board__results">
+              <span><b>01</b><i></i><i></i></span>
+              <span><b>02</b><i></i><i></i></span>
+              <span><b>03</b><i></i><i></i></span>
+            </div>
+            <div class="seo-board__chart"><i></i></div>
+          </div>
+        </div>
+        <div class="experience-card__copy">
+          <span>SEO / CONTENT</span>
+          <h3>Understanding search, then making something worth finding.</h3>
+          <p>
+            SEO is where most of my experience began. I’ve worked through keyword research, search intent, content planning, on-page improvements, WordPress publishing, Search Console data, and the less glamorous job of figuring out why a page is not doing what it should.
+          </p>
+          <ul>
+            <li>Keyword and topic research</li>
+            <li>Content structure and on-page SEO</li>
+            <li>Search Console and analytics</li>
+            <li>WordPress publishing and optimisation</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--web">
+        <div class="experience-card__art" aria-hidden="true">
+          <div class="web-window">
+            <div class="web-window__bar"><i></i><i></i><i></i><span>localhost</span></div>
+            <div class="web-window__canvas">
+              <div class="web-window__hero"></div>
+              <div class="web-window__grid"><i></i><i></i><i></i></div>
+            </div>
+            <b>looks useful. ship it.</b>
+          </div>
+        </div>
+        <div class="experience-card__copy">
+          <span>PRODUCT / WEB</span>
+          <h3>Taking an idea far enough that someone can actually use it.</h3>
+          <p>
+            Over time I moved from only growing websites to building them too. I like the part where a rough idea becomes a structure, an interface, and eventually a real thing that has to work outside my head.
+          </p>
+          <ul>
+            <li>Astro sites and web tools</li>
+            <li>HTML, CSS and responsive interfaces</li>
+            <li>WordPress and theme work</li>
+            <li>Product thinking, iteration and shipping</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--workflow">
+        <div class="experience-card__art" aria-hidden="true">
+          <div class="workflow-desk">
+            <div class="workflow-note workflow-note--one"><small>RESEARCH</small><strong>Know what matters.</strong></div>
+            <div class="workflow-note workflow-note--two"><small>MAKE</small><strong>Get to a real version.</strong></div>
+            <div class="workflow-note workflow-note--three"><small>REFINE</small><strong>Fix what feels off.</strong></div>
+          </div>
+        </div>
+        <div class="experience-card__copy">
+          <span>TOOLS / WORKFLOW</span>
+          <h3>I care more about using tools well than collecting tool names.</h3>
+          <p>
+            I’m comfortable moving between research, writing, publishing, code, GitHub, analytics, and newer development tools when they help. The useful part is being able to choose a path, get unstuck, and keep the work moving.
+          </p>
+          <ul>
+            <li>Research and synthesis</li>
+            <li>Writing, editing and publishing</li>
+            <li>Git, GitHub and deployment workflows</li>
+            <li>Fast iteration with modern development tools</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section experience-proof shell shell--wide" aria-labelledby="proof-title">
+    <div class="experience-heading">
+      <span>02 / PROOF</span>
+      <div>
+        <h2 id="proof-title">A few things that taught me the most</h2>
+        <p>The useful bits of my résumé are the projects where the numbers, users, or outcome forced me to learn properly.</p>
+      </div>
+    </div>
+
+    <div class="proof-grid">
+      <article class="proof-card proof-card--traffic">
+        <span class="proof-card__index">A</span>
+        <strong>Up to 1M</strong>
+        <h3>monthly visitors</h3>
+        <p>I grew one of my own content projects to roughly a million visitors per month at its peak.</p>
+        <div class="traffic-spark" aria-hidden="true"><i></i></div>
+      </article>
+
+      <article class="proof-card proof-card--acquired">
+        <span class="proof-card__index">B</span>
+        <strong>Acquired</strong>
+        <h3>an entertainment project</h3>
+        <p>A US-focused entertainment site I worked on was later acquired by WealthOfGeeks Media.</p>
+        <div class="acquired-stamp" aria-hidden="true">project<br />→ media</div>
+      </article>
+
+      <article class="proof-card proof-card--now">
+        <span class="proof-card__index">C</span>
+        <strong>Still building</strong>
+        <h3>the next set of skills</h3>
+        <p>SmallMB, Astro SEO Audit, Get Random Letter, Calm WP and this site are the current classroom.</p>
+        <a href={`${base}projects/`}>Current projects →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section shell shell--wide" aria-labelledby="tools-title">
+    <div class="experience-heading">
+      <span>03 / TOOLBOX</span>
+      <div>
+        <h2 id="tools-title">Things I’m comfortable working with</h2>
+        <p>This changes over time. That is kind of the point.</p>
+      </div>
+    </div>
+
+    <div class="tool-shelf" aria-label="Tools and skills">
+      {tools.map((tool, index) => (
+        <span style={`--tilt: ${index % 3 === 0 ? '-1deg' : index % 3 === 1 ? '1deg' : '0deg'}`}>{tool}</span>
+      ))}
+    </div>
+  </section>
+
+  <section class="experience-end shell shell--wide">
+    <p>
+      The common thread is pretty simple: I like understanding how something works, making a version of it, and staying with it long enough to make the version better.
+    </p>
+    <div>
+      <a class="arrow-link" href={`${base}projects/`}>Projects <span aria-hidden="true">→</span></a>
+      <a class="arrow-link" href={`${base}about/`}>More about me <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .experience-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.75fr);
+    gap: clamp(3rem, 8vw, 7rem);
+    align-items: center;
+    padding-block: clamp(4.5rem, 9vw, 7.5rem);
+  }
+
+  .experience-kicker,
+  .experience-heading > span,
+  .experience-card__copy > span {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .experience-hero h1 {
+    max-width: 10ch;
+    margin: 0.85rem 0 0;
+    font-family: var(--reading);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .experience-hero__copy > p {
+    max-width: 58ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .experience-hero__copy .experience-lede {
+    margin-top: 1.5rem;
+    color: var(--ink);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.55;
+  }
+
+  .experience-hero__copy .arrow-link {
+    margin-top: 1.35rem;
+  }
+
+  .experience-hero__art {
+    position: relative;
+    min-height: clamp(22rem, 37vw, 31rem);
+    background: #8da8e8;
+    overflow: hidden;
+  }
+
+  .field-notes {
+    position: absolute;
+    inset: 10% 10% 8%;
+    padding: clamp(1.1rem, 3vw, 2rem);
+    border: 1px solid #1d2025;
+    color: #20211f;
+    background: #f3eedc;
+    box-shadow: 1rem 1rem 0 #ff7658;
+    transform: rotate(2.5deg);
+  }
+
+  .field-notes__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #aba79b;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .field-notes__top i {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #d95c45;
+  }
+
+  .field-notes strong {
+    display: block;
+    margin-top: 18%;
+    font-family: var(--reading);
+    font-size: clamp(2rem, 4.7vw, 4rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .field-notes__lines {
+    margin-top: 2rem;
+  }
+
+  .field-notes__lines i {
+    display: block;
+    width: 88%;
+    height: 1px;
+    margin-top: 0.65rem;
+    background: #aaa598;
+  }
+
+  .field-notes__lines i:nth-child(2) { width: 72%; }
+  .field-notes__lines i:nth-child(3) { width: 81%; }
+
+  .field-notes small {
+    position: absolute;
+    right: 8%;
+    bottom: 6%;
+    color: #a34b39;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+  }
+
+  .experience-heading {
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.3fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .experience-heading h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .experience-heading p {
+    max-width: 60ch;
+    margin: 0.8rem 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .experience-cards {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .experience-card {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  .experience-card:nth-child(even) .experience-card__art {
+    order: 2;
+  }
+
+  .experience-card__art {
+    position: relative;
+    min-height: clamp(20rem, 38vw, 31rem);
+    overflow: hidden;
+  }
+
+  .experience-card--seo .experience-card__art { background: #f2d74f; }
+  .experience-card--web .experience-card__art { background: #22463c; }
+  .experience-card--workflow .experience-card__art { background: #8da8e8; }
+
+  .experience-card__copy h3 {
+    max-width: 18ch;
+    margin: 0.7rem 0 0;
+    font-family: var(--reading);
+    font-size: clamp(1.9rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .experience-card__copy p {
+    max-width: 58ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .experience-card__copy ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink);
+    font-size: 0.86rem;
+  }
+
+  .experience-card__copy li::before {
+    content: '→';
+    margin-right: 0.55rem;
+    color: var(--accent);
+  }
+
+  .seo-board {
+    position: absolute;
+    inset: 10%;
+    color: #20211f;
+  }
+
+  .seo-board__query {
+    padding: 0.8rem 1rem;
+    border: 1px solid #20211f;
+    border-radius: 2rem;
+    background: #f8f1d8;
+    font-family: var(--mono);
+    font-size: clamp(0.55rem, 1vw, 0.72rem);
+  }
+
+  .seo-board__results {
+    width: 84%;
+    margin: 1.2rem 0 0 auto;
+    border: 1px solid #20211f;
+    background: #f8f1d8;
+    box-shadow: -0.8rem 0.8rem 0 #ff7658;
+    transform: rotate(1deg);
+  }
+
+  .seo-board__results span {
+    display: grid;
+    grid-template-columns: 1.3rem 1fr;
+    gap: 0.6rem;
+    padding: 0.8rem;
+    border-bottom: 1px solid #c3bda9;
+  }
+
+  .seo-board__results span:last-child { border-bottom: 0; }
+
+  .seo-board__results b {
+    grid-row: span 2;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+  }
+
+  .seo-board__results i {
+    display: block;
+    width: 88%;
+    height: 1px;
+    background: #989589;
+  }
+
+  .seo-board__results i + i { width: 62%; }
+
+  .seo-board__chart {
+    position: absolute;
+    right: 2%;
+    bottom: 1%;
+    width: 52%;
+    height: 26%;
+    border-left: 1px solid #20211f;
+    border-bottom: 1px solid #20211f;
+  }
+
+  .seo-board__chart i {
+    position: absolute;
+    inset: 20% 5% 8% 5%;
+    border-top: 3px solid #17695a;
+    transform: skewY(-18deg) rotate(-4deg);
+  }
+
+  .web-window {
+    position: absolute;
+    inset: 10%;
+    padding: 0 1rem 1.2rem;
+    border: 1px solid #163027;
+    color: #dff5eb;
+    background: #102d24;
+    box-shadow: 1rem 1rem 0 #ff7658;
+    transform: rotate(-1.5deg);
+  }
+
+  .web-window__bar {
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px solid #315247;
+  }
+
+  .web-window__bar i {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: #6f9287;
+  }
+
+  .web-window__bar span {
+    margin-left: auto;
+    color: #83a99d;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+  }
+
+  .web-window__canvas {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #46685d;
+  }
+
+  .web-window__hero {
+    height: clamp(4rem, 10vw, 7rem);
+    background: #d9e8d9;
+  }
+
+  .web-window__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+  }
+
+  .web-window__grid i {
+    height: clamp(2.6rem, 6vw, 4.5rem);
+    background: #6fa695;
+  }
+
+  .web-window b {
+    display: block;
+    margin-top: 0.9rem;
+    color: #ff9d89;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+  }
+
+  .workflow-desk {
+    position: absolute;
+    inset: 9%;
+    color: #1b1c20;
+  }
+
+  .workflow-note {
+    position: absolute;
+    width: 78%;
+    min-height: 34%;
+    padding: clamp(1rem, 2.4vw, 1.5rem);
+    border: 1px solid #1b1c20;
+    background: #f3eedc;
+  }
+
+  .workflow-note--one { top: 0; left: 0; transform: rotate(-4deg); }
+  .workflow-note--two { top: 30%; right: 0; z-index: 2; background: #ff7c5f; transform: rotate(3deg); }
+  .workflow-note--three { bottom: 0; left: 4%; z-index: 3; transform: rotate(-1deg); }
+
+  .workflow-note small {
+    font-family: var(--mono);
+    font-size: clamp(0.48rem, 1vw, 0.62rem);
+  }
+
+  .workflow-note strong {
+    display: block;
+    margin-top: 0.75rem;
+    font-family: var(--reading);
+    font-size: clamp(1.2rem, 3vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .experience-proof {
+    border-top: 1px solid var(--rule);
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .proof-card {
+    position: relative;
+    min-height: 21rem;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    overflow: hidden;
+    border: 1px solid #24231f;
+    color: #22211d;
+  }
+
+  .proof-card--traffic { background: #f2d74f; }
+  .proof-card--acquired { background: #9fdcd8; }
+  .proof-card--now { background: #f3eedc; }
+
+  .proof-card__index {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+  }
+
+  .proof-card > strong {
+    display: block;
+    margin-top: 15%;
+    font-family: var(--reading);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  .proof-card h3 {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+  }
+
+  .proof-card p {
+    max-width: 32ch;
+    margin: 0.8rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .proof-card a {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .traffic-spark {
+    position: absolute;
+    right: 8%;
+    bottom: 8%;
+    width: 44%;
+    height: 22%;
+    border-left: 1px solid #22211d;
+    border-bottom: 1px solid #22211d;
+  }
+
+  .traffic-spark i {
+    position: absolute;
+    inset: 28% 4% 10%;
+    border-top: 4px solid #d4523c;
+    transform: skewY(-20deg) rotate(-5deg);
+  }
+
+  .acquired-stamp {
+    position: absolute;
+    right: 9%;
+    bottom: 8%;
+    width: 6.2rem;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid #22211d;
+    border-radius: 50%;
+    background: #ff7658;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(9deg);
+  }
+
+  .tool-shelf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .tool-shelf span {
+    display: inline-block;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    transform: rotate(var(--tilt));
+  }
+
+  .experience-end {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: clamp(4rem, 8vw, 6rem);
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .experience-end > p {
+    max-width: 44ch;
+    margin: 0;
+    font-family: var(--reading);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+  }
+
+  .experience-end > div {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 900px) {
+    .experience-hero,
+    .experience-card {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-card:nth-child(even) .experience-card__art {
+      order: 0;
+    }
+
+    .experience-hero__art,
+    .experience-card__art {
+      min-height: 24rem;
+    }
+
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proof-card {
+      min-height: 18rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .experience-heading {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+
+    .experience-hero__art,
+    .experience-card__art {
+      min-height: 20rem;
+    }
+
+    .experience-end {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .experience-end > div {
+      flex-wrap: wrap;
+    }
+  }
+</style>
