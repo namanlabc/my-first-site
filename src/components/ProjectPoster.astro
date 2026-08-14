@@ -26,7 +26,6 @@ const href = project.href
     <div class="project-poster__art" aria-hidden="true">
       {project.visual === 'smallmb' && (
         <div class="smallmb-scene">
-          <span class="smallmb-scene__note">MAKE IT SMALL.<br />KEEP IT YOURS.</span>
           <div class="smallmb-phone">
             <div class="smallmb-phone__top"><b>smallmb</b><i></i></div>
             <div class="smallmb-file">
@@ -105,19 +104,6 @@ const href = project.href
     position: absolute;
     inset: 0;
     color: #17231f;
-  }
-
-  .smallmb-scene__note {
-    position: absolute;
-    z-index: 3;
-    top: 10%;
-    left: 9%;
-    max-width: 8rem;
-    font-family: var(--mono);
-    font-size: clamp(0.54rem, 1.08vw, 0.76rem);
-    font-weight: 750;
-    letter-spacing: 0.08em;
-    line-height: 1.5;
   }
 
   .smallmb-phone {
@@ -232,12 +218,6 @@ const href = project.href
   }
 
   @media (max-width: 640px) {
-    .smallmb-scene__note {
-      top: 9%;
-      left: 8%;
-      font-size: 0.52rem;
-    }
-
     .smallmb-phone {
       right: 7%;
       width: 69%;
