@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 
 export async function GET({ site }) {
   const posts = await getCollection('blog');
-  const paths = ['', 'about/', 'archive/', 'projects/', ...posts.map((post) => `blog/${post.id}/`)];
+  const paths = ['', 'about/', 'archive/', 'experience/', 'projects/', ...posts.map((post) => `blog/${post.id}/`)];
   const body = paths
     .map((path) => `<url><loc>${new URL(path, site).href}</loc></url>`)
     .join('');
