@@ -98,7 +98,7 @@ const href = project.href
 
 <style>
   .project-poster--smallmb .project-poster__art {
-    background: #95d8ca;
+    background: #9fdcd8;
   }
 
   .smallmb-scene {
@@ -110,13 +110,14 @@ const href = project.href
   .smallmb-scene__note {
     position: absolute;
     z-index: 3;
-    top: 8%;
-    left: 7%;
+    top: 10%;
+    left: 9%;
+    max-width: 8rem;
     font-family: var(--mono);
-    font-size: clamp(0.56rem, 1.15vw, 0.8rem);
+    font-size: clamp(0.54rem, 1.08vw, 0.76rem);
     font-weight: 750;
     letter-spacing: 0.08em;
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   .smallmb-phone {
@@ -212,8 +213,8 @@ const href = project.href
   .smallmb-badge {
     position: absolute;
     z-index: 4;
-    right: 4%;
-    top: 8%;
+    right: 5%;
+    top: 9%;
     width: clamp(3.5rem, 9vw, 5.6rem);
     aspect-ratio: 1;
     display: grid;
@@ -231,13 +232,19 @@ const href = project.href
   }
 
   @media (max-width: 640px) {
+    .smallmb-scene__note {
+      top: 9%;
+      left: 8%;
+      font-size: 0.52rem;
+    }
+
     .smallmb-phone {
       right: 7%;
       width: 69%;
     }
 
     .smallmb-badge {
-      top: 7%;
+      top: 8%;
       right: 5%;
     }
   }
