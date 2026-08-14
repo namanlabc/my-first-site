@@ -24,6 +24,23 @@ const href = project.href
     rel={project.external ? 'noopener noreferrer' : undefined}
   >
     <div class="project-poster__art" aria-hidden="true">
+      {project.visual === 'smallmb' && (
+        <div class="smallmb-scene">
+          <span class="smallmb-scene__note">MAKE IT SMALL.<br />KEEP IT YOURS.</span>
+          <div class="smallmb-phone">
+            <div class="smallmb-phone__top"><b>smallmb</b><i></i></div>
+            <div class="smallmb-file">
+              <span>PHOTO.JPG</span>
+              <strong>12.4 MB</strong>
+              <div class="smallmb-arrow">↓</div>
+              <em>842 KB</em>
+            </div>
+            <div class="smallmb-tools"><span>COMPRESS</span><span>RESIZE</span><span>PDF</span></div>
+          </div>
+          <div class="smallmb-badge">offline<br />first</div>
+        </div>
+      )}
+
       {project.visual === 'audit' && (
         <div class="audit-window">
           <div class="audit-window__bar"><i></i><i></i><i></i><span>astro-seo-audit</span></div>
@@ -78,3 +95,150 @@ const href = project.href
     {project.external && <span class="visually-hidden"> (opens in a new tab)</span>}
   </a>
 </article>
+
+<style>
+  .project-poster--smallmb .project-poster__art {
+    background: #95d8ca;
+  }
+
+  .smallmb-scene {
+    position: absolute;
+    inset: 0;
+    color: #17231f;
+  }
+
+  .smallmb-scene__note {
+    position: absolute;
+    z-index: 3;
+    top: 8%;
+    left: 7%;
+    font-family: var(--mono);
+    font-size: clamp(0.56rem, 1.15vw, 0.8rem);
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    line-height: 1.45;
+  }
+
+  .smallmb-phone {
+    position: absolute;
+    right: 8%;
+    bottom: -5%;
+    width: min(66%, 21rem);
+    aspect-ratio: 0.68;
+    padding: 0.9rem;
+    border: clamp(0.32rem, 0.7vw, 0.52rem) solid #17231f;
+    border-radius: clamp(1.35rem, 3vw, 2.25rem);
+    background: #fff9e9;
+    box-shadow: -1rem 1rem 0 #ff7658;
+    transform: rotate(4deg);
+  }
+
+  .smallmb-phone__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.15rem 0.2rem 0.8rem;
+    border-bottom: 1px solid #b9b3a4;
+    font-family: var(--reading);
+  }
+
+  .smallmb-phone__top b {
+    font-size: clamp(0.75rem, 1.8vw, 1.15rem);
+    font-weight: 600;
+  }
+
+  .smallmb-phone__top i {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #ff7658;
+  }
+
+  .smallmb-file {
+    margin-top: 18%;
+    padding: clamp(0.8rem, 2vw, 1.25rem);
+    border: 1px solid #17231f;
+    background: #f5e575;
+  }
+
+  .smallmb-file span,
+  .smallmb-tools span {
+    font-family: var(--mono);
+    font-size: clamp(0.42rem, 0.9vw, 0.6rem);
+    letter-spacing: 0.06em;
+  }
+
+  .smallmb-file strong,
+  .smallmb-file em {
+    display: block;
+    font-family: var(--display);
+    font-style: normal;
+    font-size: clamp(1.15rem, 3.4vw, 2.4rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .smallmb-file strong {
+    margin-top: 0.45rem;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  .smallmb-arrow {
+    margin: 0.22rem 0;
+    color: #d64e37;
+    font-size: clamp(1.1rem, 3vw, 2.15rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .smallmb-file em {
+    color: #0f6557;
+  }
+
+  .smallmb-tools {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+  }
+
+  .smallmb-tools span {
+    padding: 0.48rem 0.2rem;
+    border: 1px solid #17231f;
+    text-align: center;
+  }
+
+  .smallmb-badge {
+    position: absolute;
+    z-index: 4;
+    right: 4%;
+    top: 8%;
+    width: clamp(3.5rem, 9vw, 5.6rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid #17231f;
+    border-radius: 50%;
+    background: #ff7658;
+    font-family: var(--mono);
+    font-size: clamp(0.45rem, 1vw, 0.62rem);
+    font-weight: 750;
+    line-height: 1.15;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(10deg);
+  }
+
+  @media (max-width: 640px) {
+    .smallmb-phone {
+      right: 7%;
+      width: 69%;
+    }
+
+    .smallmb-badge {
+      top: 7%;
+      right: 5%;
+    }
+  }
+</style>
