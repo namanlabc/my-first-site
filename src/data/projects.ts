@@ -6,10 +6,19 @@ export interface Project {
   kind: string;
   external?: boolean;
   details: string[];
-  visual?: 'audit' | 'wheel' | 'calm' | 'notes';
+  visual?: 'audit' | 'wheel' | 'calm' | 'notes' | 'smallmb';
 }
 
 export const projects: Project[] = [
+  {
+    name: 'SmallMB',
+    description:
+      'A privacy-first Android utility I built to shrink photos and PDFs, resize images, convert files, and handle the small file chores that somehow always take too many taps.',
+    status: 'Launching',
+    kind: 'Android app',
+    details: ['On-device processing', 'Image + PDF tools', 'No account needed'],
+    visual: 'smallmb',
+  },
   {
     name: 'Astro SEO Audit',
     description:
