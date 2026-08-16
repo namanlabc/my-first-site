@@ -7,6 +7,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   : `${import.meta.env.BASE_URL}/`;
 
 const logo = (path: string) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${path}`;
+const simpleIcon = (slug: string) => `https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slug}.svg`;
 
 const toolGroups = [
   {
@@ -36,19 +37,29 @@ const toolGroups = [
       { name: 'Android', icon: logo('android/android-original.svg') },
     ],
   },
+  {
+    label: 'AI / AGENTS',
+    tools: [
+      { name: 'Claude', icon: simpleIcon('claude') },
+      { name: 'Codex', mark: 'CX' },
+      { name: 'OpenCode', icon: simpleIcon('opencode') },
+      { name: 'OpenRouter', icon: simpleIcon('openrouter') },
+      { name: 'Antigravity', mark: 'AG' },
+    ],
+  },
 ];
 ---
 
 <Layout
   title="Experience"
-  description="Naman Patel’s hands-on experience across SEO, content, web products, Android, GitHub, automation, QA, and the workflows used to turn ideas into shipped work."
+  description="Naman Patel’s hands-on experience across SEO, content, web products, Android, GitHub, AI coding agents, model routing, automation, QA, and release workflows."
 >
   <section class="experience-hero shell shell--wide" aria-labelledby="experience-title">
     <div class="experience-hero__copy">
       <span class="experience-kicker">Experience / working evidence</span>
       <h1 id="experience-title">I learned most of this by shipping things.</h1>
       <p class="experience-lede">
-        Search was the entry point. Then the work kept pulling me into publishing, product, code, automation, Android, QA, and release engineering.
+        Search was the entry point. Then the work kept pulling me into publishing, product, code, AI agents, model routing, automation, Android, QA, and release engineering.
       </p>
       <p>
         I’m largely self-taught. I care less about collecting badges than being able to move from a messy problem to something useful, measurable, and actually live.
@@ -64,11 +75,14 @@ const toolGroups = [
       <div class="experience-console__body">
         <div class="console-line"><b>01</b><span>research search intent</span><em>SEO</em></div>
         <div class="console-line"><b>02</b><span>structure + build</span><em>WEB</em></div>
-        <div class="console-line"><b>03</b><span>test on device</span><em>QA</em></div>
-        <div class="console-line"><b>04</b><span>ship + measure</span><em>LIVE</em></div>
+        <div class="console-line"><b>03</b><span>route agents + models</span><em>AI</em></div>
+        <div class="console-line"><b>04</b><span>test on device</span><em>QA</em></div>
+        <div class="console-line"><b>05</b><span>ship + measure</span><em>LIVE</em></div>
         <pre><code>$ git status
 <span>✓ product thinking</span>
 <span>✓ technical SEO</span>
+<span>✓ Claude / Codex / OpenCode</span>
+<span>✓ OpenRouter + agent workflows</span>
 <span>✓ Android builds</span>
 <span>✓ automation / CI</span>
 
@@ -127,16 +141,18 @@ const toolGroups = [
         <div class="trail-index"><span>03</span><i></i></div>
         <div class="trail-visual"><TechnicalWorkbench variant="workflow" /></div>
         <div class="trail-copy">
-          <span class="trail-label">ISSUE → BUILD → QA → RELEASE</span>
-          <h3>Now the work regularly crosses product, Android, automation, QA, and releases.</h3>
+          <span class="trail-label">ISSUE → AGENTS → BUILD → QA → RELEASE</span>
+          <h3>Now the work crosses product, AI agents, Android, automation, QA, and releases.</h3>
           <p>
-            I’m comfortable using Android Studio, Kotlin, Gradle, GitHub workflows, emulator testing, build artifacts, release checks, and agent-assisted workflows when they shorten the path from an issue to a verified release.
+            I’m comfortable using Claude, Codex, OpenCode, OpenRouter and Antigravity alongside Android Studio, Kotlin, Gradle, GitHub workflows, emulator testing, build artifacts, and release checks. AI is part of the build system for me—not a replacement for verification.
           </p>
-          <div class="receipt-list" aria-label="Android and workflow experience">
+          <div class="receipt-list" aria-label="AI, Android and workflow experience">
             <span><b>ANDROID</b> Kotlin + Studio</span>
             <span><b>BUILD</b> Gradle + artifacts</span>
             <span><b>QA</b> emulator + smoke tests</span>
             <span><b>CI</b> GitHub Actions</span>
+            <span><b>AGENTS</b> Claude + Codex + OpenCode + Antigravity</span>
+            <span><b>ROUTING</b> OpenRouter + supervised workflows</span>
           </div>
         </div>
       </article>
@@ -195,12 +211,14 @@ const toolGroups = [
 
     <div class="tool-system">
       {toolGroups.map((group, groupIndex) => (
-        <div class="tool-system__row">
+        <div class:list={['tool-system__row', { 'tool-system__row--ai': groupIndex === 3 }]}>
           <div class="tool-system__label"><span>0{groupIndex + 1}</span><b>{group.label}</b></div>
           <div class="tool-system__tools">
             {group.tools.map((tool) => (
               <div class="tool-tile">
-                <img src={tool.icon} alt="" loading="lazy" />
+                {'icon' in tool && tool.icon
+                  ? <img src={tool.icon} alt="" loading="lazy" />
+                  : <span class="tool-tile__mark" aria-hidden="true">{'mark' in tool ? tool.mark : 'AI'}</span>}
                 <span>{tool.name}</span>
               </div>
             ))}
@@ -210,6 +228,7 @@ const toolGroups = [
             {groupIndex === 0 && <><b>useful page</b><span>indexed + measurable</span></>}
             {groupIndex === 1 && <><b>working product</b><span>built + deployed</span></>}
             {groupIndex === 2 && <><b>verified release</b><span>tested + shipped</span></>}
+            {groupIndex === 3 && <><b>AI-accelerated loop</b><span>routed + supervised + verified</span></>}
           </div>
         </div>
       ))}
@@ -549,6 +568,11 @@ const toolGroups = [
     border-bottom: 1px solid var(--rule-strong);
   }
 
+  .tool-system__row--ai {
+    padding-block: 1.35rem;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 48%, transparent), transparent 42%);
+  }
+
   .tool-system__label {
     display: flex;
     gap: 0.7rem;
@@ -561,7 +585,7 @@ const toolGroups = [
 
   .tool-system__tools {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr));
     gap: 0.4rem;
   }
 
@@ -576,8 +600,29 @@ const toolGroups = [
     background: var(--surface);
   }
 
+  .tool-system__row--ai .tool-tile {
+    border-color: color-mix(in srgb, var(--ink) 28%, var(--rule));
+    box-shadow: 0.2rem 0.2rem 0 color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
   .tool-tile img { width: 1.45rem; height: 1.45rem; object-fit: contain; }
-  .tool-tile span { overflow: hidden; font-size: 0.65rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+  .tool-tile > span:last-child { overflow: hidden; font-size: 0.65rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+
+  .tool-tile__mark {
+    width: 1.55rem;
+    height: 1.55rem;
+    flex: 0 0 1.55rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 0.28rem;
+    color: var(--ink);
+    background: var(--surface-soft);
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
 
   .tool-system__arrow { color: var(--accent); font-size: 1.4rem; }
 
