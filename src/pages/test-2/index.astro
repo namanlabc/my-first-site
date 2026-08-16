@@ -15,23 +15,6 @@ const projectHref = (project: (typeof projects)[number]) => {
   if (project.href.startsWith('/')) return `${base}${project.href.replace(/^\//, '')}`;
   return project.href;
 };
-
-const smallmb = projects.find((project) => project.visual === 'smallmb') ?? projects[0];
-const audit = projects.find((project) => project.visual === 'audit') ?? projects[1];
-const wheel = projects.find((project) => project.visual === 'wheel') ?? projects[2];
-
-const chapters = [
-  { time: '6:47 PM', title: 'Still awake.', copy: 'One ordinary evening. One small irritation. One thought that maybe I could make it better.' },
-  { time: '8:26 PM', title: 'The notebook opens.', copy: 'Before anything becomes a project, it is usually just a sentence with too many arrows around it.' },
-  { time: '10:14 PM', title: 'Now it has a screen.', copy: 'The idea stops being theoretical. SmallMB starts as a useful little phone tool, not a pitch deck.' },
-  { time: '12:03 AM', title: 'Midnight checks.', copy: 'The room gets quieter. The work gets less romantic: HTML, schema, broken details, things that actually have to pass.' },
-  { time: '2:37 AM', title: 'The weird hours.', copy: 'This is when experiments multiply and the drawer labelled “probably not a good idea” becomes suspiciously important.' },
-  { time: '3:48 AM', title: 'The wall remembers.', copy: 'Search graphs, release notes, Android scraps, agent routes. Skills look better as evidence than badges.' },
-  { time: '4:41 AM', title: 'Quiet enough to write.', copy: 'The monitor dims. Pages come out. Writing is just another way of leaving breadcrumbs for tomorrow.' },
-  { time: '5:39 AM', title: 'First light.', copy: 'The room slowly gives back details the night was hiding.' },
-  { time: '6:11 AM', title: 'Good enough to ship.', copy: 'Not perfect. Real. That is usually the more useful state.' },
-  { time: '6:24 AM', title: 'See you tonight.', copy: 'Naman Patel — building, search, experiments, notes, and a desk that is never quite clean.' },
-];
 ---
 
 <!doctype html>
@@ -39,214 +22,236 @@ const chapters = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#17131d" />
+    <meta name="theme-color" content="#121315" />
     <meta name="robots" content="noindex,nofollow" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <title>One More Night · Naman Patel</title>
-    <meta name="description" content="One continuous night inside Naman Patel's room — ideas, building, search, experiments, writing, and sunrise." />
+    <title>The Observer · Naman Patel</title>
+    <meta name="description" content="An experimental visual identity for Naman Patel — independent builder, web and search." />
   </head>
 
-  <body data-scene="0">
-    <header class="nightbar">
-      <a class="nightbar__brand" href="#chapter-0"><span>NP</span><small>ONE MORE NIGHT</small></a>
-      <div class="nightbar__time"><i></i><span data-clock>6:47 PM</span></div>
-      <div class="nightbar__links"><a href={`${base}test/`}>TEST 01</a><a href={`${base}`}>REAL SITE ↗</a></div>
+  <body>
+    <header class="masthead">
+      <a class="mark" href="#top" aria-label="Naman Patel home"><span>NP</span><small>01</small></a>
+      <nav aria-label="Test navigation">
+        <a href="#work">Works</a>
+        <a href="#profile">Profile</a>
+        <a href="#notes">Notes</a>
+      </nav>
+      <div class="masthead__right">
+        <span>IND / 2026</span>
+        <a href={`${base}`}>Real site ↗</a>
+      </div>
     </header>
 
-    <div class="progress" aria-hidden="true"><span data-progress></span></div>
+    <main>
+      <section class="hero" id="top" aria-labelledby="hero-name">
+        <div class="hero__ghost" aria-hidden="true">N</div>
 
-    <main class="night" data-night>
-      <div class="world" data-world aria-label="An illustrated room changing through one night">
-        <div class="room-grain" aria-hidden="true"></div>
-        <div class="wall-glow" aria-hidden="true"></div>
+        <div class="hero__meta hero__meta--left">
+          <span>INDEPENDENT BUILDER</span>
+          <span>WEB / SEARCH / SOFTWARE</span>
+        </div>
 
-        <section class="window" aria-label="Window looking outside">
-          <div class="sky"></div>
-          <div class="moon"></div>
-          <div class="sun"></div>
-          <div class="cloud cloud--a"></div>
-          <div class="cloud cloud--b"></div>
-          <div class="city city--far"></div>
-          <div class="city city--near"></div>
-          <div class="passing-light"></div>
-          <div class="window-frame window-frame--v"></div>
-          <div class="window-frame window-frame--h"></div>
-        </section>
+        <div class="observer-wrap" data-parallax>
+          <svg class="observer" viewBox="0 0 760 1020" role="img" aria-label="The Observer, an abstract editorial figure representing Naman's visual identity">
+            <defs>
+              <linearGradient id="coat" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#e8e1d6" />
+                <stop offset="1" stop-color="#bcb7af" />
+              </linearGradient>
+              <linearGradient id="shadow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#383b40" />
+                <stop offset="1" stop-color="#191b1f" />
+              </linearGradient>
+              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#000" flood-opacity=".22" />
+              </filter>
+            </defs>
 
-        <section class="shelf" aria-label="Shelf with books and a plant">
-          <button class="book book--one secret" type="button" data-secret="book">SEO</button>
-          <button class="book book--two secret" type="button" data-secret="op">OP</button>
-          <button class="book book--three secret" type="button" data-secret="book">ASTRO</button>
-          <div class="plant"><i></i><i></i><i></i></div>
-        </section>
+            <ellipse cx="405" cy="950" rx="210" ry="24" fill="#090a0c" opacity=".35" />
 
-        <section class="pinboard" aria-label="Pinboard of notes from the night">
-          <span class="pinboard__label">THINGS WORTH REMEMBERING</span>
-          <button class="pin pin--one secret" type="button" data-secret="note">could I make<br />this better?</button>
-          <span class="pin pin--two">small → useful → ship</span>
-          <span class="pin pin--three">intent ≠ keywords</span>
-          <span class="pin pin--late pin--four">92 / 100</span>
-          <span class="pin pin--late pin--five">versionCode ↑</span>
-          <span class="pin pin--late pin--six">agent → QA → release</span>
-          <svg viewBox="0 0 200 120" aria-hidden="true"><path d="M20 95 C65 35 105 30 180 72" /><path d="M30 35 C70 80 120 80 168 28" /></svg>
-        </section>
+            <g filter="url(#softShadow)">
+              <path class="leg leg--back" d="M331 684 L412 684 L432 926 L370 939 Z" fill="#25282d" />
+              <path class="leg" d="M415 678 L500 660 L525 921 L462 940 Z" fill="#101214" />
+              <path d="M360 925 L432 922 L444 950 L347 951 Z" fill="#0c0d0f" />
+              <path d="M461 924 L525 918 L548 945 L456 953 Z" fill="#0c0d0f" />
 
-        <section class="lamp" aria-label="Desk lamp"><div class="lamp__shade"></div><div class="lamp__arm"></div><div class="lamp__light"></div></section>
+              <path class="coat-back" d="M238 340 Q300 280 419 298 Q526 322 557 420 L525 739 Q442 789 293 752 L219 499 Z" fill="url(#shadow)" />
+              <path class="coat" d="M268 338 Q338 285 430 304 Q488 318 529 374 L487 730 Q405 771 300 738 L243 488 Z" fill="url(#coat)" />
 
-        <section class="desk" aria-label="Naman's desk">
-          <div class="desk__top"></div>
-          <div class="desk__edge"></div>
+              <path class="coat-panel coat-panel--blue" d="M284 365 L351 329 L353 724 L299 738 L259 484 Z" fill="#536a7b" opacity=".94" />
+              <path class="coat-panel coat-panel--rust" d="M439 319 L502 350 L486 704 L433 733 Z" fill="#9c5740" />
 
-          <button class="mug secret" type="button" data-secret="mug" aria-label="Chai mug">
-            <span class="mug__tea"></span><span class="mug__handle"></span><i class="steam steam--1"></i><i class="steam steam--2"></i><small>chai</small>
-          </button>
+              <path class="arm arm--left" d="M252 397 Q187 448 161 599 Q180 622 216 618 L308 469 Z" fill="#c9c3b9" />
+              <path class="arm arm--right" d="M505 372 Q585 438 613 575 L575 604 L478 473 Z" fill="#25282d" />
 
-          <button class="wheel secret" type="button" data-secret="wheel" aria-label="Tiny random letter wheel">
-            <span>A</span><span>G</span><span>M</span><span>R</span><b>spin</b>
-          </button>
+              <path class="hand" d="M158 596 Q151 624 169 642 Q192 659 216 618 L203 590 Z" fill="#b9a596" />
+              <path class="hand" d="M575 589 Q590 627 619 617 Q641 608 626 583 L606 557 Z" fill="#b9a596" />
 
-          <button class="crumple secret" type="button" data-secret="crumple" aria-label="Crumpled paper">?</button>
+              <path class="neck" d="M350 288 L428 288 L442 330 Q385 353 334 324 Z" fill="#b9a596" />
+              <ellipse class="head" cx="387" cy="207" rx="91" ry="111" fill="#b9a596" transform="rotate(-7 387 207)" />
+              <path class="hair" d="M292 192 Q310 87 406 89 Q491 96 502 179 Q470 140 424 135 Q366 126 319 170 L306 237 Q288 221 292 192 Z" fill="#17191d" />
+              <path class="face-shadow" d="M438 140 Q478 189 452 266 Q420 304 374 308 Q410 260 406 207 Q404 170 438 140 Z" fill="#927f73" opacity=".48" />
 
-          <div class="keyboard" aria-hidden="true">{Array.from({ length: 12 }).map(() => <i></i>)}</div>
+              <path class="eye" d="M333 207 Q347 201 361 207" stroke="#292b30" stroke-width="4" fill="none" stroke-linecap="round" />
+              <path class="eye" d="M411 197 Q425 191 439 197" stroke="#292b30" stroke-width="4" fill="none" stroke-linecap="round" />
 
-          <button class="phone secret" type="button" data-secret="phone" aria-label="Phone with SmallMB">
-            <span class="phone__speaker"></span>
-            <div class="phone__screen">
-              <small>smallmb</small><span>PHOTO.JPG</span><s>12.4 MB</s><b>842 KB</b><i>compress</i>
+              <rect class="notebook" x="548" y="548" width="77" height="106" rx="4" fill="#e9e2d4" transform="rotate(8 548 548)" />
+              <path d="M560 573 L606 580 M558 588 L599 594 M556 604 L607 611" stroke="#9c5740" stroke-width="3" opacity=".8" />
+
+              <circle class="motif motif--wheel" cx="325" cy="463" r="27" fill="none" stroke="#121315" stroke-width="5" />
+              <path d="M325 437 V489 M299 463 H351" stroke="#121315" stroke-width="3" opacity=".7" />
+              <rect class="motif motif--device" x="454" y="465" width="31" height="55" rx="7" fill="none" stroke="#e8e1d6" stroke-width="4" />
+              <path class="graph-line" d="M292 590 C323 565 349 602 379 570 C404 544 435 579 469 538" fill="none" stroke="#202327" stroke-width="5" stroke-linecap="round" />
+              <circle cx="469" cy="538" r="6" fill="#9c5740" />
+
+              <path class="seam" d="M357 329 L389 716" stroke="#77736e" stroke-width="2" stroke-dasharray="9 11" opacity=".8" />
+              <path class="seam" d="M462 342 L430 704" stroke="#e8e1d6" stroke-width="2" stroke-dasharray="8 12" opacity=".55" />
+
+              <rect class="note-tab" x="303" y="520" width="36" height="12" rx="3" fill="#d6a34a" transform="rotate(-6 303 520)" />
+              <rect class="note-tab" x="400" y="616" width="42" height="13" rx="3" fill="#708fa5" transform="rotate(3 400 616)" />
+
+              <path class="tiny-mark" d="M478 407 l8 -9 l8 9 l8 -9" stroke="#f0e8da" stroke-width="3" fill="none" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="hero__identity">
+          <h1 id="hero-name">Naman Patel</h1>
+          <p>independent builder / web / search</p>
+        </div>
+
+        <div class="hero__meta hero__meta--right">
+          <span>THE OBSERVER / MAKER</span>
+          <span>EXPERIMENT 002</span>
+        </div>
+
+        <a class="hero__scroll" href="#work">↓</a>
+      </section>
+
+      <section class="work-intro" id="work">
+        <span>SELECTED WORK / 01—05</span>
+        <p>Things made quietly, then released into the world.</p>
+      </section>
+
+      <section class="works" aria-label="Selected projects">
+        {projects.slice(0, 5).map((project, index) => (
+          <article class:list={['work', `work--${index + 1}`, `work--${project.visual ?? 'notes'}`]}>
+            <div class="work__meta">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <span>{project.kind}</span>
+              <span>{project.status}</span>
             </div>
-          </button>
 
-          <button class="notebook secret" type="button" data-secret="notebook" aria-label="Notebook">
-            <span class="notebook__line"></span><small>idea 07</small><b>make the boring thing<br />feel simple.</b><em>→ then actually ship it</em>
-          </button>
+            <a class="work__visual" href={projectHref(project)} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>
+              {project.visual === 'smallmb' && (
+                <div class="composition composition--phone">
+                  <div class="phone-object">
+                    <div class="phone-object__screen"><small>smallmb</small><span>PHOTO.JPG</span><s>12.4 MB</s><b>842 KB</b><i>compress</i></div>
+                  </div>
+                  <div class="orbit-label">ON DEVICE</div>
+                  <div class="mass mass--blue"></div>
+                  <div class="mass mass--bone"></div>
+                  <span class="huge-type">MB</span>
+                </div>
+              )}
 
-          <div class="papers" aria-hidden="true"><span></span><span></span><span></span></div>
+              {project.visual === 'audit' && (
+                <div class="composition composition--audit">
+                  <div class="audit-score"><span>site health</span><b>92</b><small>/100</small></div>
+                  <div class="audit-sheet"><code>$ astro-seo-audit</code><p>✓ title + description</p><p>✓ canonical</p><p>✓ schema</p></div>
+                  <svg class="audit-line" viewBox="0 0 600 300" aria-hidden="true"><path d="M20 230 C140 110 220 250 340 120 C430 25 520 180 580 70" /></svg>
+                  <span class="huge-type">SEO</span>
+                </div>
+              )}
 
-          <button class="drawer secret" type="button" data-secret="drawer" aria-label="Desk drawer">
-            <span>probably_not_a_good_idea</span><i></i>
-          </button>
+              {project.visual === 'wheel' && (
+                <div class="composition composition--wheel">
+                  <div class="wheel-object"><span>A</span><span>G</span><span>M</span><span>R</span><b>spin</b></div>
+                  <div class="wheel-shadow"></div>
+                  <span class="huge-type">RND</span>
+                  <div class="orbit-label">LIVE / BROWSER</div>
+                </div>
+              )}
 
-          <button class="bug secret" type="button" data-secret="bug" aria-label="A tiny bug"><i></i><i></i><i></i></button>
-        </section>
+              {project.visual === 'calm' && (
+                <div class="composition composition--calm">
+                  <div class="paper-object"><small>CALM / 001</small><h3>Less noise.<br />More reading.</h3><p></p><p></p><p></p></div>
+                  <div class="leaf-mark">✦</div>
+                  <span class="huge-type">CALM</span>
+                </div>
+              )}
 
-        <section class="monitor" aria-label="Monitor showing the work of the night">
-          <div class="monitor__shell">
-            <div class="monitor__camera"></div>
-            <div class="monitor__screens">
-              <div class="screen screen--0 is-active" data-screen="0"><small>NOTES.TXT</small><p>could I make<br /><strong>this better?</strong></p><span class="caret"></span></div>
+              {project.visual === 'notes' && (
+                <div class="composition composition--notes">
+                  <div class="note-object note-object--a"><small>FIELD NOTE / 08</small><b>I wanted Yoast for Astro,<br />so I built it.</b></div>
+                  <div class="note-object note-object--b"><small>FIELD NOTE / 09</small><b>Some websites are<br />never really finished.</b></div>
+                  <span class="huge-type">NP</span>
+                </div>
+              )}
+            </a>
 
-              <div class="screen screen--1" data-screen="1"><small>IDEAS / 8:26 PM</small><div class="idea-map"><b>useful?</b><i></i><b>smaller</b><i></i><b>ship</b></div><p>one evening → one annoying problem → maybe a product</p></div>
-
-              <div class="screen screen--2" data-screen="2"><small>SMALLMB / BUILD</small><div class="app-preview"><span>PHOTO.JPG</span><s>12.4 MB</s><b>842 KB</b><footer><i>COMPRESS</i><i>RESIZE</i><i>PDF</i></footer></div><a href={projectHref(smallmb)}>opening soon →</a></div>
-
-              <div class="screen screen--3" data-screen="3"><small>naman@night:~</small><code>$ npx astro-seo-audit<br /><span>✓</span> final HTML<br /><span>✓</span> canonical<br /><span>✓</span> schema<br /><b>92 / 100</b></code><a href={projectHref(audit)} target="_blank" rel="noopener noreferrer">open source ↗</a></div>
-
-              <div class="screen screen--4" data-screen="4"><small>02:37 / EXPERIMENTS</small><div class="folders"><button type="button" data-secret="folder">probably_not_a_good_idea/</button><span>agents/</span><span>draw-to-unlock/</span><span>games/</span><span>mavid/</span></div><p>normal judgement has left the room.</p></div>
-
-              <div class="screen screen--5" data-screen="5"><small>03:48 / WHAT I ACTUALLY USE</small><div class="evidence"><span>SEO</span><span>ASTRO</span><span>ANDROID</span><span>GITHUB</span><span>CLAUDE</span><span>CODEX</span><span>CI / QA</span></div><p>tools are only interesting when something ships.</p></div>
-
-              <div class="screen screen--6" data-screen="6"><small>04:41 / DRAFTS</small><div class="draft-list">{posts.map((post, index) => <a href={`${base}blog/${post.id}/`}><span>0{index + 1}</span><b>{post.data.title}</b></a>)}</div></div>
-
-              <div class="screen screen--7" data-screen="7"><small>05:39 / FIRST LIGHT</small><p>the room was always messier than it looked.</p><div class="tiny-status"><span>chai</span><b>cold</b><span>tabs</span><b>too many</b><span>sleep</span><b>later</b></div></div>
-
-              <div class="screen screen--8" data-screen="8"><small>06:11 / RELEASE</small><code>$ git push origin main<br /><span>✓</span> build<br /><span>✓</span> deploy<br /><b>good enough to ship.</b></code><div class="release-projects">{projects.slice(0, 4).map((project) => <a href={projectHref(project)} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}><span>{project.name}</span><small>{project.status}</small></a>)}</div></div>
-
-              <div class="screen screen--9" data-screen="9"><small>06:24 / NAMAN PATEL</small><h2>see you tonight.</h2><p>I build things for the web, work on search, experiment with software, and write down what I learn.</p><div class="final-links"><a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a><a href={`${base}about/`}>About →</a></div></div>
+            <div class="work__copy">
+              <h2>{project.name}</h2>
+              <p>{project.description}</p>
+              <a href={projectHref(project)} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>View project ↗</a>
             </div>
-          </div>
-          <div class="monitor__neck"></div><div class="monitor__stand"></div>
-        </section>
-
-        <div class="morning-reveal" aria-hidden="true"><span class="photo">NP<br /><small>keep making</small></span><span class="chapter-mark">one more<br />chapter?</span></div>
-
-        <div class="toast" role="status" aria-live="polite" data-toast></div>
-      </div>
-
-      <div class="chapters" aria-label="One night timeline">
-        {chapters.map((chapter, index) => (
-          <section class="chapter" id={`chapter-${index}`} data-chapter={index}>
-            <article class:list={['story', index % 2 ? 'story--right' : 'story--left']}>
-              <span class="story__time">{chapter.time}</span>
-              <span class="story__eyebrow">{index === 0 ? 'THE SUN HAS ALMOST LEFT.' : index === 9 ? 'MORNING.' : `0${index + 1} / ONE MORE NIGHT`}</span>
-              <h1>{chapter.title}</h1>
-              <p>{chapter.copy}</p>
-              {index === 0 && <small>scroll slowly. the room keeps everything.</small>}
-              {index === 4 && <small>the drawer opens. unfortunately.</small>}
-              {index === 6 && <small>the papers on the monitor are real posts.</small>}
-              {index === 9 && <a href={`${base}`}>back to the daylight site ↗</a>}
-            </article>
-          </section>
+          </article>
         ))}
-      </div>
+      </section>
+
+      <section class="profile" id="profile">
+        <div class="profile__index">PROFILE / 06</div>
+        <div class="profile__statement">
+          <p>I work where search, software, and small useful products overlap.</p>
+          <p class="profile__soft">Most of the interesting part happens between the idea and the moment it becomes real.</p>
+        </div>
+        <div class="profile__facts">
+          <span><small>Based</small><b>Mandla, India</b></span>
+          <span><small>Focus</small><b>Search / Web / Product</b></span>
+          <span><small>Bias</small><b>Make it useful</b></span>
+        </div>
+        <div class="profile__links">
+          <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
+          <a href={`${base}about/`}>About ↗</a>
+        </div>
+      </section>
+
+      <section class="notes" id="notes">
+        <header class="notes__head">
+          <span>FIELD NOTES / 07</span>
+          <p>Writing, experiments, and things worth keeping.</p>
+        </header>
+
+        <div class="notes__list">
+          {posts.map((post, index) => (
+            <a class="note-row" href={`${base}blog/${post.id}/`}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
+              <b>↗</b>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div><strong>Naman Patel</strong><span>Observer / Maker</span></div>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </main>
 
     <script>
-      const body = document.body;
-      const chapters = Array.from(document.querySelectorAll('[data-chapter]'));
-      const screens = Array.from(document.querySelectorAll('[data-screen]'));
-      const clock = document.querySelector('[data-clock]');
-      const progress = document.querySelector('[data-progress]');
-      const toast = document.querySelector('[data-toast]');
-      const times = ['6:47 PM','8:26 PM','10:14 PM','12:03 AM','2:37 AM','3:48 AM','4:41 AM','5:39 AM','6:11 AM','6:24 AM'];
-      let activeScene = 0;
-      let toastTimer;
-
-      function setScene(index) {
-        activeScene = Number(index);
-        body.dataset.scene = String(activeScene);
-        if (clock) clock.textContent = times[activeScene] ?? times[0];
-        screens.forEach((screen, i) => screen.classList.toggle('is-active', i === activeScene));
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setScene(visible.target.dataset.chapter);
-      }, { threshold: [0.35, 0.55, 0.75] });
-
-      chapters.forEach((chapter) => observer.observe(chapter));
-
-      function updateProgress() {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const ratio = max > 0 ? window.scrollY / max : 0;
-        progress?.style.setProperty('--progress', `${Math.max(0, Math.min(1, ratio)) * 100}%`);
-      }
-      addEventListener('scroll', updateProgress, { passive: true });
-      updateProgress();
-
-      function say(message) {
-        if (!toast) return;
-        toast.textContent = message;
-        toast.classList.add('is-visible');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
-      }
-
-      document.querySelectorAll('[data-secret]').forEach((el) => {
-        el.addEventListener('click', () => {
-          const secret = el.dataset.secret;
-          if (secret === 'mug') say(activeScene < 3 ? 'still warm ☕' : activeScene < 7 ? 'this chai has seen things.' : 'cold. completely abandoned.');
-          if (secret === 'wheel') { el.classList.remove('is-spinning'); void el.offsetWidth; el.classList.add('is-spinning'); say('R. destiny has spoken.'); }
-          if (secret === 'crumple') say('“build a social network for potatoes” — rejected, 8:59 PM.');
-          if (secret === 'drawer' || secret === 'folder') { body.classList.toggle('drawer-open'); say('you were specifically not supposed to open this.'); }
-          if (secret === 'notebook' || secret === 'note') say('most projects begin with handwriting this bad.');
-          if (secret === 'phone') say('12.4 MB → 842 KB. boring problem, satisfying result.');
-          if (secret === 'bug') { el.classList.add('caught'); say('bug fixed. ship it before another appears.'); }
-          if (secret === 'op') say('one more chapter. historically, a lie.');
-          if (secret === 'book') say('research material. definitely.');
+      const figure = document.querySelector('[data-parallax]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (figure && !reduce) {
+        window.addEventListener('pointermove', (event) => {
+          const x = (event.clientX / window.innerWidth - 0.5) * 10;
+          const y = (event.clientY / window.innerHeight - 0.5) * 6;
+          figure.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
-      });
-
-      addEventListener('keydown', (event) => {
-        if (event.key.toLowerCase() === 'z') {
-          body.classList.remove('zehaha'); void body.offsetWidth; body.classList.add('zehaha');
-          say('ZEHAHAHAHA — the room approves.');
-        }
-      });
-
-      setScene(0);
+      }
     </script>
   </body>
 </html>
@@ -254,169 +259,239 @@ const chapters = [
 <style>
   :root {
     color-scheme: dark;
-    --header-h: 3.35rem;
-    --ink: #f5efe4;
-    --muted: #b7aea5;
-    --faint: #807a78;
-    --line: rgba(245,239,228,.13);
-    --night: #111016;
-    --wall: #392b31;
-    --desk: #654738;
-    --lamp: #f0a667;
+    --bg: #121315;
+    --panel: #181a1d;
+    --ink: #ebe5db;
+    --muted: #9a958e;
+    --line: rgba(235,229,219,.14);
+    --blue: #536a7b;
+    --rust: #9c5740;
+    --bone: #d7d0c5;
+    --gold: #d1a456;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --ui: Inter, Geist, "Segoe UI", system-ui, sans-serif;
     --serif: Georgia, Cambria, "Times New Roman", serif;
-    --ui: Inter, system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; }
-  html { background: var(--night); scroll-behavior: smooth; }
-  body { margin: 0; min-width: 20rem; min-height: 100vh; overflow-x: hidden; background: var(--night); color: var(--ink); font-family: var(--ui); }
-  button, a { font: inherit; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body { margin: 0; min-width: 20rem; background: var(--bg); color: var(--ink); font-family: var(--ui); }
   a { color: inherit; text-decoration: none; }
-  button { color: inherit; }
+  ::selection { background: var(--rust); color: #fff; }
 
-  .nightbar {
-    position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-    padding: 0 .95rem; border-bottom: 1px solid var(--line); background: rgba(14,13,18,.92); backdrop-filter: blur(16px);
-    font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
-  }
-  .nightbar__brand, .nightbar__time, .nightbar__links { display: flex; align-items: center; gap: .65rem; }
-  .nightbar__brand span { width: 1.65rem; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-size: .5rem; }
-  .nightbar__brand small { font-size: inherit; color: var(--muted); }
-  .nightbar__time i { width: .38rem; aspect-ratio: 1; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 .8rem rgba(240,166,103,.65); }
-  .nightbar__links { justify-self: end; gap: .9rem; color: var(--muted); }
-  .nightbar a:hover { color: #fff; }
-
-  .progress { position: fixed; z-index: 101; top: var(--header-h); left: 0; width: 100%; height: 1px; background: rgba(255,255,255,.05); }
-  .progress span { display: block; width: var(--progress,0%); height: 100%; background: linear-gradient(90deg,#e99b66,#8598e9,#f0c79f); transition: width 80ms linear; }
-
-  .night { position: relative; }
-  .world { position: fixed; z-index: 1; inset: var(--header-h) 0 0; overflow: hidden; background: var(--wall); transition: background 1.2s ease; isolation: isolate; }
-  .world::after { content:""; position:absolute; inset:0; z-index:50; pointer-events:none; box-shadow: inset 0 0 8rem rgba(0,0,0,.38); transition: opacity 1s ease; }
-  .room-grain { position:absolute; inset:0; z-index:49; pointer-events:none; opacity:.14; background-image: repeating-radial-gradient(circle at 0 0, transparent 0 2px, rgba(255,255,255,.06) 2.5px 3px); background-size:5px 5px; mix-blend-mode:soft-light; }
-  .wall-glow { position:absolute; inset:0; background: radial-gradient(circle at 73% 35%, rgba(240,166,103,.16), transparent 31%), radial-gradient(circle at 22% 20%, rgba(107,102,168,.08), transparent 28%); transition: opacity 1.2s ease, background 1.2s ease; }
-
-  .window { position:absolute; left:5.5%; top:7%; width:25%; height:29%; overflow:hidden; border: .45rem solid #1a171c; background:#15131d; box-shadow: 0 1rem 2rem rgba(0,0,0,.22); }
-  .sky { position:absolute; inset:0; background: linear-gradient(#d78274 0%, #83647d 46%, #38334f 100%); transition: background 1.5s ease; }
-  .moon { position:absolute; width:1.8rem; aspect-ratio:1; border-radius:50%; left:73%; top:22%; background:#f7ebc7; box-shadow:0 0 2rem rgba(247,235,199,.25); opacity:0; transform:translateY(1rem); transition: all 1.5s ease; }
-  .sun { position:absolute; width:2.4rem; aspect-ratio:1; border-radius:50%; left:18%; top:66%; background:#ffc486; box-shadow:0 0 2.5rem #ffc486; opacity:0; transition:all 1.5s ease; }
-  .cloud { position:absolute; width:4rem; height:1rem; border-radius:999px; background:rgba(42,39,57,.55); filter:blur(1px); transition:all 1.2s ease; }
-  .cloud::before,.cloud::after { content:""; position:absolute; bottom:0; border-radius:50%; background:inherit; }
-  .cloud::before { width:1.8rem; height:1.8rem; left:.65rem; }.cloud::after { width:1.25rem; height:1.25rem; right:.6rem; }
-  .cloud--a { top:27%; left:7%; }.cloud--b { top:53%; right:-6%; transform:scale(.75); }
-  .city { position:absolute; right:0; bottom:0; left:0; height:27%; background: linear-gradient(90deg,#11131d 0 7%,transparent 7% 11%,#13151f 11% 22%,transparent 22% 25%,#0e1018 25% 44%,transparent 44% 49%,#151720 49% 68%,transparent 68% 72%,#10121b 72% 100%); }
-  .city--far { height:19%; opacity:.55; transform:translateX(-3%); }.city--near { height:12%; filter:brightness(.8); }
-  .passing-light { position:absolute; bottom:9%; left:-10%; width:1.2rem; height:.18rem; border-radius:999px; background:#ffd283; opacity:0; }
-  .window-frame { position:absolute; z-index:4; background:#19161c; }.window-frame--v { width:.4rem; top:0; bottom:0; left:50%; transform:translateX(-50%); }.window-frame--h { height:.4rem; right:0; left:0; top:54%; }
-
-  .shelf { position:absolute; left:5.7%; top:38%; width:24.5%; height:7.5%; border-bottom:.8rem solid #5a4034; display:flex; align-items:flex-end; gap:.45rem; padding-left:1.5rem; }
-  .book { border:0; border-radius:.1rem .1rem 0 0; width:2.1rem; height:4.5rem; padding:.35rem 0; writing-mode:vertical-rl; font-family:var(--mono); font-size:.45rem; letter-spacing:.08em; cursor:pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
-  .book--one { background:#8a5351; }.book--two { height:3.8rem; background:#536878; }.book--three { height:4.9rem; background:#aa784e; }
-  .plant { position:relative; width:3.2rem; height:2.3rem; margin-left:.65rem; background:#725340; clip-path:polygon(15% 35%,85% 35%,72% 100%,28% 100%); }
-  .plant i { position:absolute; bottom:1.2rem; left:50%; width:.65rem; height:2.2rem; border-radius:100% 0 100% 0; transform-origin:bottom; background:#55765d; }.plant i:nth-child(1){transform:rotate(-40deg)}.plant i:nth-child(2){height:2.7rem;transform:translateX(-50%)}.plant i:nth-child(3){transform:rotate(40deg) scaleX(-1)}
-
-  .pinboard { position:absolute; top:8%; right:5.5%; width:27%; height:26%; padding:1.3rem; background:#765943; border:.5rem solid #4b372e; box-shadow:0 1rem 2.2rem rgba(0,0,0,.18); }
-  .pinboard__label { position:absolute; top:.55rem; left:.7rem; font: .42rem var(--mono); letter-spacing:.12em; color:#e7cfb2; }
-  .pin { position:absolute; border:0; padding:.45rem .6rem; color:#44362f; background:#efe0bf; font: .58rem/1.2 var(--serif); transform:rotate(var(--r)); box-shadow:0 .2rem .35rem rgba(0,0,0,.12); transition:opacity .8s ease, transform .8s ease; }
-  .pin--one{left:12%;top:30%;--r:-5deg;cursor:pointer}.pin--two{right:9%;top:22%;--r:3deg;background:#d7dfd2}.pin--three{right:13%;bottom:16%;--r:-2deg;background:#d9cce0}.pin--four{left:12%;bottom:12%;--r:4deg}.pin--five{left:42%;top:50%;--r:-3deg;background:#cfdbe4}.pin--six{right:4%;top:54%;--r:4deg;background:#e0d2b7}
-  .pin--late { opacity:0; transform:translateY(.4rem) rotate(var(--r)); }
-  .pinboard svg { position:absolute; inset:28% 8% 8%; width:84%; height:64%; opacity:.25; fill:none; stroke:#f2dfc8; stroke-width:1; }
-
-  .lamp { position:absolute; right:19%; top:32%; width:8rem; height:23rem; z-index:3; }
-  .lamp__shade { position:absolute; top:0; left:1.1rem; width:5.6rem; height:2.8rem; border-radius:60% 60% 18% 18%; background:#6b5963; transform:rotate(7deg); }
-  .lamp__arm { position:absolute; top:2.2rem; left:3.7rem; width:.35rem; height:14rem; background:#55494f; transform:rotate(9deg); transform-origin:top; }
-  .lamp__light { position:absolute; top:2rem; left:-3rem; width:13rem; height:20rem; clip-path:polygon(38% 0,62% 0,100% 100%,0 100%); background:linear-gradient(rgba(246,176,108,.28),rgba(246,176,108,.03)); filter:blur(6px); transition:opacity 1.2s ease; }
-
-  .desk { position:absolute; z-index:5; left:2.8%; right:2.8%; bottom:0; height:28%; }
-  .desk__top { position:absolute; inset:0 0 18%; border-radius:.4rem .4rem 0 0; background:linear-gradient(#795747,#624436); box-shadow:0 -1rem 2rem rgba(0,0,0,.1), inset 0 1px rgba(255,255,255,.08); transition:background 1.2s ease; }
-  .desk__edge { position:absolute; right:0; bottom:12%; left:0; height:7%; background:#4a342c; }
-
-  .mug { position:absolute; left:18%; top:18%; width:5rem; height:5rem; border:0; border-radius:.5rem 0 1.2rem 1.2rem; background:#c77d59; cursor:pointer; box-shadow:0 .8rem 1.2rem rgba(0,0,0,.12); }
-  .mug__tea { position:absolute; top:.2rem; left:.35rem; right:.35rem; height:.5rem; border-radius:50%; background:#6a3e2b; }.mug__handle { position:absolute; top:1rem; right:-1.4rem; width:1.8rem; height:2.6rem; border:.5rem solid #c77d59; border-left:0; border-radius:0 1rem 1rem 0; }
-  .mug small { position:absolute; inset:auto 0 .7rem; font: .42rem var(--mono); color:#603d31; }.steam { position:absolute; bottom:4.6rem; width:.4rem; height:2.8rem; border-left:1px solid rgba(255,238,220,.48); border-radius:50%; animation:steam 2.3s ease-in-out infinite; }.steam--1{left:1.6rem}.steam--2{left:2.8rem;animation-delay:.8s}
-  @keyframes steam { 0%{opacity:0;transform:translateY(.4rem) translateX(0)}35%{opacity:.8}100%{opacity:0;transform:translateY(-1.1rem) translateX(.5rem)} }
-
-  .wheel { position:absolute; left:7%; top:29%; width:4.4rem; aspect-ratio:1; border:.2rem solid #c8b994; border-radius:50%; background:conic-gradient(#7b8e78 0 25%,#6d8198 25% 50%,#a67372 50% 75%,#aa9a6f 75%); cursor:pointer; box-shadow:0 .6rem 1rem rgba(0,0,0,.13); }
-  .wheel::after { content:""; position:absolute; inset:34%; border-radius:50%; background:#ddd2b8; }.wheel span,.wheel b { position:absolute; z-index:2; font:.48rem var(--mono); }.wheel span:nth-child(1){top:.3rem;left:48%}.wheel span:nth-child(2){right:.35rem;top:46%}.wheel span:nth-child(3){bottom:.25rem;left:48%}.wheel span:nth-child(4){left:.35rem;top:46%}.wheel b{inset:50% auto auto 50%;transform:translate(-50%,-50%);color:#352e2e}.wheel.is-spinning{animation:spin .7s cubic-bezier(.2,.8,.2,1)}@keyframes spin{to{transform:rotate(720deg)}}
-
-  .crumple { position:absolute; left:29%; top:49%; width:2.6rem; aspect-ratio:1; border:0; border-radius:48% 52% 55% 45%; background:#dfd4b8; color:#5a4d43; transform:rotate(11deg); cursor:pointer; font:1rem var(--serif); }
-  .keyboard { position:absolute; left:37%; top:58%; width:31%; height:2.2rem; padding:.3rem; display:grid; grid-template-columns:repeat(12,1fr); gap:.15rem; background:#25242a; transform:perspective(11rem) rotateX(35deg); box-shadow:0 .7rem 1rem rgba(0,0,0,.15); }.keyboard i{background:#3a3942;border-radius:.08rem}
-
-  .phone { position:absolute; right:7%; top:16%; width:4.1rem; height:8rem; padding:.25rem; border:.18rem solid #171a20; border-radius:.65rem; background:#11141a; transform:rotate(5deg); cursor:pointer; box-shadow:0 .7rem 1rem rgba(0,0,0,.22); transition:opacity .8s ease, transform .8s ease; }
-  .phone__speaker { display:block;width:1rem;height:.12rem;border-radius:999px;background:#393c43;margin:.15rem auto .35rem }.phone__screen{height:6.8rem;border-radius:.35rem;background:#eee4cd;color:#3f3933;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.18rem;font-family:var(--mono)}.phone__screen small{font-size:.38rem}.phone__screen span{font-size:.42rem}.phone__screen s{font-size:.6rem;color:#835849}.phone__screen b{font-size:.82rem;color:#477667}.phone__screen i{font-size:.34rem;font-style:normal;border:1px solid #6d645c;padding:.14rem .22rem;margin-top:.25rem}
-
-  .notebook { position:absolute; right:18%; top:36%; width:12rem; height:6.4rem; padding:.75rem; border:0; background:#ded1b6; color:#443a31; transform:rotate(-3deg); box-shadow:0 .7rem 1.1rem rgba(0,0,0,.13); cursor:pointer; opacity:.82; transition:all .9s ease; text-align:left; }.notebook::before{content:"";position:absolute;top:0;bottom:0;left:1rem;border-left:1px solid rgba(154,91,74,.3)}.notebook__line{position:absolute;inset:1.5rem .7rem .5rem 1.4rem;background:repeating-linear-gradient(transparent 0 .83rem,rgba(80,101,118,.16) .84rem .88rem)}.notebook small,.notebook b,.notebook em{position:relative;z-index:2;display:block}.notebook small{font:.38rem var(--mono)}.notebook b{margin:.7rem 0 .3rem 1rem;font: .68rem var(--serif);font-weight:400}.notebook em{margin-left:1rem;font:italic .48rem var(--serif)}
-  .papers { position:absolute; right:2%; top:38%; width:9rem; height:5rem; }.papers span{position:absolute;inset:0;background:#d9cdb4;box-shadow:0 .4rem .7rem rgba(0,0,0,.1)}.papers span:nth-child(1){transform:rotate(-4deg)}.papers span:nth-child(2){transform:rotate(3deg) translate(.5rem,.2rem);background:#cfc7b8}.papers span:nth-child(3){transform:rotate(1deg) translate(.2rem,.5rem);background:#e0d4be}
-
-  .drawer { position:absolute; right:19%; bottom:-11%; width:24%; height:28%; border:0; background:#4d342c; border-top:1px solid rgba(255,255,255,.08); cursor:pointer; transition:transform .7s cubic-bezier(.16,1,.3,1); }.drawer span{position:absolute;top:.45rem;left:.6rem;font:.36rem var(--mono);color:#9a7d6d}.drawer i{position:absolute;top:.65rem;left:50%;width:2.5rem;height:.22rem;border-radius:999px;background:#2f2420;transform:translateX(-50%)}
-  .drawer-open .drawer { transform:translateY(-55%); }.drawer-open .drawer::after{content:"agent zoo • cursed prototypes • pen fight • draw-to-unlock • ??";position:absolute;inset:34% 8% 8%;padding:.5rem;background:#2a2221;color:#c6ad99;font:.42rem/1.6 var(--mono);text-align:left}
-
-  .bug { position:absolute; left:72%; top:42%; width:1.4rem; height:.8rem; border:0; background:transparent; cursor:pointer; opacity:0; transition:opacity .4s ease; animation:bugwalk 5s linear infinite; }.bug i:first-child{position:absolute;left:.42rem;top:.18rem;width:.58rem;height:.42rem;border-radius:50%;background:#211c1b}.bug i:nth-child(2),.bug i:nth-child(3){position:absolute;top:.38rem;width:.7rem;border-top:1px solid #211c1b}.bug i:nth-child(2){left:0;transform:rotate(25deg)}.bug i:nth-child(3){right:0;transform:rotate(-25deg)}.bug.caught{display:none}@keyframes bugwalk{0%{transform:translateX(-3rem) rotate(0)}50%{transform:translateX(2rem) rotate(7deg)}100%{transform:translateX(-3rem) rotate(0)}}
-
-  .monitor { position:absolute; z-index:6; left:34%; top:28%; width:34%; height:45%; transition:transform .9s ease; }
-  .monitor__shell { position:relative; height:71%; padding:.75rem; border-radius:.55rem; background:#202026; box-shadow:0 1.2rem 2rem rgba(0,0,0,.23), inset 0 0 0 1px rgba(255,255,255,.08); }.monitor__camera{position:absolute;top:.35rem;left:50%;width:.22rem;aspect-ratio:1;border-radius:50%;background:#56535a}.monitor__screens{position:relative;height:100%;overflow:hidden;border-radius:.2rem;background:#101117}.monitor__neck{width:16%;height:16%;margin:auto;background:#2e2d34}.monitor__stand{width:45%;height:5%;margin:auto;border-radius:50%;background:#27262c;box-shadow:0 .5rem .5rem rgba(0,0,0,.18)}
-  .screen { position:absolute; inset:0; padding:1.2rem; opacity:0; transform:translateY(.7rem); transition:opacity .5s ease, transform .55s ease; pointer-events:none; color:#d7d2ca; background:radial-gradient(circle at 30% 0,rgba(108,110,162,.08),transparent 35%),#101117; font-family:var(--mono); }.screen.is-active{opacity:1;transform:none;pointer-events:auto}.screen small{display:block;color:#7f7d83;font-size:.44rem;letter-spacing:.09em}.screen p{font: .76rem/1.45 var(--mono);color:#b9b4ae}.screen a{display:inline-block;margin-top:.6rem;color:#d8a879;font-size:.48rem;text-transform:uppercase;letter-spacing:.08em}.screen--0 p{margin:2.2rem 0 0;font:1.15rem/1.08 var(--mono);color:#d8d0bf}.screen--0 strong{font-weight:400;color:#f0dfc6}.caret{display:block;width:.5rem;height:1px;margin-top:.7rem;background:#c9ad8c;animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
-  .idea-map{display:flex;align-items:center;gap:.5rem;margin:2rem 0 1rem}.idea-map b{padding:.4rem .55rem;border:1px solid #55515c;font-size:.5rem;font-weight:400}.idea-map i{flex:1;border-top:1px dashed #55515c}
-  .app-preview{width:70%;margin:1rem auto;padding:.7rem;background:#e9dfc8;color:#37322f;display:flex;flex-direction:column;align-items:center;gap:.25rem}.app-preview span{font-size:.42rem}.app-preview s{font-size:.7rem;color:#7f594d}.app-preview b{font-size:1rem;color:#477667}.app-preview footer{display:flex;gap:.25rem;margin-top:.45rem}.app-preview footer i{font-style:normal;font-size:.3rem;border:1px solid #756d65;padding:.18rem}
-  .screen code{display:block;margin-top:1.2rem;font:.63rem/1.7 var(--mono);color:#b9b4ae}.screen code span{color:#79a888}.screen code b{color:#d7bf81}.folders{display:grid;gap:.4rem;margin-top:1.1rem}.folders button,.folders span{padding:.5rem;border:0;border-left:2px solid #6d657b;background:#181820;color:#bbb4ad;text-align:left;font:.52rem var(--mono)}.folders button{cursor:pointer;color:#d5ad8d}.evidence{display:flex;flex-wrap:wrap;gap:.38rem;margin-top:1.25rem}.evidence span{padding:.35rem .45rem;border:1px solid #484650;font-size:.45rem}.draft-list{display:grid;margin-top:.75rem}.draft-list a{display:grid;grid-template-columns:1.5rem 1fr;gap:.5rem;margin:0;padding:.5rem 0;border-bottom:1px solid #2d2c32;text-transform:none;letter-spacing:0}.draft-list span{color:#74727a;font-size:.42rem}.draft-list b{font: .58rem/1.25 var(--serif);font-weight:400;color:#d7d1c9}.tiny-status{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin-top:1rem;font-size:.46rem}.tiny-status span{color:#75727b}.tiny-status b{font-weight:400}.release-projects{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-top:.55rem}.release-projects a{display:flex;justify-content:space-between;gap:.5rem;padding:.35rem .45rem;border:1px solid #302f35;margin:0;text-transform:none;letter-spacing:0}.release-projects span{font-size:.4rem}.release-projects small{font-size:.32rem;color:#82a97f}.screen--9 h2{margin:1.2rem 0 .4rem;font:1.35rem var(--serif);font-weight:400;color:#eee4d9}.screen--9 p{font:.62rem/1.5 var(--serif);max-width:28ch}.final-links{display:flex;gap:.8rem}.final-links a{margin-top:.5rem}
-
-  .morning-reveal { position:absolute; left:6%; top:50%; opacity:0; transition:opacity 1.4s ease; }.photo,.chapter-mark{position:absolute;display:grid;place-items:center;text-align:center;background:#e8d9bd;color:#493e35;box-shadow:0 .5rem 1rem rgba(0,0,0,.13)}.photo{width:4.4rem;height:5.2rem;transform:rotate(-4deg);font:1rem var(--serif)}.photo small{font:.35rem var(--mono)}.chapter-mark{left:5rem;top:1rem;width:4rem;height:2.5rem;transform:rotate(6deg);font:.48rem/1.3 var(--serif)}
-
-  .toast { position:absolute; z-index:80; left:50%; bottom:2.2rem; max-width:min(90vw,28rem); padding:.7rem 1rem; border:1px solid rgba(255,255,255,.15); border-radius:999px; background:rgba(19,18,23,.92); color:#eee6dc; font:.58rem var(--mono); letter-spacing:.04em; opacity:0; transform:translate(-50%,.6rem); pointer-events:none; transition:opacity .25s ease,transform .25s ease; box-shadow:0 1rem 2rem rgba(0,0,0,.24) }.toast.is-visible{opacity:1;transform:translate(-50%,0)}
-
-  .chapters { position:relative; z-index:10; }
-  .chapter { position:relative; min-height:100svh; display:flex; align-items:center; padding:calc(var(--header-h) + 2rem) clamp(1rem,5vw,5rem) 2rem; pointer-events:none; }
-  .story { width:min(29rem,42vw); padding:1.15rem 1.2rem 1.25rem; border:1px solid rgba(255,255,255,.1); background:linear-gradient(135deg,rgba(17,16,22,.88),rgba(17,16,22,.66)); backdrop-filter:blur(12px); box-shadow:0 1.2rem 3rem rgba(0,0,0,.18); pointer-events:auto; }
-  .story--right { margin-left:auto; }.story--left { margin-right:auto; }
-  .story__time,.story__eyebrow,.story small,.story a{display:block;font:.5rem var(--mono);letter-spacing:.1em;text-transform:uppercase}.story__time{color:#e1a875}.story__eyebrow{margin-top:.55rem;color:#847f7b}.story h1{margin:.45rem 0 .7rem;font:clamp(2rem,4.5vw,4.2rem)/.94 var(--serif);font-weight:400;letter-spacing:-.045em}.story p{margin:0;color:#d0c7bc;font:clamp(.88rem,1.2vw,1.05rem)/1.5 var(--serif)}.story small{margin-top:.9rem;color:#9a8b7f}.story a{margin-top:1rem;color:#e2af7e}
-
-  body[data-scene="1"] .notebook { opacity:1; transform:rotate(-1deg) translate(-2rem,-1rem) scale(1.12); box-shadow:0 1.2rem 2rem rgba(0,0,0,.22); }
-  body[data-scene="1"] .pin--one { transform:translateY(-.25rem) rotate(-1deg) scale(1.05); }
-  body[data-scene="2"] .phone { transform:rotate(0) translate(-3rem,-1.4rem) scale(1.25); box-shadow:0 1.4rem 2.4rem rgba(0,0,0,.28); }
-  body[data-scene="3"] .lamp__light, body[data-scene="4"] .lamp__light, body[data-scene="5"] .lamp__light, body[data-scene="6"] .lamp__light { opacity:.55; }
-  body[data-scene="3"] .moon, body[data-scene="4"] .moon, body[data-scene="5"] .moon, body[data-scene="6"] .moon { opacity:1; }
-  body[data-scene="3"] .moon{left:30%;top:19%} body[data-scene="4"] .moon{left:43%;top:12%} body[data-scene="5"] .moon{left:58%;top:13%} body[data-scene="6"] .moon{left:74%;top:22%}
-  body[data-scene="3"] .bug,body[data-scene="4"] .bug{opacity:1}
-  body[data-scene="4"] .notebook { transform:rotate(-7deg) translate(-1rem,.4rem); }
-  body[data-scene="4"] .crumple { transform:rotate(18deg) translate(1rem,-.3rem); }
-  body[data-scene="4"] .pin--four, body[data-scene="4"] .pin--five, body[data-scene="5"] .pin--late, body[data-scene="6"] .pin--late, body[data-scene="7"] .pin--late, body[data-scene="8"] .pin--late, body[data-scene="9"] .pin--late { opacity:1; transform:rotate(var(--r)); }
-  body[data-scene="5"] .pinboard { box-shadow:0 0 0 1px rgba(237,184,133,.08),0 1rem 2.2rem rgba(0,0,0,.18); }
-  body[data-scene="6"] .papers { transform:translate(-2rem,-1.3rem); }
-  body[data-scene="6"] .mug .steam, body[data-scene="7"] .mug .steam, body[data-scene="8"] .mug .steam, body[data-scene="9"] .mug .steam { display:none; }
-  body[data-scene="7"] .sky { background:linear-gradient(#24304f,#465477 50%,#8c6f74 100%); } body[data-scene="7"] .moon{opacity:.4;left:84%;top:30%}
-  body[data-scene="7"] .wall-glow{background:radial-gradient(circle at 18% 22%,rgba(104,126,177,.15),transparent 30%),radial-gradient(circle at 72% 38%,rgba(238,174,123,.08),transparent 30%)}
-  body[data-scene="7"] .morning-reveal,body[data-scene="8"] .morning-reveal,body[data-scene="9"] .morning-reveal{opacity:1}
-  body[data-scene="8"] .sky { background:linear-gradient(#697ca3 0%,#cf8e7b 62%,#f0ae7b 100%); } body[data-scene="8"] .moon{opacity:0}.passing-light{animation:none} body[data-scene="8"] .passing-light{opacity:1;animation:car 7s linear infinite}@keyframes car{from{transform:translateX(0)}to{transform:translateX(32rem)}}
-  body[data-scene="9"] .sky { background:linear-gradient(#91a7c0 0%,#e1a98d 54%,#f4c797 100%); } body[data-scene="9"] .sun{opacity:.95;transform:translateY(-1.6rem)} body[data-scene="9"] .lamp__light{opacity:0} body[data-scene="9"] .wall-glow{background:linear-gradient(100deg,rgba(255,210,160,.19),transparent 38%)} body[data-scene="9"] .desk__top{background:linear-gradient(#86614c,#6d4e3e)} body[data-scene="9"] .world::after{opacity:.45}
-
-  body[data-scene="2"] .sky{background:linear-gradient(#5b465f,#343249 50%,#1d2234)} body[data-scene="3"] .sky,body[data-scene="4"] .sky,body[data-scene="5"] .sky,body[data-scene="6"] .sky{background:linear-gradient(#161a2b,#1d2134 60%,#171926)}
-  body[data-scene="3"] .steam,body[data-scene="4"] .steam,body[data-scene="5"] .steam{animation-duration:3.5s;opacity:.5}
-  body[data-scene="4"] .world{background:#2b252d} body[data-scene="5"] .world,body[data-scene="6"] .world{background:#25232a} body[data-scene="7"] .world{background:#2d2c36} body[data-scene="8"] .world{background:#44383a} body[data-scene="9"] .world{background:#5d4741}
-
-  .zehaha .world { animation:zehaha .55s ease both; } @keyframes zehaha{20%{transform:translateX(-4px) rotate(-.08deg)}40%{transform:translateX(4px) rotate(.08deg)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
-
-  @media (max-width: 760px) {
-    :root { --header-h: 3rem; }
-    .nightbar { padding:0 .7rem; grid-template-columns:1fr auto auto; gap:.5rem; font-size:.48rem; }.nightbar__brand small{max-width:6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nightbar__links a:first-child{display:none}.nightbar__time{gap:.4rem}
-    .world { inset:var(--header-h) 0 0; }
-    .window { left:5%; top:6%; width:26%; height:22%; border-width:.3rem; }
-    .shelf { left:5%; top:30%; width:26%; height:6%; border-bottom-width:.5rem;padding-left:.6rem;gap:.22rem}.book{width:1.2rem;height:2.8rem;font-size:.28rem}.book--two{height:2.3rem}.book--three{height:3rem}.plant{width:1.8rem;height:1.4rem;margin-left:.2rem}.plant i{height:1.4rem;bottom:.7rem}.plant i:nth-child(2){height:1.7rem}
-    .pinboard { top:6%; right:4%; width:31%; height:22%; border-width:.3rem; padding:.5rem; }.pinboard__label{font-size:.25rem;top:.3rem;left:.35rem}.pin{font-size:.36rem;padding:.28rem .32rem}.pin--one{left:8%;top:28%}.pin--two{right:4%;top:22%}.pin--three{right:8%;bottom:12%}.pin--four{left:7%;bottom:9%}.pin--five{left:38%;top:47%}.pin--six{right:2%;top:54%}
-    .lamp { right:19%; top:25%; height:16rem; transform:scale(.7); transform-origin:top; }
-    .monitor { left:27%; top:24%; width:46%; height:38%; }.monitor__shell{padding:.45rem}.screen{padding:.65rem}.screen--0 p{margin-top:1.25rem;font-size:.76rem}.screen small{font-size:.3rem}.screen p{font-size:.45rem}.idea-map{margin:1rem 0 .5rem;gap:.2rem}.idea-map b{font-size:.3rem;padding:.2rem}.app-preview{width:82%;margin:.5rem auto;padding:.4rem}.app-preview s{font-size:.45rem}.app-preview b{font-size:.65rem}.screen code{margin-top:.6rem;font-size:.38rem;line-height:1.45}.folders{gap:.2rem;margin-top:.5rem}.folders button,.folders span{font-size:.3rem;padding:.3rem}.evidence{gap:.2rem;margin-top:.55rem}.evidence span{font-size:.27rem;padding:.2rem}.draft-list{margin-top:.35rem}.draft-list a{padding:.24rem 0;grid-template-columns:1rem 1fr;gap:.2rem}.draft-list span{font-size:.26rem}.draft-list b{font-size:.34rem}.screen--9 h2{margin:.6rem 0 .2rem;font-size:.78rem}.screen--9 p{font-size:.34rem}.final-links{gap:.35rem}.screen a{font-size:.28rem;margin-top:.25rem}.release-projects{gap:.18rem;margin-top:.2rem}.release-projects a{padding:.18rem}.release-projects span{font-size:.24rem}.release-projects small{font-size:.2rem}
-    .desk { left:0; right:0; height:27%; }.mug{left:19%;top:13%;width:3.4rem;height:3.4rem}.mug__handle{width:1.1rem;height:1.8rem;right:-.85rem;border-width:.35rem}.mug small{font-size:.26rem}.steam{bottom:3.2rem;height:1.8rem}.steam--1{left:1rem}.steam--2{left:1.8rem}.wheel{left:5%;top:34%;width:3rem}.wheel span,.wheel b{font-size:.28rem}.crumple{left:31%;top:49%;width:1.7rem;font-size:.65rem}.keyboard{left:35%;top:59%;width:34%;height:1.3rem;padding:.18rem;gap:.08rem}.phone{right:5%;top:12%;width:2.8rem;height:5.5rem}.phone__screen{height:4.55rem}.phone__screen small,.phone__screen span{font-size:.24rem}.phone__screen s{font-size:.35rem}.phone__screen b{font-size:.5rem}.phone__screen i{font-size:.2rem}.notebook{right:16%;top:40%;width:7.8rem;height:4.1rem;padding:.4rem}.notebook small{font-size:.24rem}.notebook b{margin:.35rem 0 .15rem .65rem;font-size:.42rem}.notebook em{margin-left:.65rem;font-size:.28rem}.papers{right:1%;top:42%;width:5.5rem;height:3rem}.drawer{right:14%;width:28%;}.bug{left:70%;top:38%}
-    .morning-reveal{left:4%;top:40%;transform:scale(.7);transform-origin:left top}
-    .chapter { min-height:100svh; padding:calc(var(--header-h) + 1rem) .75rem 1rem; align-items:flex-end; }
-    .story,.story--left,.story--right { width:min(92vw,28rem); margin:0 auto; padding:.8rem .9rem .9rem; background:linear-gradient(180deg,rgba(17,16,22,.34),rgba(17,16,22,.94) 24%); backdrop-filter:blur(8px); border-color:rgba(255,255,255,.08); }
-    .story__time,.story__eyebrow,.story small,.story a{font-size:.4rem}.story h1{font-size:clamp(1.8rem,9vw,3rem);margin:.3rem 0 .45rem}.story p{font-size:.82rem;line-height:1.38}.story small{margin-top:.6rem}
-    .toast{bottom:7.5rem;font-size:.46rem;padding:.55rem .7rem}
+  .masthead {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 1.2rem;
+    border-bottom: 1px solid rgba(235,229,219,.08);
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(12px);
   }
 
-  @media (max-height: 650px) and (max-width:760px) {
-    .window{height:19%}.shelf{top:27%}.pinboard{height:19%}.monitor{top:21%;height:36%}.desk{height:25%}.story p{display:none}.story h1{font-size:1.65rem}
+  .mark { justify-self: start; display: inline-flex; align-items: baseline; gap: .35rem; font-family: var(--mono); }
+  .mark span { font-size: .72rem; font-weight: 700; letter-spacing: .12em; }
+  .mark small, .masthead nav a, .masthead__right { font-family: var(--mono); font-size: .56rem; letter-spacing: .11em; text-transform: uppercase; }
+  .mark small { color: var(--rust); }
+  .masthead nav { display: flex; gap: 1.4rem; }
+  .masthead nav a, .masthead__right a { color: var(--muted); transition: color 160ms ease; }
+  .masthead nav a:hover, .masthead__right a:hover { color: var(--ink); }
+  .masthead__right { justify-self: end; display: flex; gap: 1rem; color: var(--muted); }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 6.5rem 1rem 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero__ghost {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -51%);
+    font-family: var(--serif);
+    font-size: min(74vw, 58rem);
+    line-height: .75;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(235,229,219,.055);
+    user-select: none;
+  }
+
+  .observer-wrap { position: relative; z-index: 2; width: min(49vw, 35rem); transition: transform 220ms ease-out; }
+  .observer { display: block; width: 100%; height: auto; overflow: visible; }
+  .observer .coat, .observer .coat-panel, .observer .graph-line, .observer .note-tab { transition: transform 400ms cubic-bezier(.16,1,.3,1); transform-box: fill-box; transform-origin: center; }
+  .observer-wrap:hover .coat-panel--blue { transform: translateX(-7px); }
+  .observer-wrap:hover .coat-panel--rust { transform: translateX(7px); }
+  .observer-wrap:hover .graph-line { transform: translateY(-4px); }
+  .observer-wrap:hover .note-tab { transform: translateY(-5px) rotate(-2deg); }
+
+  .hero__identity { position: absolute; z-index: 3; left: 1.4rem; bottom: 1.5rem; }
+  .hero__identity h1 { margin: 0; font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4.8rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; }
+  .hero__identity p { margin: .5rem 0 0; color: var(--muted); font-family: var(--mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; }
+
+  .hero__meta { position: absolute; z-index: 3; display: grid; gap: .3rem; font-family: var(--mono); font-size: .52rem; letter-spacing: .11em; color: var(--muted); }
+  .hero__meta--left { top: 6.4rem; left: 1.4rem; }
+  .hero__meta--right { right: 1.4rem; bottom: 1.8rem; text-align: right; }
+  .hero__scroll { position: absolute; left: 50%; bottom: 1.5rem; transform: translateX(-50%); color: var(--muted); }
+
+  .work-intro {
+    min-height: 40svh;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 3rem 1.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .work-intro span { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; color: var(--muted); }
+  .work-intro p { margin: 0; max-width: 32rem; font-family: var(--serif); font-size: clamp(1.6rem, 3.3vw, 3rem); line-height: 1.05; letter-spacing: -.035em; }
+
+  .work {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1.25fr) minmax(18rem, .65fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .work__meta { padding: 1.4rem 1rem; border-right: 1px solid var(--line); display: grid; align-content: space-between; font-family: var(--mono); font-size: .52rem; letter-spacing: .1em; color: var(--muted); writing-mode: vertical-rl; transform: rotate(180deg); }
+  .work__visual { position: relative; min-height: 100svh; overflow: hidden; background: #15171a; }
+  .work__copy { display: flex; flex-direction: column; justify-content: end; padding: clamp(2rem, 5vw, 5rem) clamp(1.4rem, 4vw, 3.5rem); border-left: 1px solid var(--line); }
+  .work__copy h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 5rem); font-weight: 400; letter-spacing: -.055em; line-height: .95; }
+  .work__copy p { margin: 1rem 0 0; max-width: 34rem; color: var(--muted); font-size: .94rem; line-height: 1.7; }
+  .work__copy > a { margin-top: 1.5rem; font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
+
+  .composition { position: absolute; inset: 0; overflow: hidden; }
+  .huge-type { position: absolute; left: -.02em; bottom: -.13em; font-family: var(--serif); font-size: min(28vw, 23rem); line-height: .8; color: rgba(235,229,219,.045); letter-spacing: -.08em; white-space: nowrap; }
+  .orbit-label { position: absolute; font-family: var(--mono); font-size: .52rem; letter-spacing: .12em; color: var(--muted); }
+
+  .composition--phone { background: linear-gradient(150deg,#182027,#121315 58%); }
+  .phone-object { position: absolute; left: 48%; top: 50%; width: min(34vw, 18rem); aspect-ratio: .52; transform: translate(-50%,-50%) rotate(-7deg); border-radius: 2.2rem; padding: .55rem; background: #0f1114; border: 1px solid #3c4046; box-shadow: 0 3rem 7rem rgba(0,0,0,.42); }
+  .phone-object__screen { width: 100%; height: 100%; border-radius: 1.7rem; display: grid; place-items: center; align-content: center; gap: .6rem; background: #e7dfd1; color: #1b1d20; text-align: center; }
+  .phone-object__screen small { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; }
+  .phone-object__screen span { font-size: .8rem; }
+  .phone-object__screen s { color: #9c5740; font-size: 1.2rem; }
+  .phone-object__screen b { font-size: 2.4rem; color: #536a7b; }
+  .phone-object__screen i { padding: .55rem 1rem; border-radius: 999px; background: #1a1d20; color: #eee7dc; font-family: var(--mono); font-size: .54rem; font-style: normal; text-transform: uppercase; }
+  .composition--phone .orbit-label { top: 18%; right: 11%; }
+  .mass { position: absolute; border-radius: 50%; filter: blur(1px); }
+  .mass--blue { width: 20rem; height: 20rem; right: -7rem; top: 8%; background: #536a7b; opacity: .16; }
+  .mass--bone { width: 13rem; height: 13rem; left: -3rem; bottom: 8%; background: #d7d0c5; opacity: .08; }
+
+  .composition--audit { background: #101214; }
+  .audit-score { position: absolute; left: 10%; top: 14%; width: 13rem; aspect-ratio: 1; border: 1px solid var(--line); display: grid; place-content: center; text-align: center; }
+  .audit-score span,.audit-score small { font-family: var(--mono); font-size: .52rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+  .audit-score b { font-family: var(--serif); font-size: 6rem; font-weight: 400; line-height: .9; }
+  .audit-sheet { position: absolute; right: 9%; top: 26%; width: min(44vw, 32rem); padding: 1.5rem; border: 1px solid var(--line); background: rgba(235,229,219,.03); font-family: var(--mono); }
+  .audit-sheet code { color: #d1a456; }
+  .audit-sheet p { margin: .7rem 0 0; color: #c8c2b8; font-size: .75rem; }
+  .audit-line { position: absolute; left: 6%; right: 6%; bottom: 8%; width: 88%; height: 28%; }
+  .audit-line path { fill: none; stroke: #536a7b; stroke-width: 4; stroke-linecap: round; }
+
+  .composition--wheel { background: linear-gradient(135deg,#19181a,#121315 60%); }
+  .wheel-object { position: absolute; left: 50%; top: 50%; width: min(48vw, 31rem); aspect-ratio: 1; transform: translate(-50%,-50%); border-radius: 50%; background: conic-gradient(#9c5740 0 25%, #d7d0c5 25% 50%, #536a7b 50% 75%, #24272b 75% 100%); box-shadow: 0 4rem 7rem rgba(0,0,0,.3); transition: transform 700ms cubic-bezier(.16,1,.3,1); }
+  .work__visual:hover .wheel-object { transform: translate(-50%,-50%) rotate(18deg); }
+  .wheel-object::after { content:""; position:absolute; inset:31%; border-radius:50%; background:#151719; border:1px solid var(--line); }
+  .wheel-object b { position:absolute; z-index:2; inset:50% auto auto 50%; transform:translate(-50%,-50%); font-family:var(--mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; }
+  .wheel-object span { position:absolute; font-size:1.6rem; font-family:var(--serif); }
+  .wheel-object span:nth-child(1){top:8%;left:48%}.wheel-object span:nth-child(2){right:10%;top:48%}.wheel-object span:nth-child(3){bottom:8%;left:48%}.wheel-object span:nth-child(4){left:10%;top:48%}
+  .wheel-shadow { position:absolute; left:50%; top:80%; width:32rem; height:4rem; transform:translateX(-50%); border-radius:50%; background:#000; filter:blur(20px); opacity:.25; }
+  .composition--wheel .orbit-label { left: 9%; top: 11%; }
+
+  .composition--calm { background: #d7d0c5; color:#17191d; }
+  .paper-object { position:absolute; left:50%; top:48%; width:min(55vw,38rem); min-height:62%; transform:translate(-50%,-50%) rotate(-2deg); padding:clamp(2rem,5vw,4.5rem); background:#f0ebe3; box-shadow:0 2rem 4rem rgba(0,0,0,.15); }
+  .paper-object small{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;color:#69645d}.paper-object h3{margin:2rem 0;font-family:var(--serif);font-size:clamp(2.2rem,5vw,4.6rem);font-weight:400;line-height:.95;letter-spacing:-.05em}.paper-object p{height:1px;background:#c7c0b6;margin:1rem 0}.paper-object p:nth-of-type(2){width:78%}.paper-object p:nth-of-type(3){width:56%}
+  .leaf-mark { position:absolute; right:10%; top:12%; font-size:4rem; color:#9c5740; }
+  .composition--calm .huge-type { color: rgba(18,19,21,.055); }
+
+  .composition--notes { background:#17191d; }
+  .note-object { position:absolute; width:min(38vw,28rem); min-height:18rem; padding:2rem; background:#e8dfd0; color:#191b1e; box-shadow:0 2.4rem 5rem rgba(0,0,0,.22); }
+  .note-object small{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;color:#777067}.note-object b{display:block;margin-top:2rem;font-family:var(--serif);font-size:clamp(1.7rem,3vw,3rem);font-weight:400;line-height:1.05}
+  .note-object--a { left:12%; top:17%; transform:rotate(-7deg); }
+  .note-object--b { right:10%; bottom:13%; transform:rotate(5deg); background:#c9d1d3; }
+
+  .profile { min-height: 100svh; display:grid; grid-template-columns: 8rem 1.15fr .75fr; gap:0; border-bottom:1px solid var(--line); }
+  .profile__index { padding:1.4rem 1rem; border-right:1px solid var(--line); font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg); }
+  .profile__statement { display:flex; flex-direction:column; justify-content:center; gap:2rem; padding:clamp(2rem,6vw,7rem); }
+  .profile__statement p { margin:0; max-width:16ch; font-family:var(--serif);font-size:clamp(2.7rem,6vw,6.2rem);font-weight:400;line-height:.95;letter-spacing:-.055em; }
+  .profile__statement .profile__soft { max-width:28rem; color:var(--muted); font-family:var(--ui); font-size:1rem; line-height:1.7; letter-spacing:0; }
+  .profile__facts { border-left:1px solid var(--line); padding:clamp(2rem,5vw,5rem); display:grid; align-content:center; gap:2rem; }
+  .profile__facts span { display:grid; gap:.4rem; }
+  .profile__facts small { color:var(--muted);font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase; }
+  .profile__facts b { font-family:var(--serif);font-size:1.5rem;font-weight:400; }
+  .profile__links { grid-column:2/4; display:flex; gap:1.2rem; padding:1rem 2rem; border-top:1px solid var(--line); font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em; }
+
+  .notes { padding:clamp(4rem,8vw,8rem) 1.4rem; }
+  .notes__head { display:flex; justify-content:space-between; gap:2rem; align-items:end; padding-bottom:2rem; border-bottom:1px solid var(--line); }
+  .notes__head span{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--muted)}
+  .notes__head p{margin:0;font-family:var(--serif);font-size:clamp(1.8rem,3.6vw,3.8rem);line-height:1;letter-spacing:-.04em;max-width:14ch}
+  .note-row { display:grid; grid-template-columns:4rem 1fr auto; gap:1rem; align-items:center; padding:1.4rem 0; border-bottom:1px solid var(--line); transition:padding 220ms cubic-bezier(.16,1,.3,1); }
+  .note-row:hover { padding-left:.6rem; padding-right:.6rem; }
+  .note-row>span{font-family:var(--mono);font-size:.56rem;color:var(--muted)}
+  .note-row h3{margin:0;font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,2.2rem);font-weight:400;letter-spacing:-.03em}.note-row p{margin:.35rem 0 0;color:var(--muted);font-size:.82rem;max-width:55rem;line-height:1.6}.note-row>b{font-weight:400;color:var(--rust)}
+
+  .footer { min-height:34svh; display:flex; align-items:end; justify-content:space-between; gap:2rem; padding:2rem 1.4rem; border-top:1px solid var(--line); }
+  .footer div{display:grid;gap:.4rem}.footer strong{font-family:var(--serif);font-size:2rem;font-weight:400}.footer span,.footer>a{font-family:var(--mono);font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+  @media (max-width: 900px) {
+    .masthead { grid-template-columns:1fr auto; }
+    .masthead nav { display:none; }
+    .masthead__right span { display:none; }
+    .observer-wrap { width:min(78vw,31rem); transform:none !important; }
+    .hero__meta--left { top:6rem; }
+    .hero__meta--right { display:none; }
+    .hero__identity { left:1rem; bottom:1.1rem; }
+    .hero__identity h1 { font-size:2.5rem; }
+    .hero__scroll { display:none; }
+
+    .work-intro { min-height:32svh; align-items:end; flex-direction:column; justify-content:end; }
+    .work { min-height:auto; grid-template-columns:1fr; }
+    .work__meta { writing-mode:horizontal-tb; transform:none; border-right:0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; }
+    .work__visual { min-height:70svh; }
+    .work__copy { min-height:34svh; border-left:0; border-top:1px solid var(--line); }
+    .phone-object { width:min(50vw,16rem); }
+    .audit-score { left:7%; top:9%; width:9rem; }.audit-score b{font-size:4rem}
+    .audit-sheet { right:6%; top:36%; width:70%; }
+    .wheel-object { width:min(68vw,26rem); }
+    .paper-object { width:78%; min-height:58%; }
+    .note-object { width:62%; min-height:15rem; }
+
+    .profile { grid-template-columns:1fr; min-height:auto; }
+    .profile__index { writing-mode:horizontal-tb;transform:none;border-right:0;border-bottom:1px solid var(--line); }
+    .profile__statement { padding:4rem 1.4rem; }
+    .profile__statement p { font-size:3rem; }
+    .profile__facts { border-left:0;border-top:1px solid var(--line);padding:3rem 1.4rem; }
+    .profile__links { grid-column:auto; padding:1.2rem 1.4rem; }
+    .notes__head { flex-direction:column;align-items:flex-start; }
+  }
+
+  @media (max-width: 560px) {
+    .hero { min-height:94svh; padding-top:5.5rem; }
+    .observer-wrap { width:91vw; margin-top:1rem; }
+    .hero__ghost { font-size:130vw; }
+    .hero__meta--left { left:1rem; font-size:.47rem; }
+    .hero__identity p { font-size:.52rem; }
+    .work__visual { min-height:62svh; }
+    .work__copy { min-height:30svh; padding:2rem 1.2rem; }
+    .work__copy h2 { font-size:2.8rem; }
+    .phone-object { width:58vw; }
+    .audit-sheet { width:78%; }
+    .note-object--a { left:7%; top:13%; }.note-object--b { right:6%; bottom:10%; }
+    .profile__statement p { font-size:2.6rem; }
+    .note-row { grid-template-columns:2.5rem 1fr auto; }
+    .note-row p { display:none; }
+    .footer { min-height:28svh; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *,*::before,*::after{animation:none!important;transition:none!important}.world{position:absolute}.chapter{min-height:95vh}
+    html { scroll-behavior:auto; }
+    .observer-wrap,.observer *,.wheel-object,.note-row { transition:none !important; }
   }
 </style>
