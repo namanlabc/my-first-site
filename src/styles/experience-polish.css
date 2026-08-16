@@ -1,0 +1,54 @@
+/* Experience-page toolbox polish.
+   Keep AI / AGENTS visually inside the same system as the other tool rows. */
+
+body .tool-system .tool-system__row--ai {
+  padding-block: 1.1rem;
+  background: transparent;
+}
+
+body .tool-system .tool-system__row--ai .tool-system__tools {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+body .tool-system .tool-system__row--ai .tool-tile {
+  min-width: 0;
+  min-height: 4.2rem;
+  gap: 0.45rem;
+  padding: 0.5rem;
+  border-color: var(--rule);
+  box-shadow: none;
+}
+
+/* Codex and Antigravity intentionally read as typographic wordmarks instead
+   of placeholder CX / AG logo badges. */
+body .tool-system .tool-system__row--ai .tool-tile__mark {
+  display: none;
+}
+
+body .tool-system .tool-system__row--ai .tool-tile > span:last-child {
+  overflow: visible;
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 0.66vw, 0.62rem);
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  text-overflow: clip;
+}
+
+body .tool-system .tool-system__row--ai .tool-tile img + span {
+  font-family: var(--ui);
+  font-weight: 650;
+  letter-spacing: normal;
+}
+
+@media (max-width: 700px) {
+  body .tool-system .tool-system__row--ai .tool-system__tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  body .tool-system .tool-system__row--ai .tool-system__tools {
+    grid-template-columns: 1fr;
+  }
+}
