@@ -84,14 +84,15 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         </div>
       </article>
 
-      <article class="experience-preview">
+      <article class="experience-preview experience-preview--ai">
         <TechnicalWorkbench variant="workflow" compact={true} />
         <div class="experience-preview__copy">
           <span>03</span>
-          <h3>Tools & workflow</h3>
-          <p>Moving between research, Android, automation, CI, QA, releases, and whatever gets the next useful version out.</p>
-          <div class="experience-preview__tags" aria-label="Workflow tools and skills">
-            <span>Android</span><span>Kotlin</span><span>Gradle</span><span>CI / QA</span>
+          <h3>Tools, agents & workflow</h3>
+          <p>Moving between Android, AI coding agents, model routing, automation, CI, QA, and releases without treating any one tool like magic.</p>
+          <div class="experience-preview__ai-ready"><b>AI READY</b><span>agentic coding · model routing · supervised shipping</span></div>
+          <div class="experience-preview__tags" aria-label="AI, Android and workflow tools">
+            <span>Claude</span><span>Codex</span><span>OpenCode</span><span>OpenRouter</span><span>Antigravity</span><span>Android / CI</span>
           </div>
         </div>
       </article>
@@ -153,7 +154,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   }
 
   .experience-preview__copy > span {
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
     padding-top: 0.2rem;
     color: var(--faint);
     font-family: var(--mono);
@@ -174,6 +175,31 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     line-height: 1.6;
   }
 
+  .experience-preview__ai-ready {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.6rem;
+    padding: 0.38rem 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--rule));
+    background: color-mix(in srgb, var(--accent-soft) 60%, var(--surface));
+    font-family: var(--mono);
+  }
+
+  .experience-preview__ai-ready b {
+    flex: 0 0 auto;
+    color: var(--accent);
+    font-size: 0.48rem;
+    letter-spacing: 0.07em;
+  }
+
+  .experience-preview__ai-ready span {
+    color: var(--muted);
+    font-size: 0.46rem;
+    line-height: 1.35;
+  }
+
   .experience-preview__tags {
     grid-column: 2;
     display: flex;
@@ -189,6 +215,12 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     background: color-mix(in srgb, var(--surface) 64%, transparent);
     font-family: var(--mono);
     font-size: 0.5rem;
+  }
+
+  .experience-preview--ai .experience-preview__tags span:nth-child(-n+5) {
+    color: var(--ink);
+    border-color: color-mix(in srgb, var(--ink) 32%, var(--rule));
+    background: var(--surface);
   }
 
   @media (max-width: 860px) {
