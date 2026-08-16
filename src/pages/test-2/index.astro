@@ -19,6 +19,19 @@ const projectHref = (project: (typeof projects)[number]) => {
 const smallmb = projects.find((project) => project.visual === 'smallmb') ?? projects[0];
 const audit = projects.find((project) => project.visual === 'audit') ?? projects[1];
 const wheel = projects.find((project) => project.visual === 'wheel') ?? projects[2];
+
+const chapters = [
+  { time: '6:47 PM', title: 'Still awake.', copy: 'One ordinary evening. One small irritation. One thought that maybe I could make it better.' },
+  { time: '8:26 PM', title: 'The notebook opens.', copy: 'Before anything becomes a project, it is usually just a sentence with too many arrows around it.' },
+  { time: '10:14 PM', title: 'Now it has a screen.', copy: 'The idea stops being theoretical. SmallMB starts as a useful little phone tool, not a pitch deck.' },
+  { time: '12:03 AM', title: 'Midnight checks.', copy: 'The room gets quieter. The work gets less romantic: HTML, schema, broken details, things that actually have to pass.' },
+  { time: '2:37 AM', title: 'The weird hours.', copy: 'This is when experiments multiply and the drawer labelled “probably not a good idea” becomes suspiciously important.' },
+  { time: '3:48 AM', title: 'The wall remembers.', copy: 'Search graphs, release notes, Android scraps, agent routes. Skills look better as evidence than badges.' },
+  { time: '4:41 AM', title: 'Quiet enough to write.', copy: 'The monitor dims. Pages come out. Writing is just another way of leaving breadcrumbs for tomorrow.' },
+  { time: '5:39 AM', title: 'First light.', copy: 'The room slowly gives back details the night was hiding.' },
+  { time: '6:11 AM', title: 'Good enough to ship.', copy: 'Not perfect. Real. That is usually the more useful state.' },
+  { time: '6:24 AM', title: 'See you tonight.', copy: 'Naman Patel — building, search, experiments, notes, and a desk that is never quite clean.' },
+];
 ---
 
 <!doctype html>
@@ -31,453 +44,209 @@ const wheel = projects.find((project) => project.visual === 'wheel') ?? projects
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <title>One More Night · Naman Patel</title>
-    <meta
-      name="description"
-      content="One night inside Naman Patel's world — ideas, building, search, experiments, writing, and sunrise."
-    />
+    <meta name="description" content="One continuous night inside Naman Patel's room — ideas, building, search, experiments, writing, and sunrise." />
   </head>
 
-  <body data-time="dusk">
-    <header class="night-nav">
-      <a class="night-mark" href="#dusk" aria-label="One More Night home">
-        <b>NP</b>
-        <span>ONE MORE NIGHT</span>
-      </a>
-      <div class="night-clock" aria-live="polite">
-        <i></i>
-        <span data-clock>6:47 PM</span>
-      </div>
-      <div class="night-links">
-        <a href={`${base}test/`}>test 01</a>
-        <a href={`${base}`}>real site ↗</a>
-      </div>
+  <body data-scene="0">
+    <header class="nightbar">
+      <a class="nightbar__brand" href="#chapter-0"><span>NP</span><small>ONE MORE NIGHT</small></a>
+      <div class="nightbar__time"><i></i><span data-clock>6:47 PM</span></div>
+      <div class="nightbar__links"><a href={`${base}test/`}>TEST 01</a><a href={`${base}`}>REAL SITE ↗</a></div>
     </header>
 
-    <main class="night-shell">
-      <aside class="room-column" aria-label="An illustrated room changing through one night">
-        <div class="room-frame" data-room data-state="dusk">
-          <div class="room-grain" aria-hidden="true"></div>
-          <div class="wall-shadow" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"><span data-progress></span></div>
 
-          <div class="window" aria-hidden="true">
-            <div class="sky"></div>
-            <div class="moon"></div>
-            <div class="cloud cloud--one"></div>
-            <div class="cloud cloud--two"></div>
-            <div class="city">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
-          </div>
+    <main class="night" data-night>
+      <div class="world" data-world aria-label="An illustrated room changing through one night">
+        <div class="room-grain" aria-hidden="true"></div>
+        <div class="wall-glow" aria-hidden="true"></div>
 
-          <div class="pinboard" aria-hidden="true">
-            <span class="pinboard__label">things worth remembering</span>
-            <div class="pin-note pin-note--why">could I make<br /><b>this better?</b></div>
-            <div class="pin-note pin-note--ship">small → useful → ship</div>
-            <div class="pin-note pin-note--search">intent ≠ keywords</div>
-            <div class="pin-note pin-note--fall">do not redesign<br />the site again</div>
-            <div class="pin-line pin-line--a"></div>
-            <div class="pin-line pin-line--b"></div>
-          </div>
+        <section class="window" aria-label="Window looking outside">
+          <div class="sky"></div>
+          <div class="moon"></div>
+          <div class="sun"></div>
+          <div class="cloud cloud--a"></div>
+          <div class="cloud cloud--b"></div>
+          <div class="city city--far"></div>
+          <div class="city city--near"></div>
+          <div class="passing-light"></div>
+          <div class="window-frame window-frame--v"></div>
+          <div class="window-frame window-frame--h"></div>
+        </section>
 
-          <div class="shelf" aria-hidden="true">
-            <div class="book book--one"><span>ASTRO</span></div>
-            <div class="book book--two"><span>SEARCH</span></div>
-            <button class="book book--op secret-trigger" type="button" data-secret="chapter" aria-label="Inspect the small book"><span>OP</span></button>
-            <div class="plant"><i></i><i></i><i></i></div>
-          </div>
+        <section class="shelf" aria-label="Shelf with books and a plant">
+          <button class="book book--one secret" type="button" data-secret="book">SEO</button>
+          <button class="book book--two secret" type="button" data-secret="op">OP</button>
+          <button class="book book--three secret" type="button" data-secret="book">ASTRO</button>
+          <div class="plant"><i></i><i></i><i></i></div>
+        </section>
 
-          <div class="lamp" aria-hidden="true">
-            <div class="lamp__shade"></div>
-            <div class="lamp__stem"></div>
-            <div class="lamp__light"></div>
-          </div>
+        <section class="pinboard" aria-label="Pinboard of notes from the night">
+          <span class="pinboard__label">THINGS WORTH REMEMBERING</span>
+          <button class="pin pin--one secret" type="button" data-secret="note">could I make<br />this better?</button>
+          <span class="pin pin--two">small → useful → ship</span>
+          <span class="pin pin--three">intent ≠ keywords</span>
+          <span class="pin pin--late pin--four">92 / 100</span>
+          <span class="pin pin--late pin--five">versionCode ↑</span>
+          <span class="pin pin--late pin--six">agent → QA → release</span>
+          <svg viewBox="0 0 200 120" aria-hidden="true"><path d="M20 95 C65 35 105 30 180 72" /><path d="M30 35 C70 80 120 80 168 28" /></svg>
+        </section>
 
-          <div class="desk" aria-hidden="true"></div>
-          <div class="desk-edge" aria-hidden="true"></div>
+        <section class="lamp" aria-label="Desk lamp"><div class="lamp__shade"></div><div class="lamp__arm"></div><div class="lamp__light"></div></section>
 
-          <div class="monitor">
-            <div class="monitor__body">
-              <div class="monitor__camera"></div>
-              <div class="screen">
-                <div class="screen-scene screen-scene--dusk">
-                  <span class="screen-kicker">notes.txt</span>
-                  <strong>could I make<br />this better?</strong>
-                  <small>_</small>
-                </div>
+        <section class="desk" aria-label="Naman's desk">
+          <div class="desk__top"></div>
+          <div class="desk__edge"></div>
 
-                <div class="screen-scene screen-scene--ideas">
-                  <span class="screen-kicker">rough ideas / unsorted</span>
-                  <ul>
-                    <li>compress files properly</li>
-                    <li>yoast-ish audit for astro</li>
-                    <li>random letter → more tools?</li>
-                    <li><s>definitely sleep early</s></li>
-                  </ul>
-                </div>
-
-                <div class="screen-scene screen-scene--build">
-                  <span class="screen-kicker">smallmb / preview</span>
-                  <div class="phone-preview">
-                    <span>PHOTO.JPG</span>
-                    <s>12.4 MB</s>
-                    <b>842 KB</b>
-                    <i>compress</i>
-                  </div>
-                </div>
-
-                <div class="screen-scene screen-scene--midnight">
-                  <span class="screen-kicker">naman@night:~</span>
-                  <code>$ npx astro-seo-audit</code>
-                  <p><b>✓</b> title + description</p>
-                  <p><b>✓</b> canonical</p>
-                  <p><b>✓</b> schema</p>
-                  <p><em>!</em> 3 things still annoying me</p>
-                  <strong>92 / 100</strong>
-                </div>
-
-                <div class="screen-scene screen-scene--weird">
-                  <span class="screen-kicker">probably_not_a_good_idea/</span>
-                  <div class="agent-map">
-                    <b>idea</b><i></i><b>atlas</b><i></i><b>build</b><i></i><b>qa</b><i></i><b>ship?</b>
-                  </div>
-                  <small>status: suspiciously alive</small>
-                </div>
-
-                <div class="screen-scene screen-scene--wall">
-                  <span class="screen-kicker">search console / 03:48</span>
-                  <div class="mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                  <p>the graph moved.</p>
-                  <small>now figure out why.</small>
-                </div>
-
-                <div class="screen-scene screen-scene--writing">
-                  <span class="screen-kicker">draft.md</span>
-                  <strong>Writing is mostly<br />thinking slowly.</strong>
-                  <p>And occasionally deleting the sentence I liked most.</p>
-                </div>
-
-                <div class="screen-scene screen-scene--first-light">
-                  <span class="screen-kicker">05:39 / still here</span>
-                  <div class="soft-list">
-                    <span>SmallMB <b>launching</b></span>
-                    <span>Get Random Letter <b>live</b></span>
-                    <span>Astro SEO Audit <b>open source</b></span>
-                  </div>
-                </div>
-
-                <div class="screen-scene screen-scene--ship">
-                  <span class="screen-kicker">git / main</span>
-                  <code>$ git push</code>
-                  <strong>good enough to ship.</strong>
-                  <p>main ← deployed</p>
-                </div>
-
-                <div class="screen-scene screen-scene--sunrise">
-                  <span class="screen-kicker">06:24</span>
-                  <strong>see you tonight.</strong>
-                  <small>Naman Patel</small>
-                </div>
-              </div>
-            </div>
-            <div class="monitor__neck"></div>
-            <div class="monitor__foot"></div>
-          </div>
-
-          <div class="keyboard" aria-hidden="true">
-            {Array.from({ length: 19 }).map(() => <i></i>)}
-          </div>
-
-          <button class="mug secret-trigger" type="button" data-secret="chai" aria-label="Inspect the chai mug">
-            <span class="steam steam--one"></span>
-            <span class="steam steam--two"></span>
-            <b>one<br />more</b>
+          <button class="mug secret" type="button" data-secret="mug" aria-label="Chai mug">
+            <span class="mug__tea"></span><span class="mug__handle"></span><i class="steam steam--1"></i><i class="steam steam--2"></i><small>chai</small>
           </button>
 
-          <button class="wheel-object secret-trigger" type="button" data-secret="wheel" aria-label="Spin the small wheel on the desk">
-            <span>A</span><span>G</span><span>M</span><span>R</span><b>•</b>
+          <button class="wheel secret" type="button" data-secret="wheel" aria-label="Tiny random letter wheel">
+            <span>A</span><span>G</span><span>M</span><span>R</span><b>spin</b>
           </button>
 
-          <div class="phone-object" aria-hidden="true"><span>01:17</span></div>
-          <div class="cable" aria-hidden="true"></div>
+          <button class="crumple secret" type="button" data-secret="crumple" aria-label="Crumpled paper">?</button>
 
-          <button class="crumple secret-trigger" type="button" data-secret="bad-idea" aria-label="Open the crumpled note">?</button>
+          <div class="keyboard" aria-hidden="true">{Array.from({ length: 12 }).map(() => <i></i>)}</div>
 
-          <button class="drawer secret-trigger" type="button" data-secret="drawer" aria-label="Open the desk drawer">
-            <span></span>
+          <button class="phone secret" type="button" data-secret="phone" aria-label="Phone with SmallMB">
+            <span class="phone__speaker"></span>
+            <div class="phone__screen">
+              <small>smallmb</small><span>PHOTO.JPG</span><s>12.4 MB</s><b>842 KB</b><i>compress</i>
+            </div>
           </button>
 
-          <button class="tiny-bug secret-trigger" type="button" data-secret="bug" aria-label="Inspect the tiny bug">•</button>
+          <button class="notebook secret" type="button" data-secret="notebook" aria-label="Notebook">
+            <span class="notebook__line"></span><small>idea 07</small><b>make the boring thing<br />feel simple.</b><em>→ then actually ship it</em>
+          </button>
 
-          <div class="paper-stack" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="papers" aria-hidden="true"><span></span><span></span><span></span></div>
 
-          <div class="sunbeam" aria-hidden="true"></div>
-          <div class="dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <button class="drawer secret" type="button" data-secret="drawer" aria-label="Desk drawer">
+            <span>probably_not_a_good_idea</span><i></i>
+          </button>
 
-          <div class="room-caption">
-            <span data-room-time>6:47 PM</span>
-            <b data-room-note>the room is still warm from the day.</b>
-          </div>
-        </div>
-      </aside>
-
-      <div class="story-column">
-        <section class="chapter chapter--opening" id="dusk" data-scene="dusk" data-time="6:47 PM" data-note="the room is still warm from the day.">
-          <div class="chapter-copy">
-            <span class="chapter-time">6:47 PM</span>
-            <p class="chapter-whisper">The sun has almost left.</p>
-            <h1>Still awake.</h1>
-            <p class="chapter-lede">
-              Most things I make begin here: one ordinary evening, one small irritation, and the thought that maybe I could make it better.
-            </p>
-            <p>
-              No grand plan. Usually just chai, too many tabs, and enough curiosity to ruin a perfectly reasonable bedtime.
-            </p>
-            <a class="continue" href="#ideas">stay for a while ↓</a>
-          </div>
+          <button class="bug secret" type="button" data-secret="bug" aria-label="A tiny bug"><i></i><i></i><i></i></button>
         </section>
 
-        <section class="chapter" id="ideas" data-scene="ideas" data-time="8:26 PM" data-note="the notebook has started winning the argument.">
-          <div class="chapter-copy chapter-copy--paper">
-            <span class="chapter-time">8:26 PM</span>
-            <p class="chapter-whisper">Nothing is a project yet.</p>
-            <h2>Just scraps.</h2>
-            <div class="idea-scraps">
-              <span>compress files properly?</span>
-              <span>yoast, but for Astro?</span>
-              <span>random letter → maybe more tools</span>
-              <span><s>sleep before 11</s> lol</span>
-            </div>
-            <p>
-              I like this part because the ideas are still ugly enough to be honest. Some survive. Most deserve what happens to the crumpled paper on the desk.
-            </p>
-            <button class="inline-secret" type="button" data-secret="bad-idea">read the rejected one →</button>
-          </div>
-        </section>
+        <section class="monitor" aria-label="Monitor showing the work of the night">
+          <div class="monitor__shell">
+            <div class="monitor__camera"></div>
+            <div class="monitor__screens">
+              <div class="screen screen--0 is-active" data-screen="0"><small>NOTES.TXT</small><p>could I make<br /><strong>this better?</strong></p><span class="caret"></span></div>
 
-        <section class="chapter" id="build" data-scene="build" data-time="10:14 PM" data-note="the lamp is doing most of the lighting now.">
-          <div class="chapter-copy">
-            <span class="chapter-time">10:14 PM</span>
-            <p class="chapter-whisper">One idea stopped being hypothetical.</p>
-            <h2>The useful little thing.</h2>
-            <p>
-              SmallMB began with a boring problem: make files smaller without turning the whole thing into a ceremony.
-            </p>
-            <a class="project-line" href={projectHref(smallmb)}>
-              <span><b>{smallmb.name}</b><small>{smallmb.kind} · {smallmb.status}</small></span>
-              <em>12.4 MB → 842 KB</em>
-              <i>↗</i>
-            </a>
-            <p>
-              The satisfying part isn't the feature list. It's watching a rough sketch become something I can actually tap on a phone.
-            </p>
-          </div>
-        </section>
+              <div class="screen screen--1" data-screen="1"><small>IDEAS / 8:26 PM</small><div class="idea-map"><b>useful?</b><i></i><b>smaller</b><i></i><b>ship</b></div><p>one evening → one annoying problem → maybe a product</p></div>
 
-        <section class="chapter" id="midnight" data-scene="midnight" data-time="12:03 AM" data-note="the chai is colder. the terminal is brighter.">
-          <div class="chapter-copy chapter-copy--terminal">
-            <span class="chapter-time">12:03 AM</span>
-            <p class="chapter-whisper">Midnight removes the decorative work.</p>
-            <h2>Now fix it.</h2>
-            <p>
-              This is when I stop admiring the idea and start asking annoying questions: does it actually work, does search understand it, what breaks on a smaller screen, what did I forget?
-            </p>
-            <a class="project-line project-line--dark" href={projectHref(audit)} target={audit.external ? '_blank' : undefined} rel={audit.external ? 'noopener noreferrer' : undefined}>
-              <span><b>{audit.name}</b><small>{audit.kind} · {audit.status}</small></span>
-              <em>check the HTML we really shipped</em>
-              <i>↗</i>
-            </a>
-            <p class="tiny-aside">There is also a bug in the room. Literally.</p>
-          </div>
-        </section>
+              <div class="screen screen--2" data-screen="2"><small>SMALLMB / BUILD</small><div class="app-preview"><span>PHOTO.JPG</span><s>12.4 MB</s><b>842 KB</b><footer><i>COMPRESS</i><i>RESIZE</i><i>PDF</i></footer></div><a href={projectHref(smallmb)}>opening soon →</a></div>
 
-        <section class="chapter" id="weird" data-scene="weird" data-time="2:37 AM" data-note="after two, even the sticky notes stop obeying physics.">
-          <div class="chapter-copy">
-            <span class="chapter-time">2:37 AM</span>
-            <p class="chapter-whisper">The weird hours.</p>
-            <h2>Ideas become less supervised.</h2>
-            <p>
-              Agents, prototypes, overcomplicated workflows, games, tiny utilities, things nobody requested — this is the hour where I let bad ideas prove whether they're actually bad.
-            </p>
-            <div class="folder-list">
-              <button type="button" data-secret="drawer">probably_not_a_good_idea/</button>
-              <span>atlas_is_doing_something/</span>
-              <span>works_on_my_phone/</span>
-              <span>ship_anyway/</span>
-            </div>
-            <p>
-              Some experiments become real products. Some disappear. A few stay around purely because they make me laugh.
-            </p>
-          </div>
-        </section>
+              <div class="screen screen--3" data-screen="3"><small>naman@night:~</small><code>$ npx astro-seo-audit<br /><span>✓</span> final HTML<br /><span>✓</span> canonical<br /><span>✓</span> schema<br /><b>92 / 100</b></code><a href={projectHref(audit)} target="_blank" rel="noopener noreferrer">open source ↗</a></div>
 
-        <section class="chapter" id="wall" data-scene="wall" data-time="3:48 AM" data-note="the wall knows more about the work than a skills section ever could.">
-          <div class="chapter-copy">
-            <span class="chapter-time">3:48 AM</span>
-            <p class="chapter-whisper">Look away from the monitor.</p>
-            <h2>The wall keeps receipts.</h2>
-            <p>
-              Search graphs, schema notes, Android sketches, release reminders, Astro, WordPress, GitHub, model routing — I'd rather show the evidence than write “I know tools” in a neat row of logos.
-            </p>
-            <div class="evidence-strip">
-              <span>SEARCH INTENT</span><span>GSC</span><span>ASTRO</span><span>SCHEMA</span><span>ANDROID</span><span>GITHUB</span><span>CLAUDE</span><span>CODEX</span><span>OPENCODE</span>
-            </div>
-            <blockquote>“Traffic going up is fun until you have to figure out why.”</blockquote>
-          </div>
-        </section>
+              <div class="screen screen--4" data-screen="4"><small>02:37 / EXPERIMENTS</small><div class="folders"><button type="button" data-secret="folder">probably_not_a_good_idea/</button><span>agents/</span><span>draw-to-unlock/</span><span>games/</span><span>mavid/</span></div><p>normal judgement has left the room.</p></div>
 
-        <section class="chapter" id="writing" data-scene="writing" data-time="4:41 AM" data-note="everything is quiet enough for sentences now.">
-          <div class="chapter-copy">
-            <span class="chapter-time">4:41 AM</span>
-            <p class="chapter-whisper">The quiet hour.</p>
-            <h2>Things I wrote before I forgot them.</h2>
-            <div class="writing-papers">
-              {posts.map((post, index) => (
-                <a class:list={['writing-paper', `writing-paper--${index + 1}`]} href={`${base}blog/${post.id}/`}>
-                  <small>field note / 0{index + 1}</small>
-                  <b>{post.data.title}</b>
-                  <p>{post.data.description}</p>
-                </a>
-              ))}
-            </div>
-            <p class="tiny-aside">Writing usually happens when I should probably be sleeping.</p>
-          </div>
-        </section>
+              <div class="screen screen--5" data-screen="5"><small>03:48 / WHAT I ACTUALLY USE</small><div class="evidence"><span>SEO</span><span>ASTRO</span><span>ANDROID</span><span>GITHUB</span><span>CLAUDE</span><span>CODEX</span><span>CI / QA</span></div><p>tools are only interesting when something ships.</p></div>
 
-        <section class="chapter" id="first-light" data-scene="first-light" data-time="5:39 AM" data-note="blue light is sneaking in around the curtains.">
-          <div class="chapter-copy">
-            <span class="chapter-time">5:39 AM</span>
-            <p class="chapter-whisper">You notice it late.</p>
-            <h2>The room starts returning.</h2>
-            <p>
-              Morning light reveals the parts that didn't matter to the work but matter to the person doing it: the books, the forgotten cable, the ridiculous note on the wall, the chapter I definitely said would be the last one.
-            </p>
-            <button class="inline-secret" type="button" data-secret="chapter">inspect that suspicious little book →</button>
-          </div>
-        </section>
+              <div class="screen screen--6" data-screen="6"><small>04:41 / DRAFTS</small><div class="draft-list">{posts.map((post, index) => <a href={`${base}blog/${post.id}/`}><span>0{index + 1}</span><b>{post.data.title}</b></a>)}</div></div>
 
-        <section class="chapter" id="ship" data-scene="ship" data-time="6:11 AM" data-note="finished things look surprisingly ordinary in daylight.">
-          <div class="chapter-copy">
-            <span class="chapter-time">6:11 AM</span>
-            <p class="chapter-whisper">No confetti.</p>
-            <h2>Good enough to ship.</h2>
-            <p>
-              The nicest moment is rarely dramatic. Something that didn't exist yesterday now exists, works, and can leave the room without me.
-            </p>
-            <div class="ship-shelf">
-              {projects.map((project) => (
-                <a href={projectHref(project)} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>
-                  <span><b>{project.name}</b><small>{project.kind}</small></span>
-                  <em>{project.status}</em>
-                </a>
-              ))}
+              <div class="screen screen--7" data-screen="7"><small>05:39 / FIRST LIGHT</small><p>the room was always messier than it looked.</p><div class="tiny-status"><span>chai</span><b>cold</b><span>tabs</span><b>too many</b><span>sleep</span><b>later</b></div></div>
+
+              <div class="screen screen--8" data-screen="8"><small>06:11 / RELEASE</small><code>$ git push origin main<br /><span>✓</span> build<br /><span>✓</span> deploy<br /><b>good enough to ship.</b></code><div class="release-projects">{projects.slice(0, 4).map((project) => <a href={projectHref(project)} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}><span>{project.name}</span><small>{project.status}</small></a>)}</div></div>
+
+              <div class="screen screen--9" data-screen="9"><small>06:24 / NAMAN PATEL</small><h2>see you tonight.</h2><p>I build things for the web, work on search, experiment with software, and write down what I learn.</p><div class="final-links"><a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a><a href={`${base}about/`}>About →</a></div></div>
             </div>
           </div>
+          <div class="monitor__neck"></div><div class="monitor__stand"></div>
         </section>
 
-        <section class="chapter chapter--sunrise" id="sunrise" data-scene="sunrise" data-time="6:24 AM" data-note="the lamp finally isn't needed anymore.">
-          <div class="chapter-copy">
-            <span class="chapter-time">6:24 AM</span>
-            <p class="chapter-whisper">Sunrise.</p>
-            <h2>Naman Patel.</h2>
-            <p class="chapter-lede">
-              I build things for the web, work on search, experiment with software, and write down what I learn while making them.
-            </p>
-            <div class="sunrise-links">
-              <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-              <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
-              <a href={`${base}about/`}>About →</a>
-            </div>
-            <p class="goodnight">see you tonight.</p>
-          </div>
-        </section>
+        <div class="morning-reveal" aria-hidden="true"><span class="photo">NP<br /><small>keep making</small></span><span class="chapter-mark">one more<br />chapter?</span></div>
+
+        <div class="toast" role="status" aria-live="polite" data-toast></div>
+      </div>
+
+      <div class="chapters" aria-label="One night timeline">
+        {chapters.map((chapter, index) => (
+          <section class="chapter" id={`chapter-${index}`} data-chapter={index}>
+            <article class:list={['story', index % 2 ? 'story--right' : 'story--left']}>
+              <span class="story__time">{chapter.time}</span>
+              <span class="story__eyebrow">{index === 0 ? 'THE SUN HAS ALMOST LEFT.' : index === 9 ? 'MORNING.' : `0${index + 1} / ONE MORE NIGHT`}</span>
+              <h1>{chapter.title}</h1>
+              <p>{chapter.copy}</p>
+              {index === 0 && <small>scroll slowly. the room keeps everything.</small>}
+              {index === 4 && <small>the drawer opens. unfortunately.</small>}
+              {index === 6 && <small>the papers on the monitor are real posts.</small>}
+              {index === 9 && <a href={`${base}`}>back to the daylight site ↗</a>}
+            </article>
+          </section>
+        ))}
       </div>
     </main>
 
-    <div class="secret" data-secret-popover hidden>
-      <button type="button" data-secret-close aria-label="Close">×</button>
-      <div data-secret-content></div>
-    </div>
-
-    <div class="zehaha" data-zehaha aria-hidden="true">zehahahaha</div>
-
     <script>
-      const room = document.querySelector('[data-room]');
+      const body = document.body;
+      const chapters = Array.from(document.querySelectorAll('[data-chapter]'));
+      const screens = Array.from(document.querySelectorAll('[data-screen]'));
       const clock = document.querySelector('[data-clock]');
-      const roomTime = document.querySelector('[data-room-time]');
-      const roomNote = document.querySelector('[data-room-note]');
-      const chapters = Array.from(document.querySelectorAll('[data-scene]'));
-      const popover = document.querySelector('[data-secret-popover]');
-      const popoverContent = document.querySelector('[data-secret-content]');
-      const closeSecret = document.querySelector('[data-secret-close]');
-      const zehaha = document.querySelector('[data-zehaha]');
+      const progress = document.querySelector('[data-progress]');
+      const toast = document.querySelector('[data-toast]');
+      const times = ['6:47 PM','8:26 PM','10:14 PM','12:03 AM','2:37 AM','3:48 AM','4:41 AM','5:39 AM','6:11 AM','6:24 AM'];
+      let activeScene = 0;
+      let toastTimer;
 
-      const secretCopy = {
-        chai: '<small>THE MUG</small><strong>one more chai</strong><p>It starts steaming at sunset. By midnight it is absolutely not warm anymore. I keep drinking it anyway.</p>',
-        wheel: '<small>DESK TOY / ESCAPED PROJECT</small><strong>Get Random Letter</strong><p>This was supposed to be one tiny wheel. That sentence aged badly.</p>',
-        'bad-idea': '<small>REJECTED / 9:13 PM</small><strong>“AI-powered motivational wallpaper generator”</strong><p>No. Absolutely not. Back into the paper ball.</p>',
-        drawer: '<small>DRAWER / DO NOT ORGANIZE</small><strong>probably_not_a_good_idea/</strong><p>draw-to-unlock · pen fight · weird games · half-built utilities · things that may return at 2:37 AM</p>',
-        bug: '<small>BUG #000</small><strong>Not that kind of bug.</strong><p>This one is allowed to stay.</p>',
-        chapter: '<small>BOOKMARK</small><strong>“one more chapter”</strong><p>A statement with a historically terrible success rate.</p>'
-      };
-
-      const setScene = (chapter) => {
-        if (!chapter || !room) return;
-        const scene = chapter.dataset.scene;
-        const time = chapter.dataset.time;
-        const note = chapter.dataset.note;
-        room.dataset.state = scene;
-        document.body.dataset.time = scene;
-        if (clock) clock.textContent = time || '';
-        if (roomTime) roomTime.textContent = time || '';
-        if (roomNote) roomNote.textContent = note || '';
-      };
+      function setScene(index) {
+        activeScene = Number(index);
+        body.dataset.scene = String(activeScene);
+        if (clock) clock.textContent = times[activeScene] ?? times[0];
+        screens.forEach((screen, i) => screen.classList.toggle('is-active', i === activeScene));
+      }
 
       const observer = new IntersectionObserver((entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setScene(visible.target);
-      }, { threshold: [0.35, 0.5, 0.7] });
+        if (visible) setScene(visible.target.dataset.chapter);
+      }, { threshold: [0.35, 0.55, 0.75] });
 
       chapters.forEach((chapter) => observer.observe(chapter));
 
-      const openSecret = (name) => {
-        if (!popover || !popoverContent || !secretCopy[name]) return;
-        popoverContent.innerHTML = secretCopy[name];
-        popover.hidden = false;
-        requestAnimationFrame(() => popover.classList.add('is-open'));
-      };
+      function updateProgress() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? window.scrollY / max : 0;
+        progress?.style.setProperty('--progress', `${Math.max(0, Math.min(1, ratio)) * 100}%`);
+      }
+      addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
 
-      document.querySelectorAll('[data-secret]').forEach((trigger) => {
-        trigger.addEventListener('click', () => {
-          const name = trigger.dataset.secret;
-          if (name === 'wheel') {
-            document.querySelector('.wheel-object')?.classList.add('is-spinning');
-            setTimeout(() => document.querySelector('.wheel-object')?.classList.remove('is-spinning'), 900);
-          }
-          openSecret(name);
+      function say(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
+      }
+
+      document.querySelectorAll('[data-secret]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const secret = el.dataset.secret;
+          if (secret === 'mug') say(activeScene < 3 ? 'still warm ☕' : activeScene < 7 ? 'this chai has seen things.' : 'cold. completely abandoned.');
+          if (secret === 'wheel') { el.classList.remove('is-spinning'); void el.offsetWidth; el.classList.add('is-spinning'); say('R. destiny has spoken.'); }
+          if (secret === 'crumple') say('“build a social network for potatoes” — rejected, 8:59 PM.');
+          if (secret === 'drawer' || secret === 'folder') { body.classList.toggle('drawer-open'); say('you were specifically not supposed to open this.'); }
+          if (secret === 'notebook' || secret === 'note') say('most projects begin with handwriting this bad.');
+          if (secret === 'phone') say('12.4 MB → 842 KB. boring problem, satisfying result.');
+          if (secret === 'bug') { el.classList.add('caught'); say('bug fixed. ship it before another appears.'); }
+          if (secret === 'op') say('one more chapter. historically, a lie.');
+          if (secret === 'book') say('research material. definitely.');
         });
       });
 
-      closeSecret?.addEventListener('click', () => {
-        popover?.classList.remove('is-open');
-        setTimeout(() => { if (popover) popover.hidden = true; }, 180);
-      });
-
-      let zCount = 0;
-      window.addEventListener('keydown', (event) => {
-        if (event.key.toLowerCase() !== 'z') return;
-        zCount += 1;
-        clearTimeout(window.__zTimer);
-        window.__zTimer = setTimeout(() => { zCount = 0; }, 900);
-        if (zCount >= 3 && zehaha) {
-          zehaha.classList.add('is-visible');
-          setTimeout(() => zehaha.classList.remove('is-visible'), 1600);
-          zCount = 0;
+      addEventListener('keydown', (event) => {
+        if (event.key.toLowerCase() === 'z') {
+          body.classList.remove('zehaha'); void body.offsetWidth; body.classList.add('zehaha');
+          say('ZEHAHAHAHA — the room approves.');
         }
       });
+
+      setScene(0);
     </script>
   </body>
 </html>
@@ -485,1094 +254,169 @@ const wheel = projects.find((project) => project.visual === 'wheel') ?? projects
 <style>
   :root {
     color-scheme: dark;
-    --ink: #f2eee5;
-    --muted: #b6ad9f;
-    --faint: #777063;
-    --line: rgba(255,255,255,.11);
-    --paper: #e9ddc7;
-    --paper-ink: #2b241e;
-    --amber: #e7a365;
-    --amber-soft: #ffd09a;
-    --blue: #7f96c8;
-    --night: #17131d;
-    --room-w: min(56vw, 780px);
+    --header-h: 3.35rem;
+    --ink: #f5efe4;
+    --muted: #b7aea5;
+    --faint: #807a78;
+    --line: rgba(245,239,228,.13);
+    --night: #111016;
+    --wall: #392b31;
+    --desk: #654738;
+    --lamp: #f0a667;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    --sans: Inter, Geist, "Segoe UI", system-ui, sans-serif;
     --serif: Georgia, Cambria, "Times New Roman", serif;
+    --ui: Inter, system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; background: #141118; }
-  body {
-    margin: 0;
-    min-width: 20rem;
-    color: var(--ink);
-    background: #141118;
-    font-family: var(--sans);
-    line-height: 1.6;
-    overflow-x: hidden;
-    transition: background 900ms ease;
-  }
-
-  body[data-time="dusk"] { background: #211721; }
-  body[data-time="ideas"] { background: #1b151f; }
-  body[data-time="build"] { background: #16141d; }
-  body[data-time="midnight"] { background: #10121a; }
-  body[data-time="weird"] { background: #0e1018; }
-  body[data-time="wall"] { background: #0d1018; }
-  body[data-time="writing"] { background: #10131c; }
-  body[data-time="first-light"] { background: #171c2a; }
-  body[data-time="ship"] { background: #252839; }
-  body[data-time="sunrise"] { background: #6f7180; }
-
+  html { background: var(--night); scroll-behavior: smooth; }
+  body { margin: 0; min-width: 20rem; min-height: 100vh; overflow-x: hidden; background: var(--night); color: var(--ink); font-family: var(--ui); }
   button, a { font: inherit; }
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
   button { color: inherit; }
 
-  .night-nav {
-    position: fixed;
-    z-index: 50;
-    top: 0;
-    right: 0;
-    left: 0;
-    min-height: 4rem;
-    padding: .75rem clamp(1rem, 2.5vw, 2rem);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,.07);
-    background: color-mix(in srgb, #0d0d11 72%, transparent);
-    backdrop-filter: blur(16px);
-  }
-
-  .night-mark,
-  .night-links,
-  .night-clock {
-    font-family: var(--mono);
-    font-size: .62rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .night-mark {
-    display: inline-flex;
-    align-items: center;
-    gap: .6rem;
-    text-decoration: none;
-  }
-
-  .night-mark b {
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-  }
-
-  .night-mark span { color: var(--muted); }
-
-  .night-clock {
-    display: flex;
-    align-items: center;
-    gap: .45rem;
-    color: var(--muted);
-  }
-
-  .night-clock i {
-    width: .4rem;
-    height: .4rem;
-    border-radius: 50%;
-    background: #eaa878;
-    box-shadow: 0 0 .8rem rgba(234,168,120,.6);
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-
-  .night-links {
-    justify-self: end;
-    display: flex;
-    gap: 1rem;
-  }
-
-  .night-links a {
-    color: var(--muted);
-    text-decoration: none;
-  }
-  .night-links a:hover { color: var(--ink); }
-
-  .night-shell {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(0, 1.16fr) minmax(22rem, .84fr);
-  }
-
-  .room-column {
-    position: relative;
-    min-width: 0;
-  }
-
-  .room-frame {
-    position: sticky;
-    top: 4rem;
-    height: calc(100svh - 4rem);
-    overflow: hidden;
-    isolation: isolate;
-    background: #2e2229;
-    border-right: 1px solid rgba(255,255,255,.07);
-    transition: background 1000ms ease;
-  }
-
-  .room-grain {
-    position: absolute;
-    z-index: 40;
-    inset: 0;
-    opacity: .12;
-    pointer-events: none;
-    background-image:
-      radial-gradient(circle at 15% 17%, rgba(255,255,255,.8) 0 .5px, transparent .7px),
-      radial-gradient(circle at 72% 63%, rgba(0,0,0,.8) 0 .5px, transparent .7px);
-    background-size: 5px 5px, 7px 7px;
-    mix-blend-mode: soft-light;
-  }
-
-  .wall-shadow {
-    position: absolute;
-    z-index: 1;
-    inset: 0 0 32% 0;
-    background:
-      radial-gradient(circle at 78% 32%, rgba(241,178,109,.14), transparent 34%),
-      linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.2));
-    transition: opacity 900ms ease;
-  }
-
-  .window {
-    position: absolute;
-    z-index: 2;
-    top: 8%;
-    left: 7%;
-    width: 28%;
-    height: 36%;
-    border: 10px solid #211b20;
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
-    overflow: hidden;
-    background: #191729;
-  }
-
-  .window::before,
-  .window::after {
-    content: "";
-    position: absolute;
-    z-index: 8;
-    background: #211b20;
-  }
-  .window::before { top: 0; bottom: 0; left: 49%; width: 7px; }
-  .window::after { right: 0; bottom: 33%; left: 0; height: 7px; }
-
-  .sky {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(#d27c70 0%, #6d516e 44%, #222540 100%);
-    transition: background 1200ms ease;
-  }
-
-  .moon {
-    position: absolute;
-    z-index: 2;
-    top: 62%;
-    left: 82%;
-    width: 2rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #f2e2ba;
-    box-shadow: 0 0 1.5rem rgba(242,226,186,.32);
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: top 1200ms ease, left 1200ms ease, opacity 900ms ease, transform 900ms ease;
-  }
-
-  .cloud {
-    position: absolute;
-    z-index: 3;
-    width: 44%;
-    height: 8%;
-    border-radius: 999px;
-    background: rgba(29,27,44,.38);
-    filter: blur(2px);
-    transition: transform 8s linear, opacity 900ms ease;
-  }
-  .cloud--one { top: 23%; left: -8%; }
-  .cloud--two { top: 48%; right: -16%; width: 33%; }
-
-  .city {
-    position: absolute;
-    z-index: 4;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 26%;
-    display: flex;
-    align-items: end;
-    gap: 3%;
-    background: linear-gradient(transparent, rgba(12,13,22,.4));
-  }
-
-  .city i {
-    position: relative;
-    flex: 1;
-    min-width: 8%;
-    background: #141522;
-    border-radius: 2px 2px 0 0;
-  }
-  .city i:nth-child(1) { height: 42%; }
-  .city i:nth-child(2) { height: 78%; }
-  .city i:nth-child(3) { height: 56%; }
-  .city i:nth-child(4) { height: 91%; }
-  .city i:nth-child(5) { height: 63%; }
-  .city i:nth-child(6) { height: 84%; }
-  .city i:nth-child(7) { height: 49%; }
-
-  .city i::after {
-    content: "";
-    position: absolute;
-    top: 18%;
-    left: 28%;
-    width: 3px;
-    height: 3px;
-    background: #ddab65;
-    opacity: .35;
-    animation: city-light 6s steps(1) infinite;
-  }
-
-  .city i:nth-child(2n)::after { animation-delay: -2s; }
-  .city i:nth-child(3n)::after { animation-delay: -4s; }
-
-  .pinboard {
-    position: absolute;
-    z-index: 4;
-    top: 9%;
-    right: 7%;
-    width: 29%;
-    height: 33%;
-    padding: 1rem;
-    background: #755b46;
-    border: 8px solid #3d302a;
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.16);
-    transform: rotate(.4deg);
-  }
-
-  .pinboard__label {
-    position: absolute;
-    top: .6rem;
-    left: .7rem;
-    color: rgba(255,245,225,.65);
-    font-family: var(--mono);
-    font-size: clamp(.38rem, .7vw, .55rem);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .pin-note {
-    position: absolute;
-    z-index: 2;
-    padding: .5rem .55rem;
-    color: #31271f;
-    background: #dfd0ad;
-    box-shadow: 0 .4rem .7rem rgba(0,0,0,.13);
-    font-family: var(--serif);
-    font-size: clamp(.46rem, .9vw, .72rem);
-    line-height: 1.15;
-    transition: transform 900ms cubic-bezier(.2,.8,.2,1), opacity 700ms ease;
-  }
-  .pin-note::before {
-    content: "";
-    position: absolute;
-    top: .18rem;
-    left: 50%;
-    width: .27rem;
-    height: .27rem;
-    border-radius: 50%;
-    background: #8b4436;
-    transform: translateX(-50%);
-  }
-  .pin-note--why { top: 23%; left: 8%; transform: rotate(-5deg); }
-  .pin-note--ship { top: 18%; right: 6%; background: #c5d7c9; transform: rotate(3deg); }
-  .pin-note--search { right: 14%; bottom: 9%; background: #d7c8dc; transform: rotate(-2deg); }
-  .pin-note--fall { left: 12%; bottom: 7%; background: #e8bf9b; transform: rotate(4deg); }
-
-  .pin-line {
-    position: absolute;
-    z-index: 1;
-    height: 1px;
-    background: rgba(255,240,210,.36);
-    transform-origin: left;
-  }
-  .pin-line--a { top: 52%; left: 27%; width: 42%; transform: rotate(17deg); }
-  .pin-line--b { top: 57%; left: 33%; width: 34%; transform: rotate(-19deg); }
-
-  .shelf {
-    position: absolute;
-    z-index: 4;
-    top: 47%;
-    left: 6%;
-    width: 27%;
-    height: 4%;
-    background: #4b382f;
-    box-shadow: 0 .55rem 1rem rgba(0,0,0,.2);
-  }
-  .shelf::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    right: 8%;
-    width: 8%;
-    height: 75%;
-    background: #312720;
-  }
-
-  .book {
-    position: absolute;
-    bottom: 100%;
-    width: 14%;
-    border: 0;
-    padding: 0;
-    display: grid;
-    place-items: center;
-    color: rgba(255,255,255,.7);
-    font-family: var(--mono);
-    font-size: clamp(.35rem, .6vw, .5rem);
-    writing-mode: vertical-rl;
-    cursor: default;
-  }
-  button.book { cursor: pointer; }
-  .book--one { left: 8%; height: 4.7rem; background: #7f4f43; transform: rotate(-3deg); }
-  .book--two { left: 23%; height: 4.1rem; background: #485d68; }
-  .book--op { left: 39%; height: 5rem; background: #8e6a37; transform: rotate(2deg); }
-
-  .plant {
-    position: absolute;
-    right: 7%;
-    bottom: 100%;
-    width: 22%;
-    height: 4rem;
-  }
-  .plant::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 28%;
-    width: 52%;
-    height: 38%;
-    border-radius: 0 0 1rem 1rem;
-    background: #6b4b3a;
-  }
-  .plant i {
-    position: absolute;
-    bottom: 30%;
-    left: 50%;
-    width: 35%;
-    height: 52%;
-    border-radius: 80% 0 80% 0;
-    background: #526b50;
-    transform-origin: bottom left;
-  }
-  .plant i:nth-child(1) { transform: rotate(-55deg); }
-  .plant i:nth-child(2) { transform: rotate(-20deg) scale(.9); }
-  .plant i:nth-child(3) { transform: rotate(20deg) scale(.85); }
-
-  .lamp {
-    position: absolute;
-    z-index: 7;
-    right: 19%;
-    bottom: 28%;
-    width: 15%;
-    height: 35%;
-  }
-  .lamp__stem {
-    position: absolute;
-    right: 47%;
-    bottom: 0;
-    width: 5px;
-    height: 75%;
-    background: #39343b;
-    transform: rotate(-6deg);
-    transform-origin: bottom;
-  }
-  .lamp__shade {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 6%;
-    width: 62%;
-    height: 18%;
-    border-radius: 55% 55% 30% 30%;
-    background: #55464b;
-    transform: rotate(8deg);
-    box-shadow: inset 0 -6px 0 rgba(255,205,145,.16);
-  }
-  .lamp__light {
-    position: absolute;
-    z-index: 1;
-    top: 13%;
-    right: -48%;
-    width: 155%;
-    height: 72%;
-    clip-path: polygon(40% 0, 70% 0, 100% 100%, 0 100%);
-    background: linear-gradient(rgba(240,176,106,.24), rgba(240,176,106,.03));
-    filter: blur(4px);
-    transition: opacity 900ms ease;
-  }
-
-  .desk {
-    position: absolute;
-    z-index: 5;
-    right: 3%;
-    bottom: 10%;
-    left: 3%;
-    height: 19%;
-    border-radius: 2% 2% 0 0;
-    background: linear-gradient(180deg, #5f4438 0%, #49352d 100%);
-    box-shadow: 0 -1px 0 rgba(255,255,255,.06), 0 -1.5rem 4rem rgba(0,0,0,.08);
-  }
-  .desk-edge {
-    position: absolute;
-    z-index: 6;
-    right: 2%;
-    bottom: 8.4%;
-    left: 2%;
-    height: 2.2%;
-    background: #352820;
-    border-radius: 0 0 8px 8px;
-  }
-
-  .monitor {
-    position: absolute;
-    z-index: 9;
-    left: 34%;
-    bottom: 25%;
-    width: 35%;
-    height: 43%;
-  }
-  .monitor__body {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 72%;
-    padding: 2.2%;
-    border-radius: 2.6% 2.6% 4% 4%;
-    background: #26272d;
-    box-shadow: 0 1.3rem 2.5rem rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.06);
-  }
-  .monitor__camera {
-    position: absolute;
-    z-index: 3;
-    top: 1.2%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #0f1014;
-    transform: translateX(-50%);
-  }
-  .screen {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 1.2%;
-    color: #dce3dd;
-    background: #11141a;
-    box-shadow: inset 0 0 2rem rgba(75,116,125,.08), 0 0 2rem rgba(91,131,147,.08);
-  }
-  .screen::after {
-    content: "";
-    position: absolute;
-    z-index: 10;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(rgba(255,255,255,.018) 50%, rgba(0,0,0,.02) 50%);
-    background-size: 100% 4px;
-    opacity: .5;
-  }
-  .monitor__neck {
-    position: absolute;
-    top: 70%;
-    left: 47%;
-    width: 9%;
-    height: 18%;
-    background: #29292e;
-  }
-  .monitor__foot {
-    position: absolute;
-    bottom: 8%;
-    left: 35%;
-    width: 34%;
-    height: 5%;
-    border-radius: 50%;
-    background: #242429;
-  }
-
-  .screen-scene {
-    position: absolute;
-    inset: 0;
-    padding: 7% 7.5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(8px) scale(.985);
-    transition: opacity 480ms ease, transform 650ms ease;
-    pointer-events: none;
-  }
-  .screen-kicker {
-    position: absolute;
-    top: 5%;
-    left: 6%;
-    color: #75817f;
-    font-family: var(--mono);
-    font-size: clamp(.36rem, .65vw, .55rem);
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
-  .screen-scene strong {
-    font-family: var(--mono);
-    font-size: clamp(.78rem, 1.75vw, 1.55rem);
-    line-height: 1.12;
-    font-weight: 500;
-  }
-  .screen-scene small,
-  .screen-scene p,
-  .screen-scene code,
-  .screen-scene li {
-    font-family: var(--mono);
-    font-size: clamp(.36rem, .7vw, .6rem);
-  }
-  .screen-scene ul { margin: 0; padding-left: 1.1rem; color: #abb5af; }
-  .screen-scene li { margin: .28rem 0; }
-  .screen-scene--dusk { color: #e9d2ab; }
-  .screen-scene--dusk small { animation: cursor-blink 1s steps(1) infinite; }
-
-  .phone-preview {
-    align-self: center;
-    width: 52%;
-    min-width: 5rem;
-    padding: 7% 6%;
-    display: grid;
-    gap: .28rem;
-    border: 1px solid #49545b;
-    border-radius: .8rem;
-    color: #222;
-    background: #e8dfc9;
-    text-align: center;
-    box-shadow: 0 .8rem 1.5rem rgba(0,0,0,.22);
-  }
-  .phone-preview span { font-family: var(--mono); font-size: clamp(.3rem,.55vw,.5rem); }
-  .phone-preview s { color: #806353; font-family: var(--mono); font-size: clamp(.46rem,.8vw,.7rem); }
-  .phone-preview b { color: #3e725c; font-size: clamp(.78rem,1.3vw,1.15rem); }
-  .phone-preview i { padding: .22rem; border-radius: 99px; background: #2e6d58; color: #fff; font-family: var(--mono); font-size: clamp(.28rem,.48vw,.43rem); font-style: normal; text-transform: uppercase; }
-
-  .screen-scene--midnight code { color: #e4b47d; margin-bottom: .4rem; }
-  .screen-scene--midnight p { margin: .1rem 0; color: #aab3af; }
-  .screen-scene--midnight p b { color: #70bf8f; }
-  .screen-scene--midnight p em { color: #d69a6c; font-style: normal; }
-  .screen-scene--midnight > strong { margin-top: .4rem; color: #8db8cc; }
-
-  .agent-map { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem; margin-bottom: .6rem; }
-  .agent-map b { padding: .25rem .35rem; border: 1px solid #4b5056; border-radius: 99px; font-family: var(--mono); font-size: clamp(.32rem,.58vw,.5rem); font-weight: 500; }
-  .agent-map i { width: .7rem; height: 1px; background: #4b5056; }
-
-  .mini-chart { height: 36%; display: flex; align-items: end; gap: 4%; padding: 0 3%; border-bottom: 1px solid #38434b; }
-  .mini-chart i { flex: 1; background: linear-gradient(#879ec1,#53627b); border-radius: 2px 2px 0 0; }
-  .mini-chart i:nth-child(1) { height: 22%; }
-  .mini-chart i:nth-child(2) { height: 38%; }
-  .mini-chart i:nth-child(3) { height: 34%; }
-  .mini-chart i:nth-child(4) { height: 54%; }
-  .mini-chart i:nth-child(5) { height: 67%; }
-  .mini-chart i:nth-child(6) { height: 62%; }
-  .mini-chart i:nth-child(7) { height: 88%; }
-
-  .soft-list { display: grid; gap: .35rem; }
-  .soft-list span { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: .25rem; border-bottom: 1px solid #30363d; font-family: var(--mono); font-size: clamp(.35rem,.65vw,.55rem); }
-  .soft-list b { color: #8fb394; font-weight: 500; }
-
-  .keyboard {
-    position: absolute;
-    z-index: 10;
-    left: 36%;
-    bottom: 15%;
-    width: 34%;
-    height: 8%;
-    padding: .45rem;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4%;
-    background: #25252a;
-    border-radius: .45rem;
-    transform: perspective(500px) rotateX(63deg);
-    transform-origin: bottom;
-    box-shadow: 0 .8rem 1rem rgba(0,0,0,.25);
-  }
-  .keyboard i { border-radius: 2px; background: #35353b; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03); }
-
-  .mug {
-    position: absolute;
-    z-index: 12;
-    left: 20%;
-    bottom: 20%;
-    width: 8%;
-    min-width: 2.5rem;
-    aspect-ratio: .9;
-    border: 0;
-    border-radius: 8% 8% 30% 30%;
-    color: #402e28;
-    background: #bd7960;
-    box-shadow: 0 .8rem 1.2rem rgba(0,0,0,.22);
-    cursor: pointer;
-  }
-  .mug::after {
-    content: "";
-    position: absolute;
-    top: 22%;
-    right: -28%;
-    width: 34%;
-    height: 44%;
-    border: 5px solid #a66652;
-    border-left: 0;
-    border-radius: 0 50% 50% 0;
-  }
-  .mug b { font-family: var(--serif); font-size: clamp(.38rem,.7vw,.6rem); line-height: .9; font-weight: 400; }
-  .steam {
-    position: absolute;
-    bottom: 108%;
-    width: 1px;
-    height: 2.2rem;
-    background: linear-gradient(transparent, rgba(255,255,255,.28), transparent);
-    filter: blur(.5px);
-    animation: steam 2.4s ease-in-out infinite;
-    transform-origin: bottom;
-    transition: opacity 800ms ease;
-  }
-  .steam--one { left: 38%; }
-  .steam--two { left: 62%; animation-delay: -1.1s; }
-
-  .wheel-object {
-    position: absolute;
-    z-index: 12;
-    left: 10%;
-    bottom: 16%;
-    width: 6.5%;
-    min-width: 2.3rem;
-    aspect-ratio: 1;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 50%;
-    color: #eee5d5;
-    background: conic-gradient(#765462 0 25%, #60717b 25% 50%, #806b4f 50% 75%, #526a5e 75% 100%);
-    box-shadow: 0 .5rem .9rem rgba(0,0,0,.2);
-    cursor: pointer;
-  }
-  .wheel-object span,
-  .wheel-object b { position: absolute; font-family: var(--mono); font-size: clamp(.26rem,.45vw,.38rem); }
-  .wheel-object span:nth-child(1) { top: 7%; left: 50%; transform: translateX(-50%); }
-  .wheel-object span:nth-child(2) { top: 50%; right: 8%; transform: translateY(-50%); }
-  .wheel-object span:nth-child(3) { bottom: 7%; left: 50%; transform: translateX(-50%); }
-  .wheel-object span:nth-child(4) { top: 50%; left: 8%; transform: translateY(-50%); }
-  .wheel-object b { inset: 50% auto auto 50%; transform: translate(-50%,-50%); }
-  .wheel-object.is-spinning { animation: wheel-spin .85s cubic-bezier(.2,.8,.2,1); }
-
-  .phone-object {
-    position: absolute;
-    z-index: 11;
-    right: 9%;
-    bottom: 17%;
-    width: 6%;
-    min-width: 2.2rem;
-    aspect-ratio: .52;
-    display: grid;
-    place-items: center;
-    border: 3px solid #25252a;
-    border-radius: .55rem;
-    color: #7c8486;
-    background: #111419;
-    box-shadow: 0 .6rem 1.2rem rgba(0,0,0,.25);
-    transform: rotate(5deg);
-  }
-  .phone-object span { font-family: var(--mono); font-size: clamp(.26rem,.5vw,.42rem); }
-
-  .cable {
-    position: absolute;
-    z-index: 8;
-    right: 4%;
-    bottom: 13%;
-    width: 19%;
-    height: 10%;
-    border: 2px solid #28272b;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    transform: rotate(8deg);
-  }
-
-  .crumple {
-    position: absolute;
-    z-index: 13;
-    left: 29%;
-    bottom: 13%;
-    width: 3.5%;
-    min-width: 1.8rem;
-    aspect-ratio: 1;
-    border: 0;
-    border-radius: 42% 58% 51% 49% / 48% 41% 59% 52%;
-    color: #65584c;
-    background: #d5cbb9;
-    box-shadow: .15rem .25rem .5rem rgba(0,0,0,.18);
-    cursor: pointer;
-    transform: rotate(-11deg);
-  }
-
-  .drawer {
-    position: absolute;
-    z-index: 6;
-    right: 8%;
-    bottom: 1.8%;
-    width: 24%;
-    height: 8%;
-    border: 0;
-    background: #3e2f28;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
-    cursor: pointer;
-  }
-  .drawer span { position: absolute; top: 23%; left: 50%; width: 18%; height: 2px; border-radius: 99px; background: #796052; transform: translateX(-50%); }
-
-  .tiny-bug {
-    position: absolute;
-    z-index: 20;
-    left: 71%;
-    bottom: 25%;
-    width: 1rem;
-    height: 1rem;
-    border: 0;
-    padding: 0;
-    color: #1e1b1a;
-    background: transparent;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 600ms ease;
-    animation: bug-walk 6s ease-in-out infinite;
-  }
-  .tiny-bug::before,
-  .tiny-bug::after { content: ""; position: absolute; top: 48%; width: .45rem; height: 1px; background: #1d1b1a; }
-  .tiny-bug::before { right: 52%; transform: rotate(27deg); }
-  .tiny-bug::after { left: 52%; transform: rotate(-27deg); }
-
-  .paper-stack {
-    position: absolute;
-    z-index: 11;
-    left: 72%;
-    bottom: 16%;
-    width: 14%;
-    height: 9%;
-    opacity: .25;
-    transition: opacity 700ms ease, transform 900ms ease;
-  }
-  .paper-stack span { position: absolute; inset: 0; border-radius: 2px; background: #d8d0c1; box-shadow: 0 .4rem .8rem rgba(0,0,0,.15); }
-  .paper-stack span:nth-child(2) { transform: rotate(5deg); }
-  .paper-stack span:nth-child(3) { transform: rotate(-4deg); }
-
-  .sunbeam {
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    left: 5%;
-    width: 40%;
-    height: 95%;
-    clip-path: polygon(0 0, 65% 0, 100% 100%, 8% 100%);
-    background: linear-gradient(180deg, rgba(255,222,177,.3), rgba(255,222,177,.02));
-    filter: blur(8px);
-    opacity: 0;
-    transition: opacity 1000ms ease;
-  }
-
-  .dust {
-    position: absolute;
-    z-index: 15;
-    top: 26%;
-    left: 20%;
-    width: 32%;
-    height: 48%;
-    opacity: 0;
-    transition: opacity 900ms ease;
-    pointer-events: none;
-  }
-  .dust i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #ffe1b4; animation: dust 7s ease-in-out infinite; }
-  .dust i:nth-child(1) { top: 10%; left: 20%; }
-  .dust i:nth-child(2) { top: 36%; left: 65%; animation-delay: -2s; }
-  .dust i:nth-child(3) { top: 58%; left: 30%; animation-delay: -4s; }
-  .dust i:nth-child(4) { top: 72%; left: 72%; animation-delay: -1s; }
-  .dust i:nth-child(5) { top: 22%; left: 48%; animation-delay: -5s; }
-
-  .room-caption {
-    position: absolute;
-    z-index: 30;
-    right: 1.2rem;
-    bottom: 1rem;
-    left: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    color: rgba(255,255,255,.55);
-    font-family: var(--mono);
-    font-size: clamp(.42rem,.7vw,.6rem);
-    letter-spacing: .05em;
-  }
-  .room-caption b { font-weight: 400; text-align: right; }
-
-  /* room states */
-  .room-frame[data-state="dusk"] { background: #3b2930; }
-  .room-frame[data-state="ideas"] { background: #33262e; }
-  .room-frame[data-state="build"] { background: #2a252d; }
-  .room-frame[data-state="midnight"],
-  .room-frame[data-state="weird"],
-  .room-frame[data-state="wall"] { background: #20232d; }
-  .room-frame[data-state="writing"] { background: #222834; }
-  .room-frame[data-state="first-light"] { background: #30384a; }
-  .room-frame[data-state="ship"] { background: #4d5162; }
-  .room-frame[data-state="sunrise"] { background: #777483; }
-
-  .room-frame[data-state="ideas"] .sky { background: linear-gradient(#604b67 0%, #2d2d4a 50%, #17192b 100%); }
-  .room-frame[data-state="build"] .sky { background: linear-gradient(#30314e 0%, #171a30 58%, #111523 100%); }
-  .room-frame[data-state="midnight"] .sky,
-  .room-frame[data-state="weird"] .sky,
-  .room-frame[data-state="wall"] .sky { background: linear-gradient(#12162c 0%, #0c1022 60%, #090d1b 100%); }
-  .room-frame[data-state="writing"] .sky { background: linear-gradient(#161b35 0%, #11182e 58%, #0e1427 100%); }
-  .room-frame[data-state="first-light"] .sky { background: linear-gradient(#324160 0%, #293650 55%, #202c43 100%); }
-  .room-frame[data-state="ship"] .sky { background: linear-gradient(#62718e 0%, #d1847f 62%, #d7a482 100%); }
-  .room-frame[data-state="sunrise"] .sky { background: linear-gradient(#8097b8 0%, #eda37f 55%, #f3c79e 100%); }
-
-  .room-frame:is([data-state="midnight"],[data-state="weird"],[data-state="wall"],[data-state="writing"],[data-state="first-light"]) .moon { opacity: 1; }
-  .room-frame[data-state="midnight"] .moon { top: 62%; left: 82%; }
-  .room-frame[data-state="weird"] .moon { top: 48%; left: 67%; transform: translate(-50%,-50%) scale(1.06); }
-  .room-frame[data-state="wall"] .moon { top: 35%; left: 52%; transform: translate(-50%,-50%) scale(1.09); }
-  .room-frame[data-state="writing"] .moon { top: 24%; left: 37%; transform: translate(-50%,-50%) scale(1.06); }
-  .room-frame[data-state="first-light"] .moon { top: 16%; left: 22%; opacity: .5; transform: translate(-50%,-50%) scale(.9); }
-
-  .room-frame:is([data-state="first-light"],[data-state="ship"],[data-state="sunrise"]) .sunbeam { opacity: 1; }
-  .room-frame:is([data-state="ship"],[data-state="sunrise"]) .dust { opacity: .75; }
-  .room-frame[data-state="sunrise"] .lamp__light { opacity: 0; }
-  .room-frame[data-state="sunrise"] .wall-shadow { opacity: .45; }
-
-  .room-frame:is([data-state="midnight"],[data-state="weird"],[data-state="wall"],[data-state="writing"],[data-state="first-light"],[data-state="ship"],[data-state="sunrise"]) .steam { opacity: 0; }
-  .room-frame:is([data-state="weird"],[data-state="wall"],[data-state="writing"],[data-state="first-light"],[data-state="ship"],[data-state="sunrise"]) .pin-note--fall { transform: translate(1.4rem, 5rem) rotate(16deg); opacity: .62; }
-  .room-frame:is([data-state="writing"],[data-state="first-light"],[data-state="ship"],[data-state="sunrise"]) .paper-stack { opacity: .95; transform: translateY(-.5rem); }
-  .room-frame:is([data-state="midnight"],[data-state="weird"],[data-state="wall"]) .tiny-bug { opacity: 1; }
-
-  .room-frame[data-state="dusk"] .screen-scene--dusk,
-  .room-frame[data-state="ideas"] .screen-scene--ideas,
-  .room-frame[data-state="build"] .screen-scene--build,
-  .room-frame[data-state="midnight"] .screen-scene--midnight,
-  .room-frame[data-state="weird"] .screen-scene--weird,
-  .room-frame[data-state="wall"] .screen-scene--wall,
-  .room-frame[data-state="writing"] .screen-scene--writing,
-  .room-frame[data-state="first-light"] .screen-scene--first-light,
-  .room-frame[data-state="ship"] .screen-scene--ship,
-  .room-frame[data-state="sunrise"] .screen-scene--sunrise {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  /* story */
-  .story-column { min-width: 0; }
-  .chapter {
-    min-height: 110svh;
-    padding: 7rem clamp(1.4rem, 4vw, 4.2rem) 5rem;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,.055);
-  }
-  .chapter--opening { min-height: 125svh; }
-  .chapter--sunrise { min-height: 115svh; }
-
-  .chapter-copy { width: min(100%, 35rem); margin-inline: auto; }
-  .chapter-time,
-  .chapter-whisper,
-  .chapter-copy--terminal .tiny-aside,
-  .writing-paper small,
-  .project-line small,
-  .ship-shelf small {
-    font-family: var(--mono);
-    letter-spacing: .06em;
-  }
-  .chapter-time { color: var(--amber-soft); font-size: .65rem; text-transform: uppercase; }
-  .chapter-whisper { margin: .5rem 0 0; color: var(--faint); font-size: .68rem; text-transform: uppercase; }
-  .chapter h1,
-  .chapter h2 {
-    margin: .75rem 0 1.2rem;
-    max-width: 8.5ch;
-    font-family: var(--serif);
-    font-weight: 400;
-    line-height: .95;
-    letter-spacing: -.045em;
-  }
-  .chapter h1 { font-size: clamp(3.8rem, 8vw, 7rem); }
-  .chapter h2 { font-size: clamp(3rem, 6vw, 5.5rem); }
-  .chapter p { max-width: 37rem; margin: .8rem 0 0; color: var(--muted); font-size: clamp(.95rem,1.4vw,1.06rem); line-height: 1.75; }
-  .chapter-lede { color: var(--ink) !important; font-family: var(--serif); font-size: clamp(1.2rem,2.1vw,1.55rem) !important; line-height: 1.55 !important; }
-  .continue { display: inline-block; margin-top: 1.6rem; color: var(--amber-soft); font-family: var(--mono); font-size: .72rem; text-decoration: none; }
-
-  .chapter-copy--paper { position: relative; padding: clamp(1.5rem,3vw,2.5rem); color: var(--paper-ink); background: var(--paper); box-shadow: 0 1.6rem 4rem rgba(0,0,0,.18); transform: rotate(-.6deg); }
-  .chapter-copy--paper::before { content: ""; position: absolute; top: 1.2rem; right: 1.4rem; width: 1.2rem; height: 1.2rem; border-radius: 50%; background: #92594a; box-shadow: inset 0 0 0 4px rgba(255,255,255,.15); }
-  .chapter-copy--paper .chapter-time { color: #8e5745; }
-  .chapter-copy--paper .chapter-whisper { color: #827467; }
-  .chapter-copy--paper h2 { color: #29221d; }
-  .chapter-copy--paper p { color: #5a4d43; }
-
-  .idea-scraps { display: grid; gap: .45rem; margin: 1rem 0 1.2rem; }
-  .idea-scraps span { width: fit-content; padding: .24rem .5rem; border-bottom: 1px solid rgba(43,36,30,.18); font-family: var(--serif); font-size: 1rem; transform: rotate(var(--r,0deg)); }
-  .idea-scraps span:nth-child(1) { --r:-1deg; }
-  .idea-scraps span:nth-child(2) { --r:.6deg; }
-  .idea-scraps span:nth-child(3) { --r:-.5deg; }
-  .idea-scraps span:nth-child(4) { --r:1.2deg; }
-
-  .inline-secret { margin-top: 1rem; padding: 0; border: 0; color: inherit; background: transparent; font-family: var(--mono); font-size: .68rem; text-decoration: underline; text-underline-offset: .18em; cursor: pointer; }
-
-  .project-line {
-    margin: 1.5rem 0;
-    padding: 1rem 0;
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 1rem;
-    border-block: 1px solid rgba(255,255,255,.13);
-    text-decoration: none;
-  }
-  .project-line span { display: grid; gap: .2rem; }
-  .project-line b { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
-  .project-line small { color: var(--faint); font-size: .58rem; text-transform: uppercase; }
-  .project-line em { color: var(--muted); font-size: .74rem; font-style: normal; }
-  .project-line i { color: var(--amber-soft); font-style: normal; }
-  .project-line:hover b { color: var(--amber-soft); }
-
-  .chapter-copy--terminal { padding: 1.5rem; border: 1px solid #2d343c; border-radius: .4rem; background: #0d1015; box-shadow: 0 1.5rem 4rem rgba(0,0,0,.22); }
-  .chapter-copy--terminal h2 { color: #e0e4df; }
-  .chapter-copy--terminal p { color: #9da7a3; }
-  .project-line--dark { border-color: #293139; }
-  .tiny-aside { color: #69736f !important; font-size: .66rem !important; }
-
-  .folder-list { margin: 1.4rem 0; display: grid; gap: .4rem; }
-  .folder-list span,
-  .folder-list button { width: fit-content; padding: .35rem .6rem; border: 1px solid rgba(255,255,255,.1); border-radius: 99px; color: var(--muted); background: rgba(255,255,255,.025); font-family: var(--mono); font-size: .67rem; cursor: default; }
-  .folder-list button { cursor: pointer; }
-  .folder-list button:hover { color: var(--ink); border-color: rgba(255,255,255,.22); }
-
-  .evidence-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.4rem 0; }
-  .evidence-strip span { padding: .34rem .55rem; border: 1px solid rgba(255,255,255,.12); color: var(--muted); font-family: var(--mono); font-size: .61rem; }
-  blockquote { margin: 1.8rem 0 0; padding-left: 1rem; border-left: 1px solid var(--amber); color: #d6cbbd; font-family: var(--serif); font-size: 1.1rem; font-style: italic; }
-
-  .writing-papers { position: relative; display: grid; gap: .8rem; margin: 1.5rem 0; }
-  .writing-paper { position: relative; padding: 1rem 1rem .9rem; display: block; color: var(--paper-ink); background: #e8decd; box-shadow: 0 .8rem 1.8rem rgba(0,0,0,.17); text-decoration: none; transition: transform 240ms ease; }
-  .writing-paper:nth-child(2n) { background: #ded7ca; transform: rotate(.5deg); }
-  .writing-paper:nth-child(3n) { transform: rotate(-.7deg); }
-  .writing-paper:hover { transform: translateY(-4px) rotate(0deg); }
-  .writing-paper small { color: #857669; font-size: .56rem; text-transform: uppercase; }
-  .writing-paper b { display: block; margin-top: .35rem; font-family: var(--serif); font-size: 1.22rem; font-weight: 400; line-height: 1.15; }
-  .writing-paper p { margin: .45rem 0 0; color: #5e5147; font-size: .78rem; line-height: 1.55; }
-
-  .ship-shelf { margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.13); }
-  .ship-shelf a { padding: .8rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,.1); text-decoration: none; }
-  .ship-shelf span { display: grid; gap: .1rem; }
-  .ship-shelf b { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; }
-  .ship-shelf small { color: var(--faint); font-size: .55rem; text-transform: uppercase; }
-  .ship-shelf em { color: var(--amber-soft); font-family: var(--mono); font-size: .58rem; font-style: normal; text-transform: uppercase; }
-
-  .chapter--sunrise { color: #211c1b; background: linear-gradient(180deg, rgba(255,213,174,.06), rgba(255,214,177,.28)); }
-  .chapter--sunrise .chapter-time { color: #6e3f33; }
-  .chapter--sunrise .chapter-whisper { color: #59535a; }
-  .chapter--sunrise p { color: #403a3b; }
-  .chapter--sunrise .chapter-lede { color: #211c1b !important; }
-  .sunrise-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
-  .sunrise-links a { color: #211c1b; font-weight: 700; text-decoration: none; }
-  .goodnight { margin-top: 3rem !important; font-family: var(--serif); font-style: italic; }
-
-  .secret {
-    position: fixed;
-    z-index: 100;
-    right: clamp(1rem,3vw,2rem);
-    bottom: clamp(1rem,3vw,2rem);
-    width: min(22rem, calc(100vw - 2rem));
-    padding: 1.1rem 2.8rem 1.1rem 1.1rem;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: .8rem;
-    color: #24201d;
-    background: #e6dac5;
-    box-shadow: 0 1.5rem 4rem rgba(0,0,0,.34);
-    opacity: 0;
-    transform: translateY(12px) rotate(-1deg);
-    transition: opacity 180ms ease, transform 180ms ease;
-  }
-  .secret.is-open { opacity: 1; transform: translateY(0) rotate(-1deg); }
-  .secret > button { position: absolute; top: .45rem; right: .55rem; width: 1.8rem; height: 1.8rem; border: 0; border-radius: 50%; color: #5b4e44; background: rgba(0,0,0,.06); cursor: pointer; }
-  .secret small { display: block; color: #8a7465; font-family: var(--mono); font-size: .55rem; letter-spacing: .07em; text-transform: uppercase; }
-  .secret strong { display: block; margin-top: .3rem; font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
-  .secret p { margin: .45rem 0 0; color: #5a4e45; font-size: .8rem; line-height: 1.55; }
-
-  .zehaha { position: fixed; z-index: 120; inset: 50% auto auto 50%; padding: .5rem .8rem; border: 1px solid rgba(255,255,255,.18); border-radius: 99px; color: #f4e9d7; background: rgba(12,12,17,.86); font-family: var(--mono); font-size: .75rem; opacity: 0; transform: translate(-50%,-50%) scale(.7); pointer-events: none; transition: opacity 180ms ease, transform 260ms cubic-bezier(.2,.9,.2,1.2); }
-  .zehaha.is-visible { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-
-  @keyframes pulse { 0%,100% { opacity:.45; } 50% { opacity:1; } }
-  @keyframes cursor-blink { 0%,45% { opacity:1; } 46%,100% { opacity:0; } }
-  @keyframes steam { 0% { opacity:0; transform: translateY(.2rem) rotate(0); } 35% { opacity:.65; } 100% { opacity:0; transform: translateY(-1rem) rotate(12deg); } }
-  @keyframes wheel-spin { to { transform: rotate(720deg); } }
-  @keyframes city-light { 0%,25% { opacity:.15; } 26%,65% { opacity:.75; } 66%,100% { opacity:.25; } }
-  @keyframes bug-walk { 0%,100% { transform: translate(0,0) rotate(0); } 35% { transform: translate(1rem,-.2rem) rotate(12deg); } 70% { transform: translate(-.4rem,.25rem) rotate(-10deg); } }
-  @keyframes dust { 0%,100% { transform: translate(0,0); opacity:.15; } 50% { transform: translate(1rem,-1.5rem); opacity:.75; } }
-
-  @media (max-width: 980px) {
-    .night-shell { display: block; }
-    .room-column { position: sticky; z-index: 20; top: 4rem; height: 44svh; }
-    .room-frame { position: relative; top: auto; height: 44svh; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .story-column { position: relative; z-index: 25; }
-    .chapter { min-height: 92svh; padding-top: 4.5rem; background: color-mix(in srgb, #121118 92%, transparent); }
-    .chapter--sunrise { background: linear-gradient(180deg, rgba(199,173,160,.95), rgba(230,192,158,.96)); }
-    .room-caption { font-size: .45rem; }
-    .room-caption b { max-width: 62%; }
-    .window { top: 7%; left: 5%; width: 27%; height: 34%; border-width: 6px; }
-    .pinboard { top: 7%; right: 5%; width: 29%; height: 32%; border-width: 5px; }
-    .monitor { bottom: 24%; }
-    .shelf { top: 44%; }
-  }
-
-  @media (max-width: 640px) {
-    .night-nav { grid-template-columns: 1fr auto; min-height: 3.6rem; padding: .65rem .8rem; }
-    .night-clock { justify-self: end; }
-    .night-links { display: none; }
-    .night-mark span { display: none; }
-    .room-column { top: 3.6rem; height: 42svh; }
-    .room-frame { height: 42svh; }
-    .chapter { min-height: 86svh; padding: 4rem 1.15rem 3rem; }
-    .chapter--opening { min-height: 95svh; }
-    .chapter h1 { font-size: clamp(3.4rem,16vw,5rem); }
-    .chapter h2 { font-size: clamp(2.8rem,14vw,4.4rem); }
-    .project-line { grid-template-columns: 1fr auto; }
-    .project-line em { grid-column: 1 / -1; }
-    .room-caption { right: .6rem; bottom: .45rem; left: .6rem; }
-    .room-caption b { display: none; }
-    .window { width: 28%; height: 34%; border-width: 4px; }
-    .pinboard { width: 31%; height: 32%; border-width: 4px; padding: .4rem; }
-    .pin-note { padding: .25rem .3rem; font-size: .36rem; }
-    .pinboard__label { font-size: .3rem; }
-    .shelf { width: 26%; }
-    .book--one,.book--two,.book--op { height: 2.6rem; }
-    .lamp { right: 18%; bottom: 27%; }
-    .monitor { left: 31%; width: 39%; bottom: 24%; }
-    .keyboard { left: 33%; width: 39%; }
-    .mug { left: 17%; }
-    .wheel-object { left: 7%; }
-    .paper-stack { left: 73%; width: 12%; }
-    .screen-scene { padding: 6%; }
+  .nightbar {
+    position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 .95rem; border-bottom: 1px solid var(--line); background: rgba(14,13,18,.92); backdrop-filter: blur(16px);
+    font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .nightbar__brand, .nightbar__time, .nightbar__links { display: flex; align-items: center; gap: .65rem; }
+  .nightbar__brand span { width: 1.65rem; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-size: .5rem; }
+  .nightbar__brand small { font-size: inherit; color: var(--muted); }
+  .nightbar__time i { width: .38rem; aspect-ratio: 1; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 .8rem rgba(240,166,103,.65); }
+  .nightbar__links { justify-self: end; gap: .9rem; color: var(--muted); }
+  .nightbar a:hover { color: #fff; }
+
+  .progress { position: fixed; z-index: 101; top: var(--header-h); left: 0; width: 100%; height: 1px; background: rgba(255,255,255,.05); }
+  .progress span { display: block; width: var(--progress,0%); height: 100%; background: linear-gradient(90deg,#e99b66,#8598e9,#f0c79f); transition: width 80ms linear; }
+
+  .night { position: relative; }
+  .world { position: fixed; z-index: 1; inset: var(--header-h) 0 0; overflow: hidden; background: var(--wall); transition: background 1.2s ease; isolation: isolate; }
+  .world::after { content:""; position:absolute; inset:0; z-index:50; pointer-events:none; box-shadow: inset 0 0 8rem rgba(0,0,0,.38); transition: opacity 1s ease; }
+  .room-grain { position:absolute; inset:0; z-index:49; pointer-events:none; opacity:.14; background-image: repeating-radial-gradient(circle at 0 0, transparent 0 2px, rgba(255,255,255,.06) 2.5px 3px); background-size:5px 5px; mix-blend-mode:soft-light; }
+  .wall-glow { position:absolute; inset:0; background: radial-gradient(circle at 73% 35%, rgba(240,166,103,.16), transparent 31%), radial-gradient(circle at 22% 20%, rgba(107,102,168,.08), transparent 28%); transition: opacity 1.2s ease, background 1.2s ease; }
+
+  .window { position:absolute; left:5.5%; top:7%; width:25%; height:29%; overflow:hidden; border: .45rem solid #1a171c; background:#15131d; box-shadow: 0 1rem 2rem rgba(0,0,0,.22); }
+  .sky { position:absolute; inset:0; background: linear-gradient(#d78274 0%, #83647d 46%, #38334f 100%); transition: background 1.5s ease; }
+  .moon { position:absolute; width:1.8rem; aspect-ratio:1; border-radius:50%; left:73%; top:22%; background:#f7ebc7; box-shadow:0 0 2rem rgba(247,235,199,.25); opacity:0; transform:translateY(1rem); transition: all 1.5s ease; }
+  .sun { position:absolute; width:2.4rem; aspect-ratio:1; border-radius:50%; left:18%; top:66%; background:#ffc486; box-shadow:0 0 2.5rem #ffc486; opacity:0; transition:all 1.5s ease; }
+  .cloud { position:absolute; width:4rem; height:1rem; border-radius:999px; background:rgba(42,39,57,.55); filter:blur(1px); transition:all 1.2s ease; }
+  .cloud::before,.cloud::after { content:""; position:absolute; bottom:0; border-radius:50%; background:inherit; }
+  .cloud::before { width:1.8rem; height:1.8rem; left:.65rem; }.cloud::after { width:1.25rem; height:1.25rem; right:.6rem; }
+  .cloud--a { top:27%; left:7%; }.cloud--b { top:53%; right:-6%; transform:scale(.75); }
+  .city { position:absolute; right:0; bottom:0; left:0; height:27%; background: linear-gradient(90deg,#11131d 0 7%,transparent 7% 11%,#13151f 11% 22%,transparent 22% 25%,#0e1018 25% 44%,transparent 44% 49%,#151720 49% 68%,transparent 68% 72%,#10121b 72% 100%); }
+  .city--far { height:19%; opacity:.55; transform:translateX(-3%); }.city--near { height:12%; filter:brightness(.8); }
+  .passing-light { position:absolute; bottom:9%; left:-10%; width:1.2rem; height:.18rem; border-radius:999px; background:#ffd283; opacity:0; }
+  .window-frame { position:absolute; z-index:4; background:#19161c; }.window-frame--v { width:.4rem; top:0; bottom:0; left:50%; transform:translateX(-50%); }.window-frame--h { height:.4rem; right:0; left:0; top:54%; }
+
+  .shelf { position:absolute; left:5.7%; top:38%; width:24.5%; height:7.5%; border-bottom:.8rem solid #5a4034; display:flex; align-items:flex-end; gap:.45rem; padding-left:1.5rem; }
+  .book { border:0; border-radius:.1rem .1rem 0 0; width:2.1rem; height:4.5rem; padding:.35rem 0; writing-mode:vertical-rl; font-family:var(--mono); font-size:.45rem; letter-spacing:.08em; cursor:pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+  .book--one { background:#8a5351; }.book--two { height:3.8rem; background:#536878; }.book--three { height:4.9rem; background:#aa784e; }
+  .plant { position:relative; width:3.2rem; height:2.3rem; margin-left:.65rem; background:#725340; clip-path:polygon(15% 35%,85% 35%,72% 100%,28% 100%); }
+  .plant i { position:absolute; bottom:1.2rem; left:50%; width:.65rem; height:2.2rem; border-radius:100% 0 100% 0; transform-origin:bottom; background:#55765d; }.plant i:nth-child(1){transform:rotate(-40deg)}.plant i:nth-child(2){height:2.7rem;transform:translateX(-50%)}.plant i:nth-child(3){transform:rotate(40deg) scaleX(-1)}
+
+  .pinboard { position:absolute; top:8%; right:5.5%; width:27%; height:26%; padding:1.3rem; background:#765943; border:.5rem solid #4b372e; box-shadow:0 1rem 2.2rem rgba(0,0,0,.18); }
+  .pinboard__label { position:absolute; top:.55rem; left:.7rem; font: .42rem var(--mono); letter-spacing:.12em; color:#e7cfb2; }
+  .pin { position:absolute; border:0; padding:.45rem .6rem; color:#44362f; background:#efe0bf; font: .58rem/1.2 var(--serif); transform:rotate(var(--r)); box-shadow:0 .2rem .35rem rgba(0,0,0,.12); transition:opacity .8s ease, transform .8s ease; }
+  .pin--one{left:12%;top:30%;--r:-5deg;cursor:pointer}.pin--two{right:9%;top:22%;--r:3deg;background:#d7dfd2}.pin--three{right:13%;bottom:16%;--r:-2deg;background:#d9cce0}.pin--four{left:12%;bottom:12%;--r:4deg}.pin--five{left:42%;top:50%;--r:-3deg;background:#cfdbe4}.pin--six{right:4%;top:54%;--r:4deg;background:#e0d2b7}
+  .pin--late { opacity:0; transform:translateY(.4rem) rotate(var(--r)); }
+  .pinboard svg { position:absolute; inset:28% 8% 8%; width:84%; height:64%; opacity:.25; fill:none; stroke:#f2dfc8; stroke-width:1; }
+
+  .lamp { position:absolute; right:19%; top:32%; width:8rem; height:23rem; z-index:3; }
+  .lamp__shade { position:absolute; top:0; left:1.1rem; width:5.6rem; height:2.8rem; border-radius:60% 60% 18% 18%; background:#6b5963; transform:rotate(7deg); }
+  .lamp__arm { position:absolute; top:2.2rem; left:3.7rem; width:.35rem; height:14rem; background:#55494f; transform:rotate(9deg); transform-origin:top; }
+  .lamp__light { position:absolute; top:2rem; left:-3rem; width:13rem; height:20rem; clip-path:polygon(38% 0,62% 0,100% 100%,0 100%); background:linear-gradient(rgba(246,176,108,.28),rgba(246,176,108,.03)); filter:blur(6px); transition:opacity 1.2s ease; }
+
+  .desk { position:absolute; z-index:5; left:2.8%; right:2.8%; bottom:0; height:28%; }
+  .desk__top { position:absolute; inset:0 0 18%; border-radius:.4rem .4rem 0 0; background:linear-gradient(#795747,#624436); box-shadow:0 -1rem 2rem rgba(0,0,0,.1), inset 0 1px rgba(255,255,255,.08); transition:background 1.2s ease; }
+  .desk__edge { position:absolute; right:0; bottom:12%; left:0; height:7%; background:#4a342c; }
+
+  .mug { position:absolute; left:18%; top:18%; width:5rem; height:5rem; border:0; border-radius:.5rem 0 1.2rem 1.2rem; background:#c77d59; cursor:pointer; box-shadow:0 .8rem 1.2rem rgba(0,0,0,.12); }
+  .mug__tea { position:absolute; top:.2rem; left:.35rem; right:.35rem; height:.5rem; border-radius:50%; background:#6a3e2b; }.mug__handle { position:absolute; top:1rem; right:-1.4rem; width:1.8rem; height:2.6rem; border:.5rem solid #c77d59; border-left:0; border-radius:0 1rem 1rem 0; }
+  .mug small { position:absolute; inset:auto 0 .7rem; font: .42rem var(--mono); color:#603d31; }.steam { position:absolute; bottom:4.6rem; width:.4rem; height:2.8rem; border-left:1px solid rgba(255,238,220,.48); border-radius:50%; animation:steam 2.3s ease-in-out infinite; }.steam--1{left:1.6rem}.steam--2{left:2.8rem;animation-delay:.8s}
+  @keyframes steam { 0%{opacity:0;transform:translateY(.4rem) translateX(0)}35%{opacity:.8}100%{opacity:0;transform:translateY(-1.1rem) translateX(.5rem)} }
+
+  .wheel { position:absolute; left:7%; top:29%; width:4.4rem; aspect-ratio:1; border:.2rem solid #c8b994; border-radius:50%; background:conic-gradient(#7b8e78 0 25%,#6d8198 25% 50%,#a67372 50% 75%,#aa9a6f 75%); cursor:pointer; box-shadow:0 .6rem 1rem rgba(0,0,0,.13); }
+  .wheel::after { content:""; position:absolute; inset:34%; border-radius:50%; background:#ddd2b8; }.wheel span,.wheel b { position:absolute; z-index:2; font:.48rem var(--mono); }.wheel span:nth-child(1){top:.3rem;left:48%}.wheel span:nth-child(2){right:.35rem;top:46%}.wheel span:nth-child(3){bottom:.25rem;left:48%}.wheel span:nth-child(4){left:.35rem;top:46%}.wheel b{inset:50% auto auto 50%;transform:translate(-50%,-50%);color:#352e2e}.wheel.is-spinning{animation:spin .7s cubic-bezier(.2,.8,.2,1)}@keyframes spin{to{transform:rotate(720deg)}}
+
+  .crumple { position:absolute; left:29%; top:49%; width:2.6rem; aspect-ratio:1; border:0; border-radius:48% 52% 55% 45%; background:#dfd4b8; color:#5a4d43; transform:rotate(11deg); cursor:pointer; font:1rem var(--serif); }
+  .keyboard { position:absolute; left:37%; top:58%; width:31%; height:2.2rem; padding:.3rem; display:grid; grid-template-columns:repeat(12,1fr); gap:.15rem; background:#25242a; transform:perspective(11rem) rotateX(35deg); box-shadow:0 .7rem 1rem rgba(0,0,0,.15); }.keyboard i{background:#3a3942;border-radius:.08rem}
+
+  .phone { position:absolute; right:7%; top:16%; width:4.1rem; height:8rem; padding:.25rem; border:.18rem solid #171a20; border-radius:.65rem; background:#11141a; transform:rotate(5deg); cursor:pointer; box-shadow:0 .7rem 1rem rgba(0,0,0,.22); transition:opacity .8s ease, transform .8s ease; }
+  .phone__speaker { display:block;width:1rem;height:.12rem;border-radius:999px;background:#393c43;margin:.15rem auto .35rem }.phone__screen{height:6.8rem;border-radius:.35rem;background:#eee4cd;color:#3f3933;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.18rem;font-family:var(--mono)}.phone__screen small{font-size:.38rem}.phone__screen span{font-size:.42rem}.phone__screen s{font-size:.6rem;color:#835849}.phone__screen b{font-size:.82rem;color:#477667}.phone__screen i{font-size:.34rem;font-style:normal;border:1px solid #6d645c;padding:.14rem .22rem;margin-top:.25rem}
+
+  .notebook { position:absolute; right:18%; top:36%; width:12rem; height:6.4rem; padding:.75rem; border:0; background:#ded1b6; color:#443a31; transform:rotate(-3deg); box-shadow:0 .7rem 1.1rem rgba(0,0,0,.13); cursor:pointer; opacity:.82; transition:all .9s ease; text-align:left; }.notebook::before{content:"";position:absolute;top:0;bottom:0;left:1rem;border-left:1px solid rgba(154,91,74,.3)}.notebook__line{position:absolute;inset:1.5rem .7rem .5rem 1.4rem;background:repeating-linear-gradient(transparent 0 .83rem,rgba(80,101,118,.16) .84rem .88rem)}.notebook small,.notebook b,.notebook em{position:relative;z-index:2;display:block}.notebook small{font:.38rem var(--mono)}.notebook b{margin:.7rem 0 .3rem 1rem;font: .68rem var(--serif);font-weight:400}.notebook em{margin-left:1rem;font:italic .48rem var(--serif)}
+  .papers { position:absolute; right:2%; top:38%; width:9rem; height:5rem; }.papers span{position:absolute;inset:0;background:#d9cdb4;box-shadow:0 .4rem .7rem rgba(0,0,0,.1)}.papers span:nth-child(1){transform:rotate(-4deg)}.papers span:nth-child(2){transform:rotate(3deg) translate(.5rem,.2rem);background:#cfc7b8}.papers span:nth-child(3){transform:rotate(1deg) translate(.2rem,.5rem);background:#e0d4be}
+
+  .drawer { position:absolute; right:19%; bottom:-11%; width:24%; height:28%; border:0; background:#4d342c; border-top:1px solid rgba(255,255,255,.08); cursor:pointer; transition:transform .7s cubic-bezier(.16,1,.3,1); }.drawer span{position:absolute;top:.45rem;left:.6rem;font:.36rem var(--mono);color:#9a7d6d}.drawer i{position:absolute;top:.65rem;left:50%;width:2.5rem;height:.22rem;border-radius:999px;background:#2f2420;transform:translateX(-50%)}
+  .drawer-open .drawer { transform:translateY(-55%); }.drawer-open .drawer::after{content:"agent zoo • cursed prototypes • pen fight • draw-to-unlock • ??";position:absolute;inset:34% 8% 8%;padding:.5rem;background:#2a2221;color:#c6ad99;font:.42rem/1.6 var(--mono);text-align:left}
+
+  .bug { position:absolute; left:72%; top:42%; width:1.4rem; height:.8rem; border:0; background:transparent; cursor:pointer; opacity:0; transition:opacity .4s ease; animation:bugwalk 5s linear infinite; }.bug i:first-child{position:absolute;left:.42rem;top:.18rem;width:.58rem;height:.42rem;border-radius:50%;background:#211c1b}.bug i:nth-child(2),.bug i:nth-child(3){position:absolute;top:.38rem;width:.7rem;border-top:1px solid #211c1b}.bug i:nth-child(2){left:0;transform:rotate(25deg)}.bug i:nth-child(3){right:0;transform:rotate(-25deg)}.bug.caught{display:none}@keyframes bugwalk{0%{transform:translateX(-3rem) rotate(0)}50%{transform:translateX(2rem) rotate(7deg)}100%{transform:translateX(-3rem) rotate(0)}}
+
+  .monitor { position:absolute; z-index:6; left:34%; top:28%; width:34%; height:45%; transition:transform .9s ease; }
+  .monitor__shell { position:relative; height:71%; padding:.75rem; border-radius:.55rem; background:#202026; box-shadow:0 1.2rem 2rem rgba(0,0,0,.23), inset 0 0 0 1px rgba(255,255,255,.08); }.monitor__camera{position:absolute;top:.35rem;left:50%;width:.22rem;aspect-ratio:1;border-radius:50%;background:#56535a}.monitor__screens{position:relative;height:100%;overflow:hidden;border-radius:.2rem;background:#101117}.monitor__neck{width:16%;height:16%;margin:auto;background:#2e2d34}.monitor__stand{width:45%;height:5%;margin:auto;border-radius:50%;background:#27262c;box-shadow:0 .5rem .5rem rgba(0,0,0,.18)}
+  .screen { position:absolute; inset:0; padding:1.2rem; opacity:0; transform:translateY(.7rem); transition:opacity .5s ease, transform .55s ease; pointer-events:none; color:#d7d2ca; background:radial-gradient(circle at 30% 0,rgba(108,110,162,.08),transparent 35%),#101117; font-family:var(--mono); }.screen.is-active{opacity:1;transform:none;pointer-events:auto}.screen small{display:block;color:#7f7d83;font-size:.44rem;letter-spacing:.09em}.screen p{font: .76rem/1.45 var(--mono);color:#b9b4ae}.screen a{display:inline-block;margin-top:.6rem;color:#d8a879;font-size:.48rem;text-transform:uppercase;letter-spacing:.08em}.screen--0 p{margin:2.2rem 0 0;font:1.15rem/1.08 var(--mono);color:#d8d0bf}.screen--0 strong{font-weight:400;color:#f0dfc6}.caret{display:block;width:.5rem;height:1px;margin-top:.7rem;background:#c9ad8c;animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+  .idea-map{display:flex;align-items:center;gap:.5rem;margin:2rem 0 1rem}.idea-map b{padding:.4rem .55rem;border:1px solid #55515c;font-size:.5rem;font-weight:400}.idea-map i{flex:1;border-top:1px dashed #55515c}
+  .app-preview{width:70%;margin:1rem auto;padding:.7rem;background:#e9dfc8;color:#37322f;display:flex;flex-direction:column;align-items:center;gap:.25rem}.app-preview span{font-size:.42rem}.app-preview s{font-size:.7rem;color:#7f594d}.app-preview b{font-size:1rem;color:#477667}.app-preview footer{display:flex;gap:.25rem;margin-top:.45rem}.app-preview footer i{font-style:normal;font-size:.3rem;border:1px solid #756d65;padding:.18rem}
+  .screen code{display:block;margin-top:1.2rem;font:.63rem/1.7 var(--mono);color:#b9b4ae}.screen code span{color:#79a888}.screen code b{color:#d7bf81}.folders{display:grid;gap:.4rem;margin-top:1.1rem}.folders button,.folders span{padding:.5rem;border:0;border-left:2px solid #6d657b;background:#181820;color:#bbb4ad;text-align:left;font:.52rem var(--mono)}.folders button{cursor:pointer;color:#d5ad8d}.evidence{display:flex;flex-wrap:wrap;gap:.38rem;margin-top:1.25rem}.evidence span{padding:.35rem .45rem;border:1px solid #484650;font-size:.45rem}.draft-list{display:grid;margin-top:.75rem}.draft-list a{display:grid;grid-template-columns:1.5rem 1fr;gap:.5rem;margin:0;padding:.5rem 0;border-bottom:1px solid #2d2c32;text-transform:none;letter-spacing:0}.draft-list span{color:#74727a;font-size:.42rem}.draft-list b{font: .58rem/1.25 var(--serif);font-weight:400;color:#d7d1c9}.tiny-status{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin-top:1rem;font-size:.46rem}.tiny-status span{color:#75727b}.tiny-status b{font-weight:400}.release-projects{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-top:.55rem}.release-projects a{display:flex;justify-content:space-between;gap:.5rem;padding:.35rem .45rem;border:1px solid #302f35;margin:0;text-transform:none;letter-spacing:0}.release-projects span{font-size:.4rem}.release-projects small{font-size:.32rem;color:#82a97f}.screen--9 h2{margin:1.2rem 0 .4rem;font:1.35rem var(--serif);font-weight:400;color:#eee4d9}.screen--9 p{font:.62rem/1.5 var(--serif);max-width:28ch}.final-links{display:flex;gap:.8rem}.final-links a{margin-top:.5rem}
+
+  .morning-reveal { position:absolute; left:6%; top:50%; opacity:0; transition:opacity 1.4s ease; }.photo,.chapter-mark{position:absolute;display:grid;place-items:center;text-align:center;background:#e8d9bd;color:#493e35;box-shadow:0 .5rem 1rem rgba(0,0,0,.13)}.photo{width:4.4rem;height:5.2rem;transform:rotate(-4deg);font:1rem var(--serif)}.photo small{font:.35rem var(--mono)}.chapter-mark{left:5rem;top:1rem;width:4rem;height:2.5rem;transform:rotate(6deg);font:.48rem/1.3 var(--serif)}
+
+  .toast { position:absolute; z-index:80; left:50%; bottom:2.2rem; max-width:min(90vw,28rem); padding:.7rem 1rem; border:1px solid rgba(255,255,255,.15); border-radius:999px; background:rgba(19,18,23,.92); color:#eee6dc; font:.58rem var(--mono); letter-spacing:.04em; opacity:0; transform:translate(-50%,.6rem); pointer-events:none; transition:opacity .25s ease,transform .25s ease; box-shadow:0 1rem 2rem rgba(0,0,0,.24) }.toast.is-visible{opacity:1;transform:translate(-50%,0)}
+
+  .chapters { position:relative; z-index:10; }
+  .chapter { position:relative; min-height:100svh; display:flex; align-items:center; padding:calc(var(--header-h) + 2rem) clamp(1rem,5vw,5rem) 2rem; pointer-events:none; }
+  .story { width:min(29rem,42vw); padding:1.15rem 1.2rem 1.25rem; border:1px solid rgba(255,255,255,.1); background:linear-gradient(135deg,rgba(17,16,22,.88),rgba(17,16,22,.66)); backdrop-filter:blur(12px); box-shadow:0 1.2rem 3rem rgba(0,0,0,.18); pointer-events:auto; }
+  .story--right { margin-left:auto; }.story--left { margin-right:auto; }
+  .story__time,.story__eyebrow,.story small,.story a{display:block;font:.5rem var(--mono);letter-spacing:.1em;text-transform:uppercase}.story__time{color:#e1a875}.story__eyebrow{margin-top:.55rem;color:#847f7b}.story h1{margin:.45rem 0 .7rem;font:clamp(2rem,4.5vw,4.2rem)/.94 var(--serif);font-weight:400;letter-spacing:-.045em}.story p{margin:0;color:#d0c7bc;font:clamp(.88rem,1.2vw,1.05rem)/1.5 var(--serif)}.story small{margin-top:.9rem;color:#9a8b7f}.story a{margin-top:1rem;color:#e2af7e}
+
+  body[data-scene="1"] .notebook { opacity:1; transform:rotate(-1deg) translate(-2rem,-1rem) scale(1.12); box-shadow:0 1.2rem 2rem rgba(0,0,0,.22); }
+  body[data-scene="1"] .pin--one { transform:translateY(-.25rem) rotate(-1deg) scale(1.05); }
+  body[data-scene="2"] .phone { transform:rotate(0) translate(-3rem,-1.4rem) scale(1.25); box-shadow:0 1.4rem 2.4rem rgba(0,0,0,.28); }
+  body[data-scene="3"] .lamp__light, body[data-scene="4"] .lamp__light, body[data-scene="5"] .lamp__light, body[data-scene="6"] .lamp__light { opacity:.55; }
+  body[data-scene="3"] .moon, body[data-scene="4"] .moon, body[data-scene="5"] .moon, body[data-scene="6"] .moon { opacity:1; }
+  body[data-scene="3"] .moon{left:30%;top:19%} body[data-scene="4"] .moon{left:43%;top:12%} body[data-scene="5"] .moon{left:58%;top:13%} body[data-scene="6"] .moon{left:74%;top:22%}
+  body[data-scene="3"] .bug,body[data-scene="4"] .bug{opacity:1}
+  body[data-scene="4"] .notebook { transform:rotate(-7deg) translate(-1rem,.4rem); }
+  body[data-scene="4"] .crumple { transform:rotate(18deg) translate(1rem,-.3rem); }
+  body[data-scene="4"] .pin--four, body[data-scene="4"] .pin--five, body[data-scene="5"] .pin--late, body[data-scene="6"] .pin--late, body[data-scene="7"] .pin--late, body[data-scene="8"] .pin--late, body[data-scene="9"] .pin--late { opacity:1; transform:rotate(var(--r)); }
+  body[data-scene="5"] .pinboard { box-shadow:0 0 0 1px rgba(237,184,133,.08),0 1rem 2.2rem rgba(0,0,0,.18); }
+  body[data-scene="6"] .papers { transform:translate(-2rem,-1.3rem); }
+  body[data-scene="6"] .mug .steam, body[data-scene="7"] .mug .steam, body[data-scene="8"] .mug .steam, body[data-scene="9"] .mug .steam { display:none; }
+  body[data-scene="7"] .sky { background:linear-gradient(#24304f,#465477 50%,#8c6f74 100%); } body[data-scene="7"] .moon{opacity:.4;left:84%;top:30%}
+  body[data-scene="7"] .wall-glow{background:radial-gradient(circle at 18% 22%,rgba(104,126,177,.15),transparent 30%),radial-gradient(circle at 72% 38%,rgba(238,174,123,.08),transparent 30%)}
+  body[data-scene="7"] .morning-reveal,body[data-scene="8"] .morning-reveal,body[data-scene="9"] .morning-reveal{opacity:1}
+  body[data-scene="8"] .sky { background:linear-gradient(#697ca3 0%,#cf8e7b 62%,#f0ae7b 100%); } body[data-scene="8"] .moon{opacity:0}.passing-light{animation:none} body[data-scene="8"] .passing-light{opacity:1;animation:car 7s linear infinite}@keyframes car{from{transform:translateX(0)}to{transform:translateX(32rem)}}
+  body[data-scene="9"] .sky { background:linear-gradient(#91a7c0 0%,#e1a98d 54%,#f4c797 100%); } body[data-scene="9"] .sun{opacity:.95;transform:translateY(-1.6rem)} body[data-scene="9"] .lamp__light{opacity:0} body[data-scene="9"] .wall-glow{background:linear-gradient(100deg,rgba(255,210,160,.19),transparent 38%)} body[data-scene="9"] .desk__top{background:linear-gradient(#86614c,#6d4e3e)} body[data-scene="9"] .world::after{opacity:.45}
+
+  body[data-scene="2"] .sky{background:linear-gradient(#5b465f,#343249 50%,#1d2234)} body[data-scene="3"] .sky,body[data-scene="4"] .sky,body[data-scene="5"] .sky,body[data-scene="6"] .sky{background:linear-gradient(#161a2b,#1d2134 60%,#171926)}
+  body[data-scene="3"] .steam,body[data-scene="4"] .steam,body[data-scene="5"] .steam{animation-duration:3.5s;opacity:.5}
+  body[data-scene="4"] .world{background:#2b252d} body[data-scene="5"] .world,body[data-scene="6"] .world{background:#25232a} body[data-scene="7"] .world{background:#2d2c36} body[data-scene="8"] .world{background:#44383a} body[data-scene="9"] .world{background:#5d4741}
+
+  .zehaha .world { animation:zehaha .55s ease both; } @keyframes zehaha{20%{transform:translateX(-4px) rotate(-.08deg)}40%{transform:translateX(4px) rotate(.08deg)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
+
+  @media (max-width: 760px) {
+    :root { --header-h: 3rem; }
+    .nightbar { padding:0 .7rem; grid-template-columns:1fr auto auto; gap:.5rem; font-size:.48rem; }.nightbar__brand small{max-width:6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nightbar__links a:first-child{display:none}.nightbar__time{gap:.4rem}
+    .world { inset:var(--header-h) 0 0; }
+    .window { left:5%; top:6%; width:26%; height:22%; border-width:.3rem; }
+    .shelf { left:5%; top:30%; width:26%; height:6%; border-bottom-width:.5rem;padding-left:.6rem;gap:.22rem}.book{width:1.2rem;height:2.8rem;font-size:.28rem}.book--two{height:2.3rem}.book--three{height:3rem}.plant{width:1.8rem;height:1.4rem;margin-left:.2rem}.plant i{height:1.4rem;bottom:.7rem}.plant i:nth-child(2){height:1.7rem}
+    .pinboard { top:6%; right:4%; width:31%; height:22%; border-width:.3rem; padding:.5rem; }.pinboard__label{font-size:.25rem;top:.3rem;left:.35rem}.pin{font-size:.36rem;padding:.28rem .32rem}.pin--one{left:8%;top:28%}.pin--two{right:4%;top:22%}.pin--three{right:8%;bottom:12%}.pin--four{left:7%;bottom:9%}.pin--five{left:38%;top:47%}.pin--six{right:2%;top:54%}
+    .lamp { right:19%; top:25%; height:16rem; transform:scale(.7); transform-origin:top; }
+    .monitor { left:27%; top:24%; width:46%; height:38%; }.monitor__shell{padding:.45rem}.screen{padding:.65rem}.screen--0 p{margin-top:1.25rem;font-size:.76rem}.screen small{font-size:.3rem}.screen p{font-size:.45rem}.idea-map{margin:1rem 0 .5rem;gap:.2rem}.idea-map b{font-size:.3rem;padding:.2rem}.app-preview{width:82%;margin:.5rem auto;padding:.4rem}.app-preview s{font-size:.45rem}.app-preview b{font-size:.65rem}.screen code{margin-top:.6rem;font-size:.38rem;line-height:1.45}.folders{gap:.2rem;margin-top:.5rem}.folders button,.folders span{font-size:.3rem;padding:.3rem}.evidence{gap:.2rem;margin-top:.55rem}.evidence span{font-size:.27rem;padding:.2rem}.draft-list{margin-top:.35rem}.draft-list a{padding:.24rem 0;grid-template-columns:1rem 1fr;gap:.2rem}.draft-list span{font-size:.26rem}.draft-list b{font-size:.34rem}.screen--9 h2{margin:.6rem 0 .2rem;font-size:.78rem}.screen--9 p{font-size:.34rem}.final-links{gap:.35rem}.screen a{font-size:.28rem;margin-top:.25rem}.release-projects{gap:.18rem;margin-top:.2rem}.release-projects a{padding:.18rem}.release-projects span{font-size:.24rem}.release-projects small{font-size:.2rem}
+    .desk { left:0; right:0; height:27%; }.mug{left:19%;top:13%;width:3.4rem;height:3.4rem}.mug__handle{width:1.1rem;height:1.8rem;right:-.85rem;border-width:.35rem}.mug small{font-size:.26rem}.steam{bottom:3.2rem;height:1.8rem}.steam--1{left:1rem}.steam--2{left:1.8rem}.wheel{left:5%;top:34%;width:3rem}.wheel span,.wheel b{font-size:.28rem}.crumple{left:31%;top:49%;width:1.7rem;font-size:.65rem}.keyboard{left:35%;top:59%;width:34%;height:1.3rem;padding:.18rem;gap:.08rem}.phone{right:5%;top:12%;width:2.8rem;height:5.5rem}.phone__screen{height:4.55rem}.phone__screen small,.phone__screen span{font-size:.24rem}.phone__screen s{font-size:.35rem}.phone__screen b{font-size:.5rem}.phone__screen i{font-size:.2rem}.notebook{right:16%;top:40%;width:7.8rem;height:4.1rem;padding:.4rem}.notebook small{font-size:.24rem}.notebook b{margin:.35rem 0 .15rem .65rem;font-size:.42rem}.notebook em{margin-left:.65rem;font-size:.28rem}.papers{right:1%;top:42%;width:5.5rem;height:3rem}.drawer{right:14%;width:28%;}.bug{left:70%;top:38%}
+    .morning-reveal{left:4%;top:40%;transform:scale(.7);transform-origin:left top}
+    .chapter { min-height:100svh; padding:calc(var(--header-h) + 1rem) .75rem 1rem; align-items:flex-end; }
+    .story,.story--left,.story--right { width:min(92vw,28rem); margin:0 auto; padding:.8rem .9rem .9rem; background:linear-gradient(180deg,rgba(17,16,22,.34),rgba(17,16,22,.94) 24%); backdrop-filter:blur(8px); border-color:rgba(255,255,255,.08); }
+    .story__time,.story__eyebrow,.story small,.story a{font-size:.4rem}.story h1{font-size:clamp(1.8rem,9vw,3rem);margin:.3rem 0 .45rem}.story p{font-size:.82rem;line-height:1.38}.story small{margin-top:.6rem}
+    .toast{bottom:7.5rem;font-size:.46rem;padding:.55rem .7rem}
+  }
+
+  @media (max-height: 650px) and (max-width:760px) {
+    .window{height:19%}.shelf{top:27%}.pinboard{height:19%}.monitor{top:21%;height:36%}.desk{height:25%}.story p{display:none}.story h1{font-size:1.65rem}
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+    *,*::before,*::after{animation:none!important;transition:none!important}.world{position:absolute}.chapter{min-height:95vh}
   }
 </style>
