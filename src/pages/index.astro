@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ProjectPoster from '../components/ProjectPoster.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import TechnicalWorkbench from '../components/TechnicalWorkbench.astro';
+import ViscoseProjects from '../components/ViscoseProjects.astro';
 import WritingItem from '../components/WritingItem.astro';
 import { projects } from '../data/projects';
 
@@ -42,12 +42,11 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <SectionHeading
       id="selected-work-title"
       title="What I’m working on"
+      description="A wheel of things I’ve built, shipped, broken, and kept improving."
       href={`${base}projects/`}
       linkLabel="All projects"
     />
-    <div class="project-poster-grid">
-      {projects.map((project) => <ProjectPoster project={project} />)}
-    </div>
+    <ViscoseProjects projects={projects} />
   </section>
 
   <section class="home-experience page-section shell shell--wide" aria-labelledby="home-experience-title">
