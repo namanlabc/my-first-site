@@ -4,7 +4,7 @@ import { projects } from '../../data/projects';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
+  .slice(0, 5);
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -22,367 +22,491 @@ const projectHref = (project: (typeof projects)[number]) => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b0b10" />
+    <meta name="theme-color" content="#151515" />
     <meta name="robots" content="noindex,nofollow" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <title>Naman Unit 001 · Creative Test</title>
-    <meta name="description" content="An alternate experimental redesign for Naman Patel's personal site." />
+    <title>The Fold · Naman Patel</title>
+    <meta name="description" content="An experimental alternate redesign for Naman Patel's personal site." />
   </head>
 
   <body>
-    <header class="hud">
-      <a class="hud-mark" href="#top" aria-label="Naman test home">
-        <span>NP</span><small>UNIT 001</small>
+    <header class="topbar">
+      <a href="#ship" class="identity" aria-label="Naman Patel creative test">
+        <b>NP</b>
+        <span>Naman Patel</span>
       </a>
-
-      <nav aria-label="Test navigation">
-        <a class="is-active" href="#top">HOME</a>
-        <a href="#works">WORKS</a>
-        <a href="#profile">PROFILE</a>
-        <a href="#notes">NOTES</a>
-      </nav>
-
-      <a class="hud-exit" href={`${base}`}>REAL SITE ↗</a>
+      <p>THE FOLD / EXPERIMENT 003</p>
+      <a href={`${base}`} class="exit">real site ↗</a>
     </header>
 
-    <main id="top">
-      <section class="hero-shell" aria-labelledby="hero-title">
-        <div class="hero-frame">
-          <div class="hero-status" aria-hidden="true">
-            <span>●</span><span>○</span><span>1</span><span>0</span><span>9</span>
+    <main class="fold" data-fold>
+      <section class="panel panel--build" data-panel="build" id="build">
+        <button class="panel-handle" type="button" data-panel-trigger aria-expanded="false">
+          <span class="panel-no">01</span>
+          <strong>BUILD</strong>
+          <small>turning an idea into something you can touch</small>
+          <b class="panel-plus" aria-hidden="true">+</b>
+        </button>
+
+        <div class="panel-body" data-panel-body>
+          <div class="panel-intro">
+            <span>01 / BUILD</span>
+            <h1>I like the part where<br />the blank page <em>stops being blank.</em></h1>
+            <p>Structure first. Then interface, code, QA, deploy, and the awkward final ten percent that decides whether a thing feels finished.</p>
           </div>
 
-          <div class="hero-scene">
-            <div class="wire-grid" aria-hidden="true"></div>
-
-            <svg class="hero-cables" viewBox="0 0 1000 1320" preserveAspectRatio="none" aria-hidden="true">
-              <path class="cable cable-a" d="M430 340 C235 220, 112 315, 28 500 C-45 662, 120 770, 250 702" />
-              <path class="cable cable-b" d="M565 300 C760 170, 915 265, 985 425 C1040 555, 942 718, 780 700" />
-              <path class="cable cable-c" d="M515 680 C690 735, 880 815, 952 1015" />
-              <path class="cable cable-d" d="M450 705 C292 804, 150 902, 138 1110" />
-            </svg>
-
-            <div class="machine" data-float>
-              <div class="machine-head">
-                <div class="machine-head__top"><i></i><i></i><i></i><span>naman@unit:~</span></div>
-                <div class="machine-eye">
-                  <span></span>
-                  <b>92</b>
-                  <small>SEO HEALTH</small>
-                </div>
-                <code>$ build something useful_<br />$ ship before overthinking it</code>
-              </div>
-
-              <div class="machine-neck"><span></span><span></span><span></span></div>
-
-              <div class="machine-body">
-                <div class="body-label">N.P. / SHIPPING MACHINE</div>
-                <div class="body-screen">
-                  <div class="screen-line"><span>PROJECT</span><b>STATUS</b></div>
-                  <div class="screen-row"><span>SmallMB</span><b>LAUNCHING</b></div>
-                  <div class="screen-row"><span>Astro SEO Audit</span><b>OPEN SRC</b></div>
-                  <div class="screen-row"><span>Get Random Letter</span><b>LIVE</b></div>
-                  <div class="screen-row"><span>Calm WP</span><b>BETA</b></div>
-                </div>
-                <div class="body-switches"><i></i><i></i><i></i><i></i><i></i></div>
-              </div>
-
-              <div class="machine-hips">
-                <span>SEO</span><span>WEB</span><span>APP</span><span>AI</span>
-              </div>
-
-              <div class="machine-legs">
-                <div class="machine-leg machine-leg--left">
-                  <div class="leg-panel"><small>INPUT</small><b>IDEA</b><i></i><small>OUTPUT</small><b>SHIP</b></div>
-                </div>
-                <div class="machine-leg machine-leg--right">
-                  <div class="leg-panel leg-panel--chart"><small>TRAFFIC</small><div><i></i><i></i><i></i><i></i><i></i></div><b>↑</b></div>
-                </div>
-              </div>
-
-              <div class="machine-feet"><span>01</span><span>02</span></div>
-            </div>
-
-            <aside class="micro-window micro-window--left" data-float aria-label="SmallMB detail">
-              <header><span>smallmb.apk</span><b>×</b></header>
-              <div class="mini-phone">
-                <small>PHOTO.JPG</small>
-                <s>12.4 MB</s>
-                <strong>842 KB</strong>
-                <footer><i>COMPRESS</i><i>RESIZE</i><i>PDF</i></footer>
-              </div>
-            </aside>
-
-            <aside class="micro-window micro-window--right" data-float aria-label="Search detail">
-              <header><span>search.graph</span><b>×</b></header>
-              <div class="mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <p>impressions / climbing</p>
-            </aside>
-
-            <div class="tag tag--one">BUILD SMALL<br />SHIP OFTEN</div>
-            <div class="tag tag--two">NO MAGIC.<br />JUST ITERATION.</div>
+          <div class="build-flow" aria-label="How I build">
+            <article><span>01</span><b>ROUGH IDEA</b><p>A sentence, screenshot, annoying problem or “what if?”</p></article>
+            <i aria-hidden="true">→</i>
+            <article><span>02</span><b>SHAPE IT</b><p>Scope, user flow, interface, content and edge cases.</p></article>
+            <i aria-hidden="true">→</i>
+            <article><span>03</span><b>MAKE IT REAL</b><p>Astro, Android, Tailwind, GitHub, whatever actually fits.</p></article>
+            <i aria-hidden="true">→</i>
+            <article><span>04</span><b>BREAK IT</b><p>QA, weird phones, bad inputs, boring checks, then ship.</p></article>
           </div>
 
-          <div class="hero-meta">
-            <div>
-              <span>1:09 / personal internet workshop</span>
-              <span>seo · products · code · notes</span>
-            </div>
-            <h1 id="hero-title">Naman Patel.</h1>
-            <p>I build useful things for the internet and write down what I learn before I forget it.</p>
-            <a href="#works">enter the workshop ↓</a>
+          <div class="tool-ribbon" aria-label="Tools I use">
+            <span>ASTRO</span><span>TAILWIND</span><span>ANDROID</span><span>GITHUB</span><span>VS CODE</span><span>CLAUDE</span><span>CODEX</span><span>OPENCODE</span>
           </div>
         </div>
       </section>
 
-      <section class="works" id="works" aria-labelledby="works-title">
-        <div class="section-cap"><span>01</span><span>SELECTED WORK</span><i></i><span>2026</span></div>
-        <div class="works-heading">
-          <h2 id="works-title">Stuff that made it<br /><em>out of the folder.</em></h2>
-          <p>Each one started as “this might be useful.” Some of them survived contact with reality.</p>
-        </div>
+      <section class="panel panel--rank" data-panel="rank" id="rank">
+        <button class="panel-handle" type="button" data-panel-trigger aria-expanded="false">
+          <span class="panel-no">02</span>
+          <strong>RANK</strong>
+          <small>making useful pages findable</small>
+          <b class="panel-plus" aria-hidden="true">+</b>
+        </button>
 
-        <div class="works-list">
-          {projects.map((project, index) => (
-            <article class="project-row">
+        <div class="panel-body" data-panel-body>
+          <div class="panel-intro panel-intro--rank">
+            <span>02 / RANK</span>
+            <h1>Search is less magic,<br />more <em>evidence.</em></h1>
+            <p>Intent, technical SEO, content systems, schema, publishing, and watching what people actually click after the page goes live.</p>
+          </div>
+
+          <div class="rank-stage">
+            <div class="rank-query">
+              <small>SEARCH QUERY</small>
+              <div><span>how do I</span><b>______</b><i>↵</i></div>
+              <p>Start with the problem. Not the keyword spreadsheet.</p>
+            </div>
+
+            <div class="rank-graph" aria-label="Illustrative search growth graph">
+              <div class="rank-graph__head"><span>SEARCH / 90 DAYS</span><b>↑ useful traffic</b></div>
+              <div class="bars" aria-hidden="true">
+                <i style="--h:22%"></i><i style="--h:31%"></i><i style="--h:28%"></i><i style="--h:42%"></i><i style="--h:52%"></i><i style="--h:48%"></i><i style="--h:67%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
+              </div>
+              <footer><span>INTENT</span><span>TECHNICAL</span><span>CONTENT</span><span>MEASURE</span></footer>
+            </div>
+
+            <div class="rank-note">
+              <b>THE RULE</b>
+              <p>Make the page genuinely useful first. Then make it impossible for crawlers to misunderstand.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--ship is-active" data-panel="ship" id="ship">
+        <button class="panel-handle" type="button" data-panel-trigger aria-expanded="true">
+          <span class="panel-no">03</span>
+          <strong>SHIP</strong>
+          <small>projects that escaped the ideas folder</small>
+          <b class="panel-plus" aria-hidden="true">−</b>
+        </button>
+
+        <div class="panel-body" data-panel-body>
+          <div class="panel-intro panel-intro--ship">
+            <span>03 / SHIP</span>
+            <h1>Things I made<br />instead of <em>just talking about them.</em></h1>
+            <p>Some are useful. Some are weird. A few started as jokes and somehow became products.</p>
+          </div>
+
+          <div class="project-stack">
+            {projects.map((project, index) => (
               <a
+                class="project-line"
                 href={projectHref(project)}
                 target={project.external ? '_blank' : undefined}
                 rel={project.external ? 'noopener noreferrer' : undefined}
               >
-                <span class="project-row__no">0{index + 1}</span>
-                <div class:list={['project-row__visual', `visual--${project.visual ?? 'notes'}`]} aria-hidden="true">
-                  {project.visual === 'smallmb' && <div class="visual-phone"><small>smallmb</small><s>12.4 MB</s><b>842 KB</b><i>OFFLINE</i></div>}
-                  {project.visual === 'audit' && <div class="visual-terminal"><code>$ astro-seo-audit</code><b>92 / 100</b><span>✓ schema &nbsp; ✓ canonical</span></div>}
-                  {project.visual === 'wheel' && <div class="visual-wheel"><span>A</span><span>G</span><span>M</span><span>R</span><b>spin</b></div>}
-                  {project.visual === 'calm' && <div class="visual-page"><small>CALM</small><h3>Less noise.<br />More reading.</h3><p></p><p></p><p></p></div>}
-                  {project.visual === 'notes' && <div class="visual-notes"><small>NOTE 07</small><b>I wanted Yoast for Astro,<br />so I built it.</b></div>}
-                </div>
-                <div class="project-row__copy">
-                  <span>{project.kind} · {project.status}</span>
-                  <h3>{project.name}</h3>
-                  <p>{project.description}</p>
-                </div>
-                <b class="project-row__arrow">↗</b>
+                <span class="project-line__index">{String(index + 1).padStart(2, '0')}</span>
+                <div class="project-line__name"><b>{project.name}</b><small>{project.kind}</small></div>
+                <p>{project.description}</p>
+                <span class="project-line__status">{project.status}</span>
+                <i aria-hidden="true">↗</i>
               </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section class="profile" id="profile" aria-labelledby="profile-title">
-        <div class="section-cap section-cap--dark"><span>02</span><span>PROFILE</span><i></i><span>ABOUT THE OPERATOR</span></div>
-        <div class="profile-grid">
-          <div class="profile-copy">
-            <span class="profile-kicker">Naman Patel / builder + SEO person</span>
-            <h2 id="profile-title">Somewhere between<br /><em>search nerd</em> and<br />product tinkerer.</h2>
-            <p>I like the awkward middle where an idea turns into an interface, the interface turns into code, and then the data tells you whether anyone cared.</p>
-            <div class="profile-links"><a href={`${base}about/`}>ABOUT →</a><a href={`${base}experience/`}>EXPERIENCE →</a><a href="https://github.com/namanlabc/">GITHUB ↗</a></div>
-          </div>
-
-          <div class="instrument-panel" aria-label="Skills instrument panel">
-            <div class="instrument-head"><span>TOOLING / ACTIVE</span><span>● ONLINE</span></div>
-            <div class="instrument-row"><b>SEARCH</b><div><i style="--w:92%"></i></div><span>92</span></div>
-            <div class="instrument-row"><b>WEB</b><div><i style="--w:87%"></i></div><span>87</span></div>
-            <div class="instrument-row"><b>PRODUCT</b><div><i style="--w:84%"></i></div><span>84</span></div>
-            <div class="instrument-row"><b>ANDROID</b><div><i style="--w:71%"></i></div><span>71</span></div>
-            <div class="instrument-row"><b>AGENTS</b><div><i style="--w:89%"></i></div><span>89</span></div>
-            <div class="instrument-tools"><span>ASTRO</span><span>TAILWIND</span><span>GITHUB</span><span>CLAUDE</span><span>CODEX</span><span>OPENCODE</span><span>GSC</span><span>WORDPRESS</span></div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section class="notes" id="notes" aria-labelledby="notes-title">
-        <div class="section-cap"><span>03</span><span>FIELD NOTES</span><i></i><span>LATEST WRITING</span></div>
-        <div class="notes-heading"><h2 id="notes-title">Things worth<br /><em>remembering.</em></h2><a href={`${base}archive/`}>FULL ARCHIVE →</a></div>
-        <div class="notes-list">
-          {posts.map((post, index) => (
-            <a class="note-row" href={`${base}blog/${post.id}/`}>
-              <span>0{index + 1}</span>
-              <div><small>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</small><h3>{post.data.title}</h3></div>
-              <p>{post.data.description}</p>
-              <b>↗</b>
-            </a>
-          ))}
+      <section class="panel panel--write" data-panel="write" id="write">
+        <button class="panel-handle" type="button" data-panel-trigger aria-expanded="false">
+          <span class="panel-no">04</span>
+          <strong>WRITE</strong>
+          <small>notes from the middle of figuring things out</small>
+          <b class="panel-plus" aria-hidden="true">+</b>
+        </button>
+
+        <div class="panel-body" data-panel-body>
+          <div class="panel-intro panel-intro--write">
+            <span>04 / WRITE</span>
+            <h1>I write things down<br />before my brain <em>deletes them.</em></h1>
+            <p>Build logs, opinions, experiments, useful mistakes and whatever refused to leave me alone.</p>
+          </div>
+
+          <div class="writing-stack">
+            {posts.map((post, index) => (
+              <a href={`${base}blog/${post.id}/`} class="writing-line">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><small>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</small><b>{post.data.title}</b></div>
+                <p>{post.data.description}</p>
+                <i>→</i>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      <footer class="test-footer">
-        <div><span>NP / UNIT 001</span><small>experimental build</small></div>
-        <p>Made while wondering if a personal site can feel more like a place than a page.</p>
-        <a href="#top">BACK TO TOP ↑</a>
-      </footer>
+      <section class="panel panel--me" data-panel="me" id="me">
+        <button class="panel-handle" type="button" data-panel-trigger aria-expanded="false">
+          <span class="panel-no">05</span>
+          <strong>ME</strong>
+          <small>the person causing all of this</small>
+          <b class="panel-plus" aria-hidden="true">+</b>
+        </button>
+
+        <div class="panel-body" data-panel-body>
+          <div class="me-layout">
+            <div class="me-title">
+              <span>05 / ME</span>
+              <h1>Naman<br />Patel<span>.</span></h1>
+            </div>
+
+            <div class="me-copy">
+              <p class="me-copy__lead">I work on SEO, build websites and useful tools, and write about what I learn while making them.</p>
+              <p>Most of it starts with me wondering, “could I make this better?” Then I disappear into it for a while.</p>
+              <div class="me-links">
+                <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
+                <a href={`${base}about/`}>About me →</a>
+              </div>
+            </div>
+
+            <div class="me-aside">
+              <small>OFF SCREEN</small>
+              <p>Chai.<br />One Piece.<br />One more chapter.</p>
+              <span>repeat forever ↻</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <footer class="bottom-note">
+      <span>Five folds. One person. Too many tabs.</span>
+      <span>naman.blog / test</span>
+    </footer>
+
     <script>
-      const floaters = document.querySelectorAll<HTMLElement>('[data-float]');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!reduce) {
-        window.addEventListener('pointermove', (event) => {
-          const x = (event.clientX / window.innerWidth - 0.5);
-          const y = (event.clientY / window.innerHeight - 0.5);
-          floaters.forEach((el, index) => {
-            const strength = 4 + (index % 3) * 3;
-            el.style.setProperty('--mx', `${x * strength}px`);
-            el.style.setProperty('--my', `${y * strength}px`);
-          });
+      const fold = document.querySelector('[data-fold]');
+      const panels = Array.from(document.querySelectorAll('[data-panel]'));
+
+      function activate(panel, shouldScroll = false) {
+        panels.forEach((item) => {
+          const active = item === panel;
+          item.classList.toggle('is-active', active);
+          item.querySelector('[data-panel-trigger]')?.setAttribute('aria-expanded', String(active));
+          const plus = item.querySelector('.panel-plus');
+          if (plus) plus.textContent = active ? '−' : '+';
         });
+
+        const name = panel?.getAttribute('data-panel');
+        if (name) history.replaceState(null, '', `#${name}`);
+        if (shouldScroll && window.innerWidth <= 760) panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+
+      panels.forEach((panel) => {
+        panel.querySelector('[data-panel-trigger]')?.addEventListener('click', () => activate(panel, true));
+      });
+
+      const initial = panels.find((panel) => `#${panel.getAttribute('data-panel')}` === location.hash);
+      if (initial) activate(initial);
+
+      fold?.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+        const current = panels.findIndex((panel) => panel.classList.contains('is-active'));
+        const delta = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
+        const next = panels[(current + delta + panels.length) % panels.length];
+        event.preventDefault();
+        activate(next, true);
+        next.querySelector('[data-panel-trigger]')?.focus();
+      });
     </script>
+
+    <style>
+      :root {
+        --ink: #151515;
+        --paper: #f0ebdf;
+        --build: #7fa8e8;
+        --rank: #c8d46d;
+        --ship: #e96a55;
+        --write: #afa2d6;
+        --me: #e7dfcf;
+        --rule: rgba(21, 21, 21, 0.45);
+        font-family: Inter, Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: var(--ink);
+      }
+
+      * { box-sizing: border-box; }
+      html { background: var(--ink); scroll-behavior: smooth; }
+      body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--ink); overflow-x: hidden; }
+      a { color: inherit; }
+      button { font: inherit; }
+      ::selection { background: var(--ink); color: var(--paper); }
+
+      .topbar {
+        height: 56px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 18px;
+        color: #f4f1e9;
+        border-bottom: 1px solid rgba(255,255,255,.18);
+        background: #151515;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 10px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .identity { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .identity b { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); font-size: 9px; }
+      .identity span { opacity: .72; }
+      .topbar p { margin: 0; opacity: .52; }
+      .exit { justify-self: end; text-decoration: none; opacity: .72; }
+
+      .fold {
+        height: calc(100svh - 92px);
+        min-height: 620px;
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        background: var(--paper);
+      }
+
+      .panel {
+        position: relative;
+        flex: .72 1 0;
+        min-width: 74px;
+        overflow: hidden;
+        border-right: 1px solid var(--rule);
+        transition: flex 720ms cubic-bezier(.16,1,.3,1), filter 260ms ease;
+        isolation: isolate;
+      }
+
+      .panel:last-child { border-right: 0; }
+      .panel.is-active { flex: 5.4 1 0; }
+      .panel:not(.is-active) { filter: saturate(.78); }
+      .panel--build { background: var(--build); }
+      .panel--rank { background: var(--rank); }
+      .panel--ship { background: var(--ship); }
+      .panel--write { background: var(--write); }
+      .panel--me { background: var(--me); }
+
+      .panel-handle {
+        position: absolute;
+        inset: 0 auto 0 0;
+        z-index: 3;
+        width: 74px;
+        padding: 18px 12px;
+        border: 0;
+        border-right: 1px solid var(--rule);
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .panel-handle .panel-no { position: absolute; top: 18px; left: 12px; font: 9px ui-monospace, monospace; }
+      .panel-handle strong {
+        position: absolute;
+        top: 54px;
+        left: 14px;
+        font-size: clamp(1.5rem, 2vw, 2.2rem);
+        line-height: 1;
+        letter-spacing: -.06em;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+      }
+      .panel-handle small {
+        position: absolute;
+        bottom: 56px;
+        left: 14px;
+        width: 140px;
+        color: rgba(21,21,21,.62);
+        font: 9px/1.35 ui-monospace, monospace;
+        transform: rotate(-90deg);
+        transform-origin: left bottom;
+        white-space: nowrap;
+      }
+      .panel-plus { position: absolute; right: 12px; bottom: 12px; font-size: 18px; font-weight: 400; }
+
+      .panel-body {
+        height: 100%;
+        margin-left: 74px;
+        padding: clamp(28px, 4vw, 58px);
+        opacity: 0;
+        transform: translateX(24px);
+        pointer-events: none;
+        overflow: auto;
+        transition: opacity 200ms ease, transform 360ms ease;
+      }
+
+      .panel.is-active .panel-body {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        transition-delay: 180ms;
+      }
+
+      .panel-intro { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(220px,.7fr); gap: 2rem; align-items: end; }
+      .panel-intro > span,
+      .me-title > span { grid-column: 1 / -1; font: 10px ui-monospace, monospace; letter-spacing: .08em; }
+      .panel-intro h1,
+      .me-title h1 { margin: 0; max-width: 860px; font-size: clamp(2.6rem, 5.8vw, 6.6rem); line-height: .9; letter-spacing: -.075em; font-weight: 750; }
+      .panel-intro h1 em { font-family: Georgia, serif; font-weight: 400; }
+      .panel-intro > p { margin: 0 0 .4rem; max-width: 34ch; font-size: clamp(.85rem, 1.3vw, 1.05rem); line-height: 1.5; }
+
+      .build-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; margin-top: clamp(38px, 7vh, 80px); }
+      .build-flow article { min-height: 180px; display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--rule); background: rgba(255,255,255,.17); }
+      .build-flow article span { font: 9px ui-monospace, monospace; }
+      .build-flow article b { margin-top: auto; font-size: clamp(1.1rem, 1.8vw, 1.5rem); letter-spacing: -.045em; }
+      .build-flow article p { margin: 8px 0 0; font-size: 12px; line-height: 1.45; }
+      .build-flow > i { align-self: center; font-style: normal; }
+      .tool-ribbon { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+      .tool-ribbon span { padding: 6px 8px; border: 1px solid var(--rule); font: 9px ui-monospace, monospace; }
+
+      .rank-stage { position: relative; display: grid; grid-template-columns: .8fr 1.35fr .75fr; gap: 18px; margin-top: clamp(38px, 7vh, 76px); align-items: stretch; }
+      .rank-query, .rank-graph, .rank-note { border: 1px solid var(--rule); background: rgba(255,255,255,.18); padding: 18px; }
+      .rank-query small, .rank-note b, .rank-graph__head { font: 9px ui-monospace, monospace; letter-spacing: .06em; }
+      .rank-query > div { display: flex; align-items: center; gap: 7px; margin-top: 48px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; font-family: Georgia, serif; font-size: clamp(1.2rem,2vw,2rem); }
+      .rank-query > div b { flex: 1; overflow: hidden; }
+      .rank-query > div i { font-style: normal; }
+      .rank-query p, .rank-note p { margin: 20px 0 0; font-size: 12px; line-height: 1.5; }
+      .rank-graph { min-height: 240px; display: flex; flex-direction: column; }
+      .rank-graph__head { display: flex; justify-content: space-between; gap: 1rem; }
+      .rank-graph__head b { color: #354100; }
+      .bars { flex: 1; display: flex; align-items: end; gap: 7px; padding: 25px 0 14px; border-bottom: 1px solid var(--rule); }
+      .bars i { flex: 1; height: var(--h); min-height: 6px; background: var(--ink); }
+      .rank-graph footer { display: flex; justify-content: space-between; gap: 8px; padding-top: 8px; font: 8px ui-monospace, monospace; }
+      .rank-note { display: flex; flex-direction: column; justify-content: flex-end; }
+      .rank-note b { margin-bottom: auto; }
+      .rank-note p { font-family: Georgia, serif; font-size: clamp(1rem,1.5vw,1.3rem); }
+
+      .project-stack, .writing-stack { margin-top: clamp(36px, 6vh, 68px); border-top: 1px solid var(--rule); }
+      .project-line { display: grid; grid-template-columns: 36px minmax(150px,.7fr) minmax(260px,1.4fr) auto 24px; gap: 18px; align-items: center; min-height: 82px; padding: 12px 4px; border-bottom: 1px solid var(--rule); text-decoration: none; transition: padding 220ms ease, background 220ms ease; }
+      .project-line:hover { padding-inline: 12px; background: rgba(255,255,255,.16); }
+      .project-line__index { font: 9px ui-monospace, monospace; }
+      .project-line__name b { display: block; font-size: clamp(1.15rem,2vw,1.7rem); letter-spacing: -.045em; }
+      .project-line__name small { font: 9px ui-monospace, monospace; text-transform: uppercase; }
+      .project-line p { margin: 0; max-width: 50ch; font-size: 12px; line-height: 1.45; }
+      .project-line__status { padding: 5px 7px; border: 1px solid var(--rule); font: 9px ui-monospace, monospace; text-transform: uppercase; }
+      .project-line i { font-style: normal; }
+
+      .writing-line { display: grid; grid-template-columns: 34px minmax(160px,.8fr) minmax(220px,1.3fr) 24px; gap: 18px; align-items: center; min-height: 88px; padding: 10px 4px; border-bottom: 1px solid var(--rule); text-decoration: none; }
+      .writing-line > span, .writing-line small { font: 9px ui-monospace, monospace; }
+      .writing-line b { display: block; margin-top: 4px; font-size: clamp(1rem,1.6vw,1.35rem); letter-spacing: -.035em; }
+      .writing-line p { margin: 0; font-size: 12px; line-height: 1.45; }
+      .writing-line i { font-style: normal; }
+
+      .me-layout { height: 100%; display: grid; grid-template-columns: 1.1fr .85fr .55fr; gap: clamp(30px,5vw,80px); align-items: center; }
+      .me-title h1 span { color: #c34634; }
+      .me-copy__lead { font-family: Georgia, serif; font-size: clamp(1.3rem,2.2vw,2rem); line-height: 1.35; }
+      .me-copy p:not(.me-copy__lead) { max-width: 38ch; font-size: 13px; line-height: 1.6; }
+      .me-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .me-links a { padding: 8px 10px; border: 1px solid var(--rule); font: 9px ui-monospace, monospace; text-decoration: none; }
+      .me-aside { align-self: end; padding: 16px; border: 1px solid var(--rule); }
+      .me-aside small, .me-aside span { font: 9px ui-monospace, monospace; }
+      .me-aside p { margin: 24px 0; font-family: Georgia, serif; font-size: clamp(1.2rem,2vw,1.8rem); line-height: 1.25; }
+
+      .bottom-note {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        color: rgba(255,255,255,.55);
+        background: var(--ink);
+        font: 8px ui-monospace, monospace;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 900px) {
+        .topbar { grid-template-columns: 1fr auto; }
+        .topbar p { display: none; }
+        .fold { height: calc(100svh - 92px); min-height: 560px; }
+        .panel-handle { width: 62px; }
+        .panel { min-width: 62px; }
+        .panel-body { margin-left: 62px; padding: 30px 24px; }
+        .panel-intro { grid-template-columns: 1fr; gap: 14px; }
+        .panel-intro > p { max-width: 48ch; }
+        .build-flow { grid-template-columns: repeat(2,1fr); }
+        .build-flow > i { display: none; }
+        .rank-stage { grid-template-columns: 1fr 1fr; }
+        .rank-note { grid-column: 1 / -1; min-height: 120px; }
+        .project-line { grid-template-columns: 30px minmax(130px,.7fr) 1fr auto; }
+        .project-line p { display: none; }
+        .project-line i { display: none; }
+        .me-layout { grid-template-columns: 1fr 1fr; }
+        .me-aside { grid-column: 1 / -1; }
+      }
+
+      @media (max-width: 760px) {
+        body { overflow: auto; }
+        .topbar { position: sticky; top: 0; z-index: 20; height: 50px; padding-inline: 12px; }
+        .identity span { display: none; }
+        .fold { height: auto; min-height: calc(100svh - 86px); flex-direction: column; overflow: visible; }
+        .panel { flex: none; min-width: 0; min-height: 72px; border-right: 0; border-bottom: 1px solid var(--rule); transition: min-height 640ms cubic-bezier(.16,1,.3,1); }
+        .panel.is-active { flex: none; min-height: calc(100svh - 86px); }
+        .panel-handle { position: relative; width: 100%; height: 72px; display: grid; grid-template-columns: 34px auto 1fr 20px; gap: 10px; align-items: center; padding: 0 14px; border-right: 0; border-bottom: 1px solid var(--rule); }
+        .panel-handle .panel-no, .panel-handle strong, .panel-handle small, .panel-plus { position: static; }
+        .panel-handle strong { writing-mode: horizontal-tb; transform: none; font-size: 1.6rem; }
+        .panel-handle small { width: auto; transform: none; transform-origin: initial; white-space: normal; text-align: right; font-size: 8px; }
+        .panel-plus { justify-self: end; }
+        .panel-body { height: auto; min-height: calc(100svh - 158px); margin-left: 0; padding: 22px 16px 34px; display: none; opacity: 1; transform: none; overflow: visible; }
+        .panel.is-active .panel-body { display: block; }
+        .panel-intro { display: block; }
+        .panel-intro > span { display: block; margin-bottom: 20px; }
+        .panel-intro h1 { font-size: clamp(2.6rem, 13vw, 4.5rem); }
+        .panel-intro > p { margin-top: 18px; font-size: .86rem; }
+        .build-flow { grid-template-columns: 1fr; margin-top: 30px; }
+        .build-flow article { min-height: 125px; }
+        .rank-stage { grid-template-columns: 1fr; margin-top: 30px; }
+        .rank-note { grid-column: auto; }
+        .project-stack, .writing-stack { margin-top: 30px; }
+        .project-line { grid-template-columns: 28px 1fr auto; gap: 10px; min-height: 72px; }
+        .project-line__status { font-size: 7px; }
+        .project-line__name small { font-size: 7px; }
+        .writing-line { grid-template-columns: 26px 1fr 18px; gap: 10px; }
+        .writing-line p { display: none; }
+        .me-layout { display: block; }
+        .me-title h1 { font-size: 18vw; margin: 16px 0 34px; }
+        .me-aside { margin-top: 34px; }
+        .bottom-note { height: 36px; padding-inline: 12px; }
+        .bottom-note span:first-child { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      }
+    </style>
   </body>
 </html>
-
-<style>
-  :root { --bg:#0b0b10; --panel:#111118; --ink:#f0efe9; --muted:#8d8d98; --line:#30303a; --blue:#4ea7ff; --violet:#8f86ff; --acid:#c4ff57; --paper:#e7e6df; --black:#0a0a0f; }
-  * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; background:var(--bg); color:var(--ink); font-family:Inter, Geist, "Segoe UI", sans-serif; }
-  body { margin:0; min-width:320px; background:var(--bg); color:var(--ink); }
-  a { color:inherit; text-decoration:none; }
-  ::selection { background:var(--blue); color:#07101d; }
-
-  .hud { position:fixed; z-index:50; top:0; left:0; right:0; height:64px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 22px; border-bottom:1px solid var(--line); background:color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter:blur(14px); font-family:"SFMono-Regular", Consolas, monospace; }
-  .hud-mark { display:flex; align-items:center; gap:10px; width:max-content; }
-  .hud-mark > span { width:32px; height:32px; display:grid; place-items:center; border:1px solid #575765; font-size:10px; font-weight:800; }
-  .hud-mark small { color:var(--muted); font-size:9px; letter-spacing:.12em; }
-  .hud nav { display:flex; align-items:center; gap:4px; padding:4px; border:1px solid #454550; border-radius:4px; }
-  .hud nav a { padding:7px 13px; border-radius:2px; color:#a5a5af; font-size:9px; letter-spacing:.08em; }
-  .hud nav a.is-active, .hud nav a:hover { color:#0b0b10; background:var(--paper); }
-  .hud-exit { justify-self:end; padding:8px 11px; border:1px solid #585865; border-radius:999px; font-size:9px; letter-spacing:.08em; }
-
-  .hero-shell { padding:80px 14px 14px; background:var(--bg); }
-  .hero-frame { position:relative; max-width:1500px; margin:0 auto; min-height:calc(100svh - 94px); border:1px solid #343440; border-radius:6px; overflow:hidden; background:#0d0d13; }
-  .hero-status { position:absolute; top:10px; right:14px; z-index:8; display:flex; gap:8px; color:#a9a9b2; font:9px "SFMono-Regular", monospace; }
-  .hero-status span:first-child { color:var(--ink); }
-
-  .hero-scene { position:relative; min-height:1120px; overflow:hidden; }
-  .wire-grid { position:absolute; left:50%; top:150px; width:min(72vw,760px); height:820px; transform:translateX(-50%) perspective(700px) rotateX(2deg); opacity:.5; background-image:linear-gradient(#33343d 1px,transparent 1px),linear-gradient(90deg,#33343d 1px,transparent 1px); background-size:42px 42px; mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 88%,transparent 100%); }
-  .hero-cables { position:absolute; inset:40px 0 auto 0; width:100%; height:1040px; overflow:visible; pointer-events:none; }
-  .cable { fill:none; stroke-width:18; stroke-linecap:round; filter:drop-shadow(0 8px 0 rgba(0,0,0,.3)); }
-  .cable-a { stroke:var(--blue); }
-  .cable-b { stroke:var(--violet); }
-  .cable-c { stroke:#5e65ff; stroke-width:12; }
-  .cable-d { stroke:#72c9ff; stroke-width:12; }
-
-  [data-float] { transform:translate(var(--mx,0),var(--my,0)); transition:transform 180ms ease-out; }
-  .machine { position:absolute; z-index:5; top:100px; left:50%; width:min(52vw,520px); transform:translateX(-50%) translate(var(--mx,0),var(--my,0)); filter:drop-shadow(0 30px 30px rgba(0,0,0,.38)); }
-  .machine-head { width:76%; margin:0 auto; border:2px solid #0a0a0e; border-radius:30px 30px 18px 18px; overflow:hidden; background:#b9b4ff; box-shadow:inset 0 0 0 1px rgba(255,255,255,.35), 14px 14px 0 #273f95; }
-  .machine-head__top { height:32px; display:flex; align-items:center; gap:7px; padding:0 13px; border-bottom:1px solid #232335; background:#efeee8; color:#1b1b23; font:9px "SFMono-Regular", monospace; }
-  .machine-head__top i { width:6px; height:6px; border-radius:50%; background:#1b1b23; }
-  .machine-head__top span { margin-left:auto; }
-  .machine-eye { position:relative; width:160px; height:120px; margin:34px auto 20px; border:2px solid #0b0b10; border-radius:50%; background:#151525; box-shadow:0 0 0 12px rgba(78,167,255,.18); overflow:hidden; color:#fff; }
-  .machine-eye > span { position:absolute; width:54px; height:54px; left:50%; top:50%; border-radius:50%; background:var(--blue); transform:translate(-50%,-50%); box-shadow:0 0 0 14px #26264a,0 0 32px rgba(78,167,255,.9); }
-  .machine-eye b { position:absolute; left:14px; top:10px; font:700 28px/1 "SFMono-Regular", monospace; }
-  .machine-eye small { position:absolute; right:11px; bottom:10px; width:70px; text-align:right; font:8px/1.2 "SFMono-Regular", monospace; letter-spacing:.06em; }
-  .machine-head code { display:block; padding:0 24px 28px; color:#161620; font:10px/1.6 "SFMono-Regular", Consolas, monospace; }
-  .machine-neck { width:22%; height:70px; margin:0 auto; display:flex; justify-content:center; gap:9px; padding-top:10px; background:#dcd9ff; border-inline:2px solid #0b0b10; }
-  .machine-neck span { width:8px; height:46px; border-radius:99px; background:#2b2b42; }
-  .machine-body { position:relative; width:88%; margin:0 auto; padding:20px 22px 24px; border:2px solid #08080c; border-radius:32px 32px 24px 24px; background:#e9e7df; color:#101017; box-shadow:12px 12px 0 #4ea7ff; }
-  .body-label { margin-bottom:14px; font:8px "SFMono-Regular", monospace; letter-spacing:.12em; }
-  .body-screen { padding:12px 14px; border:2px solid #111119; background:#101019; color:#e7e7ee; font:9px "SFMono-Regular", monospace; }
-  .screen-line,.screen-row { display:grid; grid-template-columns:1fr auto; gap:20px; padding:8px 0; border-bottom:1px solid #323241; }
-  .screen-line { color:#737386; }
-  .screen-row:last-child { border-bottom:0; }
-  .screen-row b { color:var(--acid); font-weight:500; }
-  .body-switches { display:flex; gap:9px; margin-top:18px; }
-  .body-switches i { width:34px; height:13px; border:2px solid #111119; border-radius:99px; background:#fff; }
-  .body-switches i:nth-child(2), .body-switches i:nth-child(5) { background:#ff7bb7; }
-  .machine-hips { width:68%; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); border:2px solid #09090e; border-top:0; background:#8e86ff; color:#0b0b10; }
-  .machine-hips span { padding:10px 4px; border-right:1px solid #17171d; text-align:center; font:8px "SFMono-Regular", monospace; }
-  .machine-hips span:last-child { border-right:0; }
-  .machine-legs { width:63%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .machine-leg { min-height:390px; padding:24px 13px 14px; border-inline:2px solid #09090e; border-bottom:2px solid #09090e; border-radius:0 0 38px 38px; background:#a49dfc; }
-  .machine-leg--right { background:#77bdf5; }
-  .leg-panel { min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; border:1px solid rgba(10,10,16,.65); border-radius:24px; color:#111118; font-family:"SFMono-Regular", monospace; }
-  .leg-panel small { font-size:7px; letter-spacing:.1em; }
-  .leg-panel b { font-size:20px; }
-  .leg-panel > i { width:2px; height:82px; background:#121219; }
-  .leg-panel--chart div { height:110px; display:flex; align-items:end; gap:5px; }
-  .leg-panel--chart div i { width:10px; background:#101017; }
-  .leg-panel--chart div i:nth-child(1){height:28%}.leg-panel--chart div i:nth-child(2){height:42%}.leg-panel--chart div i:nth-child(3){height:35%}.leg-panel--chart div i:nth-child(4){height:67%}.leg-panel--chart div i:nth-child(5){height:90%}
-  .leg-panel--chart > b { color:#0a3f74; font-size:34px; }
-  .machine-feet { width:79%; margin:-2px auto 0; display:flex; justify-content:space-between; }
-  .machine-feet span { width:44%; padding:18px; border:2px solid #08080c; border-radius:34px 34px 16px 16px; background:#dad8ff; color:#111118; font:8px "SFMono-Regular",monospace; }
-  .machine-feet span:last-child { background:#d8efff; }
-
-  .micro-window { position:absolute; z-index:7; width:210px; border:1px solid #555563; background:#111118; box-shadow:0 18px 40px rgba(0,0,0,.3); }
-  .micro-window header { height:27px; display:flex; align-items:center; justify-content:space-between; padding:0 9px; border-bottom:1px solid #4b4b57; color:#c3c3ca; font:8px "SFMono-Regular", monospace; }
-  .micro-window--left { top:530px; left:7%; transform:rotate(-2deg) translate(var(--mx,0),var(--my,0)); }
-  .micro-window--right { top:425px; right:7%; transform:rotate(2deg) translate(var(--mx,0),var(--my,0)); }
-  .mini-phone { margin:16px; padding:13px; border:1px solid #646470; background:#e8e7df; color:#15151d; }
-  .mini-phone small,.mini-phone s,.mini-phone strong { display:block; }
-  .mini-phone small { font:7px "SFMono-Regular",monospace; }
-  .mini-phone s { margin-top:12px; font-size:18px; }
-  .mini-phone strong { color:#126b96; font-size:25px; }
-  .mini-phone footer { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-top:12px; }
-  .mini-phone footer i { padding:5px 2px; border:1px solid #17171d; text-align:center; font:5px "SFMono-Regular",monospace; font-style:normal; }
-  .mini-chart { height:120px; display:flex; align-items:end; gap:8px; padding:20px; }
-  .mini-chart i { flex:1; background:#62baff; border:1px solid #a6d9ff; }
-  .mini-chart i:nth-child(1){height:28%}.mini-chart i:nth-child(2){height:45%}.mini-chart i:nth-child(3){height:38%}.mini-chart i:nth-child(4){height:63%}.mini-chart i:nth-child(5){height:78%}.mini-chart i:nth-child(6){height:93%}
-  .micro-window--right p { margin:0 20px 18px; color:#aaaab4; font:8px "SFMono-Regular",monospace; }
-  .tag { position:absolute; z-index:8; padding:10px 12px; border:1px solid #52525e; background:#0f0f16; color:#dad9e0; font:8px/1.4 "SFMono-Regular",monospace; }
-  .tag--one { top:280px; left:13%; transform:rotate(-6deg); }
-  .tag--two { top:780px; right:11%; transform:rotate(5deg); }
-
-  .hero-meta { position:absolute; z-index:10; left:18px; right:18px; bottom:18px; display:grid; grid-template-columns:1fr auto 1.2fr auto; gap:24px; align-items:end; padding-top:15px; border-top:1px solid #44444f; }
-  .hero-meta > div { display:grid; gap:4px; color:#9a9aa5; font:8px "SFMono-Regular",monospace; }
-  .hero-meta h1 { margin:0; font-family:Georgia,serif; font-size:clamp(25px,3vw,46px); font-weight:400; }
-  .hero-meta p { max-width:40ch; margin:0; color:#aaaab3; font-size:12px; line-height:1.5; }
-  .hero-meta > a { color:#c8c8cf; font:8px "SFMono-Regular",monospace; white-space:nowrap; }
-
-  .works,.notes { padding:120px max(22px,6vw); background:#eceae3; color:#111118; }
-  .section-cap { display:grid; grid-template-columns:auto auto 1fr auto; gap:12px; align-items:center; color:#65656c; font:8px "SFMono-Regular",monospace; letter-spacing:.08em; }
-  .section-cap i { height:1px; background:#b8b6ae; }
-  .works-heading,.notes-heading { display:grid; grid-template-columns:1.4fr .6fr; gap:40px; align-items:end; margin:60px 0 70px; }
-  .works-heading h2,.notes-heading h2,.profile-copy h2 { margin:0; font-size:clamp(44px,7vw,100px); line-height:.88; letter-spacing:-.065em; }
-  .works-heading h2 em,.notes-heading h2 em,.profile-copy h2 em { font-family:Georgia,serif; font-weight:400; }
-  .works-heading p { max-width:38ch; margin:0; color:#5f5f66; font-size:13px; line-height:1.6; }
-  .works-list { border-top:1px solid #b7b5ad; }
-  .project-row { border-bottom:1px solid #b7b5ad; }
-  .project-row > a { display:grid; grid-template-columns:40px minmax(180px,.8fr) minmax(0,1fr) auto; gap:28px; align-items:center; padding:28px 0; }
-  .project-row__no { align-self:start; color:#77777e; font:8px "SFMono-Regular",monospace; }
-  .project-row__visual { position:relative; min-height:210px; overflow:hidden; border:1px solid #111118; background:#14141b; }
-  .project-row__copy > span { color:#73737a; font:8px "SFMono-Regular",monospace; text-transform:uppercase; }
-  .project-row__copy h3 { margin:8px 0 10px; font-size:clamp(28px,4vw,56px); letter-spacing:-.05em; }
-  .project-row__copy p { max-width:55ch; margin:0; color:#5b5b62; font-size:12px; line-height:1.6; }
-  .project-row__arrow { font-size:28px; font-weight:400; }
-  .project-row:hover .project-row__visual { transform:translateY(-3px); }
-  .project-row__visual { transition:transform 220ms ease; }
-
-  .visual-phone { position:absolute; inset:22px 24%; padding:16px; border:2px solid #08080c; border-radius:22px; background:#e8e6de; color:#111118; transform:rotate(4deg); }
-  .visual-phone small,.visual-phone s,.visual-phone b { display:block; }.visual-phone s{margin-top:20px;font-size:20px}.visual-phone b{color:#1c78a7;font-size:28px}.visual-phone i{position:absolute;right:-18px;top:25px;width:58px;height:58px;display:grid;place-items:center;border:1px solid #111118;border-radius:50%;background:#ff8c9c;font:6px "SFMono-Regular",monospace;font-style:normal}
-  .visual-terminal { position:absolute; inset:26px; color:#d9d9e2; font:9px/1.7 "SFMono-Regular",monospace; }.visual-terminal code,.visual-terminal span{display:block}.visual-terminal b{display:block;margin:16px 0 6px;color:var(--acid);font-size:30px}
-  .visual-wheel { position:absolute; left:50%; top:50%; width:150px; height:150px; border:2px solid #0d0d13; border-radius:50%; background:conic-gradient(#4ea7ff 0 25%,#e8e6de 25% 50%,#8f86ff 50% 75%,#ff8aa0 75%); transform:translate(-50%,-50%); }.visual-wheel b{position:absolute;left:50%;top:50%;width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:#101017;color:#fff;transform:translate(-50%,-50%);font-size:8px}.visual-wheel span{position:absolute;font-family:Georgia,serif;font-size:22px}.visual-wheel span:nth-child(1){left:67px;top:6px}.visual-wheel span:nth-child(2){right:8px;top:65px}.visual-wheel span:nth-child(3){left:68px;bottom:5px}.visual-wheel span:nth-child(4){left:10px;top:66px}
-  .visual-page { position:absolute; inset:18px 20%; padding:18px; background:#e6e3d8; color:#111118; transform:rotate(-2deg); }.visual-page small{font:7px "SFMono-Regular",monospace}.visual-page h3{margin:20px 0;font-family:Georgia,serif;font-size:26px;font-weight:400;line-height:1}.visual-page p{height:1px;background:#8f8c83}
-  .visual-notes { position:absolute; inset:38px 12%; padding:22px; background:#d7d5ff; color:#111118; transform:rotate(3deg); box-shadow:-15px 12px 0 #6db7ef; }.visual-notes small{font:7px "SFMono-Regular",monospace}.visual-notes b{display:block;margin-top:18px;font-family:Georgia,serif;font-size:20px;font-weight:400}
-
-  .profile { padding:120px max(22px,6vw); background:#0c0c12; color:#efeee8; }
-  .section-cap--dark { color:#777783; }.section-cap--dark i{background:#34343e}
-  .profile-grid { display:grid; grid-template-columns:1fr .8fr; gap:8vw; align-items:center; margin-top:80px; }
-  .profile-kicker { color:#8f8f9c; font:8px "SFMono-Regular",monospace; letter-spacing:.08em; }
-  .profile-copy h2 { margin-top:24px; font-size:clamp(46px,6.5vw,92px); }
-  .profile-copy > p { max-width:52ch; margin:30px 0; color:#a1a1ab; font-size:13px; line-height:1.7; }
-  .profile-links { display:flex; flex-wrap:wrap; gap:10px; }.profile-links a{padding:9px 12px;border:1px solid #4b4b57;border-radius:999px;color:#c7c7cf;font:8px "SFMono-Regular",monospace}
-  .instrument-panel { border:1px solid #3a3a46; background:#101017; }
-  .instrument-head { display:flex; justify-content:space-between; padding:12px 14px; border-bottom:1px solid #3a3a46; color:#8f8f9a; font:8px "SFMono-Regular",monospace; }.instrument-head span:last-child{color:var(--acid)}
-  .instrument-row { display:grid; grid-template-columns:80px 1fr 28px; gap:12px; align-items:center; padding:13px 14px; border-bottom:1px solid #292934; font:8px "SFMono-Regular",monospace; }.instrument-row b{font-weight:500}.instrument-row > div{height:7px;background:#242430}.instrument-row i{display:block;width:var(--w);height:100%;background:linear-gradient(90deg,var(--blue),var(--violet))}
-  .instrument-tools { display:flex; flex-wrap:wrap; gap:6px; padding:18px; }.instrument-tools span{padding:7px 9px;border:1px solid #393945;color:#9999a4;font:7px "SFMono-Regular",monospace}
-
-  .notes-heading { grid-template-columns:1fr auto; }.notes-heading > a{font:8px "SFMono-Regular",monospace}
-  .notes-list { border-top:1px solid #b7b5ad; }.note-row{display:grid;grid-template-columns:40px minmax(220px,.8fr) minmax(0,1fr) auto;gap:28px;align-items:center;padding:24px 0;border-bottom:1px solid #b7b5ad}.note-row>span,.note-row small{color:#73737a;font:8px "SFMono-Regular",monospace}.note-row h3{margin:6px 0 0;font-size:22px;letter-spacing:-.03em}.note-row p{margin:0;color:#63636a;font-size:12px;line-height:1.5}.note-row>b{font-size:20px;font-weight:400}
-
-  .test-footer { display:grid; grid-template-columns:1fr 1.4fr auto; gap:30px; align-items:end; padding:70px max(22px,6vw); border-top:1px solid #31313b; background:#0b0b10; color:#d9d9df; }.test-footer>div{display:grid;gap:5px;font:8px "SFMono-Regular",monospace}.test-footer small{color:#777783}.test-footer p{max-width:50ch;margin:0;color:#8f8f9a;font-size:12px}.test-footer>a{font:8px "SFMono-Regular",monospace}
-
-  @media (max-width: 760px) {
-    .hud { height:54px; grid-template-columns:1fr auto; padding:0 12px; }.hud nav{position:absolute;top:66px;left:50%;transform:translateX(-50%);z-index:20;background:#0c0c12}.hud nav a{padding:6px 10px;font-size:7px}.hud-exit{font-size:7px}.hud-mark small{display:none}
-    .hero-shell { padding:68px 10px 10px; }.hero-frame { min-height:1280px; }.hero-status{top:6px;right:8px;font-size:7px}.hero-scene{min-height:1190px}.wire-grid{top:180px;width:76vw;height:840px;background-size:32px 32px}.hero-cables{top:90px;height:970px}.cable{stroke-width:13}.cable-c,.cable-d{stroke-width:8}
-    .machine{top:140px;width:72vw}.machine-head{width:83%;border-radius:22px 22px 14px 14px}.machine-head__top{height:26px;font-size:6px}.machine-eye{width:118px;height:90px;margin:24px auto 14px}.machine-eye>b{font-size:20px}.machine-eye>small{font-size:6px}.machine-head code{padding:0 16px 20px;font-size:7px}.machine-neck{height:52px}.machine-neck span{height:34px;width:6px}.machine-body{padding:15px 15px 18px;border-radius:24px 24px 18px 18px}.body-label{font-size:6px}.body-screen{font-size:6px;padding:8px 10px}.screen-line,.screen-row{padding:6px 0}.body-switches i{width:24px;height:10px}.machine-hips span{font-size:6px;padding:8px 2px}.machine-legs{gap:15px}.machine-leg{min-height:330px;padding:18px 8px 10px;border-radius:0 0 28px 28px}.leg-panel{min-height:245px;border-radius:18px}.leg-panel b{font-size:15px}.leg-panel>i{height:64px}.machine-feet span{padding:14px}
-    .micro-window{width:150px}.micro-window header{height:23px;font-size:6px}.micro-window--left{top:565px;left:-20px}.micro-window--right{top:450px;right:-16px}.mini-phone{margin:10px;padding:9px}.mini-phone s{font-size:14px}.mini-phone strong{font-size:19px}.mini-chart{height:90px;padding:14px;gap:5px}.micro-window--right p{margin:0 12px 12px;font-size:6px}.tag{font-size:6px;padding:8px}.tag--one{top:330px;left:4%}.tag--two{top:860px;right:4%}
-    .hero-meta{left:12px;right:12px;bottom:12px;grid-template-columns:1fr auto;gap:10px}.hero-meta>div{font-size:6px}.hero-meta h1{font-size:26px}.hero-meta p{grid-column:1/-1;font-size:10px}.hero-meta>a{justify-self:end;font-size:6px}
-    .works,.notes,.profile{padding:85px 18px}.works-heading,.notes-heading{grid-template-columns:1fr;gap:22px;margin:44px 0 50px}.works-heading h2,.notes-heading h2,.profile-copy h2{font-size:48px}.project-row>a{grid-template-columns:26px 1fr auto;gap:14px;padding:22px 0}.project-row__visual{grid-column:2/-1;min-height:170px;order:2}.project-row__copy{grid-column:2/3;order:3}.project-row__arrow{grid-column:3;order:3}.project-row__no{grid-row:1/4}.project-row__copy h3{font-size:31px}.project-row__copy p{font-size:10px}.visual-phone{inset:18px 24%}.visual-terminal{inset:20px}.visual-wheel{width:120px;height:120px}.visual-wheel span{font-size:17px}.visual-wheel span:nth-child(1){left:54px}.visual-wheel span:nth-child(2){top:52px}.visual-wheel span:nth-child(3){left:54px}.visual-wheel span:nth-child(4){top:52px}.visual-page{inset:15px 18%}.visual-notes{inset:30px 8%}
-    .profile-grid{grid-template-columns:1fr;gap:50px;margin-top:55px}.note-row{grid-template-columns:26px 1fr auto;gap:14px}.note-row p{display:none}.note-row h3{font-size:18px}.notes-heading>a{justify-self:start}
-    .test-footer{grid-template-columns:1fr;gap:18px;padding:55px 18px}.test-footer>a{justify-self:start}
-  }
-
-  @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto}[data-float]{transition:none} }
-</style>
