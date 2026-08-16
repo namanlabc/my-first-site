@@ -196,7 +196,7 @@ const { projects } = Astro.props;
   .viscose-carousel__item[data-active] { pointer-events: auto; }
   .viscose-carousel__item:not([data-active]) { filter: saturate(0.55) brightness(0.58); }
   .viscose-carousel__item :global(.project-poster) { margin: 0; box-shadow: 0 1rem 2.6rem color-mix(in srgb, var(--ink) 12%, transparent); }
-  .viscose-carousel__item:not([data-active]) :global(.project-poster__caption) { opacity: 0; }
+  .viscose-carousel__item :global(.project-poster__caption) { display: none; }
 
   .viscose-carousel__liquid {
     --motion: 0;
