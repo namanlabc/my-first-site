@@ -1,0 +1,35 @@
+---
+interface Props {
+  visual?: 'audit' | 'wheel' | 'calm' | 'notes' | 'smallmb';
+}
+const { visual = 'notes' } = Astro.props;
+---
+
+<div class:list={['project-toy', `project-toy--${visual}`]} aria-hidden="true">
+  {visual === 'smallmb' && <>
+    <div class="toy-file toy-file--big"><span>18</span><small>MB</small></div>
+    <div class="toy-arrow">→</div>
+    <div class="toy-file toy-file--small"><span>640</span><small>KB</small></div>
+    <div class="toy-helper toy-helper--orange"><i></i><i></i><b></b></div>
+  </>}
+  {visual === 'audit' && <>
+    <div class="toy-browser"><div><i></i><i></i><i></i></div><span>SEO health</span><strong>92</strong><small>clean build</small></div>
+    <div class="toy-magnifier"></div>
+    <div class="toy-helper toy-helper--blue"><i></i><i></i><b></b></div>
+  </>}
+  {visual === 'wheel' && <>
+    <div class="toy-wheel"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="toy-pointer"></div>
+    <div class="toy-helper toy-helper--green"><i></i><i></i><b></b></div>
+  </>}
+  {visual === 'calm' && <>
+    <div class="toy-paper"><i></i><i></i><i></i><i></i><b></b></div>
+    <div class="toy-mug"></div>
+    <div class="toy-helper toy-helper--cream"><i></i><i></i><b></b></div>
+  </>}
+  {visual === 'notes' && <>
+    <div class="toy-note"><span>idea</span><strong>→</strong><em>ship</em></div>
+    <div class="toy-pencil"></div>
+    <div class="toy-helper toy-helper--blue"><i></i><i></i><b></b></div>
+  </>}
+</div>
