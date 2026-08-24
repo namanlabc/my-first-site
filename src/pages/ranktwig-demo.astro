@@ -12,274 +12,235 @@ const rankTwigUrl = 'https://ranktwig.com';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#070b0b" />
+    <meta name="theme-color" content="#09090b" />
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
-    <meta name="description" content="A private design experiment for the RankTwig homepage." />
+    <meta name="description" content="A private RankTwig homepage design experiment." />
     <link rel="icon" type="image/svg+xml" href={`${base}ranktwig-demo/ranktwig-mark.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
     <title>RankTwig homepage experiment</title>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to the evidence</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="RankTwig home">
-        <svg viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="currentColor"></rect>
-          <path d="M8.5 30.2c4.1-3 7.7-6.4 10-10.2 1.7-2.8 2.7-5.8 3.1-9.3.1-1.1 1.8-1.1 1.9 0 .1 2.8-.6 5.6-1.4 7.7 2.7-2.1 5.5-4 8.4-5.7.9-.5 1.7.7 1.1 1.5-4.4 6.3-10.5 10.7-17.6 13 4.2.1 8 .8 11.4 2.1 1 .4.8 1.9-.3 2-5.6-.4-11.2-.8-18 1.6-1 .3-1.7-1.1-.8-1.7 1.6-1.2 2.1-1.8 2.6-2.7Z" fill="white"></path>
-        </svg>
-        <span>RankTwig</span>
-      </a>
+      <div class="header-shell">
+        <a class="brand" href="#top" aria-label="RankTwig home">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="currentColor"></rect>
+            <path d="M8.5 30.2c4.1-3 7.7-6.4 10-10.2 1.7-2.8 2.7-5.8 3.1-9.3.1-1.1 1.8-1.1 1.9 0 .1 2.8-.6 5.6-1.4 7.7 2.7-2.1 5.5-4 8.4-5.7.9-.5 1.7.7 1.1 1.5-4.4 6.3-10.5 10.7-17.6 13 4.2.1 8 .8 11.4 2.1 1 .4.8 1.9-.3 2-5.6-.4-11.2-.8-18 1.6-1 .3-1.7-1.1-.8-1.7 1.6-1.2 2.1-1.8 2.6-2.7Z" fill="white"></path>
+          </svg>
+          <span>RankTwig</span>
+        </a>
 
-      <nav aria-label="Primary navigation">
-        <a href="#inside">Product</a>
-        <a href="#how-it-works">How it works</a>
-        <a href="#pricing">Pricing</a>
-      </nav>
+        <nav aria-label="Primary navigation">
+          <a href="#product">Product</a>
+          <a href="#workflow">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href={`${rankTwigUrl}/mcp-guide`}>MCP</a>
+        </nav>
 
-      <a class="header-action" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Try for free <span aria-hidden="true">↗</span></a>
+        <div class="header-actions">
+          <a class="login-link" href={`${rankTwigUrl}/login`}>Log in</a>
+          <a class="header-cta" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Start Free <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </header>
 
     <main id="main-content">
-      <section id="top" class="hero" style={`--hero-image: url('${heroImage}')`} aria-labelledby="hero-title">
-        <div class="hero-veil" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow"><span></span> Evidence-first SEO intelligence <b aria-hidden="true">→</b></p>
-            <h1 id="hero-title">See what search data is trying to tell you.</h1>
-            <p class="hero-intro">
-              Find the pages, queries and opportunities worth acting on—then see the evidence behind every recommendation.
-            </p>
-            <div class="hero-actions">
-              <a class="button button--orange" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Try RankTwig <span aria-hidden="true">→</span></a>
-              <a class="button button--quiet" href={`${rankTwigUrl}/demo`}>Explore RankTwig</a>
+      <section id="top" class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow--orange" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow--blue-left" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow--blue-right" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+          <a class="announcement" href="#product">
+            <span class="announcement-dot"></span>
+            <span>Evidence-first SEO intelligence</span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <h1 id="hero-title">See what search data is trying to tell you.</h1>
+          <p class="hero-lede">RankTwig connects Search Console to the AI you choose, finds what deserves attention, and turns it into evidence-backed SEO actions.</p>
+
+          <div class="hero-actions-main">
+            <a class="button button-primary" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Find My Next SEO Move <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href={`${rankTwigUrl}/demo`}>Explore the demo</a>
+          </div>
+
+          <div class="hero-reassurance" aria-label="Product highlights">
+            <span>Set up in minutes</span>
+            <span>ChatGPT OAuth + MCP</span>
+            <span>BYOK AI</span>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art-haze"></div>
+          <img src={heroImage} alt="" loading="eager" decoding="async" />
+          <div class="floating-proof floating-proof--left">
+            <span class="proof-kicker">GSC SIGNAL</span>
+            <strong>1,240 impressions</strong>
+            <small>Position 18–29 · worth investigating</small>
+          </div>
+          <div class="floating-proof floating-proof--right">
+            <span class="proof-kicker">NEXT MOVE</span>
+            <strong>Fix the snippet first</strong>
+            <small>Evidence attached · not a blind score</small>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="flow-section section-shell" aria-labelledby="flow-title">
+        <div class="section-heading">
+          <p class="eyebrow">HOW IT COMES TOGETHER</p>
+          <h2 id="flow-title">One signal becomes a clear next move.</h2>
+          <p>Start with what your site is already earning. Keep the page, queries, dates and current evidence together before asking AI to reason over it.</p>
+        </div>
+
+        <ol class="flow-steps">
+          <li>
+            <span class="step-number">01</span>
+            <div><strong>Find</strong><p>Surface striking-distance keywords, CTR gaps, rising demand, declines and cannibalization.</p></div>
+            <span class="step-proof">Connected GSC</span>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <div><strong>Investigate</strong><p>Bring search performance, ranking queries and a fresh bounded crawl into one page view.</p></div>
+            <span class="step-proof">Search + page evidence</span>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <div><strong>Compare</strong><p>Use Page Battle to inspect observable differences instead of guessing what a competitor does better.</p></div>
+            <span class="step-proof">Observed facts</span>
+          </li>
+          <li>
+            <span class="step-number">04</span>
+            <div><strong>Act</strong><p>Turn the evidence into a focused update, content brief or grounded AI conversation.</p></div>
+            <span class="step-proof step-proof--action">Evidence-backed action</span>
+          </li>
+        </ol>
+      </section>
+
+      <section id="product" class="product-section">
+        <div class="section-shell">
+          <div class="product-heading">
+            <div>
+              <p class="eyebrow">INSIDE RANKTWIG</p>
+              <h2>Built around real SEO decisions, not decorative dashboards.</h2>
             </div>
-            <ul class="hero-notes" aria-label="Product highlights">
-              <li>Read-only GSC</li>
-              <li>Bring your own AI</li>
-              <li>ChatGPT + MCP</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="hero-caption">Follow the orange trail.</p>
-      </section>
-
-      <section class="opening shell" aria-labelledby="opening-title">
-        <p class="section-number">00 / THE SMALL ANNOYANCE</p>
-        <div class="opening-grid">
-          <h2 id="opening-title">Search Console tells you what happened. Then it leaves you with the archaeology.</h2>
-          <div class="opening-copy">
-            <p>
-              I built RankTwig because useful SEO evidence was already sitting there—queries, pages, impressions, changes—but turning it into one sensible next action still took too many tabs.
-            </p>
-            <p class="aside-note">RankTwig keeps the source, date range and limitations attached. No mysterious “SEO score” pretending to know everything.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" class="trail-section" aria-labelledby="trail-title">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="section-number">01 / FOLLOW THE EVIDENCE</p>
-            <h2 id="trail-title">One signal becomes a clear next move.</h2>
-            <p>Start with demand your site already earns. Investigate before rewriting. Keep every recommendation tied to something observable.</p>
+            <p>Every workflow keeps source, date range and limitations visible so you can see why something surfaced before you act on it.</p>
           </div>
 
-          <ol class="trail-list">
-            <li>
-              <span class="trail-index">01</span>
-              <div><strong>Find</strong><p>Surface striking-distance queries, CTR gaps, rising demand, declines and cannibalization.</p></div>
-              <span class="trail-proof">From connected GSC data</span>
-            </li>
-            <li>
-              <span class="trail-index">02</span>
-              <div><strong>Investigate</strong><p>Bring the page, its queries, performance changes and a fresh bounded crawl together.</p></div>
-              <span class="trail-proof">Metrics + current page facts</span>
-            </li>
-            <li>
-              <span class="trail-index">03</span>
-              <div><strong>Compare</strong><p>Put your page beside a public competitor and see where the observable differences actually are.</p></div>
-              <span class="trail-proof">Page Battle</span>
-            </li>
-            <li>
-              <span class="trail-index">04</span>
-              <div><strong>Act</strong><p>Turn the evidence into a focused update, a useful content brief or a conversation with your AI.</p></div>
-              <span class="trail-proof trail-proof--orange">One defensible next move</span>
-            </li>
-          </ol>
-        </div>
-      </section>
+          <div class="product-grid">
+            <article class="product-card product-card--wide">
+              <div class="card-topline"><span>PAGE INVESTIGATOR</span><span>01</span></div>
+              <div class="card-copy">
+                <h3>Understand a page before changing it.</h3>
+                <p>Performance, ranking queries and current page evidence in one place. Add your AI only when another layer of reasoning is useful.</p>
+              </div>
+              <div class="investigator-ui">
+                <div class="ui-bar"><span>/best-service-guide/</span><span>Last 28 days vs previous</span></div>
+                <div class="metric-row">
+                  <div><small>IMPRESSIONS</small><strong>1,240</strong><span>+18.4%</span></div>
+                  <div><small>CLICKS</small><strong>9</strong><span class="negative">−12.0%</span></div>
+                  <div><small>AVG. POSITION</small><strong>21.6</strong><span>+2.1</span></div>
+                </div>
+                <div class="signal-row"><span>Striking distance</span><span>CTR gap</span><span>Fresh crawl ready</span><strong>Investigate →</strong></div>
+              </div>
+            </article>
 
-      <section id="inside" class="work-section shell" aria-labelledby="work-title">
-        <div class="section-heading section-heading--wide">
-          <p class="section-number">02 / INSIDE RANKTWIG</p>
-          <h2 id="work-title">Four ways to stop guessing.</h2>
-        </div>
+            <article class="product-card">
+              <div class="card-topline"><span>PAGE BATTLE</span><span>02</span></div>
+              <div class="card-copy">
+                <h3>See where the competing page has an edge.</h3>
+                <p>Compare titles, intent, internal links, schema and current page facts side by side.</p>
+              </div>
+              <div class="battle-ui">
+                <div><span>Your page</span><strong>Useful guide</strong><small>Weak decision section</small></div>
+                <i>VS</i>
+                <div><span>Competitor</span><strong>Commercial guide</strong><small>Clearer trust cues</small></div>
+              </div>
+              <div class="action-strip"><span>Move</span><strong>Fix the decision section first</strong></div>
+            </article>
 
-        <div class="work-list">
-          <article>
-            <div class="work-meta"><span>PAGE INVESTIGATOR</span><span>01</span></div>
-            <h3>Understand a page before changing it.</h3>
-            <p>See performance, ranking queries and current page evidence together. Add your AI only when you want another layer of reasoning.</p>
-            <div class="evidence-strip" aria-label="Example evidence trail">
-              <span>28-day comparison</span><i>→</i><span>Top queries</span><i>→</i><span>Fresh crawl</span><i>→</i><strong>Next action</strong>
-            </div>
-          </article>
-
-          <article>
-            <div class="work-meta"><span>PAGE BATTLE</span><span>02</span></div>
-            <h3>See where the competing page has an edge.</h3>
-            <p>Compare titles, headings, links, schema and other observed facts without turning one competitor URL into fake certainty.</p>
-            <dl class="mini-ledger">
-              <div><dt>Your page</dt><dd>Useful guide · weak decision section</dd></div>
-              <div><dt>Competitor</dt><dd>Clear comparison · stronger trust cues</dd></div>
-              <div><dt>Move</dt><dd>Fix the decision section first</dd></div>
-            </dl>
-          </article>
-
-          <article>
-            <div class="work-meta"><span>CONTENT BRIEF</span><span>03</span></div>
-            <h3>Build from what your site already knows.</h3>
-            <p>Use Search Console evidence, existing pages and competitor sources you choose. RankTwig checks overlap before inventing another article.</p>
-            <ul class="brief-lines">
-              <li><span>01</span>Existing demand and intent</li>
-              <li><span>02</span>Overlap risk with current pages</li>
-              <li><span>03</span>Useful internal-link candidates</li>
-            </ul>
-          </article>
-
-          <article>
-            <div class="work-meta"><span>CHATGPT + MCP</span><span>04</span></div>
-            <h3>Bring the evidence into the conversation.</h3>
-            <p>Connect RankTwig once, then ask naturally. Your compatible AI client can request the page, query and opportunity evidence it needs.</p>
-            <div class="chat-example">
-              <p class="chat-user">Bro, what should I work on today?</p>
-              <p class="chat-answer"><strong>Start with /best-service-guide/.</strong> It already has demand, but the queries around positions 18–29 are not earning enough clicks. Fix the snippet and decision section before rewriting the page.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="proof-section" aria-labelledby="proof-title">
-        <div class="shell proof-grid">
-          <div>
-            <p class="section-number">03 / SHOW THE WORK</p>
-            <h2 id="proof-title">Never wonder why the AI said that.</h2>
-            <p>Observed data, calculated signals and AI inference remain distinguishable. When the evidence is thin, RankTwig should say so.</p>
-          </div>
-
-          <div class="proof-ledger">
-            <div><span>Observed</span><strong>Clicks fell while rankings held</strong><small>GSC · current 28 days vs prior 28 days</small></div>
-            <div><span>Observed</span><strong>High-impression queries still match the page</strong><small>Connected query evidence</small></div>
-            <div><span>Calculated</span><strong>CTR gap deserves investigation</strong><small>Deterministic RankTwig signal</small></div>
-            <div class="proof-ledger__answer"><span>Next move</span><strong>Start with the title and snippet</strong><small>AI reasoning checked against the evidence</small></div>
+            <article class="product-card">
+              <div class="card-topline"><span>CHATGPT + MCP</span><span>03</span></div>
+              <div class="card-copy">
+                <h3>Your SEO data, inside the conversation.</h3>
+                <p>Connect once. Then ask naturally while RankTwig brings the relevant site, page, query and opportunity evidence with it.</p>
+              </div>
+              <div class="chat-ui">
+                <p class="chat-user">Bro, what should I work on today?</p>
+                <p class="chat-ai"><strong>Start with /best-service-guide/.</strong> It already has demand, but several relevant queries sit around positions 18–29. Fix the snippet and decision section before rewriting the page.</p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="ai-section shell" aria-labelledby="ai-title">
-        <p class="section-number">04 / YOUR AI, NOT OUR CREDIT BUNDLE</p>
-        <div class="ai-grid">
-          <div>
-            <h2 id="ai-title">Bring the model you already trust.</h2>
-            <p>Connect OpenAI, Claude, Gemini, DeepSeek or OpenRouter. RankTwig provides the search context; your provider handles the model.</p>
-          </div>
-          <ul>
-            <li><span>OpenAI</span><small>Your key</small></li>
-            <li><span>Claude</span><small>Your key</small></li>
-            <li><span>Gemini</span><small>Your key</small></li>
-            <li><span>DeepSeek</span><small>Your key</small></li>
-            <li><span>OpenRouter</span><small>Your key</small></li>
-          </ul>
+      <section class="proof-section section-shell" aria-labelledby="proof-title">
+        <div class="section-heading section-heading--compact">
+          <p class="eyebrow">SHOW THE WORK</p>
+          <h2 id="proof-title">Never wonder why the AI said that.</h2>
         </div>
-        <p class="hand-note">No RankTwig AI credits. No model markup. The estimate appears before supported AI runs.</p>
+
+        <div class="evidence-ledger">
+          <div><span>OBSERVED</span><strong>Clicks fell while rankings held</strong><small>GSC · current 28 days vs prior 28 days</small></div>
+          <div><span>OBSERVED</span><strong>High-impression queries still match the page</strong><small>Connected query evidence</small></div>
+          <div><span>CALCULATED</span><strong>CTR gap deserves investigation</strong><small>Deterministic RankTwig signal</small></div>
+          <div class="ledger-answer"><span>NEXT MOVE</span><strong>Start with the title and snippet</strong><small>AI reasoning checked against the evidence</small></div>
+        </div>
       </section>
 
-      <section id="pricing" class="pricing-section" aria-labelledby="pricing-title">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="section-number">05 / START SMALL</p>
-            <h2 id="pricing-title">Use the real product for free.</h2>
-            <p>Not a seven-day tour. Connect one website, use BYOK AI and see whether RankTwig earns a place in your workflow.</p>
+      <section id="pricing" class="pricing-section">
+        <div class="section-shell pricing-inner">
+          <div class="section-heading section-heading--compact">
+            <p class="eyebrow">START SMALL</p>
+            <h2>Use the real product for free.</h2>
+            <p>Connect one website and see whether RankTwig earns a place in your workflow.</p>
           </div>
 
           <div class="plans">
             <article>
-              <div><span class="plan-name">Free</span><strong>$0</strong><small>forever</small></div>
-              <p>One connected website with the intelligence core and useful monthly workflow limits.</p>
-              <ul>
-                <li>1 connected website</li>
-                <li>25 Page Investigations / month</li>
-                <li>10 Page Battles / month</li>
-                <li>5 Content Briefs / month</li>
-              </ul>
-              <a class="button button--ink" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Start free <span aria-hidden="true">→</span></a>
+              <div class="plan-heading"><span>FREE</span><strong>$0</strong><small>forever</small></div>
+              <p>One connected website with the intelligence core and useful workflow limits.</p>
+              <ul><li>1 connected website</li><li>25 Page Investigations / month</li><li>10 Page Battles / month</li><li>5 Content Briefs / month</li></ul>
+              <a class="button button-secondary" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Start Free</a>
             </article>
-
-            <article class="plan--pro">
-              <div><span class="plan-name">Pro</span><strong>$29</strong><small>per month</small></div>
+            <article class="plan-pro">
+              <div class="plan-heading"><span>PRO</span><strong>$29</strong><small>per month</small></div>
               <p>More sites, generous workflow capacity, MCP, URL Groups and exports.</p>
-              <ul>
-                <li>Up to 5 connected websites</li>
-                <li>500 Investigations · 200 Battles</li>
-                <li>100 Content Briefs / month</li>
-                <li>ChatGPT + MCP, groups and exports</li>
-              </ul>
-              <a class="button button--orange" href={`${rankTwigUrl}/pricing`}>See Pro <span aria-hidden="true">→</span></a>
+              <ul><li>Up to 5 connected websites</li><li>500 Investigations · 200 Battles</li><li>100 Content Briefs / month</li><li>ChatGPT + MCP, groups and exports</li></ul>
+              <a class="button button-primary" href={`${rankTwigUrl}/pricing`}>See Pro <span aria-hidden="true">→</span></a>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="faq-section shell" aria-labelledby="faq-title">
-        <div class="faq-heading">
-          <p class="section-number">06 / BEFORE YOU CONNECT IT</p>
-          <h2 id="faq-title">A few sensible questions.</h2>
-        </div>
-        <div class="faq-list">
-          <details>
-            <summary>Why not just use Search Console?</summary>
-            <p>Search Console is the source of truth. RankTwig adds the workflow around it: comparisons, opportunity signals, page evidence, investigations, battles, briefs and optional AI reasoning.</p>
-          </details>
-          <details>
-            <summary>Does RankTwig modify my Search Console data?</summary>
-            <p>No. The Google Search Console connection is read-only. RankTwig cannot change your property through that permission.</p>
-          </details>
-          <details>
-            <summary>Do I need an AI key?</summary>
-            <p>No. Pages, keywords, opportunities, deterministic signals and SEO Health work without one. Connect a supported provider only when you want AI reasoning.</p>
-          </details>
-          <details>
-            <summary>Does it guarantee rankings?</summary>
-            <p>No. RankTwig provides evidence and decision support. It keeps limitations visible instead of turning observations into promises.</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="closing" aria-labelledby="closing-title">
-        <div class="closing-art" style={`--hero-image: url('${heroImage}')`} aria-hidden="true"></div>
-        <div class="shell closing-copy">
-          <p class="section-number">THE NEXT MOVE IS PROBABLY ALREADY THERE</p>
-          <h2 id="closing-title">Follow the evidence.</h2>
+      <section class="closing-section">
+        <div class="closing-glow" aria-hidden="true"></div>
+        <div class="section-shell closing-inner">
+          <p class="eyebrow">THE NEXT MOVE IS PROBABLY ALREADY THERE</p>
+          <h2>Follow the evidence.</h2>
           <p>Connect Search Console. Let RankTwig show you what deserves attention. Decide with the source still attached.</p>
-          <div class="hero-actions">
-            <a class="button button--orange" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Put my search data to work <span aria-hidden="true">→</span></a>
-            <a class="button button--quiet" href={`${rankTwigUrl}/demo`}>Look around first</a>
+          <div class="hero-actions-main">
+            <a class="button button-primary" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Put my search data to work <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href={`${rankTwigUrl}/demo`}>Explore first</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <a class="brand brand--footer" href="#top" aria-label="Back to the top">
-        <svg viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="currentColor"></rect>
-          <path d="M8.5 30.2c4.1-3 7.7-6.4 10-10.2 1.7-2.8 2.7-5.8 3.1-9.3.1-1.1 1.8-1.1 1.9 0 .1 2.8-.6 5.6-1.4 7.7 2.7-2.1 5.5-4 8.4-5.7.9-.5 1.7.7 1.1 1.5-4.4 6.3-10.5 10.7-17.6 13 4.2.1 8 .8 11.4 2.1 1 .4.8 1.9-.3 2-5.6-.4-11.2-.8-18 1.6-1 .3-1.7-1.1-.8-1.7 1.6-1.2 2.1-1.8 2.6-2.7Z" fill="white"></path>
-        </svg>
+      <a class="brand" href="#top" aria-label="Back to the top">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="currentColor"></rect><path d="M8.5 30.2c4.1-3 7.7-6.4 10-10.2 1.7-2.8 2.7-5.8 3.1-9.3.1-1.1 1.8-1.1 1.9 0 .1 2.8-.6 5.6-1.4 7.7 2.7-2.1 5.5-4 8.4-5.7.9-.5 1.7.7 1.1 1.5-4.4 6.3-10.5 10.7-17.6 13 4.2.1 8 .8 11.4 2.1 1 .4.8 1.9-.3 2-5.6-.4-11.2-.8-18 1.6-1 .3-1.7-1.1-.8-1.7 1.6-1.2 2.1-1.8 2.6-2.7Z" fill="white"></path></svg>
         <span>RankTwig</span>
       </a>
-      <p>Evidence-first SEO intelligence. Built by Naman.</p>
+      <p>SEO intelligence that turns evidence into action.</p>
       <div><a href={`${rankTwigUrl}/privacy`}>Privacy</a><a href={`${rankTwigUrl}/terms`}>Terms</a><a href="mailto:team@ranktwig.com">Contact</a></div>
     </footer>
   </body>
@@ -287,219 +248,214 @@ const rankTwigUrl = 'https://ranktwig.com';
 
 <style is:global>
   :root {
-    --navy: #101a3d;
-    --navy-deep: #0b122d;
-    --blue: #6f91ea;
-    --blue-soft: #c6d3f6;
-    --cream: #fff2dd;
-    --paper: #f5f1e8;
-    --ink: #171817;
-    --muted: #65635d;
-    --orange: #f36b00;
-    --rule: #d5d0c5;
-    --sans: Inter, Geist, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-    --serif: Georgia, Cambria, "Times New Roman", serif;
-    --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --canvas: #09090b;
+    --surface: #121215;
+    --surface-raised: #18181b;
+    --surface-overlay: #1c1c20;
+    --ink: #fafafa;
+    --ink-muted: #a1a1aa;
+    --ink-faint: #71717a;
+    --line: #27272a;
+    --line-subtle: #1e1e22;
+    --action: #f97316;
+    --action-hover: #ea580c;
+    --action-muted: rgb(249 115 22 / 12%);
+    --positive: #22c55e;
+    --risk: #ef4444;
+    --ai: #6366f1;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-  body { min-width: 20rem; margin: 0; background: var(--paper); color: var(--ink); line-height: 1.6; }
+  html { min-width: 320px; scroll-behavior: smooth; background: var(--canvas); color: var(--ink); font-family: var(--sans); }
+  body { min-width: 320px; margin: 0; overflow-x: hidden; background: var(--canvas); color: var(--ink); font-family: var(--sans); line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
   img, svg { display: block; max-width: 100%; }
-  a { color: inherit; text-underline-offset: .22em; }
-  ::selection { background: #ffd1af; color: var(--ink); }
-  :focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+  ::selection { background: var(--action-muted); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--action); outline-offset: 3px; }
 
-  .skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; padding: .7rem 1rem; color: white; background: var(--orange); transform: translateY(-160%); }
+  .skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; transform: translateY(-150%); border-radius: .5rem; background: var(--action); padding: .65rem .9rem; color: #09090b; font-size: .875rem; font-weight: 600; }
   .skip-link:focus { transform: translateY(0); }
 
-  .shell { width: min(100% - clamp(2.2rem, 8vw, 6rem), 76rem); margin-inline: auto; }
-  .site-header { position: absolute; z-index: 20; top: 0; left: 50%; width: min(100% - clamp(2rem, 6vw, 5rem), 82rem); min-height: 4.6rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; color: #f5f5f2; transform: translateX(-50%); }
-  .brand { display: inline-flex; align-items: center; gap: .62rem; justify-self: start; color: var(--orange); font-size: .98rem; font-weight: 760; letter-spacing: -.03em; text-decoration: none; }
-  .brand svg { width: 1.72rem; height: 1.72rem; }
-  .brand span { color: #f5f5f2; }
-  .site-header nav { display: flex; align-items: center; gap: clamp(1.15rem, 2.5vw, 2rem); }
-  .site-header nav a, .header-action { font-size: .69rem; font-weight: 580; text-decoration: none; }
-  .site-header nav a { color: rgb(245 245 242 / 68%); }
-  .site-header nav a:hover { color: #fff; }
-  .header-action { justify-self: end; padding: .55rem .78rem; border: 1px solid rgb(255 255 255 / 34%); border-radius: .62rem; color: #f8f8f5; background: rgb(255 255 255 / 2%); }
-  .header-action:hover { border-color: rgb(255 255 255 / 58%); background: rgb(255 255 255 / 5%); }
+  .section-shell, .header-shell { width: min(100% - 2rem, 76rem); margin-inline: auto; }
 
-  .hero { position: relative; min-height: clamp(54rem, 100svh, 64rem); display: block; overflow: hidden; color: #f7f7f4; background: #070b0b; isolation: isolate; }
-  .hero::before { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 77%, rgb(243 107 0 / 13%), transparent 23%), radial-gradient(circle at 6% 90%, rgb(58 77 255 / 28%), transparent 25%), radial-gradient(circle at 94% 90%, rgb(55 75 255 / 28%), transparent 25%), linear-gradient(180deg, #070b0b 0%, #070b0b 53%, #081018 100%); }
-  .hero::after { content: ""; position: absolute; z-index: 1; left: 50%; bottom: -3.5rem; width: min(78rem, 108vw); height: 56%; pointer-events: none; background-image: var(--hero-image); background-repeat: no-repeat; background-position: center bottom; background-size: cover; opacity: .96; transform: translateX(-50%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 22%) 8%, #000 24%, #000 100%); mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 22%) 8%, #000 24%, #000 100%); }
-  .hero-veil { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgb(7 11 11 / 18%) 0%, transparent 44%, transparent 76%, rgb(7 11 11 / 26%) 100%), radial-gradient(ellipse 38% 21% at 50% 72%, rgb(243 107 0 / 12%), transparent 72%); }
-  .hero-veil::after { content: ""; position: absolute; inset: 0; opacity: .12; background-image: radial-gradient(rgb(255 255 255 / 42%) .45px, transparent .55px); background-size: 4px 4px; mix-blend-mode: soft-light; }
-  .hero-inner { position: relative; z-index: 3; width: min(100% - clamp(2.2rem, 8vw, 6rem), 76rem); margin-inline: auto; padding: clamp(8.3rem, 15vh, 10rem) 0 30rem; }
-  .hero-copy { width: min(52rem, 92%); margin-inline: auto; text-align: center; }
-  .eyebrow, .section-number { margin: 0; font-family: var(--mono); font-size: .67rem; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
-  .eyebrow { width: fit-content; max-width: 100%; margin-inline: auto; display: inline-flex; align-items: center; justify-content: center; gap: .48rem; padding: .34rem .58rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; color: rgb(245 245 242 / 72%); background: rgb(255 255 255 / 3%); letter-spacing: .02em; text-transform: none; backdrop-filter: blur(8px); }
-  .eyebrow span { width: .36rem; height: .36rem; flex: 0 0 auto; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 .2rem rgb(243 107 0 / 12%); }
-  .eyebrow b { color: rgb(245 245 242 / 55%); font-weight: 500; }
-  .hero h1 { max-width: 13ch; margin: 1.22rem auto 0; font-family: var(--sans); font-size: clamp(3.25rem, 5.65vw, 5.75rem); font-weight: 520; line-height: .96; letter-spacing: -.06em; text-wrap: balance; }
-  .hero-intro { max-width: 43rem; margin: 1.35rem auto 0; color: rgb(234 238 239 / 55%); font-size: clamp(.94rem, 1.18vw, 1.05rem); line-height: 1.65; }
-  .hero-actions { margin-top: 1.65rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .65rem; }
-  .button { min-height: 2.85rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .68rem 1rem; border: 1px solid transparent; border-radius: .58rem; font-size: .76rem; font-weight: 680; text-decoration: none; transition: transform 220ms ease, background-color 160ms ease, border-color 160ms ease; }
-  .button:hover { transform: translateY(-2px); }
-  .button--orange { color: #111; background: #f6f5ef; }
-  .button--orange:hover { background: #fff; }
-  .button--quiet { color: #f2f2ef; border-color: rgb(255 255 255 / 28%); background: rgb(255 255 255 / 2%); }
-  .button--quiet:hover { border-color: rgb(255 255 255 / 52%); background: rgb(255 255 255 / 5%); }
-  .button--ink { color: var(--cream); background: var(--ink); border-radius: 0; }
-  .hero-notes { margin: 1rem auto 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.15rem; color: rgb(219 227 250 / 55%); font-family: var(--mono); font-size: .59rem; list-style: none; }
-  .hero-notes li::before { content: "·"; margin-right: .42rem; color: var(--orange); }
-  .hero-caption { position: absolute; z-index: 4; right: clamp(1.2rem, 4vw, 3.6rem); bottom: 1.2rem; margin: 0; color: rgb(255 255 255 / 34%); font-family: var(--mono); font-size: .58rem; letter-spacing: .04em; }
+  .site-header { position: absolute; z-index: 50; inset: 0 0 auto; }
+  .header-shell { min-height: 4.75rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; }
+  .brand { display: inline-flex; align-items: center; gap: .625rem; width: fit-content; color: var(--action); text-decoration: none; }
+  .brand svg { width: 2rem; height: 2rem; flex: 0 0 auto; border-radius: .5rem; }
+  .brand span { color: var(--ink); font-size: 1.0625rem; font-weight: 600; letter-spacing: -.025em; }
+  .site-header nav { display: flex; align-items: center; gap: .1rem; }
+  .site-header nav a, .login-link { min-height: 2.5rem; display: inline-flex; align-items: center; padding: .65rem .78rem; border-radius: .5rem; color: var(--ink-muted); font-size: .8125rem; font-weight: 500; text-decoration: none; transition: 150ms ease; }
+  .site-header nav a:hover, .login-link:hover { color: var(--ink); background: rgb(255 255 255 / 4%); }
+  .header-actions { justify-self: end; display: flex; align-items: center; gap: .25rem; }
+  .header-cta { min-height: 2.5rem; display: inline-flex; align-items: center; gap: .45rem; padding: .65rem .9rem; border-radius: .5rem; background: var(--action); color: #09090b; font-size: .8125rem; font-weight: 600; text-decoration: none; transition: 150ms ease; }
+  .header-cta:hover { background: var(--action-hover); color: #fff; transform: translateY(-1px); }
 
-  .opening { padding-block: clamp(5rem, 10vw, 9rem); }
-  .section-number { color: #8f3d18; }
-  .opening-grid { margin-top: 1.4rem; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, .7fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .opening h2, .section-heading h2, .proof-section h2, .ai-section h2, .faq-section h2, .closing h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.6rem, 5.2vw, 5.1rem); font-weight: 400; line-height: 1.02; letter-spacing: -.055em; text-wrap: balance; }
-  .opening-copy { padding-top: .5rem; color: var(--muted); }
-  .opening-copy > p { margin: 0; font-family: var(--serif); font-size: 1.1rem; line-height: 1.8; }
-  .aside-note { margin-top: 2rem !important; padding: 1.2rem 0 0 1.2rem; border-top: 1px solid var(--rule); border-left: 3px solid var(--orange); font-family: var(--mono) !important; font-size: .72rem !important; line-height: 1.75 !important; }
+  .hero { position: relative; min-height: clamp(58rem, 100svh, 68rem); overflow: hidden; isolation: isolate; background: var(--canvas); }
+  .hero::before { content: ""; position: absolute; z-index: -3; inset: 0; background: linear-gradient(180deg, #09090b 0%, #09090b 51%, #0b0c12 76%, #09090b 100%); }
+  .hero-grid { position: absolute; z-index: -2; inset: 0; opacity: .6; background-image: radial-gradient(rgb(255 255 255 / 7%) .75px, transparent .75px); background-size: 24px 24px; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 44%, transparent 82%); mask-image: linear-gradient(to bottom, #000 0%, #000 44%, transparent 82%); }
+  .hero-glow { position: absolute; z-index: -1; border-radius: 999px; filter: blur(20px); pointer-events: none; }
+  .hero-glow--orange { left: 50%; bottom: 4%; width: min(46rem, 76vw); height: 24rem; background: radial-gradient(circle, rgb(249 115 22 / 20%), transparent 68%); transform: translateX(-50%); }
+  .hero-glow--blue-left { left: -16rem; bottom: -8rem; width: 34rem; height: 34rem; background: radial-gradient(circle, rgb(99 102 241 / 25%), transparent 70%); }
+  .hero-glow--blue-right { right: -16rem; bottom: -8rem; width: 34rem; height: 34rem; background: radial-gradient(circle, rgb(59 130 246 / 22%), transparent 70%); }
 
-  .trail-section { padding-block: clamp(5rem, 9vw, 8rem); color: var(--cream); background: var(--navy-deep); }
-  .trail-section .section-number, .proof-section .section-number, .closing .section-number { color: var(--blue); }
-  .section-heading { max-width: 49rem; }
-  .section-heading h2 { margin-top: 1.25rem; }
-  .section-heading > p:last-child { max-width: 39rem; margin: 1.45rem 0 0; color: var(--muted); font-family: var(--serif); font-size: 1.05rem; line-height: 1.75; }
-  .trail-section .section-heading > p:last-child { color: #aebde5; }
-  .trail-list { margin: 4rem 0 0; padding: 0; border-top: 1px solid rgb(111 145 234 / 28%); list-style: none; }
-  .trail-list li { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(10rem, .42fr); gap: 2rem; align-items: center; padding: 1.65rem 0; border-bottom: 1px solid rgb(111 145 234 / 28%); }
-  .trail-index, .trail-proof { font-family: var(--mono); font-size: .65rem; }
-  .trail-index { color: var(--blue); }
-  .trail-list strong { display: block; font-family: var(--serif); font-size: 1.55rem; font-weight: 400; }
-  .trail-list p { margin: .25rem 0 0; color: #aebde5; font-size: .86rem; }
-  .trail-proof { color: var(--blue-soft); text-align: right; }
-  .trail-proof--orange { color: #ff9b51; }
+  .hero-copy { position: relative; z-index: 5; width: min(100% - 2rem, 58rem); margin-inline: auto; padding-top: clamp(8rem, 14vh, 10rem); text-align: center; }
+  .announcement { display: inline-flex; align-items: center; gap: .5rem; padding: .37rem .62rem; border: 1px solid rgb(255 255 255 / 12%); border-radius: 999px; background: rgb(255 255 255 / 3%); color: var(--ink-muted); font-family: var(--mono); font-size: .6875rem; font-weight: 500; text-decoration: none; box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%); backdrop-filter: blur(12px); }
+  .announcement:hover { border-color: rgb(249 115 22 / 45%); color: var(--ink); }
+  .announcement-dot { width: .4rem; height: .4rem; border-radius: 50%; background: var(--action); box-shadow: 0 0 0 .23rem rgb(249 115 22 / 10%); }
+  .hero h1 { max-width: 13ch; margin: 1.3rem auto 0; font-size: clamp(3.4rem, 6.1vw, 6.2rem); font-weight: 500; line-height: .94; letter-spacing: -.062em; text-wrap: balance; }
+  .hero-lede { max-width: 45rem; margin: 1.45rem auto 0; color: var(--ink-muted); font-size: clamp(.95rem, 1.25vw, 1.08rem); line-height: 1.75; text-wrap: balance; }
+  .hero-actions-main { margin-top: 1.65rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; }
+  .button { min-height: 3rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .72rem 1rem; border: 1px solid transparent; border-radius: .5rem; font-size: .875rem; font-weight: 600; text-decoration: none; transition: 150ms ease; }
+  .button:hover { transform: translateY(-1px); }
+  .button-primary { background: var(--action); color: #09090b; }
+  .button-primary:hover { background: var(--action-hover); color: #fff; }
+  .button-secondary { border-color: var(--line); background: var(--surface-raised); color: var(--ink); }
+  .button-secondary:hover { border-color: var(--ink-faint); background: var(--surface-overlay); }
+  .hero-reassurance { margin-top: 1.15rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1.4rem; color: var(--ink-faint); font-family: var(--mono); font-size: .625rem; }
+  .hero-reassurance span::before { content: "•"; margin-right: .45rem; color: var(--action); }
 
-  .work-section { padding-block: clamp(5rem, 10vw, 9rem); }
-  .section-heading--wide { max-width: 58rem; }
-  .work-list { margin-top: 3.5rem; border-top: 1px solid var(--ink); }
-  .work-list article { display: grid; grid-template-columns: minmax(9rem, .32fr) minmax(17rem, .7fr) minmax(20rem, 1fr); gap: clamp(1.5rem, 5vw, 5rem); padding-block: 3rem; border-bottom: 1px solid var(--rule); align-items: start; }
-  .work-meta { display: flex; justify-content: space-between; gap: 1rem; color: #8f3d18; font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; }
-  .work-list h3 { margin: 0; font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 400; line-height: 1.08; letter-spacing: -.04em; }
-  .work-list article > p { margin: .75rem 0 0; color: var(--muted); font-family: var(--serif); }
-  .work-list article > :nth-child(n+4) { grid-column: 3; }
-  .evidence-strip { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: var(--muted); font-family: var(--mono); font-size: .62rem; }
-  .evidence-strip i { color: var(--orange); font-style: normal; }
-  .evidence-strip strong { padding: .35rem .5rem; color: white; background: var(--orange); font-family: var(--mono); font-size: inherit; }
-  .mini-ledger { margin: 0; border-top: 1px solid var(--rule); }
-  .mini-ledger div { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding: .7rem 0; border-bottom: 1px solid var(--rule); }
-  .mini-ledger dt { color: var(--muted); font-family: var(--mono); font-size: .62rem; text-transform: uppercase; }
-  .mini-ledger dd { margin: 0; font-size: .78rem; }
-  .brief-lines { margin: 0; padding: 0; list-style: none; }
-  .brief-lines li { padding: .65rem 0; border-bottom: 1px solid var(--rule); font-size: .78rem; }
-  .brief-lines span { margin-right: 1rem; color: var(--orange); font-family: var(--mono); font-size: .62rem; }
-  .chat-example { display: grid; gap: .65rem; }
-  .chat-example p { max-width: 90%; margin: 0; padding: .8rem 1rem; font-size: .76rem; line-height: 1.65; }
-  .chat-user { justify-self: end; color: white; background: var(--orange); }
-  .chat-answer { border: 1px solid var(--rule); background: #fffaf1; }
+  .hero-art { position: absolute; z-index: 3; left: 50%; bottom: -1.5rem; width: min(82rem, 112vw); height: 49%; transform: translateX(-50%); pointer-events: none; }
+  .hero-art::before { content: ""; position: absolute; z-index: -1; left: 10%; right: 10%; bottom: 2%; height: 48%; border-radius: 50%; background: radial-gradient(ellipse, rgb(249 115 22 / 14%), transparent 66%); filter: blur(24px); }
+  .hero-art-haze { position: absolute; z-index: 2; inset: 0; background: linear-gradient(180deg, var(--canvas) 0%, rgb(9 9 11 / 92%) 5%, transparent 27%, transparent 90%, rgb(9 9 11 / 16%) 100%); }
+  .hero-art img { position: absolute; z-index: 1; left: 50%; bottom: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform: translateX(-50%); image-rendering: auto; filter: saturate(1.06) contrast(1.02); }
+  .floating-proof { position: absolute; z-index: 4; width: 13.5rem; padding: .85rem .9rem; border: 1px solid rgb(255 255 255 / 12%); border-radius: .72rem; background: rgb(18 18 21 / 82%); box-shadow: 0 18px 60px rgb(0 0 0 / 28%), inset 0 1px 0 rgb(255 255 255 / 5%); backdrop-filter: blur(16px); }
+  .floating-proof--left { left: 8%; bottom: 19%; transform: rotate(-2deg); }
+  .floating-proof--right { right: 8%; bottom: 26%; transform: rotate(2deg); }
+  .proof-kicker { display: block; color: var(--action); font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .08em; }
+  .floating-proof strong { display: block; margin-top: .36rem; font-size: .78rem; font-weight: 600; }
+  .floating-proof small { display: block; margin-top: .24rem; color: var(--ink-faint); font-family: var(--mono); font-size: .54rem; line-height: 1.5; }
 
-  .proof-section { padding-block: clamp(5rem, 9vw, 8rem); color: var(--cream); background: var(--navy); }
-  .proof-grid { display: grid; grid-template-columns: minmax(18rem, .72fr) minmax(24rem, 1fr); gap: clamp(3rem, 9vw, 8rem); align-items: start; }
-  .proof-section h2 { margin-top: 1.25rem; }
-  .proof-section .proof-grid > div:first-child > p:last-child { max-width: 31rem; color: #aebde5; font-family: var(--serif); }
-  .proof-ledger { border-top: 1px solid rgb(111 145 234 / 35%); }
-  .proof-ledger > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: .35rem 1.2rem; padding: 1rem 0; border-bottom: 1px solid rgb(111 145 234 / 25%); }
-  .proof-ledger span, .proof-ledger small { font-family: var(--mono); font-size: .62rem; }
-  .proof-ledger span { grid-row: 1 / 3; color: var(--blue); text-transform: uppercase; }
-  .proof-ledger strong { font-size: .82rem; font-weight: 650; }
-  .proof-ledger small { color: #91a5d8; }
-  .proof-ledger__answer { border-left: 3px solid var(--orange); padding-left: 1rem !important; background: rgb(243 107 0 / 5%); }
-  .proof-ledger__answer span { color: #ff9b51; }
+  .eyebrow { margin: 0; color: var(--action); font-family: var(--mono); font-size: .6875rem; font-weight: 500; letter-spacing: .08em; }
+  .section-heading { max-width: 46rem; }
+  .section-heading h2, .product-heading h2, .closing-inner h2 { margin: .85rem 0 0; font-size: clamp(2.5rem, 4.8vw, 4.7rem); font-weight: 500; line-height: .98; letter-spacing: -.052em; text-wrap: balance; }
+  .section-heading > p:last-child, .product-heading > p, .closing-inner > p:nth-of-type(2) { margin: 1.25rem 0 0; color: var(--ink-muted); font-size: 1rem; line-height: 1.75; }
+  .section-heading--compact { max-width: 38rem; }
 
-  .ai-section { padding-block: clamp(5rem, 10vw, 9rem); }
-  .ai-grid { margin-top: 1.2rem; display: grid; grid-template-columns: minmax(18rem, .9fr) minmax(22rem, 1fr); gap: clamp(3rem, 9vw, 9rem); align-items: end; }
-  .ai-grid > div > p { max-width: 36rem; color: var(--muted); font-family: var(--serif); font-size: 1.05rem; }
-  .ai-grid ul { margin: 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
-  .ai-grid li { display: flex; align-items: center; justify-content: space-between; padding: .85rem 0; border-bottom: 1px solid var(--rule); }
-  .ai-grid li span { font-family: var(--serif); font-size: 1.15rem; }
-  .ai-grid li small { color: var(--muted); font-family: var(--mono); font-size: .62rem; }
-  .hand-note { width: fit-content; margin: 2.3rem 0 0 auto; padding-bottom: .3rem; border-bottom: 2px solid var(--orange); color: #8f3d18; font-family: var(--serif); font-size: .9rem; font-style: italic; transform: rotate(-1deg); }
+  .flow-section { padding-block: clamp(6rem, 11vw, 10rem); }
+  .flow-steps { margin: 4rem 0 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+  .flow-steps li { display: grid; grid-template-columns: 3.8rem minmax(0, 1fr) minmax(9rem, .35fr); gap: 2rem; align-items: center; padding: 1.6rem 0; border-bottom: 1px solid var(--line); }
+  .step-number, .step-proof { color: var(--ink-faint); font-family: var(--mono); font-size: .625rem; }
+  .flow-steps strong { display: block; font-size: 1.35rem; font-weight: 600; letter-spacing: -.025em; }
+  .flow-steps p { max-width: 42rem; margin: .28rem 0 0; color: var(--ink-muted); font-size: .875rem; }
+  .step-proof { text-align: right; }
+  .step-proof--action { color: var(--action); }
 
-  .pricing-section { padding-block: clamp(5rem, 9vw, 8rem); border-block: 1px solid var(--rule); background: #ece8de; }
-  .plans { margin-top: 3.5rem; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-  .plans article { padding: clamp(1.6rem, 4vw, 3rem); }
-  .plans article + article { border-left: 1px solid var(--ink); }
-  .plans article > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: .3rem 1rem; }
-  .plan-name { align-self: start; color: #8f3d18; font-family: var(--mono); font-size: .65rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
-  .plans article strong { grid-row: 1 / 3; grid-column: 2; font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 400; line-height: .9; letter-spacing: -.06em; }
-  .plans article small { color: var(--muted); font-family: var(--mono); font-size: .62rem; }
-  .plans article > p { min-height: 4.8rem; margin: 1.8rem 0; color: var(--muted); font-family: var(--serif); }
-  .plans ul { margin: 0 0 2rem; padding: 0; border-top: 1px solid var(--rule); list-style: none; }
-  .plans li { padding: .68rem 0; border-bottom: 1px solid var(--rule); font-size: .77rem; }
-  .plans li::before { content: "↳"; margin-right: .7rem; color: var(--orange); }
-  .plan--pro { background: var(--cream); }
+  .product-section { padding-block: clamp(6rem, 11vw, 10rem); border-block: 1px solid var(--line-subtle); background: #0b0b0e; }
+  .product-heading { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .55fr); gap: clamp(3rem, 8vw, 7rem); align-items: end; }
+  .product-heading h2 { max-width: 14ch; }
+  .product-grid { margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .product-card { overflow: hidden; min-height: 28rem; padding: clamp(1.4rem, 2.5vw, 2rem); border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(180deg, rgb(24 24 27 / 92%), rgb(18 18 21 / 98%)); box-shadow: inset 0 1px 0 rgb(255 255 255 / 3%); }
+  .product-card--wide { grid-column: 1 / -1; min-height: 31rem; }
+  .card-topline { display: flex; justify-content: space-between; gap: 1rem; color: var(--ink-faint); font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; }
+  .card-copy { max-width: 37rem; margin-top: 1.6rem; }
+  .card-copy h3 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.7rem); font-weight: 500; line-height: 1.04; letter-spacing: -.045em; }
+  .card-copy p { margin: .85rem 0 0; color: var(--ink-muted); font-size: .875rem; line-height: 1.7; }
+  .investigator-ui { margin-top: 2rem; overflow: hidden; border: 1px solid var(--line); border-radius: .8rem; background: var(--canvas); }
+  .ui-bar { min-height: 2.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; border-bottom: 1px solid var(--line); color: var(--ink-faint); font-family: var(--mono); font-size: .6rem; }
+  .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .metric-row > div { padding: 1.2rem; border-right: 1px solid var(--line); }
+  .metric-row > div:last-child { border-right: 0; }
+  .metric-row small { display: block; color: var(--ink-faint); font-family: var(--mono); font-size: .55rem; }
+  .metric-row strong { display: block; margin-top: .35rem; font-size: 1.7rem; font-weight: 600; letter-spacing: -.04em; }
+  .metric-row span { color: var(--positive); font-family: var(--mono); font-size: .58rem; }
+  .metric-row .negative { color: var(--risk); }
+  .signal-row { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; padding: .9rem 1rem; border-top: 1px solid var(--line); }
+  .signal-row span { padding: .32rem .48rem; border: 1px solid var(--line); border-radius: .4rem; color: var(--ink-muted); font-family: var(--mono); font-size: .55rem; }
+  .signal-row strong { margin-left: auto; color: var(--action); font-size: .72rem; }
+  .battle-ui { margin-top: 2rem; display: grid; grid-template-columns: 1fr auto 1fr; gap: .8rem; align-items: center; }
+  .battle-ui > div { min-height: 7.2rem; display: flex; flex-direction: column; justify-content: center; padding: 1rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--canvas); }
+  .battle-ui span, .action-strip span { color: var(--ink-faint); font-family: var(--mono); font-size: .55rem; }
+  .battle-ui strong { margin-top: .3rem; font-size: .9rem; }
+  .battle-ui small { margin-top: .2rem; color: var(--ink-muted); font-size: .65rem; }
+  .battle-ui i { color: var(--action); font-family: var(--mono); font-size: .6rem; font-style: normal; }
+  .action-strip { margin-top: .7rem; display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 1rem; border-left: 2px solid var(--action); background: var(--action-muted); }
+  .action-strip strong { font-size: .72rem; }
+  .chat-ui { margin-top: 1.8rem; display: grid; gap: .7rem; }
+  .chat-ui p { margin: 0; padding: .85rem 1rem; border-radius: .8rem; font-size: .72rem; line-height: 1.65; }
+  .chat-user { max-width: 78%; justify-self: end; border-bottom-right-radius: .25rem !important; background: var(--action); color: #09090b; font-weight: 600; }
+  .chat-ai { max-width: 92%; border: 1px solid var(--line); border-bottom-left-radius: .25rem !important; background: var(--canvas); color: var(--ink-muted); }
+  .chat-ai strong { color: var(--ink); }
 
-  .faq-section { padding-block: clamp(5rem, 10vw, 9rem); display: grid; grid-template-columns: minmax(16rem, .65fr) minmax(24rem, 1fr); gap: clamp(3rem, 9vw, 9rem); }
-  .faq-section h2 { margin-top: 1.25rem; }
-  .faq-list { border-top: 1px solid var(--ink); }
-  .faq-list details { border-bottom: 1px solid var(--rule); }
-  .faq-list summary { position: relative; padding: 1.2rem 2.5rem 1.2rem 0; cursor: pointer; font-family: var(--serif); font-size: 1.05rem; list-style: none; }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after { content: "+"; position: absolute; right: .15rem; color: var(--orange); font-family: var(--mono); }
-  .faq-list details[open] summary::after { content: "−"; }
-  .faq-list details p { max-width: 43rem; margin: 0; padding: 0 2.5rem 1.3rem 0; color: var(--muted); font-size: .82rem; }
+  .proof-section { padding-block: clamp(6rem, 11vw, 10rem); display: grid; grid-template-columns: minmax(16rem, .65fr) minmax(24rem, 1fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .evidence-ledger { border-top: 1px solid var(--line); }
+  .evidence-ledger > div { display: grid; grid-template-columns: 6rem 1fr; gap: .25rem 1.2rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .evidence-ledger span, .evidence-ledger small { font-family: var(--mono); font-size: .58rem; }
+  .evidence-ledger span { grid-row: 1 / 3; color: var(--ink-faint); }
+  .evidence-ledger strong { font-size: .82rem; font-weight: 600; }
+  .evidence-ledger small { color: var(--ink-faint); }
+  .ledger-answer { margin-top: .5rem; padding-left: 1rem !important; border-left: 2px solid var(--action); background: var(--action-muted); }
+  .ledger-answer span { color: var(--action); }
 
-  .closing { position: relative; min-height: 39rem; display: flex; align-items: center; overflow: hidden; color: var(--cream); background: var(--navy-deep); isolation: isolate; }
-  .closing-art { position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(90deg, rgb(11 18 45 / 92%) 0%, rgb(11 18 45 / 62%) 52%, rgb(11 18 45 / 20%) 100%), var(--hero-image); background-repeat: no-repeat; background-position: center bottom; background-size: cover; transform: scaleX(-1); }
-  .closing-copy { padding-block: 6rem; }
-  .closing-copy > * { transform: scaleX(1); }
-  .closing h2 { max-width: 10ch; margin-top: 1.25rem; font-size: clamp(3.5rem, 8vw, 7.5rem); }
-  .closing-copy > p:nth-of-type(2) { max-width: 34rem; color: #b9c7ea; font-family: var(--serif); font-size: 1.05rem; }
+  .pricing-section { padding-block: clamp(6rem, 11vw, 10rem); border-block: 1px solid var(--line-subtle); background: #0b0b0e; }
+  .pricing-inner { display: grid; grid-template-columns: minmax(16rem, .6fr) minmax(30rem, 1fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); }
+  .plans article { padding: 1.6rem; }
+  .plans article + article { border-left: 1px solid var(--line); }
+  .plan-pro { background: var(--surface-raised); }
+  .plan-heading { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: .1rem .8rem; }
+  .plan-heading span { color: var(--action); font-family: var(--mono); font-size: .6rem; font-weight: 500; }
+  .plan-heading strong { grid-row: 1 / 3; grid-column: 2; font-size: 2.6rem; font-weight: 600; letter-spacing: -.055em; line-height: .9; }
+  .plan-heading small { color: var(--ink-faint); font-family: var(--mono); font-size: .55rem; }
+  .plans article > p { min-height: 4.5rem; margin: 1.4rem 0; color: var(--ink-muted); font-size: .78rem; line-height: 1.65; }
+  .plans ul { margin: 0 0 1.5rem; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+  .plans li { padding: .68rem 0; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: .72rem; }
+  .plans li::before { content: "↳"; margin-right: .6rem; color: var(--action); font-family: var(--mono); }
+  .plans .button { width: 100%; }
 
-  footer { min-height: 8rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2rem max(clamp(1.1rem, 4vw, 3rem), calc((100vw - 76rem) / 2)); color: #aebde5; background: #080d22; }
-  .brand--footer span { color: var(--cream); }
-  footer p { margin: 0; font-family: var(--serif); font-size: .8rem; }
+  .closing-section { position: relative; overflow: hidden; padding-block: clamp(7rem, 13vw, 12rem); text-align: center; }
+  .closing-section::before { content: ""; position: absolute; inset: 0; z-index: -2; background-image: radial-gradient(rgb(255 255 255 / 6%) .75px, transparent .75px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000, transparent 72%); mask-image: radial-gradient(circle at 50% 50%, #000, transparent 72%); }
+  .closing-glow { position: absolute; z-index: -1; left: 50%; top: 50%; width: 42rem; height: 24rem; border-radius: 50%; background: radial-gradient(ellipse, rgb(249 115 22 / 14%), transparent 70%); transform: translate(-50%, -50%); }
+  .closing-inner { max-width: 52rem; }
+  .closing-inner h2 { font-size: clamp(3.4rem, 7vw, 6.6rem); }
+  .closing-inner > p:nth-of-type(2) { max-width: 36rem; margin-inline: auto; }
+
+  footer { min-height: 8rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2rem max(1rem, calc((100vw - 76rem) / 2)); border-top: 1px solid var(--line-subtle); color: var(--ink-faint); background: #070709; }
+  footer p { margin: 0; font-size: .75rem; }
   footer > div { display: flex; gap: 1rem; }
-  footer > div a { font-size: .7rem; text-decoration: none; }
+  footer > div a { color: var(--ink-muted); font-size: .7rem; text-decoration: none; }
+  footer > div a:hover { color: var(--ink); }
 
-  @media (max-width: 900px) {
-    .site-header { grid-template-columns: 1fr auto; }
+  @media (max-width: 940px) {
+    .header-shell { grid-template-columns: 1fr auto; }
     .site-header nav { display: none; }
-    .hero { min-height: 54rem; }
-    .hero::after { width: min(72rem, 126vw); height: 52%; }
-    .hero-copy { width: min(46rem, 94%); }
-    .hero-inner { padding-bottom: 28rem; }
-    .opening-grid, .proof-grid, .ai-grid, .faq-section { grid-template-columns: 1fr; gap: 2.5rem; }
-    .work-list article { grid-template-columns: 8rem minmax(0, 1fr); gap: 1.2rem 2rem; }
-    .work-list article > p { grid-column: 2; }
-    .work-list article > :nth-child(n+4) { grid-column: 2; }
+    .login-link { display: none; }
+    .hero { min-height: 58rem; }
+    .hero-art { width: 126vw; height: 46%; }
+    .floating-proof--left { left: 7%; }
+    .floating-proof--right { right: 7%; }
+    .product-heading, .proof-section, .pricing-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   }
 
-  @media (max-width: 620px) {
-    .shell, .hero-inner { width: min(100% - 2.2rem, 76rem); }
-    .site-header { width: calc(100% - 2.2rem); min-height: 4.4rem; gap: .8rem; }
-    .brand { font-size: .9rem; }
-    .brand svg { width: 1.58rem; height: 1.58rem; }
-    .header-action { padding: .46rem .62rem; font-size: .64rem; }
-    .hero { min-height: 49rem; }
-    .hero::before { background: radial-gradient(circle at 50% 77%, rgb(243 107 0 / 12%), transparent 28%), radial-gradient(circle at 5% 91%, rgb(58 77 255 / 27%), transparent 30%), radial-gradient(circle at 95% 91%, rgb(55 75 255 / 27%), transparent 30%), linear-gradient(180deg, #070b0b 0%, #070b0b 55%, #081018 100%); }
-    .hero::after { bottom: -1.2rem; width: 144vw; height: 43%; background-size: cover; }
-    .hero-inner { padding: 7.6rem 0 20rem; }
-    .hero-copy { width: 100%; }
-    .eyebrow { font-size: .57rem; }
-    .hero h1 { max-width: 11ch; font-size: clamp(2.7rem, 12.6vw, 4rem); line-height: .98; }
-    .hero-intro { max-width: 31rem; font-size: .9rem; line-height: 1.6; }
-    .hero-actions { align-items: stretch; }
-    .hero-actions .button { width: auto; flex: 1 1 8.8rem; max-width: 11.5rem; }
-    .hero-notes { display: none; }
-    .hero-caption { display: none; }
-    .opening-grid { margin-top: 1rem; gap: 1.8rem; }
-    .opening h2, .section-heading h2, .proof-section h2, .ai-section h2, .faq-section h2 { font-size: clamp(2.45rem, 11vw, 3.5rem); }
-    .trail-list li { grid-template-columns: 2rem 1fr; gap: .8rem; align-items: start; }
-    .trail-proof { grid-column: 2; text-align: left; }
-    .work-list article { grid-template-columns: 1fr; gap: .85rem; padding-block: 2.2rem; }
-    .work-list article > p, .work-list article > :nth-child(n+4) { grid-column: 1; }
-    .work-meta { margin-bottom: .5rem; }
+  @media (max-width: 680px) {
+    .section-shell, .header-shell { width: min(100% - 2rem, 76rem); }
+    .header-shell { min-height: 4.4rem; }
+    .brand svg { width: 1.8rem; height: 1.8rem; }
+    .brand span { font-size: .96rem; }
+    .header-cta { padding-inline: .72rem; font-size: .72rem; }
+    .hero { min-height: 52rem; }
+    .hero-copy { padding-top: 7.2rem; }
+    .announcement { font-size: .58rem; }
+    .hero h1 { max-width: 10.5ch; margin-top: 1rem; font-size: clamp(2.8rem, 12vw, 4.2rem); line-height: .97; }
+    .hero-lede { font-size: .9rem; line-height: 1.65; }
+    .hero-actions-main .button { flex: 1 1 9rem; max-width: 13rem; }
+    .hero-reassurance { display: none; }
+    .hero-art { bottom: -.4rem; width: 156vw; height: 40%; }
+    .floating-proof { display: none; }
+    .flow-steps li { grid-template-columns: 2rem 1fr; gap: .8rem; align-items: start; }
+    .step-proof { grid-column: 2; text-align: left; }
+    .product-grid { grid-template-columns: 1fr; }
+    .product-card--wide { grid-column: auto; }
+    .metric-row { grid-template-columns: 1fr; }
+    .metric-row > div { border-right: 0; border-bottom: 1px solid var(--line); }
+    .metric-row > div:last-child { border-bottom: 0; }
+    .signal-row strong { width: 100%; margin-left: 0; }
+    .battle-ui { grid-template-columns: 1fr; }
+    .battle-ui i { text-align: center; }
     .plans { grid-template-columns: 1fr; }
-    .plans article + article { border-top: 1px solid var(--ink); border-left: 0; }
+    .plans article + article { border-top: 1px solid var(--line); border-left: 0; }
     .plans article > p { min-height: 0; }
-    .hand-note { margin-left: 0; }
-    .closing { min-height: 42rem; align-items: flex-start; }
-    .closing-art { background-image: linear-gradient(180deg, rgb(11 18 45 / 96%) 0%, rgb(11 18 45 / 78%) 56%, rgb(11 18 45 / 24%) 100%), var(--hero-image); background-position: 73% bottom; background-size: auto 72%; }
-    .closing-copy { padding-block: 5rem 18rem; }
     footer { flex-direction: column; align-items: flex-start; }
   }
 
