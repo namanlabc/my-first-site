@@ -7,20 +7,23 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 <footer class="site-footer">
   <div class="shell shell--wide site-footer__inner">
     <div class="site-footer__note">
-      <span class="site-footer__mark" aria-hidden="true"></span>
+      <span class="site-footer__status"><i></i> still making things</span>
       <p>Built by Naman. Yes, I’ll probably redesign it again.</p>
     </div>
+
     <nav class="site-footer__links" aria-label="Footer navigation">
-      <a href={`${base}archive/`}>Writing</a>
       <a href={`${base}projects/`}>Projects</a>
+      <a href={`${base}archive/`}>Writing</a>
+      <a href={`${base}about/`}>About</a>
       <a href={`${base}rss.xml`}>RSS</a>
       <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">
-        GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+        GitHub ↗<span class="visually-hidden"> (opens in a new tab)</span>
       </a>
       <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">
-        X<span class="visually-hidden"> (opens in a new tab)</span>
+        X ↗<span class="visually-hidden"> (opens in a new tab)</span>
       </a>
     </nav>
-    <p class="site-footer__year">© {new Date().getFullYear()}</p>
+
+    <p class="site-footer__year">© {new Date().getFullYear()} · naman.blog</p>
   </div>
 </footer>
