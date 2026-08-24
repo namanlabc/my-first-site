@@ -6,11 +6,12 @@ const rankTwigUrl = 'https://ranktwig.com';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="light" data-theme="light" data-theme-preference="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#f7f7f8" data-ranktwig-theme-color />
+    <meta name="color-scheme" content="light dark" />
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="description" content="A private RankTwig homepage design experiment." />
@@ -19,6 +20,27 @@ const rankTwigUrl = 'https://ranktwig.com';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
     <title>RankTwig homepage experiment</title>
+    <script is:inline>
+      (() => {
+        const storageKey = 'ranktwig-theme';
+        const allowed = ['dark', 'light', 'system'];
+        let preference = 'light';
+        try {
+          const saved = window.localStorage.getItem(storageKey);
+          if (saved && allowed.includes(saved)) preference = saved;
+        } catch {}
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const resolved = preference === 'system' ? (systemLight ? 'light' : 'dark') : preference;
+        const root = document.documentElement;
+        root.dataset.themePreference = preference;
+        root.dataset.theme = resolved;
+        root.style.colorScheme = resolved;
+        root.classList.toggle('dark', resolved === 'dark');
+        root.classList.toggle('light', resolved === 'light');
+        const themeColor = document.querySelector('meta[data-ranktwig-theme-color]');
+        if (themeColor) themeColor.setAttribute('content', resolved === 'light' ? '#f7f7f8' : '#09090b');
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -42,6 +64,17 @@ const rankTwigUrl = 'https://ranktwig.com';
         </nav>
 
         <div class="header-actions">
+          <div class="theme-control theme-control-compact" role="group" aria-label="Color theme" data-theme-control>
+            <button type="button" data-theme-option="system" aria-pressed="false" aria-label="Use system theme" title="System theme">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"></rect><path d="M7 17h6M10 14v3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Use light theme" title="Light theme">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Use dark theme" title="Dark theme">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.7 12.6A6.2 6.2 0 0 1 7.4 4.3 6.3 6.3 0 1 0 15.7 12.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+            </button>
+          </div>
           <a class="login" href={`${rankTwigUrl}/login`}>Log in</a>
           <a class="button button-primary button-small" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Start Free <span aria-hidden="true">→</span></a>
         </div>
@@ -317,6 +350,46 @@ const rankTwigUrl = 'https://ranktwig.com';
     </footer>
 
     <script>
+      const storageKey = 'ranktwig-theme';
+      const allowedThemes = new Set(['dark', 'light', 'system']);
+      const themeMedia = window.matchMedia('(prefers-color-scheme: light)');
+      const resolveTheme = (preference) => preference === 'system' ? (themeMedia.matches ? 'light' : 'dark') : preference;
+      const updateThemeControls = (preference) => {
+        document.querySelectorAll('[data-theme-option]').forEach((button) => {
+          const selected = button.dataset.themeOption === preference;
+          button.setAttribute('aria-pressed', String(selected));
+          button.toggleAttribute('data-selected', selected);
+        });
+      };
+      const applyThemePreference = (requested, persist = true) => {
+        const preference = allowedThemes.has(requested) ? requested : 'light';
+        const resolved = resolveTheme(preference);
+        const root = document.documentElement;
+        root.dataset.themePreference = preference;
+        root.dataset.theme = resolved;
+        root.style.colorScheme = resolved;
+        root.classList.toggle('dark', resolved === 'dark');
+        root.classList.toggle('light', resolved === 'light');
+        const themeColor = document.querySelector('meta[data-ranktwig-theme-color]');
+        if (themeColor) themeColor.content = resolved === 'light' ? '#f7f7f8' : '#09090b';
+        if (persist) {
+          try { window.localStorage.setItem(storageKey, preference); } catch {}
+        }
+        updateThemeControls(preference);
+        window.dispatchEvent(new CustomEvent('ranktwig:themechange', { detail: { preference, resolved } }));
+      };
+      updateThemeControls(document.documentElement.dataset.themePreference || 'light');
+      document.querySelectorAll('[data-theme-option]').forEach((button) => {
+        button.addEventListener('click', () => applyThemePreference(button.dataset.themeOption || 'light'));
+      });
+      themeMedia.addEventListener('change', () => {
+        if (document.documentElement.dataset.themePreference === 'system') applyThemePreference('system', false);
+      });
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey || !event.newValue || !allowedThemes.has(event.newValue)) return;
+        applyThemePreference(event.newValue, false);
+      });
+
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const root = document.documentElement;
       root.classList.add('motion-ready');
@@ -446,14 +519,34 @@ const rankTwigUrl = 'https://ranktwig.com';
     --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;
   }
 
+  :root[data-theme='dark']{color-scheme:dark}
+  :root[data-theme='light']{
+    color-scheme:light;
+    --canvas:#f7f7f8;
+    --surface:#ffffff;
+    --surface-raised:#f4f4f5;
+    --surface-overlay:#e4e4e7;
+    --ink:#18181b;
+    --ink-muted:#52525b;
+    --ink-faint:#71717a;
+    --line:#d4d4d8;
+    --line-subtle:#e4e4e7;
+    --action:#f97316;
+    --action-hover:#ea580c;
+    --action-muted:rgb(249 115 22 / 10%);
+    --positive:#15803d;
+    --risk:#dc2626;
+    --ai:#4f46e5;
+  }
+
   *,*::before,*::after{box-sizing:border-box}
   html{min-width:320px;scroll-behavior:smooth;background:var(--canvas);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-  body{min-width:320px;margin:0;overflow-x:hidden;background:var(--canvas);color:var(--ink);font-family:var(--sans);line-height:1.6;text-rendering:optimizeLegibility}
+  body{min-width:320px;margin:0;overflow-x:hidden;background:var(--canvas);color:var(--ink);font-family:var(--sans);line-height:1.6;text-rendering:optimizeLegibility;transition:background-color 180ms ease,color 180ms ease}
   a{color:inherit}
   svg{display:block;max-width:100%}
   ::selection{background:var(--action-muted);color:var(--ink)}
   :focus-visible{outline:2px solid var(--action);outline-offset:3px}
-  .skip-link{position:fixed;z-index:100;top:.75rem;left:.75rem;transform:translateY(-150%);border-radius:.5rem;background:var(--action);padding:.65rem .9rem;color:#09090b;font-size:.875rem;font-weight:600}
+  .skip-link{position:fixed;z-index:100;top:.75rem;left:.75rem;transform:translateY(-150%);border-radius:.5rem;background:var(--action);padding:.65rem .9rem;color:#fff;font-size:.875rem;font-weight:600}
   .skip-link:focus{transform:translateY(0)}
   .shell{width:min(100% - 2rem,76rem);margin-inline:auto}
 
@@ -464,25 +557,32 @@ const rankTwigUrl = 'https://ranktwig.com';
   .brand span{color:var(--ink);font-size:1.0625rem;font-weight:600;letter-spacing:-.025em}
   .site-header nav{display:flex;align-items:center;gap:.1rem}
   .site-header nav a,.login{min-height:2.5rem;display:inline-flex;align-items:center;padding:.65rem .75rem;border-radius:.5rem;color:var(--ink-muted);font-size:.8125rem;font-weight:500;text-decoration:none;transition:150ms ease}
-  .site-header nav a:hover,.login:hover{color:var(--ink);background:rgb(255 255 255 / 4%)}
-  .header-actions{justify-self:end;display:flex;align-items:center;gap:.25rem}
+  .site-header nav a:hover,.login:hover{color:var(--ink);background:rgb(127 127 127 / 7%)}
+  .header-actions{justify-self:end;display:flex;align-items:center;gap:.35rem}
+
+  .theme-control{display:inline-flex;align-items:center;gap:.125rem;width:fit-content;border:1px solid var(--line);border-radius:.65rem;padding:.15rem;background:var(--surface);color:var(--ink-muted);box-shadow:0 7px 24px rgb(0 0 0 / 5%);transition:background-color 180ms ease,border-color 180ms ease}
+  .theme-control button{display:grid;width:2.3rem;height:2.3rem;place-items:center;border:0;border-radius:.48rem;background:transparent;color:inherit;cursor:pointer;transition:background-color 150ms ease-out,color 150ms ease-out,box-shadow 150ms ease-out}
+  .theme-control button svg{width:.95rem;height:.95rem}
+  .theme-control button:hover{background:var(--surface-raised);color:var(--ink)}
+  .theme-control button[data-selected]{background:var(--action-muted);color:var(--action);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--action) 32%,transparent)}
+  .theme-control button:focus-visible{outline:2px solid var(--action);outline-offset:1px}
 
   .button{min-height:3rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1rem;border:1px solid transparent;border-radius:.5rem;font-size:.875rem;font-weight:600;text-decoration:none;transition:transform 180ms var(--ease),background-color 150ms ease,border-color 150ms ease,box-shadow 180ms ease}
   .button:hover{transform:translateY(-2px)}
   .button-small{min-height:2.5rem;padding:.62rem .9rem;font-size:.8125rem}
-  .button-primary{background:var(--action);color:#09090b;box-shadow:0 0 0 1px rgb(255 255 255 / 3%) inset,0 10px 30px rgb(249 115 22 / 10%)}
-  .button-primary:hover{background:var(--action-hover);color:#fff;box-shadow:0 12px 35px rgb(249 115 22 / 18%)}
+  .button-primary{background:#c84c0c;color:#fff;box-shadow:0 0 0 1px rgb(255 255 255 / 4%) inset,0 10px 30px rgb(249 115 22 / 10%)}
+  .button-primary:hover{background:#b45309;color:#fff;box-shadow:0 12px 35px rgb(249 115 22 / 18%)}
   .button-secondary{border-color:var(--line);background:var(--surface-raised);color:var(--ink)}
   .button-secondary:hover{border-color:var(--ink-faint);background:var(--surface-overlay)}
 
-  .hero{--orb-x:0px;position:relative;min-height:clamp(58rem,100svh,68rem);overflow:hidden;isolation:isolate;background:var(--canvas)}
-  .hero::before{content:"";position:absolute;z-index:-5;inset:0;background:linear-gradient(180deg,#09090b 0%,#09090b 46%,#0a0c13 72%,#09090b 100%)}
+  .hero{--orb-x:0px;position:relative;min-height:clamp(58rem,100svh,68rem);overflow:hidden;isolation:isolate;background:var(--canvas);transition:background-color 180ms ease}
+  .hero::before{content:"";position:absolute;z-index:-5;inset:0;background:linear-gradient(180deg,#09090b 0%,#09090b 46%,#0a0c13 72%,#09090b 100%);transition:background 220ms ease}
   .hero-noise,.closing-noise{position:absolute;z-index:-2;inset:0;opacity:.25;background-image:radial-gradient(rgb(255 255 255 / 8%) .65px,transparent .7px);background-size:5px 5px;mask-image:linear-gradient(to bottom,#000,transparent 76%)}
-  .hero-orb{position:absolute;z-index:-4;bottom:-14rem;width:38rem;height:38rem;border-radius:50%;filter:blur(22px);pointer-events:none;transition:transform 650ms var(--ease)}
+  .hero-orb{position:absolute;z-index:-4;bottom:-14rem;width:38rem;height:38rem;border-radius:50%;filter:blur(22px);pointer-events:none;transition:transform 650ms var(--ease),opacity 180ms ease}
   .hero-orb-left{left:-18rem;background:radial-gradient(circle,rgb(79 70 229 / 25%),transparent 70%);transform:translateX(var(--orb-x))}
   .hero-orb-right{right:-18rem;background:radial-gradient(circle,rgb(37 99 235 / 22%),transparent 70%);transform:translateX(calc(var(--orb-x) * -.7))}
   .hero-copy{position:relative;z-index:8;padding-top:clamp(8.25rem,14vh,10.25rem);text-align:center}
-  .announcement{display:inline-flex;align-items:center;gap:.5rem;padding:.36rem .62rem;border:1px solid rgb(255 255 255 / 12%);border-radius:999px;background:rgb(255 255 255 / 3%);box-shadow:inset 0 1px 0 rgb(255 255 255 / 4%);color:var(--ink-muted);font-family:var(--mono);font-size:.6875rem;font-weight:500;text-decoration:none;backdrop-filter:blur(12px);transition:border-color 180ms ease,color 180ms ease,transform 180ms var(--ease)}
+  .announcement{display:inline-flex;align-items:center;gap:.5rem;padding:.36rem .62rem;border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:999px;background:color-mix(in srgb,var(--surface) 68%,transparent);box-shadow:inset 0 1px 0 rgb(255 255 255 / 4%);color:var(--ink-muted);font-family:var(--mono);font-size:.6875rem;font-weight:500;text-decoration:none;backdrop-filter:blur(12px);transition:border-color 180ms ease,color 180ms ease,transform 180ms var(--ease),background-color 180ms ease}
   .announcement:hover{border-color:rgb(249 115 22 / 42%);color:var(--ink);transform:translateY(-1px)}
   .announcement-dot{width:.4rem;height:.4rem;border-radius:50%;background:var(--action);box-shadow:0 0 0 .23rem rgb(249 115 22 / 10%)}
   .hero h1{max-width:12ch;margin:1.35rem auto 0;font-size:clamp(3.65rem,6.45vw,6.6rem);font-weight:500;line-height:.92;letter-spacing:-.066em;text-wrap:balance}
@@ -493,17 +593,18 @@ const rankTwigUrl = 'https://ranktwig.com';
 
   .terrain-wrap{--parallax-x:0px;--parallax-y:0px;position:absolute;z-index:3;left:50%;bottom:-.5rem;width:min(100rem,112vw);height:54%;transform:translate(calc(-50% + var(--parallax-x)),var(--parallax-y));transition:transform 520ms var(--ease);pointer-events:none;will-change:transform}
   .terrain-wrap::before{content:"";position:absolute;z-index:-1;left:50%;bottom:7%;width:62%;height:34%;border-radius:50%;background:radial-gradient(ellipse,rgb(249 115 22 / 15%),transparent 67%);filter:blur(22px);transform:translateX(-50%)}
-  .terrain-wrap::after{content:"";position:absolute;z-index:10;inset:0;background:linear-gradient(180deg,var(--canvas) 0%,rgb(9 9 11 / 82%) 5%,transparent 24%,transparent 88%,rgb(9 9 11 / 20%) 100%)}
+  .terrain-wrap::after{content:"";position:absolute;z-index:10;inset:0;background:linear-gradient(180deg,var(--canvas) 0%,rgb(9 9 11 / 82%) 5%,transparent 24%,transparent 88%,rgb(9 9 11 / 20%) 100%);transition:background 180ms ease}
   .terrain{position:absolute;inset:0;width:100%;height:100%}
-  .terrain-mass-back{fill:#12182a;opacity:.68}
+  .terrain-mass-back{fill:#12182a;opacity:.68;transition:fill 180ms ease,opacity 180ms ease}
   .terrain-mass{fill:url(#mountainFill)}
   .contours{stroke:#818cf8;stroke-opacity:.24;stroke-width:1.15}
-  .signal-stars{opacity:.68}
+  .mesh{transition:stroke 180ms ease,stroke-opacity 180ms ease}
+  .signal-stars{opacity:.68;transition:fill 180ms ease,opacity 180ms ease}
   .route-glow{fill:none;stroke:#f97316;stroke-opacity:.27;stroke-width:12;filter:url(#softGlow)}
   .route{fill:none;stroke:url(#orangeRoute);stroke-width:3.25;stroke-linecap:round;filter:url(#routeGlow)}
   .route-node,.destination{opacity:0;transition:opacity 380ms var(--ease),filter 500ms ease}
   .route-node.is-active,.destination.is-active{opacity:1;filter:drop-shadow(0 0 11px rgb(249 115 22 / 35%))}
-  .terrain-label{position:absolute;z-index:12;min-width:12.7rem;padding:.72rem .78rem .66rem;border:1px solid rgb(255 255 255 / 11%);border-radius:.68rem;background:linear-gradient(180deg,rgb(24 24 27 / 88%),rgb(12 12 15 / 88%));box-shadow:0 22px 65px rgb(0 0 0 / 28%),inset 0 1px 0 rgb(255 255 255 / 5%);backdrop-filter:blur(14px);opacity:0;transform:translateY(10px) scale(.985);filter:blur(4px);transition:opacity 520ms var(--ease),transform 520ms var(--ease),filter 520ms var(--ease),border-color 180ms ease}
+  .terrain-label{position:absolute;z-index:12;min-width:12.7rem;padding:.72rem .78rem .66rem;border:1px solid rgb(255 255 255 / 11%);border-radius:.68rem;background:linear-gradient(180deg,rgb(24 24 27 / 88%),rgb(12 12 15 / 88%));box-shadow:0 22px 65px rgb(0 0 0 / 28%),inset 0 1px 0 rgb(255 255 255 / 5%);backdrop-filter:blur(14px);opacity:0;transform:translateY(10px) scale(.985);filter:blur(4px);transition:opacity 520ms var(--ease),transform 520ms var(--ease),filter 520ms var(--ease),border-color 180ms ease,background 180ms ease,box-shadow 180ms ease}
   .terrain-label.is-active{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
   .terrain-label::before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgb(255 255 255 / 18%),transparent)}
   .terrain-label::after{content:"";position:absolute;width:1px;height:2rem;background:linear-gradient(to bottom,rgb(249 115 22 / 70%),transparent)}
@@ -530,14 +631,14 @@ const rankTwigUrl = 'https://ranktwig.com';
   .workflow-steps.is-visible::before{transform:scaleX(1)}
   .workflow-steps li{min-height:11rem;padding:1.5rem;border-right:1px solid var(--line);transition:background-color 180ms ease,transform 220ms var(--ease)}
   .workflow-steps li:last-child{border-right:0}
-  .workflow-steps li:hover{background:rgb(255 255 255 / 1.8%);transform:translateY(-2px)}
+  .workflow-steps li:hover{background:rgb(127 127 127 / 4%);transform:translateY(-2px)}
   .workflow-steps li>span{display:inline-flex;width:1.7rem;height:1.7rem;align-items:center;justify-content:center;border:1px solid rgb(249 115 22 / 52%);border-radius:50%;color:var(--action);font-family:var(--mono);font-size:.55rem;box-shadow:0 0 0 0 rgb(249 115 22 / 0%);transition:box-shadow 380ms ease,background-color 380ms ease}
   .workflow-steps.is-visible li:nth-child(1)>span{transition-delay:180ms}.workflow-steps.is-visible li:nth-child(2)>span{transition-delay:420ms}.workflow-steps.is-visible li:nth-child(3)>span{transition-delay:680ms}.workflow-steps.is-visible li:nth-child(4)>span{transition-delay:940ms}
   .workflow-steps.is-visible li>span{background:rgb(249 115 22 / 8%);box-shadow:0 0 0 .28rem rgb(249 115 22 / 4%)}
   .workflow-steps strong{display:block;margin-top:1rem;font-size:1.02rem;font-weight:600}
   .workflow-steps p{margin:.38rem 0 0;color:var(--ink-muted);font-size:.78rem;line-height:1.65}
 
-  .product-section{padding-block:clamp(7rem,11vw,10rem);border-block:1px solid var(--line-subtle);background:#0b0b0e}
+  .product-section{padding-block:clamp(7rem,11vw,10rem);border-block:1px solid var(--line-subtle);background:#0b0b0e;transition:background-color 180ms ease,border-color 180ms ease}
   .section-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(18rem,.55fr);gap:clamp(3rem,8vw,7rem);align-items:end}
   .section-intro h2{max-width:14ch;margin-top:.85rem}
   .section-intro>p{margin:0;color:var(--ink-muted);font-size:.92rem;line-height:1.75}
@@ -553,25 +654,25 @@ const rankTwigUrl = 'https://ranktwig.com';
 
   .motion-card{position:relative;overflow:hidden;transition:transform 260ms var(--ease),border-color 200ms ease,box-shadow 260ms ease}
   .motion-card::after{content:"";position:absolute;z-index:8;top:0;left:0;width:38%;height:1px;background:linear-gradient(90deg,transparent,var(--action),#fb923c,transparent);transform:translateX(-135%);opacity:.9;pointer-events:none}
-  .motion-card:hover{transform:translateY(-4px);border-color:#3f3f46;box-shadow:0 38px 105px rgb(0 0 0 / 28%),0 0 0 1px rgb(255 255 255 / 2%) inset}
+  .motion-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--ink-faint) 54%,var(--line));box-shadow:0 38px 105px rgb(0 0 0 / 18%),0 0 0 1px rgb(255 255 255 / 2%) inset}
   .motion-card:hover::after{animation:cardTracer 900ms var(--ease)}
   @keyframes cardTracer{0%{transform:translateX(-135%)}100%{transform:translateX(355%)}}
 
-  .product-window,.battle-window,.chat-window{overflow:hidden;border:1px solid var(--line);border-radius:1rem;background:linear-gradient(180deg,rgb(24 24 27 / 92%),rgb(18 18 21 / 98%));box-shadow:0 30px 90px rgb(0 0 0 / 18%),inset 0 1px 0 rgb(255 255 255 / 3%)}
+  .product-window,.battle-window,.chat-window{overflow:hidden;border:1px solid var(--line);border-radius:1rem;background:linear-gradient(180deg,rgb(24 24 27 / 92%),rgb(18 18 21 / 98%));box-shadow:0 30px 90px rgb(0 0 0 / 18%),inset 0 1px 0 rgb(255 255 255 / 3%);transition:background 180ms ease,border-color 180ms ease,box-shadow 180ms ease}
   .window-bar{min-height:3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid var(--line);color:var(--ink-faint);font-family:var(--mono);font-size:.58rem}
   .metric-grid{display:grid;grid-template-columns:repeat(3,1fr)}
   .metric-grid>div{padding:1.25rem;border-right:1px solid var(--line)}.metric-grid>div:last-child{border-right:0}
   .metric-grid small{display:block;color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.metric-grid strong{display:block;margin-top:.34rem;font-size:1.85rem;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.metric-grid em{display:block;color:var(--positive);font-family:var(--mono);font-size:.55rem;font-style:normal}.metric-grid .down{color:var(--risk)}
-  .evidence-row{display:flex;flex-wrap:wrap;align-items:center;gap:.52rem;padding:.9rem 1rem;border-block:1px solid var(--line);background:rgb(9 9 11 / 40%)}
+  .evidence-row{display:flex;flex-wrap:wrap;align-items:center;gap:.52rem;padding:.9rem 1rem;border-block:1px solid var(--line);background:color-mix(in srgb,var(--canvas) 42%,transparent)}
   .evidence-row span{padding:.3rem .46rem;border:1px solid var(--line);border-radius:.4rem;color:var(--ink-muted);font-family:var(--mono);font-size:.53rem;transition:border-color 180ms ease,background-color 180ms ease}.evidence-row span:hover{border-color:rgb(249 115 22 / 34%);background:var(--action-muted)}.evidence-row strong{margin-left:auto;color:var(--action);font-size:.68rem}
-  .query-list>div{display:grid;grid-template-columns:1fr auto auto;gap:1.5rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);align-items:center;transition:background-color 160ms ease}.query-list>div:hover{background:rgb(255 255 255 / 2%)}.query-list>div:last-child{border-bottom:0}.query-list span{font-size:.72rem}.query-list small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.query-list strong{color:var(--ink-muted);font-family:var(--mono);font-size:.58rem}
+  .query-list>div{display:grid;grid-template-columns:1fr auto auto;gap:1.5rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);align-items:center;transition:background-color 160ms ease}.query-list>div:hover{background:rgb(127 127 127 / 4%)}.query-list>div:last-child{border-bottom:0}.query-list span{font-size:.72rem}.query-list small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.query-list strong{color:var(--ink-muted);font-family:var(--mono);font-size:.58rem}
 
   .battle-window{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;padding:1rem}
-  .battle-column{min-height:16rem;display:flex;flex-direction:column;padding:1.15rem;border:1px solid var(--line);border-radius:.75rem;background:var(--canvas);transition:transform 650ms var(--ease),opacity 650ms var(--ease),border-color 180ms ease}
+  .battle-column{min-height:16rem;display:flex;flex-direction:column;padding:1.15rem;border:1px solid var(--line);border-radius:.75rem;background:var(--canvas);transition:transform 650ms var(--ease),opacity 650ms var(--ease),border-color 180ms ease,background-color 180ms ease}
   .motion-ready .feature-battle:not(.is-visible) .battle-column:first-child{opacity:0;transform:translateX(-18px)}
   .motion-ready .feature-battle:not(.is-visible) .battle-column:nth-of-type(2){opacity:0;transform:translateX(18px)}
   .feature-battle.is-visible .battle-column{opacity:1;transform:translateX(0)}
-  .battle-column:hover{border-color:#3f3f46}
+  .battle-column:hover{border-color:color-mix(in srgb,var(--ink-faint) 54%,var(--line))}
   .battle-column>span{color:var(--ink-faint);font-family:var(--mono);font-size:.55rem}.battle-column>strong{margin:.7rem 0 1.1rem;font-size:1.02rem}.battle-column>small{padding:.58rem 0;border-top:1px solid var(--line);color:var(--ink-muted);font-size:.65rem}
   .battle-vs{align-self:center;color:var(--action);font-family:var(--mono);font-size:.58rem;transition:opacity 500ms ease,transform 500ms var(--ease) 200ms}.motion-ready .feature-battle:not(.is-visible) .battle-vs{opacity:0;transform:scale(.7)}
   .battle-verdict{grid-column:1/-1;display:grid;grid-template-columns:4rem 1fr;gap:.2rem .9rem;padding:.9rem 1rem;border-left:2px solid var(--action);background:var(--action-muted);transition:opacity 520ms ease,transform 520ms var(--ease) 300ms}.motion-ready .feature-battle:not(.is-visible) .battle-verdict{opacity:0;transform:translateY(8px)}
@@ -581,7 +682,7 @@ const rankTwigUrl = 'https://ranktwig.com';
   .bubble{margin:0;padding:.9rem 1rem;border-radius:.85rem;font-size:.72rem;line-height:1.65;transition:opacity 520ms var(--ease),transform 520ms var(--ease),filter 520ms var(--ease)}
   .motion-ready .feature-mcp:not(.is-visible) .bubble{opacity:0;transform:translateY(10px);filter:blur(3px)}
   .feature-mcp.is-visible .bubble:nth-child(1){transition-delay:120ms}.feature-mcp.is-visible .bubble:nth-child(2){transition-delay:260ms}.feature-mcp.is-visible .bubble:nth-child(3){transition-delay:400ms}.feature-mcp.is-visible .bubble:nth-child(4){transition-delay:540ms}
-  .bubble-user{max-width:76%;justify-self:end;border-bottom-right-radius:.25rem;background:var(--action);color:#09090b;font-weight:600}
+  .bubble-user{max-width:76%;justify-self:end;border-bottom-right-radius:.25rem;background:#c84c0c;color:#fff;font-weight:600}
   .bubble-ai{max-width:91%;border:1px solid var(--line);border-bottom-left-radius:.25rem;background:var(--canvas);color:var(--ink-muted)}
   .bubble-ai strong{color:var(--ink)}.bubble-ai p{margin:.32rem 0 0}.chat-evidence{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.4rem}.chat-evidence span{padding:.25rem .38rem;border:1px solid var(--line);border-radius:.35rem;color:var(--ink-faint);font-family:var(--mono);font-size:.49rem}
 
@@ -591,19 +692,19 @@ const rankTwigUrl = 'https://ranktwig.com';
   .proof-flow::before{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:50%;height:1px;background:var(--line)}
   .proof-flow::after{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:50%;height:1px;background:linear-gradient(90deg,var(--action),#fb923c);box-shadow:0 0 14px rgb(249 115 22 / 24%);transform:scaleX(0);transform-origin:left;transition:transform 1500ms var(--ease) 140ms}
   .proof-flow.is-visible::after{transform:scaleX(1)}
-  .proof-card{position:relative;min-height:10rem;padding:1rem;border:1px solid var(--line);border-radius:.8rem;background:linear-gradient(180deg,var(--surface-raised),var(--surface));box-shadow:0 18px 55px rgb(0 0 0 / 12%),inset 0 1px 0 rgb(255 255 255 / 3%);transition:transform 220ms var(--ease),border-color 180ms ease,box-shadow 220ms ease}
-  .proof-card::before{content:"";position:absolute;top:.95rem;right:.95rem;width:.42rem;height:.42rem;border-radius:50%;background:#52525b;box-shadow:0 0 0 .22rem rgb(82 82 91 / 9%)}
-  .proof-card:hover{transform:translateY(-4px);border-color:#3f3f46;box-shadow:0 24px 65px rgb(0 0 0 / 20%),inset 0 1px 0 rgb(255 255 255 / 4%)}
+  .proof-card{position:relative;min-height:10rem;padding:1rem;border:1px solid var(--line);border-radius:.8rem;background:linear-gradient(180deg,var(--surface-raised),var(--surface));box-shadow:0 18px 55px rgb(0 0 0 / 8%),inset 0 1px 0 rgb(255 255 255 / 3%);transition:transform 220ms var(--ease),border-color 180ms ease,box-shadow 220ms ease}
+  .proof-card::before{content:"";position:absolute;top:.95rem;right:.95rem;width:.42rem;height:.42rem;border-radius:50%;background:#71717a;box-shadow:0 0 0 .22rem rgb(113 113 122 / 9%)}
+  .proof-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--ink-faint) 54%,var(--line));box-shadow:0 24px 65px rgb(0 0 0 / 12%),inset 0 1px 0 rgb(255 255 255 / 4%)}
   .proof-card>span{color:var(--ink-faint);font-family:var(--mono);font-size:.5rem}.proof-card strong{display:block;margin-top:.75rem;font-size:.82rem}.proof-card small{display:block;margin-top:.24rem;color:var(--ink-faint);font-size:.59rem;line-height:1.5}.proof-card b{display:block;margin-top:.72rem;padding-top:.56rem;border-top:1px solid var(--line);color:var(--ink-muted);font-family:var(--mono);font-size:.48rem;font-weight:500}
   .proof-flow>i{color:var(--ink-faint);font-style:normal;background:var(--canvas);padding:.15rem}
   .proof-flow .proof-action{border-color:rgb(249 115 22 / 34%);background:linear-gradient(180deg,var(--surface-raised),rgb(249 115 22 / 7%));box-shadow:0 22px 70px rgb(249 115 22 / 5%),inset 0 1px 0 rgb(255 255 255 / 4%)}
   .proof-flow .proof-action::before{background:var(--action);box-shadow:0 0 0 .22rem rgb(249 115 22 / 9%),0 0 18px rgb(249 115 22 / 28%)}
   .proof-flow .proof-action>span{color:var(--action)}
 
-  .pricing-section{padding-block:clamp(7rem,11vw,10rem);border-block:1px solid var(--line-subtle);background:#0b0b0e}
+  .pricing-section{padding-block:clamp(7rem,11vw,10rem);border-block:1px solid var(--line-subtle);background:#0b0b0e;transition:background-color 180ms ease,border-color 180ms ease}
   .pricing-grid{display:grid;grid-template-columns:minmax(16rem,.52fr) minmax(0,1fr);gap:clamp(3rem,8vw,7rem);align-items:start}
   .pricing-copy h2{margin-top:.85rem}.pricing-copy>p:last-child{margin:1rem 0 0;color:var(--ink-muted);font-size:.9rem;line-height:1.75}
-  .plans{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid var(--line);border-radius:1rem;background:var(--surface)}
+  .plans{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid var(--line);border-radius:1rem;background:var(--surface);box-shadow:0 18px 55px rgb(0 0 0 / 6%);transition:background-color 180ms ease,border-color 180ms ease,box-shadow 180ms ease}
   .plans article{padding:1.6rem}.plans article+article{border-left:1px solid var(--line)}.plan-pro{background:var(--surface-raised)}
   .plan-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:.1rem .8rem}.plan-head span{color:var(--action);font-family:var(--mono);font-size:.6rem}.plan-head strong{grid-row:1/3;grid-column:2;font-size:2.75rem;font-weight:600;letter-spacing:-.055em;line-height:.9}.plan-head small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}
   .plans article>p{min-height:4.3rem;margin:1.35rem 0;color:var(--ink-muted);font-size:.76rem;line-height:1.65}.plans ul{margin:0 0 1.5rem;padding:0;border-top:1px solid var(--line);list-style:none}.plans li{padding:.67rem 0;border-bottom:1px solid var(--line);color:var(--ink-muted);font-size:.7rem}.plans li::before{content:"↳";margin-right:.6rem;color:var(--action);font-family:var(--mono)}.plans .button{width:100%}
@@ -616,7 +717,40 @@ const rankTwigUrl = 'https://ranktwig.com';
   .closing.is-visible .closing-route path{stroke-dashoffset:0}
   .closing-inner{position:relative;z-index:2;max-width:52rem}.closing-inner h2{margin-top:.85rem;font-size:clamp(3.6rem,7vw,6.8rem)}.closing-inner>p:nth-of-type(2){max-width:37rem;margin:1.2rem auto 0;color:var(--ink-muted);font-size:.95rem;line-height:1.75}
 
-  footer{border-top:1px solid var(--line-subtle);background:#070709}.footer-inner{min-height:8rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;color:var(--ink-faint)}.footer-inner>p{margin:0;font-size:.75rem}.footer-inner nav{display:flex;gap:1rem}.footer-inner nav a{color:var(--ink-muted);font-size:.7rem;text-decoration:none}.footer-inner nav a:hover{color:var(--ink)}
+  footer{border-top:1px solid var(--line-subtle);background:#070709;transition:background-color 180ms ease,border-color 180ms ease}.footer-inner{min-height:8rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;color:var(--ink-faint)}.footer-inner>p{margin:0;font-size:.75rem}.footer-inner nav{display:flex;gap:1rem}.footer-inner nav a{color:var(--ink-muted);font-size:.7rem;text-decoration:none}.footer-inner nav a:hover{color:var(--ink)}
+
+  :root[data-theme='light'] .hero::before{background:linear-gradient(180deg,#f7f7f8 0%,#f7f7f8 43%,#f0f2f7 72%,#f7f7f8 100%)}
+  :root[data-theme='light'] .hero-noise,:root[data-theme='light'] .closing-noise{opacity:.34;background-image:radial-gradient(rgb(24 24 27 / 10%) .65px,transparent .7px)}
+  :root[data-theme='light'] .hero-orb-left{background:radial-gradient(circle,rgb(99 102 241 / 13%),transparent 70%)}
+  :root[data-theme='light'] .hero-orb-right{background:radial-gradient(circle,rgb(37 99 235 / 10%),transparent 70%)}
+  :root[data-theme='light'] .terrain-wrap::after{background:linear-gradient(180deg,var(--canvas) 0%,rgb(247 247 248 / 82%) 5%,transparent 24%,transparent 88%,rgb(247 247 248 / 20%) 100%)}
+  :root[data-theme='light'] #terrainFade stop:nth-child(2){stop-color:#cbd5e1;stop-opacity:.38}
+  :root[data-theme='light'] #terrainFade stop:nth-child(3){stop-color:#e4e4e7;stop-opacity:1}
+  :root[data-theme='light'] #mountainFill stop:nth-child(1){stop-color:#d9def0}
+  :root[data-theme='light'] #mountainFill stop:nth-child(2){stop-color:#cfd5e5}
+  :root[data-theme='light'] #mountainFill stop:nth-child(3){stop-color:#e8e9ee}
+  :root[data-theme='light'] .terrain-mass-back{fill:#cdd4e8;opacity:.68}
+  :root[data-theme='light'] .contours{stroke:#4f46e5;stroke-opacity:.23}
+  :root[data-theme='light'] .mesh{stroke:#4f46e5!important;stroke-opacity:.12!important}
+  :root[data-theme='light'] .signal-stars{fill:#4338ca;opacity:.46}
+  :root[data-theme='light'] #microGrid circle{fill:#4f46e5;opacity:.12}
+  :root[data-theme='light'] .terrain-label{border-color:rgb(24 24 27 / 10%);background:linear-gradient(180deg,rgb(255 255 255 / 94%),rgb(247 247 248 / 92%));box-shadow:0 20px 52px rgb(24 24 27 / 10%),inset 0 1px 0 rgb(255 255 255 / 80%)}
+  :root[data-theme='light'] .terrain-label::before{background:linear-gradient(90deg,transparent,rgb(24 24 27 / 10%),transparent)}
+  :root[data-theme='light'] .terrain-label-action{border-color:rgb(249 115 22 / 28%);box-shadow:0 22px 58px rgb(24 24 27 / 11%),0 0 42px rgb(249 115 22 / 8%)}
+  :root[data-theme='light'] .label-source{border-top-color:rgb(24 24 27 / 8%);color:rgb(82 82 91 / 68%)}
+  :root[data-theme='light'] .product-section,:root[data-theme='light'] .pricing-section{background:#f4f4f5}
+  :root[data-theme='light'] .product-window,:root[data-theme='light'] .battle-window,:root[data-theme='light'] .chat-window{background:linear-gradient(180deg,#ffffff,#f7f7f8);box-shadow:0 28px 70px rgb(24 24 27 / 10%),inset 0 1px 0 rgb(255 255 255 / 90%)}
+  :root[data-theme='light'] .motion-card:hover{box-shadow:0 32px 80px rgb(24 24 27 / 12%),0 0 0 1px rgb(255 255 255 / 72%) inset}
+  :root[data-theme='light'] .bubble-ai,:root[data-theme='light'] .battle-column{background:#ffffff}
+  :root[data-theme='light'] .proof-card{box-shadow:0 18px 45px rgb(24 24 27 / 7%),inset 0 1px 0 rgb(255 255 255 / 90%)}
+  :root[data-theme='light'] .proof-card:hover{box-shadow:0 24px 58px rgb(24 24 27 / 10%),inset 0 1px 0 rgb(255 255 255 / 95%)}
+  :root[data-theme='light'] .plans{box-shadow:0 20px 55px rgb(24 24 27 / 8%)}
+  :root[data-theme='light'] footer{background:#ffffff}
+
+  @media(max-width:1080px){
+    .theme-control button{width:2.1rem;height:2.1rem}
+    .site-header nav a{padding-inline:.58rem}
+  }
 
   @media(max-width:980px){
     .header-inner{grid-template-columns:1fr auto}.site-header nav{display:none}.login{display:none}
@@ -628,7 +762,9 @@ const rankTwigUrl = 'https://ranktwig.com';
   }
 
   @media(max-width:680px){
-    .shell{width:min(100% - 2rem,76rem)}.header-inner{min-height:4.4rem}.brand svg{width:1.8rem;height:1.8rem}.brand span{font-size:.96rem}.button-small{padding-inline:.72rem;font-size:.72rem}
+    .shell{width:min(100% - 2rem,76rem)}.header-inner{min-height:4.4rem}.brand svg{width:1.8rem;height:1.8rem}.brand span{font-size:.96rem}.button-small{padding-inline:.7rem;font-size:.72rem}
+    .theme-control{gap:0;padding:.12rem}.theme-control button{width:2rem;height:2rem;border-radius:.4rem}.theme-control button[data-theme-option='system']{display:none}.theme-control button svg{width:.86rem;height:.86rem}
+    .header-actions{gap:.3rem}
     .hero{min-height:52rem}.hero-copy{padding-top:7.2rem}.announcement{font-size:.58rem}.hero h1{max-width:10.5ch;margin-top:1rem;font-size:clamp(2.9rem,12.4vw,4.35rem);line-height:.96}.hero-lede{font-size:.9rem;line-height:1.65}.hero-actions-main .button{flex:1 1 9rem;max-width:13.5rem}.hero-meta{display:none}
     .terrain-wrap{bottom:0;width:175vw;height:40%}.terrain-label{display:none}
     .workflow{padding-block:5.5rem}.workflow-steps{grid-template-columns:1fr}.workflow-steps li{min-height:0;border-right:0!important;border-bottom:1px solid var(--line)!important}.workflow-steps li:last-child{border-bottom:0!important}
@@ -643,6 +779,7 @@ const rankTwigUrl = 'https://ranktwig.com';
 
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
+    .theme-control button{transition:none}
     .motion-ready .reveal-target{opacity:1!important;transform:none!important;filter:none!important}
     .route,.route-glow,.closing-route path{transition:none!important;stroke-dashoffset:0!important}
     .route-node,.destination,.terrain-label{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
