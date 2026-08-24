@@ -3,51 +3,52 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About" description="About Naman, the things he keeps building, and what usually sends him down a new rabbit hole.">
-  <div class="shell shell--content page-intro">
-    <h1>I usually build first and figure things out on the way.</h1>
-    <p>
-      I’m Naman. I like taking a small idea, making it real, and then finding ten ways it could be better.
-    </p>
-  </div>
+  <div class="editorial-page about-editorial">
+    <section class="page-hero shell shell--wide" aria-labelledby="about-title">
+      <p class="page-kicker">About / personal internet</p>
+      <h1 id="about-title">I like turning small ideas into <span class="accent-blue">real things.</span></h1>
+      <p class="page-lede">I’m Naman. Most of what I know came from getting curious, building a version, breaking something, and staying with it long enough to understand what actually matters.</p>
+    </section>
 
-  <div class="shell shell--content about-grid">
-    <article class="prose about-copy">
-      <p>
-        That is basically how this site, Get Random Letter, and most of my experiments started. I’m not following some grand roadmap. I find something interesting or annoying, build a version, test it, improve it, and write down what I learned.
-      </p>
+    <section class="about-layout shell shell--wide" aria-label="About Naman">
+      <div class="about-story">
+        <section>
+          <p class="section-kicker">01 / THE PATTERN</p>
+          <h2>Build first. Figure out the edges on the way.</h2>
+          <p>That is basically how this site, Get Random Letter, and most of my experiments started. I’m not following some grand roadmap. I find something interesting or annoying, build a version, test it, improve it, and write down what I learned.</p>
+          <p>I like useful things, clear interfaces, weird little ideas, and the final ten percent that makes something feel finished instead of merely functional.</p>
+        </section>
 
-      <h2 id="exploring">What I work on and keep exploring</h2>
-      <p>
-        SEO is part of my actual work: technical fixes, content, search data, and figuring out why a useful page isn’t getting found. I’m much more interested in using new tools to make something useful than arguing about which one won the week. WordPress still pulls me in too, because so much of the web runs on it—and there is plenty I’d like to make calmer and less annoying.
-      </p>
-      <p>
-        Most of what I write comes from work I’m doing right now, including the parts I’m still figuring out.
-      </p>
+        <section id="exploring">
+          <p class="section-kicker">02 / WHAT PULLS ME IN</p>
+          <h2>Search, products, tools, and the systems between them.</h2>
+          <p>SEO is a big part of my work: technical fixes, content, search data, and figuring out why a useful page isn’t getting found. Building products pulled me deeper into web development, Android, automation, AI-assisted workflows, QA, and the less glamorous details that turn an idea into something somebody else can actually use.</p>
+          <p>I’m much more interested in using tools to make something useful than arguing about which tool won the week. Most of what I write comes from work I’m doing right now, including the parts I’m still figuring out.</p>
+        </section>
 
-      <h2 id="off-screen">When I’m off-screen</h2>
-      <p>
-        <em>One Piece</em> is the permanent favorite. I like stories with ridiculous ambition, weird crews, and a world that keeps getting bigger the farther you go. Chai also helps.
-      </p>
+        <section id="off-screen">
+          <p class="section-kicker">03 / OFF SCREEN</p>
+          <h2>A little ambition, a little chaos, plenty of chai.</h2>
+          <p><em>One Piece</em> is the permanent favorite. I like stories with ridiculous ambition, strange crews, and a world that keeps getting bigger the farther you go. Chai also helps with the parts of building that somehow become 2 AM problems.</p>
+        </section>
 
-      <h2>Why keep a personal site?</h2>
-      <p>
-        Because I don’t want everything I make to disappear into a feed. I want one place where a WordPress theme in beta can sit next to a weird wheel tool, an unfinished idea, and a post I still like six months later.
-      </p>
+        <section>
+          <p class="section-kicker">04 / WHY THIS SITE EXISTS</p>
+          <h2>I don’t want everything I make to disappear into a feed.</h2>
+          <p>I want one place where an Android utility can sit next to an open-source SEO tool, a weird browser experiment, an unfinished idea, and a post I still like six months later.</p>
+          <p>Naman.blog is built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>, mostly plain CSS, and a small amount of JavaScript. <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a> hosts it. The setup stays intentionally boring so the things on the site can be less boring.</p>
+        </section>
+      </div>
 
-      <h2>Colophon</h2>
-      <p>
-        I built Naman.blog with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro<span class="visually-hidden"> (opens in a new tab)</span></a>, mostly plain CSS, and a tiny bit of JavaScript. <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages<span class="visually-hidden"> (opens in a new tab)</span></a> hosts it. The setup stays simple so I can spend more time making things than maintaining the site that lists them.
-      </p>
-    </article>
-
-    <aside class="about-aside" aria-label="A few coordinates">
-      <h2>A few coordinates</h2>
-      <dl>
-        <div><dt>Making</dt><dd>Get Random Letter + Calm WP</dd></div>
-        <div><dt>Working</dt><dd>SEO + search projects</dd></div>
-        <div><dt>Writing</dt><dd>What I learn while doing it</dd></div>
-        <div><dt>Recharging</dt><dd>One Piece + chai</dd></div>
-      </dl>
-    </aside>
+      <aside class="about-now" aria-label="A few current coordinates">
+        <div class="about-now__top"><span>currently active</span><span>●</span></div>
+        <dl>
+          <div><dt>Making</dt><dd>Products, tools, and experiments</dd></div>
+          <div><dt>Working on</dt><dd>SEO + search projects</dd></div>
+          <div><dt>Writing</dt><dd>What I learn while doing it</dd></div>
+          <div><dt>Recharging</dt><dd>One Piece + chai</dd></div>
+        </dl>
+      </aside>
+    </section>
   </div>
 </Layout>
