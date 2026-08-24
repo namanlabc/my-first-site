@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   type?: 'website' | 'article';
   image?: string;
+  bodyClass?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = 'Naman Patel works on SEO, builds websites and useful tools, and writes about what he learns along the way.',
   type = 'website',
   image,
+  bodyClass,
 } = Astro.props;
 
 const pageTitle = title === 'Naman Patel'
@@ -62,7 +64,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       })();
     </script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader />
     <main id="main-content" tabindex="-1">
@@ -75,6 +77,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
       function updateThemeControl() {
         const isDark = document.documentElement.classList.contains('dark');
+        document.body.classList.toggle('dark', isDark);
         button?.setAttribute('aria-pressed', String(isDark));
         button?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
         document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#11110f' : '#f5f3ed');
@@ -83,6 +86,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       updateThemeControl();
       button?.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
+        document.body.classList.toggle('dark', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateThemeControl();
       });

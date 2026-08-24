@@ -1,0 +1,30 @@
+---
+interface Props {
+  compact?: boolean;
+  label?: string;
+}
+const { compact = false, label = 'A playful crew building things together' } = Astro.props;
+---
+
+<div class:list={['playful-crew', { 'playful-crew--compact': compact }]} role="img" aria-label={label}>
+  <div class="playful-crew__status"><span></span>status: building <b>✓</b></div>
+  <div class="playful-crew__stage" aria-hidden="true">
+    <div class="crew-pet crew-pet--bot">
+      <svg viewBox="0 0 160 190"><path d="M42 42V27m76 15V27" stroke="#1f2024" stroke-width="8" stroke-linecap="round"/><circle cx="42" cy="20" r="9" fill="#627fe8" stroke="#1f2024" stroke-width="6"/><circle cx="118" cy="20" r="9" fill="#627fe8" stroke="#1f2024" stroke-width="6"/><rect x="17" y="42" width="126" height="128" rx="36" fill="#32343b" stroke="#1f2024" stroke-width="7"/><rect x="35" y="67" width="90" height="69" rx="26" fill="#202227"/><rect x="54" y="89" width="8" height="18" rx="4" fill="#b7c5ff"/><rect x="98" y="89" width="8" height="18" rx="4" fill="#b7c5ff"/><path d="M67 118c8 7 18 7 26 0" fill="none" stroke="#b7c5ff" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="crew-pet crew-pet--blue">
+      <svg viewBox="0 0 150 180"><path d="M24 62c0-25 20-44 47-44s48 19 48 44v61c0 24-19 43-43 43h-8c-24 0-44-19-44-43V62Z" fill="#5578eb" stroke="#25262b" stroke-width="7"/><rect x="43" y="73" width="58" height="51" rx="21" fill="#26345e"/><rect x="56" y="90" width="7" height="18" rx="3.5" fill="#ddf5ff"/><rect x="82" y="90" width="7" height="18" rx="3.5" fill="#ddf5ff"/><path d="M59 130c9 7 18 7 27 0" fill="none" stroke="#25262b" stroke-width="5" stroke-linecap="round"/><path d="M25 117 8 136m108-18 18 16" fill="none" stroke="#25262b" stroke-width="7" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="crew-pet crew-pet--main">
+      <svg viewBox="0 0 210 240"><path d="M106 34c-6-18-3-28 9-34 8 13 8 24 0 34" fill="#78a94a" stroke="#2c3329" stroke-width="5"/><path d="M106 29c-21-12-36-11-47 1 15 12 30 14 47 6m8-4c20-16 37-17 52-3-14 14-32 16-52 9" fill="#94bd61" stroke="#2c3329" stroke-width="5" stroke-linejoin="round"/><rect x="24" y="46" width="162" height="170" rx="52" fill="#efe9cd" stroke="#39382f" stroke-width="7"/><rect x="45" y="74" width="120" height="96" rx="40" fill="#fff9df" stroke="#c9c19c" stroke-width="5"/><rect x="70" y="108" width="9" height="20" rx="4.5" fill="#31322f"/><rect x="132" y="108" width="9" height="20" rx="4.5" fill="#31322f"/><path d="M94 137c8 8 17 8 24 0" fill="none" stroke="#31322f" stroke-width="5" stroke-linecap="round"/><circle cx="61" cy="139" r="8" fill="#efa39e" opacity=".66"/><circle cx="151" cy="139" r="8" fill="#efa39e" opacity=".66"/></svg>
+    </div>
+
+    <div class="crew-pet crew-pet--orange">
+      <svg viewBox="0 0 150 180"><path d="M48 39c3-22 17-34 40-38-6 12-4 21 5 29 5-10 13-16 24-18 1 15-4 28-14 37" fill="#f36b00" stroke="#7b3300" stroke-width="5" stroke-linejoin="round"/><rect x="21" y="43" width="108" height="123" rx="35" fill="#ffb25e" stroke="#5d341e" stroke-width="7"/><rect x="39" y="67" width="73" height="67" rx="26" fill="#fff0d9"/><rect x="53" y="90" width="8" height="18" rx="4" fill="#4b3124"/><rect x="89" y="90" width="8" height="18" rx="4" fill="#4b3124"/><path d="M65 118c7 7 14 7 21 0" fill="none" stroke="#4b3124" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+
+    <svg class="crew-laptop" viewBox="0 0 250 125"><path d="M37 8h176c9 0 16 7 16 16v72H21V24c0-9 7-16 16-16Z" fill="#3b3c3f" stroke="#242528" stroke-width="7"/><rect x="42" y="27" width="166" height="57" rx="5" fill="#232427"/><path d="M112 47c12-10 25-11 38-4-5 14-16 23-34 27-7-8-8-16-4-23Z" fill="#78a94a"/><path d="M115 70c8-11 17-19 29-25" fill="none" stroke="#b5d67f" stroke-width="3.5" stroke-linecap="round"/><path d="M8 96h234l-12 20H20L8 96Z" fill="#595a5e" stroke="#242528" stroke-width="7" stroke-linejoin="round"/></svg>
+  </div>
+</div>
