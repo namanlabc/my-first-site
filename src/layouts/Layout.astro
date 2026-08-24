@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   type?: 'website' | 'article';
   image?: string;
+  bodyClass?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = 'Naman Patel works on SEO, builds websites and useful tools, and writes about what he learns along the way.',
   type = 'website',
   image,
+  bodyClass,
 } = Astro.props;
 
 const pageTitle = title === 'Naman Patel'
@@ -62,7 +64,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       })();
     </script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader />
     <main id="main-content" tabindex="-1">
