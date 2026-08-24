@@ -29,56 +29,60 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 ---
 
 <Layout title={title} description={description} type="article" image={image}>
-  <div class="shell shell--reading article-shell">
-    <a class="back-link" href={`${base}archive/`}><span aria-hidden="true">←</span> All writing</a>
-    <article>
-      <header class="article-header">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <div class="article-meta">
-          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-          <span aria-hidden="true">·</span>
-          <span>{readingTime} min read</span>
-        </div>
-        {tags.length > 0 && (
-          <ul class="tag-list" aria-label="Tags">
-            {tags.map((tag) => <li>{tag}</li>)}
-          </ul>
+  <div class="editorial-page article-editorial">
+    <div class="shell article-shell">
+      <a class="back-link" href={`${base}archive/`}><span aria-hidden="true">←</span> All writing</a>
+
+      <article>
+        <header class="article-header">
+          <p class="page-kicker">Note / {formattedDate}</p>
+          <h1>{title}</h1>
+          <p>{description}</p>
+          <div class="article-meta">
+            <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+            <span aria-hidden="true">·</span>
+            <span>{readingTime} min read</span>
+          </div>
+          {tags.length > 0 && (
+            <ul class="tag-list" aria-label="Tags">
+              {tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          )}
+        </header>
+
+        {featuredImage && (
+          <figure class="article-featured">
+            <img
+              src={featuredImage}
+              alt={imageAlt ?? ''}
+              width="1536"
+              height="1024"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
         )}
-      </header>
 
-      {featuredImage && (
-        <figure class="article-featured">
-          <img
-            src={featuredImage}
-            alt={imageAlt ?? ''}
-            width="1536"
-            height="1024"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </figure>
-      )}
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
 
-      <div class="prose">
-        <slot />
-      </div>
-    </article>
-
-    <nav class="post-nav" aria-label="More writing">
-      {olderPost ? (
-        <a href={`${base}blog/${olderPost.id}/`}>
-          <span>Older note</span>
-          <strong>{olderPost.data.title}</strong>
-        </a>
-      ) : <span></span>}
-      {newerPost ? (
-        <a class="post-nav__newer" href={`${base}blog/${newerPost.id}/`}>
-          <span>Newer note</span>
-          <strong>{newerPost.data.title}</strong>
-        </a>
-      ) : <span></span>}
-    </nav>
+      <nav class="post-nav" aria-label="More writing">
+        {olderPost ? (
+          <a href={`${base}blog/${olderPost.id}/`}>
+            <span>Older note</span>
+            <strong>{olderPost.data.title}</strong>
+          </a>
+        ) : <span></span>}
+        {newerPost ? (
+          <a class="post-nav__newer" href={`${base}blog/${newerPost.id}/`}>
+            <span>Newer note</span>
+            <strong>{newerPost.data.title}</strong>
+          </a>
+        ) : <span></span>}
+      </nav>
+    </div>
   </div>
 </Layout>
