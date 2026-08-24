@@ -4,18 +4,32 @@ import ProjectItem from '../components/ProjectItem.astro';
 import { projects } from '../data/projects';
 ---
 
-<Layout title="Projects" description="The websites, open-source tools, and WordPress experiments Naman keeps building and improving.">
-  <div class="shell shell--content page-intro">
-    <h1>The things I keep tinkering with.</h1>
-    <p>
-      Some are live, Astro SEO Audit is now open source, Calm WP is still in beta, and I keep finding reasons to improve all of them.
-    </p>
-  </div>
+<Layout title="Projects" description="The websites, open-source tools, and experiments Naman keeps building and improving.">
+  <div class="editorial-page projects-editorial">
+    <section class="page-hero shell shell--wide" aria-labelledby="projects-title">
+      <p class="page-kicker">Projects / things that escaped the notes app</p>
+      <h1 id="projects-title">A small pile of things I decided <span class="accent-blue">should exist.</span></h1>
+      <p class="page-lede">Some are live, some are open source, some are still being shaped. The common part is that I wanted a real version I could use, test, and make better.</p>
 
-  <section class="shell shell--wide projects-page" aria-labelledby="projects-list-title">
-    <h2 id="projects-list-title" class="visually-hidden">Current projects</h2>
-    <div class="project-list">
-      {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
-    </div>
-  </section>
+      <div class="project-summary" aria-label="Project summary">
+        <div><strong>{projects.length} current projects</strong><span>apps, tools, themes, and this site</span></div>
+        <div><strong>Built to be used</strong><span>not portfolio-only concepts</span></div>
+        <div><strong>Still changing</strong><span>finished is usually temporary</span></div>
+      </div>
+    </section>
+
+    <section class="shell shell--wide projects-page" aria-labelledby="projects-list-title">
+      <div class="section-heading">
+        <p class="section-kicker">01 / CURRENT WORK</p>
+        <div>
+          <h2 id="projects-list-title">The useful, the odd, and the still-cooking.</h2>
+          <p>No giant gallery of mockups. Just what each thing is, why it exists, and where it is now.</p>
+        </div>
+      </div>
+
+      <div class="project-list">
+        {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
+      </div>
+    </section>
+  </div>
 </Layout>
