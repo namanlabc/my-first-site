@@ -77,6 +77,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
       function updateThemeControl() {
         const isDark = document.documentElement.classList.contains('dark');
+        document.body.classList.toggle('dark', isDark);
         button?.setAttribute('aria-pressed', String(isDark));
         button?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
         document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#11110f' : '#f5f3ed');
@@ -85,6 +86,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       updateThemeControl();
       button?.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
+        document.body.classList.toggle('dark', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateThemeControl();
       });
