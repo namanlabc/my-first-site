@@ -151,29 +151,32 @@ const rankTwigUrl = 'https://ranktwig.com';
           </svg>
 
           <div class="terrain-label label-left">
-            <span class="label-kicker">SEARCH SIGNAL</span>
+            <span class="label-kicker">OBSERVED · GSC</span>
             <strong>1,240 impressions</strong>
-            <small>relevant queries · position 18–29</small>
+            <small>3 relevant queries · position 18–29</small>
+            <span class="label-source">28-day comparison</span>
           </div>
           <div class="terrain-label label-mid">
-            <span class="label-kicker">PAGE EVIDENCE</span>
+            <span class="label-kicker">CALCULATED</span>
             <strong>CTR gap confirmed</strong>
             <small>rankings held while clicks fell</small>
+            <span class="label-source">deterministic signal</span>
           </div>
-          <div class="terrain-label label-right">
+          <div class="terrain-label label-right terrain-label-action">
             <span class="label-kicker">NEXT MOVE</span>
             <strong>Fix the snippet first</strong>
             <small>evidence attached</small>
+            <span class="label-source">higher-confidence action</span>
           </div>
         </div>
       </section>
 
       <section class="workflow shell" aria-labelledby="workflow-title">
-        <div class="workflow-heading">
+        <div class="workflow-heading reveal-target">
           <p class="eyebrow">HOW IT COMES TOGETHER</p>
           <h2 id="workflow-title">From signal to action without losing the source.</h2>
         </div>
-        <ol class="workflow-steps">
+        <ol class="workflow-steps reveal-target">
           <li><span>01</span><div><strong>Find</strong><p>Surface the pages and queries already showing potential.</p></div></li>
           <li><span>02</span><div><strong>Investigate</strong><p>Bring performance, intent and fresh page evidence together.</p></div></li>
           <li><span>03</span><div><strong>Compare</strong><p>See what is observably different before copying anything.</p></div></li>
@@ -183,7 +186,7 @@ const rankTwigUrl = 'https://ranktwig.com';
 
       <section id="product" class="product-section">
         <div class="shell">
-          <div class="section-intro">
+          <div class="section-intro reveal-target">
             <div>
               <p class="eyebrow">THE PRODUCT</p>
               <h2>Built around SEO decisions, not dashboard decoration.</h2>
@@ -191,19 +194,19 @@ const rankTwigUrl = 'https://ranktwig.com';
             <p>RankTwig keeps the search signal, current page facts and AI reasoning visually distinct so you always know what came from where.</p>
           </div>
 
-          <article class="feature feature-investigator">
+          <article class="feature feature-investigator reveal-target">
             <div class="feature-copy">
               <span class="feature-index">01 / PAGE INVESTIGATOR</span>
               <h3>Understand a page before changing it.</h3>
               <p>See search performance, ranking queries and fresh page evidence together. Add your AI only when another layer of reasoning is actually useful.</p>
               <a href={`${rankTwigUrl}/demo/pages/detail`}>Explore Page Investigator <span aria-hidden="true">→</span></a>
             </div>
-            <div class="product-window">
+            <div class="product-window motion-card">
               <div class="window-bar"><span>Page Investigator</span><span>28 days vs previous 28</span></div>
               <div class="metric-grid">
-                <div><small>IMPRESSIONS</small><strong>1,240</strong><em>+18.4%</em></div>
-                <div><small>CLICKS</small><strong>9</strong><em class="down">−12.0%</em></div>
-                <div><small>POSITION</small><strong>21.6</strong><em>+2.1</em></div>
+                <div><small>IMPRESSIONS</small><strong data-counter="1240" data-format="integer">1,240</strong><em>+18.4%</em></div>
+                <div><small>CLICKS</small><strong data-counter="9" data-format="integer">9</strong><em class="down">−12.0%</em></div>
+                <div><small>POSITION</small><strong data-counter="21.6" data-format="decimal">21.6</strong><em>+2.1</em></div>
               </div>
               <div class="evidence-row"><span>Striking distance</span><span>CTR gap</span><span>Fresh crawl</span><strong>Investigate →</strong></div>
               <div class="query-list">
@@ -214,14 +217,14 @@ const rankTwigUrl = 'https://ranktwig.com';
             </div>
           </article>
 
-          <article class="feature feature-battle">
+          <article class="feature feature-battle reveal-target">
             <div class="feature-copy">
               <span class="feature-index">02 / PAGE BATTLE</span>
               <h3>See where the competing page actually has an edge.</h3>
               <p>Compare titles, intent, internal links, schema and observed page facts side by side—without turning one competitor URL into fake certainty.</p>
               <a href={`${rankTwigUrl}/use-cases`}>See Page Battle use cases <span aria-hidden="true">→</span></a>
             </div>
-            <div class="battle-window">
+            <div class="battle-window motion-card">
               <div class="battle-column"><span>YOUR PAGE</span><strong>Useful guide</strong><small>28 internal links</small><small>Weak decision section</small><small>Article schema valid</small></div>
               <div class="battle-vs">VS</div>
               <div class="battle-column"><span>COMPETITOR</span><strong>Commercial guide</strong><small>34 internal links</small><small>Clear comparison section</small><small>Trust cues observed</small></div>
@@ -229,14 +232,14 @@ const rankTwigUrl = 'https://ranktwig.com';
             </div>
           </article>
 
-          <article class="feature feature-mcp">
+          <article class="feature feature-mcp reveal-target">
             <div class="feature-copy">
               <span class="feature-index">03 / CHATGPT + MCP</span>
               <h3>Your SEO evidence, inside the conversation.</h3>
               <p>Connect RankTwig once, then ask naturally. A compatible AI client can request the relevant site, page, query and opportunity evidence when it needs it.</p>
               <a href={`${rankTwigUrl}/mcp-guide`}>See how MCP works <span aria-hidden="true">→</span></a>
             </div>
-            <div class="chat-window">
+            <div class="chat-window motion-card">
               <p class="bubble bubble-user">Bro, what should I work on today?</p>
               <div class="bubble bubble-ai"><strong>Start with /best-service-guide/.</strong><p>It has 1,240 impressions but only 9 clicks, with several relevant queries around positions 18–29.</p><div class="chat-evidence"><span>GSC · 28 days</span><span>3 matching queries</span><span>Fresh crawl ready</span></div></div>
               <p class="bubble bubble-user">What do I actually change?</p>
@@ -247,37 +250,37 @@ const rankTwigUrl = 'https://ranktwig.com';
       </section>
 
       <section id="proof" class="proof shell" aria-labelledby="proof-title">
-        <div class="proof-copy">
+        <div class="proof-copy reveal-target">
           <p class="eyebrow">SHOW THE WORK</p>
           <h2 id="proof-title">Never wonder why the AI said that.</h2>
           <p>Observed data, calculated signals and AI inference stay distinguishable. Thin evidence should look thin.</p>
         </div>
-        <div class="proof-flow">
-          <div><span>01</span><strong>Observed</strong><small>Search Console + current page facts</small></div>
+        <div class="proof-flow reveal-target">
+          <div class="proof-card"><span>01 · OBSERVED</span><strong>Search signal</strong><small>Search Console + current page facts</small><b>Source attached</b></div>
           <i>→</i>
-          <div><span>02</span><strong>Calculated</strong><small>Deterministic signals and comparisons</small></div>
+          <div class="proof-card"><span>02 · CALCULATED</span><strong>Opportunity signal</strong><small>Deterministic comparisons and rules</small><b>Reproducible</b></div>
           <i>→</i>
-          <div><span>03</span><strong>AI inference</strong><small>Your model reasons over the evidence</small></div>
+          <div class="proof-card"><span>03 · AI INFERENCE</span><strong>Reasoning layer</strong><small>Your model reasons over bounded evidence</small><b>Limitations visible</b></div>
           <i>→</i>
-          <div class="proof-action"><span>04</span><strong>Action</strong><small>One next move with the source attached</small></div>
+          <div class="proof-card proof-action"><span>04 · ACTION</span><strong>Fix the snippet</strong><small>One next move with the source attached</small><b>Act with confidence</b></div>
         </div>
       </section>
 
       <section id="pricing" class="pricing-section">
         <div class="shell pricing-grid">
-          <div class="pricing-copy">
+          <div class="pricing-copy reveal-target">
             <p class="eyebrow">SIMPLE PRICING</p>
             <h2>Use the real product for free.</h2>
             <p>Connect one website and decide from actual use whether RankTwig belongs in your workflow.</p>
           </div>
-          <div class="plans">
-            <article>
+          <div class="plans reveal-target">
+            <article class="motion-card">
               <div class="plan-head"><span>FREE</span><strong>$0</strong><small>forever</small></div>
               <p>One connected website with the intelligence core and useful monthly limits.</p>
               <ul><li>1 connected website</li><li>25 Page Investigations / month</li><li>10 Page Battles / month</li><li>5 Content Briefs / month</li></ul>
               <a class="button button-secondary" href={`${rankTwigUrl}/login?intent=connect-gsc`}>Start Free</a>
             </article>
-            <article class="plan-pro">
+            <article class="plan-pro motion-card">
               <div class="plan-head"><span>PRO</span><strong>$29</strong><small>per month</small></div>
               <p>More sites, generous capacity, MCP, URL Groups and exports.</p>
               <ul><li>Up to 5 websites</li><li>500 Investigations · 200 Battles</li><li>100 Content Briefs / month</li><li>ChatGPT + MCP, groups and exports</li></ul>
@@ -287,8 +290,9 @@ const rankTwigUrl = 'https://ranktwig.com';
         </div>
       </section>
 
-      <section class="closing">
+      <section class="closing reveal-target">
         <div class="closing-noise" aria-hidden="true"></div>
+        <svg class="closing-route" viewBox="0 0 900 180" aria-hidden="true"><path d="M28 142C166 135 220 63 337 84C446 104 504 146 613 110C716 76 745 34 866 48"/></svg>
         <div class="shell closing-inner">
           <p class="eyebrow">THE NEXT MOVE IS PROBABLY ALREADY THERE</p>
           <h2>Follow the evidence.</h2>
@@ -311,6 +315,112 @@ const rankTwigUrl = 'https://ranktwig.com';
         <nav aria-label="Footer links"><a href={`${rankTwigUrl}/privacy`}>Privacy</a><a href={`${rankTwigUrl}/terms`}>Terms</a><a href="mailto:team@ranktwig.com">Contact</a></nav>
       </div>
     </footer>
+
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const root = document.documentElement;
+      root.classList.add('motion-ready');
+
+      const revealNow = (element) => element.classList.add('is-visible');
+      const revealTargets = [...document.querySelectorAll('.reveal-target')];
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealTargets.forEach(revealNow);
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            revealNow(entry.target);
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
+        revealTargets.forEach((target) => observer.observe(target));
+      }
+
+      const route = document.querySelector('.route');
+      const routeGlow = document.querySelector('.route-glow');
+      const nodes = [...document.querySelectorAll('.route-node, .destination')];
+      const terrainLabels = [...document.querySelectorAll('.terrain-label')];
+
+      if (route instanceof SVGPathElement) {
+        const length = route.getTotalLength();
+        [route, routeGlow].forEach((path) => {
+          if (!(path instanceof SVGPathElement)) return;
+          path.style.strokeDasharray = `${length}`;
+          path.style.strokeDashoffset = reduceMotion ? '0' : `${length}`;
+        });
+        if (!reduceMotion) {
+          requestAnimationFrame(() => {
+            route.style.transition = 'stroke-dashoffset 1800ms cubic-bezier(.22,1,.36,1) 420ms';
+            route.style.strokeDashoffset = '0';
+            if (routeGlow instanceof SVGPathElement) {
+              routeGlow.style.transition = 'stroke-dashoffset 1900ms cubic-bezier(.22,1,.36,1) 440ms';
+              routeGlow.style.strokeDashoffset = '0';
+            }
+          });
+          nodes.forEach((node, index) => setTimeout(() => node.classList.add('is-active'), 700 + index * 360));
+          terrainLabels.forEach((card, index) => setTimeout(() => card.classList.add('is-active'), 900 + index * 430));
+        } else {
+          nodes.forEach((node) => node.classList.add('is-active'));
+          terrainLabels.forEach((card) => card.classList.add('is-active'));
+        }
+      }
+
+      const hero = document.querySelector('.hero');
+      const terrain = document.querySelector('.terrain-wrap');
+      if (!reduceMotion && hero instanceof HTMLElement && terrain instanceof HTMLElement && window.matchMedia('(pointer:fine)').matches) {
+        let frame = 0;
+        hero.addEventListener('pointermove', (event) => {
+          cancelAnimationFrame(frame);
+          frame = requestAnimationFrame(() => {
+            const rect = hero.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
+            const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
+            terrain.style.setProperty('--parallax-x', `${x * 5}px`);
+            terrain.style.setProperty('--parallax-y', `${y * 3}px`);
+            hero.style.setProperty('--orb-x', `${x * 8}px`);
+          });
+        });
+        hero.addEventListener('pointerleave', () => {
+          terrain.style.setProperty('--parallax-x', '0px');
+          terrain.style.setProperty('--parallax-y', '0px');
+          hero.style.setProperty('--orb-x', '0px');
+        });
+      }
+
+      const counters = [...document.querySelectorAll('[data-counter]')];
+      const runCounter = (element) => {
+        if (!(element instanceof HTMLElement) || element.dataset.counted === 'true') return;
+        element.dataset.counted = 'true';
+        const target = Number(element.dataset.counter || '0');
+        const decimal = element.dataset.format === 'decimal';
+        const duration = 760;
+        const start = performance.now();
+        const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: decimal ? 1 : 0, minimumFractionDigits: decimal ? 1 : 0 });
+        if (reduceMotion) { element.textContent = formatter.format(target); return; }
+        const tick = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = formatter.format(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        counters.forEach(runCounter);
+      } else {
+        const counterObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.querySelectorAll?.('[data-counter]').forEach(runCounter);
+            if (entry.target.matches?.('[data-counter]')) runCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          });
+        }, { threshold: .35 });
+        document.querySelectorAll('.metric-grid').forEach((grid) => counterObserver.observe(grid));
+      }
+    </script>
   </body>
 </html>
 
@@ -331,6 +441,7 @@ const rankTwigUrl = 'https://ranktwig.com';
     --positive:#22c55e;
     --risk:#ef4444;
     --ai:#6366f1;
+    --ease:cubic-bezier(.22,1,.36,1);
     --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;
   }
@@ -356,23 +467,23 @@ const rankTwigUrl = 'https://ranktwig.com';
   .site-header nav a:hover,.login:hover{color:var(--ink);background:rgb(255 255 255 / 4%)}
   .header-actions{justify-self:end;display:flex;align-items:center;gap:.25rem}
 
-  .button{min-height:3rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1rem;border:1px solid transparent;border-radius:.5rem;font-size:.875rem;font-weight:600;text-decoration:none;transition:150ms ease}
-  .button:hover{transform:translateY(-1px)}
+  .button{min-height:3rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1rem;border:1px solid transparent;border-radius:.5rem;font-size:.875rem;font-weight:600;text-decoration:none;transition:transform 180ms var(--ease),background-color 150ms ease,border-color 150ms ease,box-shadow 180ms ease}
+  .button:hover{transform:translateY(-2px)}
   .button-small{min-height:2.5rem;padding:.62rem .9rem;font-size:.8125rem}
-  .button-primary{background:var(--action);color:#09090b}
-  .button-primary:hover{background:var(--action-hover);color:#fff}
+  .button-primary{background:var(--action);color:#09090b;box-shadow:0 0 0 1px rgb(255 255 255 / 3%) inset,0 10px 30px rgb(249 115 22 / 10%)}
+  .button-primary:hover{background:var(--action-hover);color:#fff;box-shadow:0 12px 35px rgb(249 115 22 / 18%)}
   .button-secondary{border-color:var(--line);background:var(--surface-raised);color:var(--ink)}
   .button-secondary:hover{border-color:var(--ink-faint);background:var(--surface-overlay)}
 
-  .hero{position:relative;min-height:clamp(58rem,100svh,68rem);overflow:hidden;isolation:isolate;background:var(--canvas)}
+  .hero{--orb-x:0px;position:relative;min-height:clamp(58rem,100svh,68rem);overflow:hidden;isolation:isolate;background:var(--canvas)}
   .hero::before{content:"";position:absolute;z-index:-5;inset:0;background:linear-gradient(180deg,#09090b 0%,#09090b 46%,#0a0c13 72%,#09090b 100%)}
-  .hero-noise,.closing-noise{position:absolute;z-index:-2;inset:0;opacity:.28;background-image:radial-gradient(rgb(255 255 255 / 8%) .65px,transparent .7px);background-size:5px 5px;mask-image:linear-gradient(to bottom,#000,transparent 76%)}
-  .hero-orb{position:absolute;z-index:-4;bottom:-14rem;width:38rem;height:38rem;border-radius:50%;filter:blur(22px);pointer-events:none}
-  .hero-orb-left{left:-18rem;background:radial-gradient(circle,rgb(79 70 229 / 25%),transparent 70%)}
-  .hero-orb-right{right:-18rem;background:radial-gradient(circle,rgb(37 99 235 / 22%),transparent 70%)}
+  .hero-noise,.closing-noise{position:absolute;z-index:-2;inset:0;opacity:.25;background-image:radial-gradient(rgb(255 255 255 / 8%) .65px,transparent .7px);background-size:5px 5px;mask-image:linear-gradient(to bottom,#000,transparent 76%)}
+  .hero-orb{position:absolute;z-index:-4;bottom:-14rem;width:38rem;height:38rem;border-radius:50%;filter:blur(22px);pointer-events:none;transition:transform 650ms var(--ease)}
+  .hero-orb-left{left:-18rem;background:radial-gradient(circle,rgb(79 70 229 / 25%),transparent 70%);transform:translateX(var(--orb-x))}
+  .hero-orb-right{right:-18rem;background:radial-gradient(circle,rgb(37 99 235 / 22%),transparent 70%);transform:translateX(calc(var(--orb-x) * -.7))}
   .hero-copy{position:relative;z-index:8;padding-top:clamp(8.25rem,14vh,10.25rem);text-align:center}
-  .announcement{display:inline-flex;align-items:center;gap:.5rem;padding:.36rem .62rem;border:1px solid rgb(255 255 255 / 12%);border-radius:999px;background:rgb(255 255 255 / 3%);box-shadow:inset 0 1px 0 rgb(255 255 255 / 4%);color:var(--ink-muted);font-family:var(--mono);font-size:.6875rem;font-weight:500;text-decoration:none;backdrop-filter:blur(12px)}
-  .announcement:hover{border-color:rgb(249 115 22 / 42%);color:var(--ink)}
+  .announcement{display:inline-flex;align-items:center;gap:.5rem;padding:.36rem .62rem;border:1px solid rgb(255 255 255 / 12%);border-radius:999px;background:rgb(255 255 255 / 3%);box-shadow:inset 0 1px 0 rgb(255 255 255 / 4%);color:var(--ink-muted);font-family:var(--mono);font-size:.6875rem;font-weight:500;text-decoration:none;backdrop-filter:blur(12px);transition:border-color 180ms ease,color 180ms ease,transform 180ms var(--ease)}
+  .announcement:hover{border-color:rgb(249 115 22 / 42%);color:var(--ink);transform:translateY(-1px)}
   .announcement-dot{width:.4rem;height:.4rem;border-radius:50%;background:var(--action);box-shadow:0 0 0 .23rem rgb(249 115 22 / 10%)}
   .hero h1{max-width:12ch;margin:1.35rem auto 0;font-size:clamp(3.65rem,6.45vw,6.6rem);font-weight:500;line-height:.92;letter-spacing:-.066em;text-wrap:balance}
   .hero-lede{max-width:44rem;margin:1.5rem auto 0;color:var(--ink-muted);font-size:clamp(.95rem,1.3vw,1.08rem);line-height:1.75;text-wrap:balance}
@@ -380,7 +491,7 @@ const rankTwigUrl = 'https://ranktwig.com';
   .hero-meta{margin-top:1.12rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.45rem;color:var(--ink-faint);font-family:var(--mono);font-size:.625rem}
   .hero-meta span::before{content:"•";margin-right:.45rem;color:var(--action)}
 
-  .terrain-wrap{position:absolute;z-index:3;left:50%;bottom:-.5rem;width:min(100rem,112vw);height:54%;transform:translateX(-50%);pointer-events:none}
+  .terrain-wrap{--parallax-x:0px;--parallax-y:0px;position:absolute;z-index:3;left:50%;bottom:-.5rem;width:min(100rem,112vw);height:54%;transform:translate(calc(-50% + var(--parallax-x)),var(--parallax-y));transition:transform 520ms var(--ease);pointer-events:none;will-change:transform}
   .terrain-wrap::before{content:"";position:absolute;z-index:-1;left:50%;bottom:7%;width:62%;height:34%;border-radius:50%;background:radial-gradient(ellipse,rgb(249 115 22 / 15%),transparent 67%);filter:blur(22px);transform:translateX(-50%)}
   .terrain-wrap::after{content:"";position:absolute;z-index:10;inset:0;background:linear-gradient(180deg,var(--canvas) 0%,rgb(9 9 11 / 82%) 5%,transparent 24%,transparent 88%,rgb(9 9 11 / 20%) 100%)}
   .terrain{position:absolute;inset:0;width:100%;height:100%}
@@ -390,28 +501,39 @@ const rankTwigUrl = 'https://ranktwig.com';
   .signal-stars{opacity:.68}
   .route-glow{fill:none;stroke:#f97316;stroke-opacity:.27;stroke-width:12;filter:url(#softGlow)}
   .route{fill:none;stroke:url(#orangeRoute);stroke-width:3.25;stroke-linecap:round;filter:url(#routeGlow)}
-  .route-node,.destination{animation:nodeFloat 5s ease-in-out infinite}
-  .route-node:nth-of-type(2){animation-delay:-1.2s}.route-node:nth-of-type(3){animation-delay:-2.1s}.destination{animation-delay:-.7s}
-  @keyframes nodeFloat{0%,100%{transform-box:fill-box;transform-origin:center;opacity:1}50%{opacity:.82}}
-  .terrain-label{position:absolute;z-index:12;min-width:12.2rem;padding:.68rem .78rem;border:1px solid rgb(255 255 255 / 11%);border-radius:.55rem;background:rgb(12 12 15 / 82%);box-shadow:0 18px 50px rgb(0 0 0 / 24%),inset 0 1px 0 rgb(255 255 255 / 4%);backdrop-filter:blur(14px)}
+  .route-node,.destination{opacity:0;transition:opacity 380ms var(--ease),filter 500ms ease}
+  .route-node.is-active,.destination.is-active{opacity:1;filter:drop-shadow(0 0 11px rgb(249 115 22 / 35%))}
+  .terrain-label{position:absolute;z-index:12;min-width:12.7rem;padding:.72rem .78rem .66rem;border:1px solid rgb(255 255 255 / 11%);border-radius:.68rem;background:linear-gradient(180deg,rgb(24 24 27 / 88%),rgb(12 12 15 / 88%));box-shadow:0 22px 65px rgb(0 0 0 / 28%),inset 0 1px 0 rgb(255 255 255 / 5%);backdrop-filter:blur(14px);opacity:0;transform:translateY(10px) scale(.985);filter:blur(4px);transition:opacity 520ms var(--ease),transform 520ms var(--ease),filter 520ms var(--ease),border-color 180ms ease}
+  .terrain-label.is-active{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  .terrain-label::before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgb(255 255 255 / 18%),transparent)}
   .terrain-label::after{content:"";position:absolute;width:1px;height:2rem;background:linear-gradient(to bottom,rgb(249 115 22 / 70%),transparent)}
+  .terrain-label-action{border-color:rgb(249 115 22 / 28%);box-shadow:0 25px 70px rgb(0 0 0 / 32%),0 0 45px rgb(249 115 22 / 7%),inset 0 1px 0 rgb(255 255 255 / 5%)}
   .label-left{left:17%;bottom:24%}.label-left::after{left:24%;top:100%}
-  .label-mid{left:48%;bottom:34%;transform:translateX(-50%)}.label-mid::after{left:50%;top:100%}
+  .label-mid{left:48%;bottom:34%}.label-mid::after{left:50%;top:100%}
   .label-right{right:14%;bottom:37%}.label-right::after{right:24%;top:100%}
-  .label-kicker{display:block;color:var(--action);font-family:var(--mono);font-size:.52rem;font-weight:500;letter-spacing:.08em}
-  .terrain-label strong{display:block;margin-top:.28rem;font-size:.72rem;font-weight:600}
-  .terrain-label small{display:block;margin-top:.16rem;color:var(--ink-faint);font-family:var(--mono);font-size:.5rem}
+  .label-kicker{display:block;color:var(--action);font-family:var(--mono);font-size:.5rem;font-weight:500;letter-spacing:.075em}
+  .terrain-label strong{display:block;margin-top:.3rem;font-size:.73rem;font-weight:600;letter-spacing:-.01em}
+  .terrain-label small{display:block;margin-top:.16rem;color:var(--ink-faint);font-family:var(--mono);font-size:.49rem}
+  .label-source{display:block;margin-top:.55rem;padding-top:.48rem;border-top:1px solid rgb(255 255 255 / 8%);color:rgb(161 161 170 / 62%);font-family:var(--mono);font-size:.46rem}
 
   .eyebrow{margin:0;color:var(--action);font-family:var(--mono);font-size:.6875rem;font-weight:500;letter-spacing:.08em}
   h2{margin:0;font-size:clamp(2.5rem,4.9vw,4.8rem);font-weight:500;line-height:.98;letter-spacing:-.054em;text-wrap:balance}
 
+  .motion-ready .reveal-target{opacity:0;transform:translateY(18px);filter:blur(5px);transition:opacity 620ms var(--ease),transform 620ms var(--ease),filter 620ms var(--ease)}
+  .motion-ready .reveal-target.is-visible{opacity:1;transform:translateY(0);filter:blur(0)}
+
   .workflow{padding-block:clamp(6.5rem,10vw,9rem)}
   .workflow-heading{max-width:47rem}
   .workflow-heading h2{margin-top:.85rem}
-  .workflow-steps{margin:3.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);list-style:none}
-  .workflow-steps li{min-height:11rem;padding:1.5rem;border-right:1px solid var(--line)}
+  .workflow-steps{position:relative;margin:3.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);list-style:none;overflow:hidden}
+  .workflow-steps::before{content:"";position:absolute;z-index:2;left:0;top:-1px;width:100%;height:1px;background:linear-gradient(90deg,transparent 0%,var(--action) 14%,#fb923c 78%,transparent 100%);transform:scaleX(0);transform-origin:left;transition:transform 1400ms var(--ease) 120ms;box-shadow:0 0 10px rgb(249 115 22 / 30%)}
+  .workflow-steps.is-visible::before{transform:scaleX(1)}
+  .workflow-steps li{min-height:11rem;padding:1.5rem;border-right:1px solid var(--line);transition:background-color 180ms ease,transform 220ms var(--ease)}
   .workflow-steps li:last-child{border-right:0}
-  .workflow-steps li>span{display:inline-flex;width:1.7rem;height:1.7rem;align-items:center;justify-content:center;border:1px solid rgb(249 115 22 / 52%);border-radius:50%;color:var(--action);font-family:var(--mono);font-size:.55rem}
+  .workflow-steps li:hover{background:rgb(255 255 255 / 1.8%);transform:translateY(-2px)}
+  .workflow-steps li>span{display:inline-flex;width:1.7rem;height:1.7rem;align-items:center;justify-content:center;border:1px solid rgb(249 115 22 / 52%);border-radius:50%;color:var(--action);font-family:var(--mono);font-size:.55rem;box-shadow:0 0 0 0 rgb(249 115 22 / 0%);transition:box-shadow 380ms ease,background-color 380ms ease}
+  .workflow-steps.is-visible li:nth-child(1)>span{transition-delay:180ms}.workflow-steps.is-visible li:nth-child(2)>span{transition-delay:420ms}.workflow-steps.is-visible li:nth-child(3)>span{transition-delay:680ms}.workflow-steps.is-visible li:nth-child(4)>span{transition-delay:940ms}
+  .workflow-steps.is-visible li>span{background:rgb(249 115 22 / 8%);box-shadow:0 0 0 .28rem rgb(249 115 22 / 4%)}
   .workflow-steps strong{display:block;margin-top:1rem;font-size:1.02rem;font-weight:600}
   .workflow-steps p{margin:.38rem 0 0;color:var(--ink-muted);font-size:.78rem;line-height:1.65}
 
@@ -426,33 +548,57 @@ const rankTwigUrl = 'https://ranktwig.com';
   .feature-index{color:var(--ink-faint);font-family:var(--mono);font-size:.625rem;letter-spacing:.08em}
   .feature-copy h3{margin:.85rem 0 0;font-size:clamp(2rem,3.6vw,3.5rem);font-weight:500;line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
   .feature-copy p{margin:1rem 0 0;color:var(--ink-muted);font-size:.9rem;line-height:1.75}
-  .feature-copy>a{display:inline-flex;gap:.45rem;margin-top:1.2rem;color:var(--action);font-size:.8rem;font-weight:600;text-decoration:none}
-  .feature-copy>a:hover{color:#fb923c}
+  .feature-copy>a{display:inline-flex;gap:.45rem;margin-top:1.2rem;color:var(--action);font-size:.8rem;font-weight:600;text-decoration:none;transition:gap 180ms var(--ease),color 180ms ease}
+  .feature-copy>a:hover{gap:.7rem;color:#fb923c}
+
+  .motion-card{position:relative;overflow:hidden;transition:transform 260ms var(--ease),border-color 200ms ease,box-shadow 260ms ease}
+  .motion-card::after{content:"";position:absolute;z-index:8;top:0;left:0;width:38%;height:1px;background:linear-gradient(90deg,transparent,var(--action),#fb923c,transparent);transform:translateX(-135%);opacity:.9;pointer-events:none}
+  .motion-card:hover{transform:translateY(-4px);border-color:#3f3f46;box-shadow:0 38px 105px rgb(0 0 0 / 28%),0 0 0 1px rgb(255 255 255 / 2%) inset}
+  .motion-card:hover::after{animation:cardTracer 900ms var(--ease)}
+  @keyframes cardTracer{0%{transform:translateX(-135%)}100%{transform:translateX(355%)}}
+
   .product-window,.battle-window,.chat-window{overflow:hidden;border:1px solid var(--line);border-radius:1rem;background:linear-gradient(180deg,rgb(24 24 27 / 92%),rgb(18 18 21 / 98%));box-shadow:0 30px 90px rgb(0 0 0 / 18%),inset 0 1px 0 rgb(255 255 255 / 3%)}
   .window-bar{min-height:3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid var(--line);color:var(--ink-faint);font-family:var(--mono);font-size:.58rem}
   .metric-grid{display:grid;grid-template-columns:repeat(3,1fr)}
   .metric-grid>div{padding:1.25rem;border-right:1px solid var(--line)}.metric-grid>div:last-child{border-right:0}
-  .metric-grid small{display:block;color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.metric-grid strong{display:block;margin-top:.34rem;font-size:1.85rem;font-weight:600;letter-spacing:-.045em}.metric-grid em{display:block;color:var(--positive);font-family:var(--mono);font-size:.55rem;font-style:normal}.metric-grid .down{color:var(--risk)}
+  .metric-grid small{display:block;color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.metric-grid strong{display:block;margin-top:.34rem;font-size:1.85rem;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.metric-grid em{display:block;color:var(--positive);font-family:var(--mono);font-size:.55rem;font-style:normal}.metric-grid .down{color:var(--risk)}
   .evidence-row{display:flex;flex-wrap:wrap;align-items:center;gap:.52rem;padding:.9rem 1rem;border-block:1px solid var(--line);background:rgb(9 9 11 / 40%)}
-  .evidence-row span{padding:.3rem .46rem;border:1px solid var(--line);border-radius:.4rem;color:var(--ink-muted);font-family:var(--mono);font-size:.53rem}.evidence-row strong{margin-left:auto;color:var(--action);font-size:.68rem}
-  .query-list>div{display:grid;grid-template-columns:1fr auto auto;gap:1.5rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);align-items:center}.query-list>div:last-child{border-bottom:0}.query-list span{font-size:.72rem}.query-list small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.query-list strong{color:var(--ink-muted);font-family:var(--mono);font-size:.58rem}
+  .evidence-row span{padding:.3rem .46rem;border:1px solid var(--line);border-radius:.4rem;color:var(--ink-muted);font-family:var(--mono);font-size:.53rem;transition:border-color 180ms ease,background-color 180ms ease}.evidence-row span:hover{border-color:rgb(249 115 22 / 34%);background:var(--action-muted)}.evidence-row strong{margin-left:auto;color:var(--action);font-size:.68rem}
+  .query-list>div{display:grid;grid-template-columns:1fr auto auto;gap:1.5rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);align-items:center;transition:background-color 160ms ease}.query-list>div:hover{background:rgb(255 255 255 / 2%)}.query-list>div:last-child{border-bottom:0}.query-list span{font-size:.72rem}.query-list small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}.query-list strong{color:var(--ink-muted);font-family:var(--mono);font-size:.58rem}
+
   .battle-window{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;padding:1rem}
-  .battle-column{min-height:16rem;display:flex;flex-direction:column;padding:1.15rem;border:1px solid var(--line);border-radius:.75rem;background:var(--canvas)}
+  .battle-column{min-height:16rem;display:flex;flex-direction:column;padding:1.15rem;border:1px solid var(--line);border-radius:.75rem;background:var(--canvas);transition:transform 650ms var(--ease),opacity 650ms var(--ease),border-color 180ms ease}
+  .motion-ready .feature-battle:not(.is-visible) .battle-column:first-child{opacity:0;transform:translateX(-18px)}
+  .motion-ready .feature-battle:not(.is-visible) .battle-column:nth-of-type(2){opacity:0;transform:translateX(18px)}
+  .feature-battle.is-visible .battle-column{opacity:1;transform:translateX(0)}
+  .battle-column:hover{border-color:#3f3f46}
   .battle-column>span{color:var(--ink-faint);font-family:var(--mono);font-size:.55rem}.battle-column>strong{margin:.7rem 0 1.1rem;font-size:1.02rem}.battle-column>small{padding:.58rem 0;border-top:1px solid var(--line);color:var(--ink-muted);font-size:.65rem}
-  .battle-vs{align-self:center;color:var(--action);font-family:var(--mono);font-size:.58rem}
-  .battle-verdict{grid-column:1/-1;display:grid;grid-template-columns:4rem 1fr;gap:.2rem .9rem;padding:.9rem 1rem;border-left:2px solid var(--action);background:var(--action-muted)}
+  .battle-vs{align-self:center;color:var(--action);font-family:var(--mono);font-size:.58rem;transition:opacity 500ms ease,transform 500ms var(--ease) 200ms}.motion-ready .feature-battle:not(.is-visible) .battle-vs{opacity:0;transform:scale(.7)}
+  .battle-verdict{grid-column:1/-1;display:grid;grid-template-columns:4rem 1fr;gap:.2rem .9rem;padding:.9rem 1rem;border-left:2px solid var(--action);background:var(--action-muted);transition:opacity 520ms ease,transform 520ms var(--ease) 300ms}.motion-ready .feature-battle:not(.is-visible) .battle-verdict{opacity:0;transform:translateY(8px)}
   .battle-verdict span{grid-row:1/3;color:var(--action);font-family:var(--mono);font-size:.54rem}.battle-verdict strong{font-size:.72rem}.battle-verdict small{color:var(--ink-faint);font-family:var(--mono);font-size:.52rem}
+
   .chat-window{padding:1.2rem;display:grid;gap:.7rem}
-  .bubble{margin:0;padding:.9rem 1rem;border-radius:.85rem;font-size:.72rem;line-height:1.65}
+  .bubble{margin:0;padding:.9rem 1rem;border-radius:.85rem;font-size:.72rem;line-height:1.65;transition:opacity 520ms var(--ease),transform 520ms var(--ease),filter 520ms var(--ease)}
+  .motion-ready .feature-mcp:not(.is-visible) .bubble{opacity:0;transform:translateY(10px);filter:blur(3px)}
+  .feature-mcp.is-visible .bubble:nth-child(1){transition-delay:120ms}.feature-mcp.is-visible .bubble:nth-child(2){transition-delay:260ms}.feature-mcp.is-visible .bubble:nth-child(3){transition-delay:400ms}.feature-mcp.is-visible .bubble:nth-child(4){transition-delay:540ms}
   .bubble-user{max-width:76%;justify-self:end;border-bottom-right-radius:.25rem;background:var(--action);color:#09090b;font-weight:600}
   .bubble-ai{max-width:91%;border:1px solid var(--line);border-bottom-left-radius:.25rem;background:var(--canvas);color:var(--ink-muted)}
   .bubble-ai strong{color:var(--ink)}.bubble-ai p{margin:.32rem 0 0}.chat-evidence{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.4rem}.chat-evidence span{padding:.25rem .38rem;border:1px solid var(--line);border-radius:.35rem;color:var(--ink-faint);font-family:var(--mono);font-size:.49rem}
 
   .proof{padding-block:clamp(7rem,11vw,10rem);display:grid;grid-template-columns:minmax(16rem,.5fr) minmax(0,1fr);gap:clamp(3rem,8vw,7rem);align-items:center}
   .proof-copy h2{margin-top:.85rem}.proof-copy>p:last-child{margin:1rem 0 0;color:var(--ink-muted);font-size:.9rem;line-height:1.75}
-  .proof-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:.55rem}
-  .proof-flow>div{min-height:9.4rem;padding:1rem;border:1px solid var(--line);border-radius:.75rem;background:var(--surface)}
-  .proof-flow>div>span{color:var(--ink-faint);font-family:var(--mono);font-size:.52rem}.proof-flow strong{display:block;margin-top:.75rem;font-size:.82rem}.proof-flow small{display:block;margin-top:.24rem;color:var(--ink-faint);font-size:.6rem;line-height:1.5}.proof-flow>i{color:var(--ink-faint);font-style:normal}.proof-flow .proof-action{border-color:rgb(249 115 22 / 34%);background:linear-gradient(180deg,var(--surface-raised),rgb(249 115 22 / 7%))}.proof-flow .proof-action>span{color:var(--action)}
+  .proof-flow{position:relative;display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:.55rem;isolation:isolate}
+  .proof-flow::before{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:50%;height:1px;background:var(--line)}
+  .proof-flow::after{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:50%;height:1px;background:linear-gradient(90deg,var(--action),#fb923c);box-shadow:0 0 14px rgb(249 115 22 / 24%);transform:scaleX(0);transform-origin:left;transition:transform 1500ms var(--ease) 140ms}
+  .proof-flow.is-visible::after{transform:scaleX(1)}
+  .proof-card{position:relative;min-height:10rem;padding:1rem;border:1px solid var(--line);border-radius:.8rem;background:linear-gradient(180deg,var(--surface-raised),var(--surface));box-shadow:0 18px 55px rgb(0 0 0 / 12%),inset 0 1px 0 rgb(255 255 255 / 3%);transition:transform 220ms var(--ease),border-color 180ms ease,box-shadow 220ms ease}
+  .proof-card::before{content:"";position:absolute;top:.95rem;right:.95rem;width:.42rem;height:.42rem;border-radius:50%;background:#52525b;box-shadow:0 0 0 .22rem rgb(82 82 91 / 9%)}
+  .proof-card:hover{transform:translateY(-4px);border-color:#3f3f46;box-shadow:0 24px 65px rgb(0 0 0 / 20%),inset 0 1px 0 rgb(255 255 255 / 4%)}
+  .proof-card>span{color:var(--ink-faint);font-family:var(--mono);font-size:.5rem}.proof-card strong{display:block;margin-top:.75rem;font-size:.82rem}.proof-card small{display:block;margin-top:.24rem;color:var(--ink-faint);font-size:.59rem;line-height:1.5}.proof-card b{display:block;margin-top:.72rem;padding-top:.56rem;border-top:1px solid var(--line);color:var(--ink-muted);font-family:var(--mono);font-size:.48rem;font-weight:500}
+  .proof-flow>i{color:var(--ink-faint);font-style:normal;background:var(--canvas);padding:.15rem}
+  .proof-flow .proof-action{border-color:rgb(249 115 22 / 34%);background:linear-gradient(180deg,var(--surface-raised),rgb(249 115 22 / 7%));box-shadow:0 22px 70px rgb(249 115 22 / 5%),inset 0 1px 0 rgb(255 255 255 / 4%)}
+  .proof-flow .proof-action::before{background:var(--action);box-shadow:0 0 0 .22rem rgb(249 115 22 / 9%),0 0 18px rgb(249 115 22 / 28%)}
+  .proof-flow .proof-action>span{color:var(--action)}
 
   .pricing-section{padding-block:clamp(7rem,11vw,10rem);border-block:1px solid var(--line-subtle);background:#0b0b0e}
   .pricing-grid{display:grid;grid-template-columns:minmax(16rem,.52fr) minmax(0,1fr);gap:clamp(3rem,8vw,7rem);align-items:start}
@@ -462,10 +608,13 @@ const rankTwigUrl = 'https://ranktwig.com';
   .plan-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:.1rem .8rem}.plan-head span{color:var(--action);font-family:var(--mono);font-size:.6rem}.plan-head strong{grid-row:1/3;grid-column:2;font-size:2.75rem;font-weight:600;letter-spacing:-.055em;line-height:.9}.plan-head small{color:var(--ink-faint);font-family:var(--mono);font-size:.54rem}
   .plans article>p{min-height:4.3rem;margin:1.35rem 0;color:var(--ink-muted);font-size:.76rem;line-height:1.65}.plans ul{margin:0 0 1.5rem;padding:0;border-top:1px solid var(--line);list-style:none}.plans li{padding:.67rem 0;border-bottom:1px solid var(--line);color:var(--ink-muted);font-size:.7rem}.plans li::before{content:"↳";margin-right:.6rem;color:var(--action);font-family:var(--mono)}.plans .button{width:100%}
 
-  .closing{position:relative;overflow:hidden;padding-block:clamp(8rem,13vw,12rem);text-align:center}
+  .closing{position:relative;overflow:hidden;padding-block:clamp(8rem,13vw,12rem);text-align:center;isolation:isolate}
   .closing::before{content:"";position:absolute;z-index:-3;left:50%;top:50%;width:45rem;height:25rem;border-radius:50%;background:radial-gradient(ellipse,rgb(249 115 22 / 14%),transparent 70%);transform:translate(-50%,-50%)}
   .closing-noise{mask-image:radial-gradient(circle at 50% 50%,#000,transparent 70%)}
-  .closing-inner{max-width:52rem}.closing-inner h2{margin-top:.85rem;font-size:clamp(3.6rem,7vw,6.8rem)}.closing-inner>p:nth-of-type(2){max-width:37rem;margin:1.2rem auto 0;color:var(--ink-muted);font-size:.95rem;line-height:1.75}
+  .closing-route{position:absolute;z-index:-1;left:50%;top:50%;width:min(70rem,92vw);height:13rem;transform:translate(-50%,-50%);opacity:.48}
+  .closing-route path{fill:none;stroke:var(--action);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200;filter:drop-shadow(0 0 7px rgb(249 115 22 / 28%));transition:stroke-dashoffset 1700ms var(--ease) 120ms}
+  .closing.is-visible .closing-route path{stroke-dashoffset:0}
+  .closing-inner{position:relative;z-index:2;max-width:52rem}.closing-inner h2{margin-top:.85rem;font-size:clamp(3.6rem,7vw,6.8rem)}.closing-inner>p:nth-of-type(2){max-width:37rem;margin:1.2rem auto 0;color:var(--ink-muted);font-size:.95rem;line-height:1.75}
 
   footer{border-top:1px solid var(--line-subtle);background:#070709}.footer-inner{min-height:8rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;color:var(--ink-faint)}.footer-inner>p{margin:0;font-size:.75rem}.footer-inner nav{display:flex;gap:1rem}.footer-inner nav a{color:var(--ink-muted);font-size:.7rem;text-decoration:none}.footer-inner nav a:hover{color:var(--ink)}
 
@@ -475,7 +624,7 @@ const rankTwigUrl = 'https://ranktwig.com';
     .workflow-steps{grid-template-columns:1fr 1fr}.workflow-steps li:nth-child(2){border-right:0}.workflow-steps li:nth-child(-n+2){border-bottom:1px solid var(--line)}
     .section-intro,.feature,.feature:nth-of-type(3),.proof,.pricing-grid{grid-template-columns:1fr;gap:2.6rem}
     .feature:nth-of-type(3) .feature-copy,.feature:nth-of-type(3) .battle-window{grid-column:auto;grid-row:auto}.feature-copy{max-width:40rem}
-    .proof-flow{grid-template-columns:1fr auto 1fr;gap:.5rem}.proof-flow>i:nth-of-type(2){display:none}.proof-flow>div:nth-of-type(3){margin-top:.25rem}.proof-flow>i:nth-of-type(3){margin-top:.25rem}
+    .proof-flow{grid-template-columns:1fr auto 1fr;gap:.5rem}.proof-flow::before,.proof-flow::after{display:none}.proof-flow>i:nth-of-type(2){display:none}.proof-flow>div:nth-of-type(3){margin-top:.25rem}.proof-flow>i:nth-of-type(3){margin-top:.25rem}
   }
 
   @media(max-width:680px){
@@ -486,10 +635,19 @@ const rankTwigUrl = 'https://ranktwig.com';
     .section-intro{grid-template-columns:1fr}.section-intro>p{font-size:.86rem}
     .product-section{padding-block:6rem}.feature{margin-top:5rem}.metric-grid{grid-template-columns:1fr}.metric-grid>div{border-right:0;border-bottom:1px solid var(--line)}.metric-grid>div:last-child{border-bottom:0}.evidence-row strong{width:100%;margin-left:0}.query-list>div{grid-template-columns:1fr auto;gap:.7rem}.query-list>div>strong{display:none}
     .battle-window{grid-template-columns:1fr}.battle-vs{text-align:center}.battle-verdict{grid-column:1}.bubble-user{max-width:88%}
-    .proof-flow{grid-template-columns:1fr;gap:.5rem}.proof-flow>i{display:none!important}.proof-flow>div{min-height:0}
+    .proof-flow{grid-template-columns:1fr;gap:.5rem}.proof-flow>i{display:none!important}.proof-card{min-height:0}
     .plans{grid-template-columns:1fr}.plans article+article{border-top:1px solid var(--line);border-left:0}.plans article>p{min-height:0}
+    .closing-route{width:120vw;opacity:.3}
     .footer-inner{padding-block:2rem;flex-direction:column;align-items:flex-start}
   }
 
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.route-node,.destination{animation:none}*,*::before,*::after{transition-duration:.01ms!important}}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .motion-ready .reveal-target{opacity:1!important;transform:none!important;filter:none!important}
+    .route,.route-glow,.closing-route path{transition:none!important;stroke-dashoffset:0!important}
+    .route-node,.destination,.terrain-label{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+    .motion-card,.battle-column,.battle-vs,.battle-verdict,.bubble{transition:none!important;transform:none!important;filter:none!important;opacity:1!important}
+    .workflow-steps::before,.proof-flow::after{transition:none!important;transform:scaleX(1)!important}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
 </style>
