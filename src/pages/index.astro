@@ -2,7 +2,10 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import WritingItem from '../components/WritingItem.astro';
+import PlayfulCrew from '../components/home/PlayfulCrew.astro';
+import ProjectToy from '../components/home/ProjectToy.astro';
 import { projects } from '../data/projects';
+import '../styles/home-world.css';
 
 const posts = await getCollection('blog');
 const recentPosts = posts
@@ -13,358 +16,122 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   : `${import.meta.env.BASE_URL}/`;
 ---
 
-<Layout>
-  <section class="world-hero shell shell--wide" aria-labelledby="home-title">
-    <div class="world-hero__copy reveal">
-      <p class="world-kicker"><span></span> building things on the internet</p>
-      <h1 id="home-title">I make things.<br />Then make them better.</h1>
-      <p class="world-hero__intro">SEO, websites, apps, odd little tools, and whatever idea refuses to leave my head.</p>
-      <div class="world-hero__actions">
-        <a class="world-button world-button--dark" href="#projects">See what I’m making <span aria-hidden="true">↓</span></a>
-        <a class="world-button" href={`${base}about/`}>About me</a>
-      </div>
-    </div>
-
-    <div class="hero-world reveal" aria-label="A playful illustration of Naman's little building crew">
-      <a class="hero-status" href="#projects"><i></i><span>status: making stuff</span><b>✓</b></a>
-      <div class="hero-note" aria-hidden="true"><span>currently</span><strong>building, breaking,<br />fixing, repeating.</strong></div>
-      <div class="hero-ground" aria-hidden="true"></div>
-      <div class="hero-crew" aria-hidden="true">
-        <div class="pet pet--builder">
-          <svg viewBox="0 0 170 205">
-            <rect x="20" y="47" width="130" height="137" rx="39" fill="#31343c" stroke="#18191d" stroke-width="7"/>
-            <path d="M47 47V28m76 19V28" stroke="#18191d" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="47" cy="22" r="9" fill="#6f8cf4" stroke="#18191d" stroke-width="6"/><circle cx="123" cy="22" r="9" fill="#6f8cf4" stroke="#18191d" stroke-width="6"/>
-            <rect x="38" y="72" width="94" height="70" rx="27" fill="#1f2229"/>
-            <rect x="57" y="94" width="8" height="18" rx="4" fill="#b7c5ff"/><rect x="104" y="94" width="8" height="18" rx="4" fill="#b7c5ff"/>
-            <path d="M70 122c9 7 20 7 29 0" fill="none" stroke="#b7c5ff" stroke-width="5" stroke-linecap="round"/>
-          </svg>
+<Layout bodyClass="home-world-page">
+  <div class="naman-world">
+    <section class="world-hero world-shell" aria-labelledby="home-title">
+      <div class="world-hero__copy reveal-up">
+        <p class="world-kicker"><i></i> building things on the internet</p>
+        <h1 id="home-title">I make things.<br />Then make them better.</h1>
+        <p class="world-hero__intro">
+          SEO, websites, apps, open-source tools, and the occasional idea that gets far more serious than it was supposed to.
+        </p>
+        <div class="world-hero__actions">
+          <a class="world-button world-button--ink" href="#projects">See what I’m making <span aria-hidden="true">↓</span></a>
+          <a class="world-button" href={`${base}about/`}>About me</a>
         </div>
-
-        <div class="pet pet--explorer">
-          <svg viewBox="0 0 220 255">
-            <path d="M112 37c-6-18-2-30 10-36 8 14 8 26-1 36" fill="#78a94a" stroke="#2a3328" stroke-width="5"/>
-            <path d="M112 31c-21-13-37-12-49 1 16 13 32 15 49 6m8-4c20-17 39-18 54-3-15 14-33 17-54 10" fill="#94bd61" stroke="#2a3328" stroke-width="5" stroke-linejoin="round"/>
-            <rect x="27" y="49" width="166" height="175" rx="54" fill="#eee8cb" stroke="#34342c" stroke-width="7"/>
-            <rect x="48" y="77" width="124" height="99" rx="42" fill="#fff9df" stroke="#c8bf98" stroke-width="5"/>
-            <rect x="72" y="111" width="9" height="20" rx="4.5" fill="#2f302e"/><rect x="139" y="111" width="9" height="20" rx="4.5" fill="#2f302e"/>
-            <path d="M98 140c8 8 17 8 25 0" fill="none" stroke="#2f302e" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="63" cy="140" r="8" fill="#efa39e" opacity=".68"/><circle cx="158" cy="140" r="8" fill="#efa39e" opacity=".68"/>
-          </svg>
-        </div>
-
-        <div class="pet pet--writer">
-          <svg viewBox="0 0 160 190">
-            <path d="M28 62c0-26 20-46 48-46s50 20 50 46v68c0 25-20 44-45 44h-8c-25 0-45-19-45-44V62Z" fill="#5578eb" stroke="#25262b" stroke-width="7"/>
-            <rect x="47" y="72" width="61" height="54" rx="22" fill="#26345e"/>
-            <rect x="61" y="91" width="7" height="18" rx="3.5" fill="#ddf5ff"/><rect x="87" y="91" width="7" height="18" rx="3.5" fill="#ddf5ff"/>
-            <path d="M64 132c9 7 19 7 29 0" fill="none" stroke="#25262b" stroke-width="5" stroke-linecap="round"/>
-            <path d="m119 127 27-19" stroke="#f0c04d" stroke-width="9" stroke-linecap="round"/>
-            <path d="m144 108 7-4-2 8" fill="#f0c04d"/>
-          </svg>
-        </div>
-
-        <div class="pet pet--spark">
-          <svg viewBox="0 0 160 190">
-            <path d="M52 42c2-24 17-37 41-40-6 12-4 22 5 30 5-10 13-17 25-19 0 16-5 29-15 39" fill="#f06b16" stroke="#7b3407" stroke-width="5"/>
-            <rect x="25" y="47" width="113" height="127" rx="37" fill="#ffb061" stroke="#63371e" stroke-width="7"/>
-            <rect x="43" y="72" width="77" height="69" rx="27" fill="#fff0d8"/>
-            <rect x="58" y="94" width="8" height="18" rx="4" fill="#4b3124"/><rect x="96" y="94" width="8" height="18" rx="4" fill="#4b3124"/>
-            <path d="M70 121c7 7 14 7 21 0" fill="none" stroke="#4b3124" stroke-width="5" stroke-linecap="round"/>
-          </svg>
-        </div>
-
-        <svg class="hero-laptop" viewBox="0 0 250 125">
-          <path d="M37 8h176c9 0 16 7 16 16v72H21V24c0-9 7-16 16-16Z" fill="#3c3e42" stroke="#202124" stroke-width="7"/>
-          <rect x="42" y="27" width="166" height="57" rx="5" fill="#232427"/>
-          <path d="M108 49c13-12 28-13 43-5-6 15-18 24-38 28-8-8-10-16-5-23Z" fill="#78a94a"/>
-          <path d="M112 70c9-11 19-20 31-27" fill="none" stroke="#b9d88a" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M8 96h234l-12 20H20L8 96Z" fill="#5b5d61" stroke="#202124" stroke-width="7" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <section class="tiny-proof shell shell--wide reveal" aria-label="A short introduction">
-    <p>I like useful things, clear interfaces, weird ideas, and the final 10% that makes something feel finished.</p>
-    <div><span>SEO</span><span>products</span><span>open source</span><span>experiments</span></div>
-  </section>
-
-  <section id="projects" class="world-section world-section--projects shell shell--wide" aria-labelledby="projects-title">
-    <div class="world-heading reveal">
-      <p>01 / things I’m making</p>
-      <h2 id="projects-title">A small pile of things<br />I decided should exist.</h2>
-      <a href={`${base}projects/`}>All projects →</a>
-    </div>
-
-    <div class="project-world-grid">
-      {projects.slice(0, 4).map((project, index) => (
-        <article class:list={['project-world', `project-world--${index + 1}`, 'reveal']}>
-          <div class="project-world__scene" aria-hidden="true">
-            {index === 0 && <><div class="file-big">18MB</div><div class="compress-arrow">→</div><div class="file-small">640KB</div><div class="mini-pet mini-pet--orange"><i></i><i></i><b></b></div></>}
-            {index === 1 && <><div class="audit-window"><span></span><span></span><span></span><b>92</b></div><div class="magnifier"></div><div class="mini-pet mini-pet--blue"><i></i><i></i><b></b></div></>}
-            {index === 2 && <><div class="wheel"><span>A</span><span>B</span><span>C</span><span>D</span></div><div class="pointer"></div><div class="mini-pet mini-pet--green"><i></i><i></i><b></b></div></>}
-            {index === 3 && <><div class="calm-page"><i></i><i></i><i></i><i></i></div><div class="tiny-mug"></div><div class="mini-pet mini-pet--cream"><i></i><i></i><b></b></div></>}
-          </div>
-          <div class="project-world__copy">
-            <div><span>{project.kind}</span><em>{project.status}</em></div>
-            <h3>{project.name}</h3>
-            <p>{project.description}</p>
-            {project.href ? <a href={project.href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>Open project <span>↗</span></a> : <span class="coming">still cooking…</span>}
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="night-journey" aria-labelledby="journey-title">
-    <div class="shell shell--wide journey-inner">
-      <div class="journey-copy reveal">
-        <p>02 / how it usually goes</p>
-        <h2 id="journey-title">One idea.<br />One unnecessarily late night.</h2>
-        <p class="journey-intro">Most things start small: one annoying problem, one “what if?”, or one page I think could be better.</p>
       </div>
 
-      <div class="journey-track reveal" aria-label="Idea to shipped project">
-        <div class="journey-line"><i></i></div>
-        <article><span>8:17 PM</span><strong>“Wait. What if…”</strong><p>An idea becomes just interesting enough to ruin the evening.</p></article>
-        <article><span>11:42 PM</span><strong>Now it has folders.</strong><p>This was supposed to be a quick experiment.</p></article>
-        <article><span>2:08 AM</span><strong>Why is this button 2px off?</strong><p>The dangerous stage where details suddenly matter a lot.</p></article>
-        <article><span>6:11 AM</span><strong>Okay. Ship it.</strong><p>Good enough to be real. Not finished enough to stop improving.</p></article>
-        <div class="journey-pet" aria-hidden="true"><i></i><i></i><b></b></div>
+      <div class="world-hero__aside reveal-up" data-delay="1">
+        <PlayfulCrew />
+        <div class="world-hero__note" aria-hidden="true">
+          <small>currently</small>
+          <strong>building, breaking,<br />fixing, repeating.</strong>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="world-section experiments shell shell--wide" aria-labelledby="experiments-title">
-    <div class="world-heading reveal">
-      <p>03 / the messy table</p>
-      <h2 id="experiments-title">Experiments are allowed<br />to be a little weird.</h2>
-      <a href={`${base}projects/`}>Browse everything →</a>
+    <div class="world-shell world-proof reveal-up">
+      <p>I like useful things, clear interfaces, weird ideas, and the final ten percent that makes something feel finished.</p>
+      <div aria-label="What I work on"><span>SEO</span><span>products</span><span>open source</span><span>experiments</span></div>
     </div>
-    <div class="experiment-table reveal">
-      <a href="https://getrandomletter.com/" target="_blank" rel="noopener noreferrer"><span>browser toy</span><strong>Spin a letter.</strong><small>Then somehow build five more tools.</small></a>
-      <a href="https://github.com/namanlabc/astro-seo-audit" target="_blank" rel="noopener noreferrer"><span>open source</span><strong>Audit what Astro actually ships.</strong><small>Because source code is not the final HTML.</small></a>
-      <a href={`${base}projects/`}><span>ongoing</span><strong>Make something useful.</strong><small>Then obsess over the tiny parts.</small></a>
-      <div class="experiment-creature" aria-hidden="true"><i></i><i></i><b></b><span>✦</span></div>
-      <div class="loose-bolt" aria-hidden="true">✦</div>
-    </div>
-  </section>
 
-  <section class="writing-world shell shell--wide" aria-labelledby="recent-writing-title">
-    <div class="writing-world__head reveal">
-      <div><p>04 / notes from the process</p><h2 id="recent-writing-title">Writing things down<br />before I forget them.</h2></div>
-      <a href={`${base}archive/`}>Full archive →</a>
-      <div class="writer-perch" aria-hidden="true"><i></i><i></i><b></b><span></span></div>
-    </div>
-    <div class="writing-list reveal">
-      {recentPosts.map((post) => (
-        <WritingItem
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          href={`${base}blog/${post.id}/`}
-          tags={post.data.tags}
-        />
-      ))}
-    </div>
-  </section>
+    <section id="projects" class="world-section world-shell" aria-labelledby="projects-title">
+      <div class="world-heading reveal-up">
+        <div><p>01 / selected work</p><h2 id="projects-title">Things I decided should exist.</h2></div>
+        <a href={`${base}projects/`}>All projects →</a>
+      </div>
 
-  <section class="final-world shell shell--wide reveal" aria-labelledby="final-title">
-    <div>
-      <p>still making things.</p>
-      <h2 id="final-title">See you somewhere<br />on the internet.</h2>
-      <div class="final-links"><a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a><a href={`${base}about/`}>About →</a></div>
-    </div>
-    <div class="final-crew" aria-hidden="true"><div class="dot-pet dot-pet--blue"><i></i><i></i></div><div class="dot-pet dot-pet--cream"><i></i><i></i></div><div class="dot-pet dot-pet--orange"><i></i><i></i></div><span><i></i> online somewhere ✓</span></div>
-  </section>
+      <div class="project-story-grid">
+        {projects.slice(0, 4).map((project, index) => (
+          <article class="project-story reveal-up" data-delay={String(index % 2)}>
+            <div class="project-story__visual"><ProjectToy visual={project.visual} /></div>
+            <div class="project-story__copy">
+              <div class="project-story__meta"><span>{project.kind}</span><em>{project.status}</em></div>
+              <h3>{project.name}</h3>
+              <p>{project.description}</p>
+              {project.href ? (
+                <a class="project-story__link" href={project.href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>Open project ↗</a>
+              ) : (
+                <span class="project-story__link">Still cooking…</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="world-night" aria-labelledby="night-title">
+      <div class="world-shell world-night__grid">
+        <div class="world-night__copy reveal-up">
+          <p>02 / the usual process</p>
+          <h2 id="night-title">One idea. One unnecessarily late night.</h2>
+          <p>Most projects begin as one annoying problem, one “what if?”, or one page I’m convinced could be better.</p>
+        </div>
+
+        <div class="world-night__steps reveal-up" data-delay="1">
+          <article><span>8:17 PM</span><strong>“Wait. What if…”</strong><p>The idea becomes interesting enough to ruin the evening.</p></article>
+          <article><span>11:42 PM</span><strong>Now it has folders.</strong><p>This was definitely supposed to be a quick experiment.</p></article>
+          <article><span>2:08 AM</span><strong>Why is this button 2px off?</strong><p>The dangerous stage where details suddenly matter a lot.</p></article>
+          <article><span>6:11 AM</span><strong>Okay. Ship it.</strong><p>Good enough to be real. Not finished enough to stop improving.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="world-writing world-shell" aria-labelledby="recent-writing-title">
+      <div class="world-writing__head reveal-up">
+        <div><p>03 / notes from the process</p><h2 id="recent-writing-title">Writing things down before I forget them.</h2></div>
+        <a href={`${base}archive/`}>Full archive →</a>
+      </div>
+      <div class="writing-list reveal-up" data-delay="1">
+        {recentPosts.map((post) => (
+          <WritingItem
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            href={`${base}blog/${post.id}/`}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="world-final world-shell reveal-up" aria-labelledby="final-title">
+      <div>
+        <p>still making things</p>
+        <h2 id="final-title">See you somewhere on the internet.</h2>
+        <div class="world-final__links">
+          <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
+          <a href={`${base}about/`}>About →</a>
+        </div>
+      </div>
+      <PlayfulCrew compact label="The little building crew signing off" />
+    </section>
+  </div>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+    const elements = [...document.querySelectorAll<HTMLElement>('.reveal-up')];
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).classList.add('is-visible');
           observer.unobserve(entry.target);
         }
-      }
-    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
-    reveals.forEach((item) => observer.observe(item));
-
-    const journey = document.querySelector('.journey-track');
-    const journeyPet = document.querySelector('.journey-pet');
-    if (journey instanceof HTMLElement && journeyPet instanceof HTMLElement) {
-      const updateJourney = () => {
-        const rect = journey.getBoundingClientRect();
-        const viewport = window.innerHeight;
-        const progress = Math.max(0, Math.min(1, (viewport * .72 - rect.top) / Math.max(rect.height, 1)));
-        journey.style.setProperty('--journey-progress', String(progress));
-      };
-      updateJourney();
-      window.addEventListener('scroll', updateJourney, { passive: true });
-      window.addEventListener('resize', updateJourney);
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+      elements.forEach((element) => observer.observe(element));
+    } else {
+      elements.forEach((element) => element.classList.add('is-visible'));
     }
   </script>
 </Layout>
-
-<style>
-  :global(body) { background: #faf9f4; }
-  :global(.dark body) { background: #151513; }
-
-  .world-hero { min-height: min(780px, calc(100vh - 80px)); display: grid; grid-template-columns: minmax(0, .92fr) minmax(430px, 1.08fr); align-items: center; gap: clamp(2rem, 5vw, 6rem); padding-top: clamp(5rem, 9vw, 8.5rem); padding-bottom: clamp(4rem, 7vw, 7rem); }
-  .world-hero__copy { position: relative; z-index: 2; }
-  .world-kicker { display: inline-flex; align-items: center; gap: .55rem; margin: 0 0 1.35rem; color: var(--muted); font-family: var(--mono); font-size: .68rem; letter-spacing: .045em; text-transform: uppercase; }
-  .world-kicker span { width: 8px; height: 8px; border-radius: 50%; background: #f36b00; box-shadow: 0 0 0 5px color-mix(in srgb, #f36b00 10%, transparent); }
-  .world-hero h1 { max-width: 780px; margin: 0; font-size: clamp(4rem, 7.2vw, 7.4rem); line-height: .93; letter-spacing: -.075em; font-weight: 750; }
-  .world-hero__intro { max-width: 610px; margin: 2rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.6; }
-  .world-hero__actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-  .world-button { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 48px; padding: .75rem 1rem; border: 1px solid var(--rule-strong); border-radius: 12px; background: var(--surface); color: var(--ink); font-weight: 700; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
-  .world-button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(20,20,16,.08); }
-  .world-button--dark { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-  .hero-world { position: relative; min-height: 510px; }
-  .hero-ground { position: absolute; left: 5%; right: 3%; bottom: 8%; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb,var(--ink) 18%,transparent) 18%, color-mix(in srgb,var(--ink) 18%,transparent) 83%, transparent); }
-  .hero-crew { position: absolute; inset: 0; }
-  .pet { position: absolute; filter: drop-shadow(0 15px 14px rgba(20,20,16,.11)); transform-origin: 50% 100%; animation: pet-breathe 5.2s ease-in-out infinite; }
-  .pet svg { width: 100%; height: 100%; overflow: visible; }
-  .pet--explorer { width: 205px; height: 238px; left: 36%; bottom: 40px; z-index: 4; animation-delay: -.8s; }
-  .pet--builder { width: 164px; height: 196px; left: 43%; bottom: 206px; z-index: 2; animation-delay: -2.2s; }
-  .pet--writer { width: 150px; height: 178px; left: 15%; bottom: 42px; z-index: 3; animation-delay: -3.3s; }
-  .pet--spark { width: 148px; height: 176px; right: 6%; bottom: 42px; z-index: 3; animation-delay: -1.7s; }
-  .hero-laptop { position: absolute; width: 235px; left: 35%; bottom: 28px; z-index: 6; filter: drop-shadow(0 13px 15px rgba(20,20,16,.13)); }
-  .hero-status { position: absolute; right: 1%; top: 38px; z-index: 8; display: inline-flex; align-items: center; gap: .55rem; padding: .7rem .95rem; border: 1px solid rgba(84,170,82,.24); border-radius: 999px; background: #e9f7e6; color: #253522; font: 700 .78rem/1 var(--sans); text-decoration: none; box-shadow: 0 9px 25px rgba(52,91,46,.09); animation: pop-in .6s cubic-bezier(.2,.8,.2,1) both .25s; }
-  .dark .hero-status { background: #213020; color: #e9f4e7; }
-  .hero-status i { width: 8px; height: 8px; border-radius: 50%; background: #68a949; animation: status-pulse 2.3s ease-in-out infinite; }
-  .hero-note { position: absolute; left: 1%; top: 62px; z-index: 7; padding: .85rem 1rem; border: 1px solid var(--rule); border-radius: 15px; background: var(--surface); box-shadow: 0 12px 34px rgba(20,20,16,.06); transform: rotate(-2deg); animation: note-in .65s cubic-bezier(.2,.8,.2,1) both .15s; }
-  .hero-note span { display: block; margin-bottom: .3rem; color: #f36b00; font-family: var(--mono); font-size: .57rem; text-transform: uppercase; letter-spacing: .08em; }
-  .hero-note strong { font-size: .88rem; line-height: 1.35; }
-
-  .tiny-proof { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-top: 1.25rem; padding-bottom: 1.25rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .tiny-proof p { max-width: 640px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.55; }
-  .tiny-proof div { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4rem; }
-  .tiny-proof span { padding: .28rem .5rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--faint); font-family: var(--mono); font-size: .56rem; }
-
-  .world-section, .writing-world { padding-top: clamp(6rem, 10vw, 10rem); padding-bottom: clamp(6rem, 10vw, 10rem); }
-  .world-heading { display: grid; grid-template-columns: 1fr auto; gap: .8rem 2rem; align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-  .world-heading > p, .journey-copy > p:first-child, .writing-world__head p, .final-world > div > p { grid-column: 1 / -1; margin: 0; color: #f36b00; font-family: var(--mono); font-size: .63rem; letter-spacing: .08em; text-transform: uppercase; }
-  .world-heading h2, .journey-copy h2, .writing-world__head h2, .final-world h2 { margin: 0; font-size: clamp(3rem, 5.6vw, 6rem); line-height: .96; letter-spacing: -.065em; }
-  .world-heading > a, .writing-world__head > a { color: var(--muted); text-decoration: none; font-weight: 700; }
-
-  .project-world-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.2rem; }
-  .project-world { min-width: 0; border: 1px solid var(--rule); border-radius: 25px; background: var(--surface); overflow: hidden; transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease; }
-  .project-world:hover { transform: translateY(-4px); box-shadow: 0 22px 55px rgba(20,20,16,.08); }
-  .project-world__scene { position: relative; min-height: 290px; overflow: hidden; background: #eef2ff; }
-  .project-world--1 .project-world__scene { background: #fff0e3; }
-  .project-world--2 .project-world__scene { background: #edf2ff; }
-  .project-world--3 .project-world__scene { background: #eef6e7; }
-  .project-world--4 .project-world__scene { background: #f3efe4; }
-  .dark .project-world__scene { filter: brightness(.72) saturate(.88); }
-  .project-world__copy { padding: 1.3rem 1.35rem 1.45rem; }
-  .project-world__copy > div { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  .project-world__copy span, .project-world__copy em { color: var(--faint); font: 500 .58rem/1 var(--mono); font-style: normal; text-transform: uppercase; letter-spacing: .06em; }
-  .project-world__copy h3 { margin: 1rem 0 .55rem; font-size: clamp(1.75rem, 3vw, 2.6rem); letter-spacing: -.05em; }
-  .project-world__copy p { margin: 0; color: var(--muted); line-height: 1.65; }
-  .project-world__copy a, .coming { display: inline-flex; margin-top: 1rem; color: var(--ink); font-weight: 700; text-decoration: none; }
-
-  .file-big, .file-small { position: absolute; display: grid; place-items: center; border: 4px solid #52331e; border-radius: 14px; background: #fff8ed; font: 700 .72rem/1 var(--mono); box-shadow: 0 10px 20px rgba(72,43,21,.08); }
-  .file-big { width: 120px; height: 148px; left: 15%; top: 68px; }
-  .file-small { width: 70px; height: 86px; right: 17%; top: 96px; }
-  .compress-arrow { position: absolute; left: 50%; top: 135px; color: #f36b00; font-size: 2.2rem; transform: translateX(-50%); animation: arrow-nudge 1.8s ease-in-out infinite; }
-  .audit-window { position: absolute; width: 225px; height: 145px; left: 13%; top: 63px; border: 4px solid #273052; border-radius: 15px; background: #fff; box-shadow: 0 13px 30px rgba(51,68,123,.09); }
-  .audit-window span { position: absolute; left: 22px; right: 65px; height: 8px; border-radius: 999px; background: #dce4ff; }
-  .audit-window span:nth-child(1) { top: 32px; }.audit-window span:nth-child(2) { top: 58px; width: 48%; }.audit-window span:nth-child(3) { top: 84px; width: 62%; }
-  .audit-window b { position: absolute; right: 16px; top: 36px; color: #78a94a; font-size: 2.2rem; }
-  .magnifier { position: absolute; width: 72px; height: 72px; right: 15%; top: 115px; border: 7px solid #5578eb; border-radius: 50%; transform: rotate(-12deg); }
-  .magnifier::after { content: ''; position: absolute; width: 46px; height: 7px; right: -35px; bottom: -17px; border-radius: 999px; background: #5578eb; transform: rotate(48deg); }
-  .wheel { position: absolute; width: 170px; height: 170px; left: 17%; top: 54px; border: 5px solid #315228; border-radius: 50%; background: conic-gradient(#f2c84b 0 25%,#89bd61 25% 50%,#7ba2ef 50% 75%,#f29b67 75%); box-shadow: 0 12px 28px rgba(43,74,34,.11); animation: wheel-wiggle 6s ease-in-out infinite; }
-  .wheel span { position: absolute; font: 800 .8rem/1 var(--mono); color: #23321f; }.wheel span:nth-child(1){left:78px;top:25px}.wheel span:nth-child(2){right:27px;top:79px}.wheel span:nth-child(3){left:78px;bottom:25px}.wheel span:nth-child(4){left:29px;top:79px}
-  .pointer { position: absolute; left: 178px; top: 37px; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 27px solid #f36b00; }
-  .calm-page { position: absolute; width: 220px; height: 150px; left: 13%; top: 62px; border: 4px solid #594f3a; border-radius: 14px; background: #fffdf4; box-shadow: 0 12px 28px rgba(75,65,43,.08); }
-  .calm-page i { position: absolute; left: 25px; height: 8px; border-radius: 999px; background: #d8d1bd; }.calm-page i:nth-child(1){top:35px;width:54%}.calm-page i:nth-child(2){top:62px;width:70%}.calm-page i:nth-child(3){top:89px;width:62%}.calm-page i:nth-child(4){top:116px;width:42%}
-  .tiny-mug { position: absolute; right: 21%; top: 121px; width: 55px; height: 58px; border: 5px solid #805f3d; border-radius: 8px 8px 17px 17px; background: #d8a974; }.tiny-mug::after { content:''; position:absolute; right:-25px; top:10px; width:25px; height:28px; border:5px solid #805f3d; border-left:0; border-radius:0 16px 16px 0; }
-  .mini-pet { position: absolute; right: 10%; bottom: 20px; width: 72px; height: 78px; border: 4px solid #3d352d; border-radius: 25px 25px 20px 20px; animation: pet-breathe 4.4s ease-in-out infinite; }
-  .mini-pet i { position: absolute; top: 30px; width: 7px; height: 13px; border-radius: 999px; background: #332f2b; }.mini-pet i:first-child{left:20px}.mini-pet i:nth-child(2){right:20px}.mini-pet b{position:absolute;left:50%;top:51px;width:17px;height:4px;border-radius:999px;background:#332f2b;transform:translateX(-50%)}
-  .mini-pet--orange{background:#ffb061}.mini-pet--blue{background:#6f8cf4}.mini-pet--green{background:#9fc46f}.mini-pet--cream{background:#eee8cb}
-
-  .night-journey { background: #1d1e25; color: #f5f2e9; overflow: hidden; }
-  .journey-inner { padding-top: clamp(6rem, 10vw, 10rem); padding-bottom: clamp(6rem, 10vw, 10rem); }
-  .journey-copy { max-width: 820px; }
-  .journey-copy h2 { color: #f7f5ee; }
-  .journey-intro { max-width: 620px; margin-top: 1.7rem; color: #a9aab3; font-size: 1.05rem; line-height: 1.7; }
-  .journey-track { --journey-progress: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; margin-top: 5rem; padding-top: 3.3rem; }
-  .journey-line { position: absolute; left: 0; right: 0; top: 15px; height: 2px; background: #3b3d47; overflow: hidden; }
-  .journey-line i { display: block; width: calc(var(--journey-progress) * 100%); height: 100%; background: linear-gradient(90deg,#f36b00,#f2c84b); transition: width .12s linear; }
-  .journey-track article { position: relative; padding-right: 1.5rem; }
-  .journey-track article::before { content:''; position:absolute; width:11px;height:11px;top:-43px;left:0;border-radius:50%;background:#696b76;border:3px solid #1d1e25;box-shadow:0 0 0 1px #696b76; }
-  .journey-track article span { color: #777987; font-family: var(--mono); font-size: .62rem; }
-  .journey-track article strong { display: block; margin-top: .8rem; font-size: 1.25rem; }
-  .journey-track article p { color:#9c9eaa; line-height:1.6; font-size:.86rem; }
-  .journey-pet { position: absolute; left: calc(var(--journey-progress) * (100% - 52px)); top: -10px; width: 52px; height: 58px; border: 3px solid #101116; border-radius: 18px; background:#f2c84b; transform:translateY(-100%); transition:left .12s linear; filter:drop-shadow(0 8px 8px rgba(0,0,0,.25)); }
-  .journey-pet i,.experiment-creature i,.writer-perch i,.dot-pet i{position:absolute;width:5px;height:10px;border-radius:999px;background:#222}.journey-pet i:first-child{left:14px;top:22px}.journey-pet i:nth-child(2){right:14px;top:22px}.journey-pet b{position:absolute;width:14px;height:3px;border-radius:999px;background:#222;left:17px;top:39px}
-
-  .experiment-table { position: relative; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; min-height:390px; padding:1.2rem; border:1px solid var(--rule); border-radius:26px; background:color-mix(in srgb,var(--surface) 80%,transparent); overflow:hidden; }
-  .experiment-table a { display:flex; flex-direction:column; justify-content:flex-end; min-height:320px; padding:1.25rem; border:1px solid var(--rule); border-radius:19px; background:var(--surface); color:var(--ink); text-decoration:none; transition:transform .2s ease; }
-  .experiment-table a:hover { transform:translateY(-3px) rotate(-.35deg); }
-  .experiment-table a span { color:#f36b00;font:600 .57rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em; }
-  .experiment-table a strong { margin-top:.65rem;font-size:1.4rem;line-height:1.15; }
-  .experiment-table a small { margin-top:.55rem;color:var(--muted);line-height:1.55; }
-  .experiment-creature { position:absolute; width:82px;height:91px;right:3%;top:22px;border:4px solid #3c3025;border-radius:28px;background:#ffad5d;transform:rotate(8deg);animation:pet-breathe 4s ease-in-out infinite; }
-  .experiment-creature i:first-child{left:22px;top:35px}.experiment-creature i:nth-child(2){right:22px;top:35px}.experiment-creature b{position:absolute;left:31px;top:59px;width:17px;height:4px;border-radius:999px;background:#222}.experiment-creature span{position:absolute;right:-20px;top:-20px;color:#f2c84b;font-size:1.7rem;animation:spark-spin 5s linear infinite}.loose-bolt{position:absolute;left:48%;bottom:10px;color:#5578eb;font-size:1.35rem;transform:rotate(22deg)}
-
-  .writing-world { border-top:1px solid var(--rule); }
-  .writing-world__head { position:relative; display:grid;grid-template-columns:1fr auto;align-items:end;gap:1rem 2rem;margin-bottom:2.5rem; }
-  .writing-world__head p { grid-column:1/-1; }
-  .writer-perch { position:absolute; right:5%; top:-60px; width:75px;height:82px;border:4px solid #273052;border-radius:25px;background:#6f8cf4;transform:rotate(4deg);animation:pet-breathe 4.7s ease-in-out infinite; }
-  .writer-perch i:first-child{left:20px;top:29px}.writer-perch i:nth-child(2){right:20px;top:29px}.writer-perch b{position:absolute;left:28px;top:52px;width:16px;height:4px;border-radius:999px;background:#222}.writer-perch span{position:absolute;width:44px;height:6px;right:-28px;bottom:10px;border-radius:999px;background:#f2c84b;transform:rotate(-37deg);transform-origin:left center}
-
-  .final-world { display:grid; grid-template-columns:1fr minmax(320px,.7fr); gap:3rem;align-items:center;padding-top:clamp(6rem,10vw,10rem);padding-bottom:clamp(6rem,10vw,10rem);border-top:1px solid var(--rule); }
-  .final-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem}.final-links a{color:var(--muted);font-weight:700;text-decoration:none}.final-crew{position:relative;min-height:260px}.dot-pet{position:absolute;width:100px;height:112px;border:5px solid #2b2b28;border-radius:34px;bottom:34px;filter:drop-shadow(0 12px 12px rgba(20,20,16,.1));animation:pet-breathe 5s ease-in-out infinite}.dot-pet--blue{left:5%;background:#6f8cf4}.dot-pet--cream{left:34%;background:#eee8cb;bottom:48px;z-index:2}.dot-pet--orange{right:8%;background:#ffad5d}.dot-pet i:first-child{left:27px;top:43px}.dot-pet i:nth-child(2){right:27px;top:43px}.final-crew>span{position:absolute;right:1%;top:18px;display:flex;align-items:center;gap:.45rem;padding:.65rem .8rem;border-radius:999px;background:#e9f7e6;color:#31512d;font-size:.72rem;font-weight:700}.final-crew>span i{width:7px;height:7px;border-radius:50%;background:#68a949;animation:status-pulse 2.2s ease-in-out infinite}
-
-  .reveal { opacity:0; transform:translateY(14px); transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1); }
-  .reveal.is-visible { opacity:1; transform:none; }
-  .world-hero .reveal { animation:page-in .6s cubic-bezier(.2,.8,.2,1) both; opacity:1; transform:none; }
-  .world-hero .hero-world { animation-delay:.08s; }
-
-  @keyframes page-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @keyframes pet-breathe{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(.35deg)}}
-  @keyframes pop-in{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
-  @keyframes note-in{from{opacity:0;transform:translateY(9px) rotate(-4deg)}to{opacity:1;transform:rotate(-2deg)}}
-  @keyframes status-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.78);opacity:.62}}
-  @keyframes arrow-nudge{0%,100%{transform:translateX(-50%)}50%{transform:translateX(calc(-50% + 6px))}}
-  @keyframes wheel-wiggle{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
-  @keyframes spark-spin{to{transform:rotate(360deg)}}
-
-  @media (max-width: 960px) {
-    .world-hero { grid-template-columns:1fr; min-height:0; }
-    .hero-world { min-height:470px; max-width:720px; width:100%; margin:0 auto; }
-    .project-world-grid { grid-template-columns:1fr; }
-    .journey-track { grid-template-columns:1fr; gap:2.7rem; padding-left:2.5rem; padding-top:0; }
-    .journey-line { left:12px; right:auto; top:0; bottom:0; width:2px; height:auto; }
-    .journey-line i { width:100%; height:calc(var(--journey-progress) * 100%); }
-    .journey-track article::before { left:-2.82rem; top:.1rem; }
-    .journey-pet { left:-13px !important; top:calc(var(--journey-progress) * (100% - 58px)); transform:translateX(-100%); transition:top .12s linear; }
-    .experiment-table { grid-template-columns:1fr; }
-    .experiment-table a { min-height:210px; }
-    .final-world { grid-template-columns:1fr; }
-  }
-
-  @media (max-width: 640px) {
-    .world-hero h1 { font-size:clamp(3.6rem,17vw,5.2rem); }
-    .world-hero { padding-top:4rem; }
-    .hero-world { min-height:390px; overflow:hidden; }
-    .hero-crew { width:680px; left:50%; transform:translateX(-50%) scale(.72); transform-origin:center bottom; }
-    .hero-note { left:0;top:38px; }
-    .hero-status { top:16px;right:0; }
-    .tiny-proof { align-items:flex-start;flex-direction:column; }
-    .tiny-proof div { justify-content:flex-start; }
-    .world-heading,.writing-world__head { grid-template-columns:1fr; }
-    .world-heading h2,.journey-copy h2,.writing-world__head h2,.final-world h2 { font-size:clamp(2.8rem,14vw,4.2rem); }
-    .project-world__scene { min-height:240px; transform-origin:center; }
-    .writer-perch { display:none; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,*::before,*::after { animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important; }
-    .reveal { opacity:1;transform:none; }
-  }
-</style>
