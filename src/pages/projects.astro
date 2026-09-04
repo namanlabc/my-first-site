@@ -5,31 +5,31 @@ import { projects } from '../data/projects';
 ---
 
 <Layout title="Projects" description="The websites, open-source tools, and experiments Naman keeps building and improving.">
-  <div class="editorial-page projects-editorial">
-    <section class="page-hero shell shell--wide" aria-labelledby="projects-title">
-      <p class="page-kicker">Projects / things that escaped the notes app</p>
-      <h1 id="projects-title">A small pile of things I decided <span class="accent-blue">should exist.</span></h1>
-      <p class="page-lede">Some are live, some are open source, some are still being shaped. The common part is that I wanted a real version I could use, test, and make better.</p>
-
-      <div class="project-summary" aria-label="Project summary">
-        <div><strong>{projects.length} current projects</strong><span>apps, tools, themes, and this site</span></div>
-        <div><strong>Built to be used</strong><span>not portfolio-only concepts</span></div>
-        <div><strong>Still changing</strong><span>finished is usually temporary</span></div>
+  <div class="inner-page projects-page">
+    <section class="page-hero page-hero--split" aria-labelledby="projects-title">
+      <div>
+        <p class="page-kicker">Projects / things that escaped the notes app</p>
+        <h1 id="projects-title">A small pile of things I decided should exist.</h1>
+      </div>
+      <div class="page-hero__aside">
+        <p>Some are useful. Some are odd. The best ones tend to be both.</p>
+        <span>{projects.length} current projects</span>
       </div>
     </section>
 
-    <section class="shell shell--wide projects-page" aria-labelledby="projects-list-title">
-      <div class="section-heading">
-        <p class="section-kicker">01 / CURRENT WORK</p>
-        <div>
-          <h2 id="projects-list-title">The useful, the odd, and the still-cooking.</h2>
-          <p>No giant gallery of mockups. Just what each thing is, why it exists, and where it is now.</p>
-        </div>
-      </div>
-
+    <section class="page-section" aria-labelledby="project-list-title">
+      <header class="section-intro">
+        <p>01 / current work</p>
+        <div><h2 id="project-list-title">Built to be used, not displayed.</h2></div>
+      </header>
       <div class="project-list">
         {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
       </div>
     </section>
+
+    <aside class="margin-note">
+      <span>small note</span>
+      <p>Finished is usually temporary around here.</p>
+    </aside>
   </div>
 </Layout>

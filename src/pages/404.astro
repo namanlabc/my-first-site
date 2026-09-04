@@ -6,16 +6,14 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 ---
 
 <Layout title="Page not found" description="This route does not exist on Naman.blog.">
-  <div class="editorial-page not-found-editorial">
-    <section class="shell shell--content not-found" aria-labelledby="not-found-title">
-      <div class="not-found__number" aria-hidden="true">404</div>
-      <div class="not-found__route" aria-hidden="true"><span>you</span><i></i><b>?</b></div>
-      <h1 id="not-found-title">This route wandered off somewhere.</h1>
-      <p>Either the link is wrong, or I moved something and forgot to leave directions.</p>
-      <div class="not-found__links">
-        <a class="action-dark" href={base}>Return home <span aria-hidden="true">→</span></a>
-        <a class="action-light" href={`${base}archive/`}>Browse writing</a>
-      </div>
-    </section>
-  </div>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <p class="page-kicker">404 / wrong turn</p>
+    <div class="not-found__route" aria-hidden="true"><span>you</span><i></i><b>?</b></div>
+    <h1 id="not-found-title">This route wandered off somewhere.</h1>
+    <p>Either the link is wrong, or I moved something and forgot to leave directions.</p>
+    <div>
+      <a href={base}>Return home →</a>
+      <a href={`${base}archive/`}>Browse writing</a>
+    </div>
+  </section>
 </Layout>

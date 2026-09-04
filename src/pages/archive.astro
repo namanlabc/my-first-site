@@ -5,9 +5,10 @@ import WritingItem from '../components/WritingItem.astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const [latestPost, ...olderPosts] = sortedPosts;
 const postsByYear: Record<number, typeof posts> = {};
 
-for (const post of sortedPosts) {
+for (const post of olderPosts) {
   const year = post.data.pubDate.getFullYear();
   postsByYear[year] ??= [];
   postsByYear[year].push(post);
@@ -20,21 +21,41 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 ---
 
 <Layout title="Writing archive" description="A chronological archive of everything Naman has published on Naman.blog.">
-  <div class="editorial-page archive-editorial">
-    <section class="page-hero shell shell--wide" aria-labelledby="archive-title">
-      <p class="page-kicker">Writing / notes from the process</p>
-      <h1 id="archive-title">Things worth writing down <span class="accent-blue">before I forget.</span></h1>
-      <p class="page-lede">Build notes, SEO lessons, experiments, and whatever became clearer only after I tried it for real.</p>
-      <span class="archive-count">{sortedPosts.length} notes · newest first · no algorithm</span>
+  <div class="inner-page archive-page">
+    <section class="page-hero page-hero--split" aria-labelledby="archive-title">
+      <div>
+        <p class="page-kicker">Writing / notes from the process</p>
+        <h1 id="archive-title">Things worth writing down before I forget.</h1>
+      </div>
+      <div class="page-hero__aside">
+        <p>Build notes, SEO lessons, experiments, and whatever became clearer after trying it for real.</p>
+        <span>{sortedPosts.length} notes · newest first</span>
+      </div>
     </section>
 
-    <div class="shell shell--wide archive">
+    {latestPost && (
+      <section class="latest-note" aria-labelledby="latest-note-title">
+        <div class="latest-note__image">
+          {latestPost.data.image ? (
+            <img src={`${base}${latestPost.data.image.replace(/^\//, '')}`} alt={latestPost.data.imageAlt ?? ''} width="1536" height="1024" />
+          ) : <span aria-hidden="true">new<br />note</span>}
+        </div>
+        <div>
+          <p class="page-kicker">Latest note</p>
+          <h2 id="latest-note-title"><a href={`${base}blog/${latestPost.id}/`}>{latestPost.data.title}</a></h2>
+          <p>{latestPost.data.description}</p>
+          <a href={`${base}blog/${latestPost.id}/`}>Read it ↗</a>
+        </div>
+      </section>
+    )}
+
+    <div class="archive-years">
       {years.length === 0 ? (
-        <p class="empty-state">Nothing published yet. The first note is still finding its way here.</p>
+        <p class="empty-state">The rest of the archive is still taking shape.</p>
       ) : years.map((year) => (
         <section class="archive-year" aria-labelledby={`year-${year}`}>
           <h2 id={`year-${year}`}>{year}</h2>
-          <div class="writing-list writing-list--archive">
+          <div class="writing-list">
             {postsByYear[year].map((post) => (
               <WritingItem
                 title={post.data.title}

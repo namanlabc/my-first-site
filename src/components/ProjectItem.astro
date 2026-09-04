@@ -17,12 +17,16 @@ const href = project.href
   : undefined;
 ---
 
-<article class:list={['project-item', { 'project-item--linked': href }]}>
-  <span class="project-item__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-  <div class="project-item__main">
+<article class="project-item" data-visual={project.visual ?? 'notes'}>
+  <div class="project-item__mark" aria-hidden="true">
+    <span>{String(index + 1).padStart(2, '0')}</span>
+    <b>{project.name.slice(0, 1)}</b>
+  </div>
+  <div class="project-item__body">
     <div class="project-item__meta">
       <span>{project.kind}</span>
-      <span class="project-item__status">{project.status}</span>
+      <span>•</span>
+      <span>{project.status}</span>
     </div>
     <h3>
       {href ? (
@@ -30,7 +34,7 @@ const href = project.href
           {project.name}<span aria-hidden="true"> {project.external ? '↗' : '→'}</span>
           {project.external && <span class="visually-hidden"> (opens in a new tab)</span>}
         </a>
-      ) : <span class="project-item__title">{project.name}</span>}
+      ) : <span>{project.name}</span>}
     </h3>
     <p>{project.description}</p>
   </div>

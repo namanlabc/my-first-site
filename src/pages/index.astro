@@ -1,264 +1,134 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ProjectItem from '../components/ProjectItem.astro';
+import WritingItem from '../components/WritingItem.astro';
 import { projects } from '../data/projects';
 
 const posts = await getCollection('blog');
 const recentPosts = posts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
-
+  .slice(0, 5);
+const featured = projects.slice(0, 3);
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-
-const featured = projects.slice(0, 3);
-const projectHref = (project) => project.href || `${base}projects/`;
 ---
 
 <Layout>
-  <div class="editorial-home">
-    <section class="hero shell shell--wide" aria-labelledby="home-title">
-      <div class="hero-copy">
-        <p class="availability"><span></span> Building on the internet</p>
-        <h1 id="home-title">I build useful things<br />for the internet.</h1>
-        <p class="hero-intro">SEO, small software, open source, websites, and the occasional idea that gets wildly out of hand.</p>
-        <div class="hero-actions">
-          <a class="primary-action" href="#work">See selected work <span>↘</span></a>
-          <a class="quiet-action" href={`${base}about/`}>A little about me →</a>
-        </div>
+  <div class="home-page">
+    <section class="home-stage" aria-labelledby="home-title">
+      <div class="stage-copy">
+        <p class="stage-kicker">Naman notices a small problem</p>
+        <h1 id="home-title">and builds<br />something around it.</h1>
       </div>
 
-      <div class="workbench" aria-label="A small visual workbench showing Naman building things">
-        <div class="workbench-status"><i></i><span>status: building</span><b>✓</b></div>
-        <div class="browser-object">
-          <div class="browser-top"><span></span><span></span><span></span><small>naman / current</small></div>
-          <div class="browser-body">
-            <p>NOW</p>
-            <strong>Make the useful thing.<br />Then make it feel obvious.</strong>
-            <div class="tiny-progress"><i></i></div>
-            <div class="browser-meta"><span>shipping</span><span>learning</span><span>repeat</span></div>
+      <div class="stage-art">
+        <img
+          src={`${base}images/observer-maker.webp`}
+          alt="An abstract figure arranging a page, a wheel, and a file into a small tower."
+          width="1280"
+          height="853"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="stage-bottom">
+        <div class="stage-intro">
+          <h2>Naman Patel</h2>
+          <p>I work on SEO, build useful software, and write down what the rabbit holes teach me.</p>
+        </div>
+
+        <nav class="stage-actions" aria-label="Start exploring">
+          <a href={`${base}projects/`}>See the work</a>
+          <a href={`${base}archive/`}>Read the notes</a>
+          <button id="thought-button" type="button">Another thought</button>
+        </nav>
+
+        <div class="stage-palette" aria-label="Choose an accent colour">
+          <span>pick a colour</span>
+          <div>
+            <button class="dot dot--coral" data-accent-choice="coral" type="button" aria-label="Use coral accent" aria-pressed="false"></button>
+            <button class="dot dot--blue" data-accent-choice="blue" type="button" aria-label="Use blue accent" aria-pressed="true"></button>
+            <button class="dot dot--green" data-accent-choice="green" type="button" aria-label="Use green accent" aria-pressed="false"></button>
+            <button class="dot dot--yellow" data-accent-choice="yellow" type="button" aria-label="Use yellow accent" aria-pressed="false"></button>
           </div>
         </div>
-        <div class="floating-note"><span>today’s problem</span><strong>“this can be simpler”</strong></div>
-        <div class="pixel-buddy" aria-hidden="true"><i></i><i></i><b></b></div>
-        <div class="cursor" aria-hidden="true"></div>
       </div>
+
+      <p class="floating-thought" id="floating-thought" aria-live="polite">make the useful thing feel obvious</p>
     </section>
 
-    <section class="identity shell shell--wide" aria-label="What Naman works on">
-      <p>I like clear interfaces, useful products, measurable results, and details most people will never notice.</p>
-      <div><span>SEO</span><i></i><span>products</span><i></i><span>open source</span><i></i><span>experiments</span></div>
+    <section class="identity-strip" aria-label="What I work on">
+      <span>SEO</span><i></i><span>software</span><i></i><span>open source</span><i></i><span>small internet experiments</span>
     </section>
 
-    <section id="work" class="work shell shell--wide" aria-labelledby="work-title">
-      <header class="section-heading">
+    <section class="home-section" aria-labelledby="selected-work-title">
+      <header class="section-intro">
+        <p>01 / selected work</p>
         <div>
-          <p>Selected work</p>
-          <h2 id="work-title">Things that made it<br />out of my head.</h2>
+          <h2 id="selected-work-title">A few things that made it out of my head.</h2>
+          <a href={`${base}projects/`}>All projects ↗</a>
         </div>
-        <a href={`${base}projects/`}>Everything I’m making ↗</a>
       </header>
-
-      <div class="work-layout">
-        {featured[0] && (
-          <a class="project project-featured" href={projectHref(featured[0])} target={featured[0].external ? '_blank' : undefined} rel={featured[0].external ? 'noopener noreferrer' : undefined}>
-            <div class="featured-visual" aria-hidden="true">
-              <div class="phone-shell">
-                <div class="phone-bar"><span></span></div>
-                <small>compress photo</small>
-                <strong>18.4 MB</strong>
-                <div class="compression-line"><i></i></div>
-                <div class="phone-result"><span>done</span><b>642 KB</b></div>
-              </div>
-              <div class="file-before">18MB</div>
-              <div class="file-arrow">→</div>
-              <div class="file-after">642KB</div>
-              <div class="success-tag"><i></i> on-device</div>
-            </div>
-            <div class="project-info">
-              <div class="project-meta"><span>{featured[0].kind}</span><em>{featured[0].status}</em></div>
-              <h3>{featured[0].name}</h3>
-              <p>{featured[0].description}</p>
-              <strong class="project-link">View project <span>↗</span></strong>
-            </div>
-          </a>
-        )}
-
-        <div class="work-stack">
-          {featured[1] && (
-            <a class="project project-secondary audit-project" href={projectHref(featured[1])} target={featured[1].external ? '_blank' : undefined} rel={featured[1].external ? 'noopener noreferrer' : undefined}>
-              <div class="secondary-visual audit-scene" aria-hidden="true">
-                <div class="audit-panel">
-                  <div class="audit-top"><i></i><i></i><i></i></div>
-                  <span>final HTML</span>
-                  <strong>92</strong>
-                  <small>healthy</small>
-                </div>
-                <div class="audit-check">✓</div>
-              </div>
-              <div class="project-info">
-                <div class="project-meta"><span>{featured[1].kind}</span><em>{featured[1].status}</em></div>
-                <h3>{featured[1].name}</h3>
-                <p>{featured[1].description}</p>
-              </div>
-            </a>
-          )}
-
-          {featured[2] && (
-            <a class="project project-secondary wheel-project" href={projectHref(featured[2])} target={featured[2].external ? '_blank' : undefined} rel={featured[2].external ? 'noopener noreferrer' : undefined}>
-              <div class="secondary-visual wheel-scene" aria-hidden="true">
-                <div class="letter-wheel"><span>A</span><span>B</span><span>C</span><span>D</span><b>?</b></div>
-                <div class="wheel-pointer"></div>
-                <div class="spin-label">spin me ↻</div>
-              </div>
-              <div class="project-info">
-                <div class="project-meta"><span>{featured[2].kind}</span><em>{featured[2].status}</em></div>
-                <h3>{featured[2].name}</h3>
-                <p>{featured[2].description}</p>
-              </div>
-            </a>
-          )}
-        </div>
+      <div class="project-list project-list--home">
+        {featured.map((project, index) => <ProjectItem project={project} index={index} />)}
       </div>
     </section>
 
-    <section class="process shell shell--wide" aria-labelledby="process-title">
-      <div class="process-heading">
-        <p>How it usually goes</p>
-        <h2 id="process-title">One idea. One rabbit hole.</h2>
-      </div>
-      <div class="process-rail">
-        <div class="rail-line"><span></span></div>
-        <article><time>8:17 PM</time><strong>“Wait. What if…”</strong><p>The innocent beginning.</p></article>
-        <article><time>11:42 PM</time><strong>Now it has folders.</strong><p>This escalated quickly.</p></article>
-        <article class="process-detail"><time>2:08 AM</time><strong>Why is that 2px off?</strong><p>Unfortunately, it matters now.</p></article>
-        <article><time>6:11 AM</time><strong>Ship it.</strong><p>Real beats perfect.</p></article>
-      </div>
+    <section class="desk-note" aria-labelledby="desk-note-title">
+      <p>the usual sequence</p>
+      <h2 id="desk-note-title">Notice it. Pull the thread. Build too much. Remove half. Ship it.</h2>
+      <span>Sometimes in that order.</span>
     </section>
 
-    <section class="experiments shell shell--wide" aria-labelledby="experiments-title">
-      <header class="section-heading experiments-heading">
+    <section class="home-section" aria-labelledby="latest-writing-title">
+      <header class="section-intro">
+        <p>02 / latest writing</p>
         <div>
-          <p>Experiments</p>
-          <h2 id="experiments-title">Small ideas deserve<br />somewhere to misbehave.</h2>
+          <h2 id="latest-writing-title">Notes before I forget the useful part.</h2>
+          <a href={`${base}archive/`}>Full archive ↗</a>
         </div>
-        <a href={`${base}projects/`}>Browse the messy shelf ↗</a>
       </header>
-
-      <div class="experiment-shelf">
-        <a class="experiment-object letter-object" href="https://getrandomletter.com/" target="_blank" rel="noopener noreferrer">
-          <div class="object-art"><span>A</span><i>↻</i></div>
-          <p><small>browser toy</small><strong>Spin a letter.</strong><span>One wheel somehow became six tools.</span></p>
-        </a>
-        <a class="experiment-object audit-object" href="https://github.com/namanlabc/astro-seo-audit" target="_blank" rel="noopener noreferrer">
-          <div class="object-art"><span>92</span><i>✓</i></div>
-          <p><small>open source</small><strong>Audit the final HTML.</strong><span>Because source code is not what Google sees.</span></p>
-        </a>
-        <a class="experiment-object idea-object" href={`${base}projects/`}>
-          <div class="object-art"><span>?</span><i>✦</i></div>
-          <p><small>ongoing</small><strong>Make the odd thing.</strong><span>Useful is ideal. Interesting also counts.</span></p>
-        </a>
-      </div>
-    </section>
-
-    <section class="writing shell shell--wide" aria-labelledby="writing-title">
-      <header class="section-heading writing-heading">
-        <div>
-          <p>Writing</p>
-          <h2 id="writing-title">Notes before I<br />forget the lesson.</h2>
-        </div>
-        <a href={`${base}archive/`}>Full archive ↗</a>
-      </header>
-
       <div class="writing-list">
-        {recentPosts.map((post, index) => (
-          <a href={`${base}blog/${post.id}/`} class="writing-row">
-            <span class="writing-number">0{index + 1}</span>
-            <div>
-              <h3>{post.data.title}</h3>
-              <p>{post.data.description}</p>
-            </div>
-            <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en', { month: 'short', day: 'numeric' })}</time>
-            <b>↗</b>
-          </a>
+        {recentPosts.map((post) => (
+          <WritingItem
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            href={`${base}blog/${post.id}/`}
+            tags={post.data.tags}
+          />
         ))}
       </div>
     </section>
 
-    <section class="closing shell shell--wide" aria-labelledby="closing-title">
-      <div>
-        <p><span></span> still making things</p>
-        <h2 id="closing-title">See you somewhere<br />on the internet.</h2>
-      </div>
-      <nav aria-label="Elsewhere">
-        <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
-        <a href={`${base}about/`}>About →</a>
-      </nav>
-      <div class="closing-mark" aria-hidden="true"><i></i><i></i><b></b></div>
+    <section class="home-closing">
+      <p>There is more context behind all this.</p>
+      <a href={`${base}about/`}>A little about me <span>→</span></a>
     </section>
   </div>
+
+  <script>
+    const thoughts = [
+      'make the useful thing feel obvious',
+      'the last ten percent is mostly noticing',
+      'small ideas deserve real versions',
+      'clarity is a feature',
+      'one more rabbit hole, apparently',
+    ];
+    const thought = document.querySelector<HTMLElement>('#floating-thought');
+    const thoughtButton = document.querySelector<HTMLButtonElement>('#thought-button');
+    let thoughtIndex = 0;
+
+    thoughtButton?.addEventListener('click', () => {
+      thoughtIndex = (thoughtIndex + 1) % thoughts.length;
+      if (!thought) return;
+      thought.classList.remove('thought-pop');
+      requestAnimationFrame(() => {
+        thought.textContent = thoughts[thoughtIndex];
+        thought.classList.add('thought-pop');
+      });
+    });
+  </script>
 </Layout>
-
-<style>
-  :global(body){background:#fcfcfa!important;color:#131416!important}
-  :global(.site-header){background:rgba(252,252,250,.9)!important;border-bottom:1px solid #e9e9e4!important;backdrop-filter:blur(18px)}
-  :global(.site-header .site-brand__name),:global(.site-header .primary-nav a),:global(.site-header .site-tools__text),:global(.site-header .site-tools__icon),:global(.site-header .theme-toggle){color:#17181a!important}
-  :global(.site-header .primary-nav a[aria-current="page"]){background:#f0f0eb!important;color:#111214!important}
-  :global(.site-footer){background:#f7f7f3!important;color:#17181a!important;border-color:#e6e6df!important}
-  :global(.site-footer a),:global(.site-footer p),:global(.site-footer span){color:inherit!important}
-
-  .editorial-home{--paper:#fcfcfa;--ink:#111214;--muted:#686b70;--line:#e7e7e1;--soft:#f4f4ef;--green:#20c267;--blue:#4e72f2;--orange:#f26a21;--yellow:#f1c84b;background:var(--paper);color:var(--ink);overflow:hidden}
-  .shell--wide{max-width:1200px}
-
-  .hero{min-height:760px;display:grid;grid-template-columns:minmax(0,1fr) minmax(440px,.86fr);align-items:center;gap:88px;padding-top:88px;padding-bottom:96px}
-  .availability{display:flex;align-items:center;gap:10px;margin:0;color:#5f6267;font-size:13px;font-weight:700;letter-spacing:-.01em}
-  .availability span{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px #e5f8ed}
-  .hero h1{max-width:760px;margin:25px 0 26px;font-family:var(--display);font-size:clamp(60px,7vw,102px);font-weight:680;line-height:.93;letter-spacing:-.072em;color:#0d0e10;text-wrap:balance}
-  .hero-intro{max-width:610px;margin:0;color:#676a70;font-size:19px;line-height:1.55;letter-spacing:-.018em}
-  .hero-actions{display:flex;align-items:center;gap:20px;margin-top:34px;flex-wrap:wrap}
-  .primary-action,.quiet-action{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-weight:700}
-  .primary-action{padding:13px 17px;border-radius:11px;background:#121315;color:#fff;box-shadow:0 12px 30px rgba(17,18,20,.12);transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out)}
-  .primary-action:hover{transform:translateY(-2px);box-shadow:0 17px 36px rgba(17,18,20,.16)}
-  .quiet-action{color:#42454a;font-size:14px}.quiet-action:hover{color:#111214}
-
-  .workbench{position:relative;min-height:520px}
-  .browser-object{position:absolute;inset:86px 14px 38px 26px;border:1px solid #dfdfd8;border-radius:24px;background:#fff;box-shadow:0 30px 80px rgba(25,28,31,.09);overflow:hidden;transform:rotate(-1.4deg);transition:transform .45s var(--ease-out)}
-  .workbench:hover .browser-object{transform:rotate(0deg) translateY(-4px)}
-  .browser-top{height:50px;display:flex;align-items:center;gap:7px;padding:0 17px;border-bottom:1px solid #ecece7;background:#fafaf7}
-  .browser-top>span{width:8px;height:8px;border-radius:50%;background:#d7d7d0}.browser-top>span:first-child{background:#f09b78}.browser-top>span:nth-child(2){background:#f2ca65}.browser-top>span:nth-child(3){background:#79c78e}.browser-top small{margin-left:auto;color:#95979b;font:600 10px var(--mono)}
-  .browser-body{padding:44px 40px}.browser-body>p{margin:0 0 15px;color:#8d9095;font:700 10px var(--mono);letter-spacing:.12em}.browser-body>strong{display:block;max-width:430px;font-size:clamp(28px,3vw,40px);line-height:1.08;letter-spacing:-.045em}.tiny-progress{height:7px;margin:35px 0 22px;border-radius:999px;background:#ededE8;overflow:hidden}.tiny-progress i{display:block;width:72%;height:100%;border-radius:inherit;background:var(--blue);animation:progress-in 1.1s var(--ease-out) both}.browser-meta{display:flex;gap:8px;flex-wrap:wrap}.browser-meta span{padding:6px 9px;border:1px solid #e6e6e1;border-radius:7px;color:#74777d;font-size:11px;background:#fdfdfa}
-  .workbench-status{position:absolute;z-index:4;right:0;top:28px;display:flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:var(--green);color:#07331a;font:700 11px var(--mono);box-shadow:0 10px 30px rgba(32,194,103,.17);animation:float-soft 4s ease-in-out infinite}.workbench-status i{width:7px;height:7px;border-radius:50%;background:#fff}.workbench-status b{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#fff;color:#159b50}
-  .floating-note{position:absolute;z-index:3;left:-4px;bottom:5px;padding:12px 14px;border:1px solid #e2e2dc;border-radius:12px;background:#fff;box-shadow:0 12px 30px rgba(24,27,31,.07);transform:rotate(2deg)}.floating-note span{display:block;margin-bottom:3px;color:#9a9ca0;font:700 9px var(--mono);text-transform:uppercase}.floating-note strong{font-size:13px;letter-spacing:-.02em}
-  .pixel-buddy{position:absolute;z-index:5;right:34px;bottom:17px;width:47px;height:48px;border:4px solid #151619;border-radius:11px;background:#f1e6b9;box-shadow:inset 0 -5px rgba(0,0,0,.06);image-rendering:pixelated;transform:rotate(-3deg)}.pixel-buddy i{position:absolute;top:18px;width:5px;height:7px;background:#1c1d20}.pixel-buddy i:first-child{left:11px}.pixel-buddy i:nth-child(2){right:11px}.pixel-buddy b{position:absolute;left:17px;top:30px;width:8px;height:4px;border-bottom:3px solid #1c1d20}
-  .cursor{position:absolute;z-index:6;right:7px;bottom:78px;width:0;height:0;border-left:12px solid transparent;border-right:6px solid transparent;border-bottom:26px solid var(--orange);transform:rotate(-38deg);filter:drop-shadow(0 2px 0 #8f3511)}
-
-  .identity{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:30px;padding-top:22px;padding-bottom:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .identity>p{max-width:670px;margin:0;color:#53565b;font-size:15px}.identity>div{display:flex;align-items:center;gap:10px;white-space:nowrap;color:#7b7e83;font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.05em}.identity>div i{width:3px;height:3px;border-radius:50%;background:#c8c8c1}
-
-  .work,.experiments,.writing{padding-top:140px;padding-bottom:30px}
-  .section-heading{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:52px}.section-heading p,.process-heading>p{margin:0 0 12px;color:#8a8d91;font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.section-heading h2,.process-heading h2{margin:0;font-size:clamp(42px,5vw,68px);line-height:.98;letter-spacing:-.058em;font-weight:650}.section-heading>a{margin-bottom:8px;color:#55585e;font-size:13px;font-weight:700;text-decoration:none}.section-heading>a:hover{color:#111214}
-
-  .work-layout{display:grid;grid-template-columns:1.42fr .92fr;gap:18px;align-items:stretch}.work-stack{display:grid;grid-template-rows:1fr 1fr;gap:18px}.project{display:grid;text-decoration:none;color:inherit;overflow:hidden;border:1px solid var(--line);background:#fff;transition:transform .28s var(--ease-out),box-shadow .28s var(--ease-out),border-color .28s ease}.project:hover{transform:translateY(-4px);border-color:#d9d9d2;box-shadow:0 24px 60px rgba(25,28,31,.08)}
-  .project-featured{min-height:690px;grid-template-rows:1.15fr auto;border-radius:25px}.project-secondary{min-height:336px;grid-template-columns:45% 55%;border-radius:20px}.featured-visual,.secondary-visual{position:relative;overflow:hidden}.featured-visual{background:#edf2ff}.secondary-visual{min-height:100%}.audit-scene{background:#eff8f0}.wheel-scene{background:#fff5df}
-  .project-info{padding:28px 30px 30px}.project-featured .project-info{padding:34px 36px 38px}.project-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}.project-meta span,.project-meta em{font:700 9px var(--mono);letter-spacing:.08em;text-transform:uppercase}.project-meta span{color:#777a80}.project-meta em{font-style:normal;color:#278751}.project h3{margin:0 0 11px;font-size:30px;line-height:1.02;letter-spacing:-.045em}.project-featured h3{font-size:44px}.project p{margin:0;color:#6c6f75;font-size:13px;line-height:1.48}.project-featured p{max-width:620px;font-size:15px}.project-link{display:inline-flex;gap:9px;margin-top:24px;font-size:13px}.project:hover .project-link span{transform:translate(2px,-2px)}.project-link span{transition:transform .2s ease}
-
-  .phone-shell{position:absolute;left:50%;top:50%;width:220px;height:400px;padding:20px 20px;border:7px solid #1c1e24;border-radius:39px;background:#fff;box-shadow:0 25px 45px rgba(53,73,133,.14);transform:translate(-50%,-48%) rotate(-3deg)}.phone-bar{height:18px}.phone-bar span{display:block;width:54px;height:6px;margin:auto;border-radius:999px;background:#292b30}.phone-shell small{display:block;margin-top:42px;color:#8d9098;font:700 9px var(--mono);text-transform:uppercase}.phone-shell>strong{display:block;margin-top:6px;font-size:38px;letter-spacing:-.055em}.compression-line{height:7px;margin:36px 0 18px;border-radius:99px;background:#e8eaf2;overflow:hidden}.compression-line i{display:block;width:78%;height:100%;background:var(--blue);border-radius:inherit}.phone-result{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:12px;background:#f0f8f1;color:#23613a}.phone-result span{font-size:11px;font-weight:800;text-transform:uppercase}.phone-result b{font-size:16px}.file-before,.file-after{position:absolute;display:grid;place-items:center;width:86px;height:100px;border-radius:13px;border:1px solid rgba(0,0,0,.1);font:800 13px var(--mono);box-shadow:0 15px 30px rgba(32,45,80,.09)}.file-before{left:60px;top:88px;background:#fff;transform:rotate(-8deg)}.file-after{right:52px;bottom:70px;background:#dfe8ff;transform:rotate(7deg)}.file-arrow{position:absolute;left:77px;top:208px;font-size:26px;color:#7891de;transform:rotate(17deg)}.success-tag{position:absolute;right:35px;top:36px;display:flex;align-items:center;gap:7px;padding:9px 11px;border-radius:999px;background:#fff;color:#3d6a4e;font:700 10px var(--mono);box-shadow:0 8px 24px rgba(43,65,86,.08)}.success-tag i{width:7px;height:7px;border-radius:50%;background:var(--green)}
-  .audit-panel{position:absolute;left:50%;top:50%;width:145px;height:170px;padding:14px;border:1px solid #d7e5d9;border-radius:15px;background:#fff;box-shadow:0 15px 32px rgba(62,94,67,.1);transform:translate(-52%,-50%) rotate(-3deg)}.audit-top{display:flex;gap:4px}.audit-top i{width:5px;height:5px;border-radius:50%;background:#d9ddd8}.audit-panel>span{display:block;margin-top:28px;color:#8e958f;font:700 8px var(--mono);text-transform:uppercase}.audit-panel>strong{display:block;margin-top:1px;font-size:46px;line-height:1;letter-spacing:-.06em;color:#206d3a}.audit-panel>small{display:inline-block;margin-top:8px;padding:4px 7px;border-radius:999px;background:#e8f6eb;color:#3d7b50;font-size:8px;font-weight:800}.audit-check{position:absolute;right:19px;bottom:25px;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--green);color:#fff;font-weight:900;transform:rotate(7deg)}
-  .letter-wheel{position:absolute;left:50%;top:50%;width:138px;height:138px;border:5px solid #17181b;border-radius:50%;background:conic-gradient(#5b7bf0 0 25%,#f0c847 25% 50%,#f18b59 50% 75%,#8ccc81 75%);box-shadow:0 15px 30px rgba(88,72,25,.12);transform:translate(-56%,-52%) rotate(-7deg)}.letter-wheel span{position:absolute;font:900 14px var(--mono);color:#17181b}.letter-wheel span:nth-child(1){left:58px;top:13px}.letter-wheel span:nth-child(2){right:18px;top:56px}.letter-wheel span:nth-child(3){left:61px;bottom:12px}.letter-wheel span:nth-child(4){left:16px;top:57px}.letter-wheel b{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:38px;height:38px;border:4px solid #17181b;border-radius:50%;background:#fff;transform:translate(-50%,-50%)}.wheel-pointer{position:absolute;right:23px;top:42px;width:0;height:0;border-top:11px solid transparent;border-bottom:11px solid transparent;border-right:26px solid #151619;transform:rotate(12deg)}.spin-label{position:absolute;right:17px;bottom:22px;padding:5px 7px;border-radius:6px;background:#fff;border:1px solid #ede0bf;color:#8c6e2f;font:700 8px var(--mono);transform:rotate(3deg)}
-
-  .process{padding-top:150px;padding-bottom:60px}.process-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:52px}.process-heading h2{font-size:clamp(36px,4.5vw,58px)}.process-rail{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding-top:34px}.rail-line{position:absolute;left:5%;right:5%;top:5px;height:1px;background:#dadad4}.rail-line:before,.rail-line:after{content:"";position:absolute;top:-4px;width:9px;height:9px;border-radius:50%;background:#cfcfc8}.rail-line:before{left:0}.rail-line:after{right:0}.rail-line span{display:block;width:72%;height:1px;background:#222;animation:rail-grow 1.4s var(--ease-out) both}.process-rail article{position:relative;padding:0 24px 0 0}.process-rail article:before{content:"";position:absolute;top:-34px;left:0;width:9px;height:9px;border:3px solid var(--paper);border-radius:50%;background:#9b9d9f;box-shadow:0 0 0 1px #bdbdb7}.process-rail article:nth-of-type(2):before{background:var(--yellow)}.process-rail article:nth-of-type(3):before{background:var(--orange)}.process-rail article:nth-of-type(4):before{background:var(--green)}.process-rail time{display:block;margin-bottom:10px;color:#8e9094;font:700 9px var(--mono)}.process-rail strong{display:block;margin-bottom:6px;font-size:17px;letter-spacing:-.025em}.process-rail p{margin:0;color:#8a8c91;font-size:12px}.process-detail strong{display:inline-block;position:relative}.process-detail strong:after{content:"2px";position:absolute;right:-32px;top:-16px;color:var(--orange);font:800 8px var(--mono);transform:rotate(8deg)}
-
-  .experiments{padding-bottom:60px}.experiment-shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:42px;border-top:1px solid var(--line);padding-top:34px}.experiment-object{display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:center;padding:13px 0;text-decoration:none}.object-art{position:relative;width:92px;height:92px;display:grid;place-items:center;border:1px solid #e1e1db;border-radius:20px;background:#fff;box-shadow:0 15px 35px rgba(26,29,32,.06);transition:transform .25s var(--ease-out)}.experiment-object:hover .object-art{transform:translateY(-5px) rotate(-2deg)}.object-art>span{font-size:34px;font-weight:760;letter-spacing:-.06em}.object-art>i{position:absolute;right:-7px;bottom:-7px;display:grid;place-items:center;width:27px;height:27px;border:3px solid var(--paper);border-radius:50%;font-style:normal;font-size:12px}.letter-object .object-art{background:#eef2ff}.letter-object .object-art>i{background:var(--blue);color:#fff}.audit-object .object-art{background:#edf8ef}.audit-object .object-art>i{background:var(--green);color:#fff}.idea-object .object-art{background:#fff4df}.idea-object .object-art>i{background:var(--orange);color:#fff}.experiment-object p{margin:0}.experiment-object small{display:block;margin-bottom:4px;color:#999b9f;font:700 8px var(--mono);text-transform:uppercase;letter-spacing:.09em}.experiment-object strong{display:block;margin-bottom:5px;font-size:17px;letter-spacing:-.025em}.experiment-object p>span{display:block;color:#7d8085;font-size:12px;line-height:1.45}
-
-  .writing{padding-bottom:120px}.writing-list{border-top:1px solid #dcdcd6}.writing-row{display:grid;grid-template-columns:44px minmax(0,1fr) 70px 22px;gap:24px;align-items:center;padding:25px 4px;border-bottom:1px solid #e5e5df;text-decoration:none;transition:padding .2s var(--ease-out),background .2s ease}.writing-row:hover{padding-left:12px;padding-right:12px;background:#f8f8f4}.writing-number{color:#a0a2a5;font:700 9px var(--mono)}.writing-row h3{margin:0 0 3px;font-size:20px;letter-spacing:-.032em}.writing-row p{max-width:650px;margin:0;color:#888b90;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.writing-row time{color:#8b8e92;font:600 10px var(--mono)}.writing-row>b{font-size:14px;transition:transform .2s ease}.writing-row:hover>b{transform:translate(3px,-3px)}
-
-  .closing{position:relative;min-height:430px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding-top:100px;padding-bottom:90px;border-top:1px solid var(--line)}.closing>div:first-child>p{display:flex;align-items:center;gap:9px;margin:0 0 18px;color:#85888c;font:700 10px var(--mono);text-transform:uppercase;letter-spacing:.1em}.closing>div:first-child>p span{width:8px;height:8px;border-radius:50%;background:var(--green)}.closing h2{margin:0;font-size:clamp(48px,6.2vw,82px);line-height:.94;letter-spacing:-.065em}.closing nav{display:flex;gap:20px;padding-bottom:8px}.closing nav a{font-size:13px;font-weight:700;text-decoration:none;color:#51545a}.closing nav a:hover{color:#111214}.closing-mark{position:absolute;right:20px;top:82px;width:42px;height:42px;border:4px solid #17181b;border-radius:10px;background:#f3e7b7;transform:rotate(5deg);image-rendering:pixelated}.closing-mark i{position:absolute;top:15px;width:5px;height:6px;background:#17181b}.closing-mark i:first-child{left:9px}.closing-mark i:nth-child(2){right:9px}.closing-mark b{position:absolute;left:14px;top:27px;width:7px;height:3px;border-bottom:3px solid #17181b}
-
-  @keyframes progress-in{from{width:0}to{width:72%}}@keyframes rail-grow{from{width:0}to{width:72%}}@keyframes float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-
-  @media (max-width:980px){.hero{grid-template-columns:1fr;gap:30px;padding-top:70px}.workbench{min-height:470px;max-width:680px;width:100%;margin-inline:auto}.identity{align-items:flex-start;flex-direction:column}.work-layout{grid-template-columns:1fr}.work-stack{grid-template-columns:1fr 1fr;grid-template-rows:none}.project-secondary{grid-template-columns:42% 58%}.experiment-shelf{grid-template-columns:1fr;gap:12px}.experiment-object{max-width:620px}.closing{align-items:flex-start;flex-direction:column}.closing nav{padding-top:10px}}
-  @media (max-width:700px){.hero{min-height:auto;padding-top:58px;padding-bottom:70px}.hero h1{font-size:clamp(50px,15vw,72px)}.hero-intro{font-size:17px}.workbench{min-height:390px;margin-top:8px}.browser-object{inset:75px 0 30px 8px}.browser-body{padding:32px 24px}.browser-body>strong{font-size:29px}.workbench-status{right:5px;top:18px}.floating-note{left:0;bottom:0}.pixel-buddy{right:22px;bottom:8px}.identity>div{white-space:normal;flex-wrap:wrap}.work,.experiments,.writing{padding-top:100px}.section-heading,.process-heading{align-items:flex-start;flex-direction:column}.section-heading h2{font-size:48px}.work-stack{grid-template-columns:1fr}.project-featured{min-height:610px}.project-secondary{min-height:280px}.phone-shell{transform:translate(-50%,-48%) scale(.84) rotate(-3deg)}.file-before{left:24px}.file-after{right:22px}.success-tag{right:18px}.process{padding-top:110px}.process-rail{grid-template-columns:1fr;padding-top:0}.rail-line{left:4px;right:auto;top:4px;bottom:4px;width:1px;height:auto}.rail-line span{width:1px;height:72%;animation:none}.process-rail article{padding:0 0 32px 32px}.process-rail article:before{top:3px;left:0}.experiment-object{grid-template-columns:74px 1fr}.object-art{width:72px;height:72px;border-radius:16px}.writing{padding-bottom:90px}.writing-row{grid-template-columns:30px 1fr 22px;gap:12px}.writing-row time{display:none}.writing-row p{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.closing{min-height:360px;padding-top:75px;padding-bottom:70px}.closing nav{flex-wrap:wrap}.closing-mark{top:45px;right:5px}}
-</style>

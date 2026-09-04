@@ -1,134 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 ---
 
-<Layout
-  title="Experience"
-  description="Naman Patel’s hands-on experience across SEO, content, web products, Android, AI-assisted development, automation, QA, and release workflows."
->
-  <div class="editorial-page experience-editorial">
-    <section class="page-hero shell shell--wide" aria-labelledby="experience-title">
-      <div class="experience-intro-grid">
-        <div>
-          <p class="page-kicker">Experience / built, broken, shipped</p>
-          <h1 id="experience-title">The skills only make sense when they <span class="accent-blue">connect.</span></h1>
-          <p class="page-lede">Search was the entry point. Then the work kept pulling me into publishing, product, code, AI-assisted workflows, Android, QA, automation, and releases.</p>
-          <div class="hero-actions">
-            <a class="action-dark" href={`${base}projects/`}>See what I’ve built <span>→</span></a>
-            <a class="action-light" href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
-        </div>
-        <aside class="experience-note">
-          I’m largely self-taught. I care less about collecting tool names than being able to move from a messy problem to something useful, measurable, tested, and actually live.
-        </aside>
+<Layout title="Experience" description="Naman Patel’s hands-on experience across SEO, content, web products, Android, AI-assisted development, automation, QA, and release workflows.">
+  <div class="inner-page experience-page">
+    <section class="page-hero page-hero--split" aria-labelledby="experience-title">
+      <div>
+        <p class="page-kicker">Experience / built, broken, shipped</p>
+        <h1 id="experience-title">The skills only make sense when they connect.</h1>
+      </div>
+      <div class="page-hero__aside">
+        <p>I’m largely self-taught. I care less about collecting tool names than moving from a messy problem to something useful, tested, and live.</p>
+        <a href={`${base}projects/`}>See the work ↗</a>
       </div>
     </section>
 
-    <section class="section-wrap shell shell--wide" aria-labelledby="lanes-title">
-      <div class="section-heading">
-        <p class="section-kicker">01 / THE WORK TRAIL</p>
-        <div>
-          <h2 id="lanes-title">One problem kept leading to the next skill.</h2>
-          <p>The useful part is not each box by itself. It is being able to carry context across the whole path from research to release.</p>
-        </div>
-      </div>
+    <section class="evidence-line" aria-label="Selected evidence">
+      <article><strong>~1M</strong><p>monthly visitors at the peak of one content project</p></article>
+      <article><strong>Acquired</strong><p>a US entertainment project I worked on was later acquired</p></article>
+      <article><strong>Shipping</strong><p>products, open-source tools, and Android utilities now</p></article>
+    </section>
 
-      <div class="experience-lanes">
-        <article class="experience-lane">
-          <span class="experience-lane__num">01</span>
-          <div>
-            <p class="micro-label">SEARCH → CONTENT → MEASUREMENT</p>
-            <h3>SEO taught me to start with what people actually need.</h3>
-            <p>Keyword research, search intent, content structure, on-page work, WordPress publishing, technical cleanup, Search Console, analytics, and diagnosing why a page stopped working.</p>
-          </div>
-          <div class="lane-tools" aria-label="SEO skills and tools">
-            <span>Search Console</span><span>Search intent</span><span>Technical SEO</span><span>WordPress</span><span>Schema</span><span>Analytics</span>
-          </div>
+    <section class="page-section" aria-labelledby="trail-title">
+      <header class="section-intro">
+        <p>01 / the work trail</p>
+        <div><h2 id="trail-title">One problem kept leading to the next skill.</h2></div>
+      </header>
+
+      <div class="experience-trail">
+        <article>
+          <span>01</span>
+          <div><p>Search → content → measurement</p><h3>SEO taught me to start with what people actually need.</h3></div>
+          <p>Keyword research, search intent, content structure, on-page work, WordPress publishing, technical cleanup, Search Console, analytics, and diagnosing why a page stopped working.</p>
         </article>
-
-        <article class="experience-lane">
-          <span class="experience-lane__num">02</span>
-          <div>
-            <p class="micro-label">IDEA → INTERFACE → CODE → DEPLOY</p>
-            <h3>Eventually I wanted to build the thing, not only grow it.</h3>
-            <p>That pushed me into Astro, HTML, CSS, responsive interfaces, GitHub, debugging, deployment, and product decisions. I like getting a rough idea far enough that somebody else can open it and immediately understand what to do.</p>
-          </div>
-          <div class="lane-tools" aria-label="Product and web skills">
-            <span>Astro</span><span>HTML / CSS / JS</span><span>Tailwind</span><span>Git</span><span>GitHub</span><span>Deployments</span>
-          </div>
+        <article>
+          <span>02</span>
+          <div><p>Idea → interface → code → deploy</p><h3>Eventually I wanted to build the thing, not only grow it.</h3></div>
+          <p>That pushed me into Astro, HTML, CSS, responsive interfaces, GitHub, debugging, deployment, and product decisions.</p>
         </article>
-
-        <article class="experience-lane">
-          <span class="experience-lane__num">03</span>
-          <div>
-            <p class="micro-label">ISSUE → AGENTS → BUILD → QA → RELEASE</p>
-            <h3>Now the work crosses AI, Android, automation, QA, and releases.</h3>
-            <p>I use AI coding tools as part of a supervised build loop, alongside Android Studio, Kotlin, Gradle, GitHub workflows, emulator testing, build artifacts, and release checks. Speed is useful only if the output survives verification.</p>
-          </div>
-          <div class="lane-tools" aria-label="AI, Android and workflow skills">
-            <span>Codex</span><span>Claude</span><span>OpenCode</span><span>OpenRouter</span><span>Kotlin</span><span>Android Studio</span><span>Gradle</span><span>GitHub Actions</span><span>QA</span>
-          </div>
+        <article>
+          <span>03</span>
+          <div><p>Issue → agents → QA → release</p><h3>Now the work crosses AI, Android, automation, and releases.</h3></div>
+          <p>I use AI coding tools as part of a supervised build loop, alongside Kotlin, Gradle, emulator testing, workflows, build artifacts, and release checks.</p>
         </article>
       </div>
     </section>
 
-    <section class="section-wrap hairline-top" aria-labelledby="evidence-title">
-      <div class="shell shell--wide">
-        <div class="section-heading">
-          <p class="section-kicker">02 / RECEIPTS</p>
-          <div>
-            <h2 id="evidence-title">Real work is where the lessons stuck.</h2>
-            <p>Traffic, users, technical failures, and release pressure are much better teachers than a neat list of certifications.</p>
-          </div>
-        </div>
-
-        <div class="evidence-strip">
-          <article>
-            <p class="micro-label">CONTENT PROJECT</p>
-            <strong>~1M</strong>
-            <h3>monthly visitors at peak</h3>
-            <p>One of my own content projects grew to roughly a million monthly visitors at its peak.</p>
-          </article>
-          <article>
-            <p class="micro-label">OUTCOME</p>
-            <strong>Acquired</strong>
-            <h3>entertainment project</h3>
-            <p>A US-focused entertainment site I worked on was later acquired by WealthOfGeeks Media.</p>
-          </article>
-          <article>
-            <p class="micro-label">CURRENT LAB</p>
-            <strong>Shipping</strong>
-            <h3>products + tooling</h3>
-            <p>SmallMB, Astro SEO Audit, Get Random Letter, and newer experiments are where the next layer gets tested.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-wrap shell shell--wide" aria-labelledby="stack-title">
-      <div class="section-heading">
-        <p class="section-kicker">03 / WORKING STACK</p>
-        <div>
-          <h2 id="stack-title">Tools are useful when they disappear into the workflow.</h2>
-          <p>I do not care about displaying every logo I have ever opened. These are the groups I actually move between while making things.</p>
-        </div>
-      </div>
-
-      <div class="stack-lines">
-        <div class="stack-line"><span>Search / publish</span><p>Search Console · WordPress · technical SEO · content systems · HTML · CSS</p></div>
-        <div class="stack-line"><span>Build / ship</span><p>Astro · Tailwind · Git · GitHub · deployment · debugging</p></div>
-        <div class="stack-line"><span>Android / QA</span><p>Kotlin · Android Studio · Gradle · emulator testing · smoke checks · release artifacts</p></div>
-        <div class="stack-line"><span>AI / agents</span><p>Codex · Claude · OpenCode · OpenRouter · model routing · supervised agent workflows</p></div>
-      </div>
-
-      <div class="hero-actions" style="margin-top: 2rem;">
-        <a class="action-dark" href={`${base}projects/`}>Projects <span>→</span></a>
-        <a class="action-light" href={`${base}about/`}>More about me <span>→</span></a>
-      </div>
+    <section class="stack-section" aria-labelledby="stack-title">
+      <p class="section-number">02 / working stack</p>
+      <h2 id="stack-title">Tools are useful when they disappear into the work.</h2>
+      <dl>
+        <div><dt>Search / publish</dt><dd>Search Console · WordPress · technical SEO · content systems</dd></div>
+        <div><dt>Build / ship</dt><dd>Astro · HTML · CSS · JavaScript · Git · GitHub · deployments</dd></div>
+        <div><dt>Android / QA</dt><dd>Kotlin · Android Studio · Gradle · emulator testing · release checks</dd></div>
+        <div><dt>AI / agents</dt><dd>Codex · Claude · OpenRouter · model routing · supervised workflows</dd></div>
+      </dl>
     </section>
   </div>
 </Layout>
