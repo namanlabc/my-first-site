@@ -4,7 +4,7 @@ description: "SEO charts need context. After cleaning spam URLs from a site, fal
 pubDate: 2026-08-07
 tags: ["SEO", "search", "field notes"]
 image: "/images/posts/fewer-search-impressions.webp"
-imageAlt: "A noisy field of signals becoming one clear path beside a magnifying glass."
+imageAlt: "A sieve filtering a noisy field of signals into three useful dots while a small character watches."
 ---
 
 SEO reports train us to celebrate lines that go up and explain lines that go down.

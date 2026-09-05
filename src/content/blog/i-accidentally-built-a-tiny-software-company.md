@@ -4,7 +4,7 @@ description: "I set up a chief of staff, designer, engineer, architect, QA revie
 pubDate: 2026-08-12
 tags: ["building", "AI agents", "Paperclip", "personal"]
 image: "/images/posts/tiny-software-company.webp"
-imageAlt: "A handmade paper-collage software shipyard where a small crew designs, builds and checks websites, databases and mobile apps."
+imageAlt: "A two-eyed dot leading a small colourful crew through planning, checking and shipping software around one server."
 ---
 
 A few days ago, I saw a screenshot of several AI agents giving stand-up updates to each other.

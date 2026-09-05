@@ -4,7 +4,7 @@ description: "A personal site does not need to perform like a content machine. I
 pubDate: 2026-08-01
 tags: ["the internet", "personal sites", "writing"]
 image: "/images/posts/internet-feels-small.webp"
-imageAlt: "A small browser window, chai, notebook, and cable arranged on a desk."
+imageAlt: "A two-eyed dot tending a plant inside one small handmade window connected by a wandering cable."
 ---
 
 The internet feels enormous until you find a page that was clearly made by one person.

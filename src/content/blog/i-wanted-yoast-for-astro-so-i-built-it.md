@@ -4,7 +4,7 @@ description: "Astro SEO Audit began as a simple pre-publish check. It turned int
 pubDate: 2026-08-10T12:00:00Z
 tags: ["Astro", "SEO", "open source", "building"]
 image: "/images/posts/astro-seo-audit.webp"
-imageAlt: "A paper-collage hand using a magnifying glass to inspect layers of a webpage."
+imageAlt: "A two-eyed dot inspecting a simple webpage with an oversized magnifying glass."
 ---
 
 The first version of the idea was embarrassingly simple: I wanted something a little like Yoast, but for Astro.
