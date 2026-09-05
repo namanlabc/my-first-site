@@ -33,6 +33,10 @@ main { flex: 1; min-width: 0; }
 .site-brand { display: grid; place-items: center; width: 44px; height: 44px; color: var(--ink); text-decoration: none; }
 .brand-mascot { width: 38px; height: 38px; transition: transform 180ms ease; }
 .site-brand:hover .brand-mascot { transform: rotate(-7deg) translateY(-1px); }
+.brand-mascot .mascot-bob { transform-box: fill-box; transform-origin: center bottom; animation: mascot-bob 4.5s ease-in-out infinite; }
+.brand-mascot .mascot-eye { transform-box: fill-box; transform-origin: center; animation: mascot-blink 5.5s ease-in-out infinite; }
+@keyframes mascot-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px) rotate(-1deg); } }
+@keyframes mascot-blink { 0%, 91%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.12); } }
 .header-controls, .desktop-nav { display: flex; align-items: center; gap: 28px; }
 .desktop-nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding-block: 12px; }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--ink); }
