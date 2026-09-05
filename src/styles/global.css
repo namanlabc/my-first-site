@@ -85,7 +85,7 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
 .recent-writing h3 { margin: 0; font-size: 17px; font-weight: 450; line-height: 1.5; letter-spacing: -.015em; }
 .recent-writing time { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .site-footer { color: var(--muted); font-size: 13px; }
-.footer-scene { position: relative; height: 90px; overflow: hidden; border-top: 1px solid var(--rule); pointer-events: none; }
+.footer-scene { position: relative; height: 90px; overflow: hidden; pointer-events: none; }
 .footer-landscape { position: absolute; left: 50%; bottom: 0; width: 960px; height: 90px; max-width: none; transform: translateX(-50%); overflow: visible; }
 .footer-landscape path, .footer-landscape ellipse { vector-effect: non-scaling-stroke; }
 .footer-cloud { fill: color-mix(in srgb, var(--rule) 45%, transparent); stroke: var(--rule); stroke-width: 1.5; animation: footer-cloud-drift 24s linear infinite; }
