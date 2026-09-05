@@ -6,19 +6,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
 ---
 <header class="site-header">
   <a class="site-brand" href={base} aria-label="Naman.blog home">
-    <svg class="brand-mascot" viewBox="0 0 48 48" role="img" aria-label="Small backpack mascot">
-      <circle cx="24" cy="24" r="21" fill="var(--accent)" opacity=".12" />
-      <g class="mascot-bob">
-      <path d="M14 30c0-5.5 4.3-9 10-9s10 3.5 10 9v7H14Z" fill="var(--accent)" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-      <path d="M16 20.5c0-5 3.2-8 8-8s8 3 8 8v4.2c0 4.4-3.1 7-8 7s-8-2.6-8-7Z" fill="var(--paper)" stroke="currentColor" stroke-width="1.7" />
-      <path d="M15.4 19.7c.2-4.5 3.1-8.1 8.3-8.1 4.4 0 7.2 2.4 8 6.5-2.6-.8-4.8-2-6.5-3.7-2 2.4-5.3 4.5-9.8 5.3Z" fill="currentColor" />
-      <circle class="mascot-eye" cx="21" cy="23" r="1.45" fill="currentColor" /><circle class="mascot-eye" cx="27" cy="23" r="1.45" fill="currentColor" />
-      <path d="M21.7 27.4c1.5 1.2 3.1 1.2 4.6 0" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
-      <path d="M15 29.5c-3.3-.7-5.1-2.6-5.1-5.2 0-1.8.7-3.1 2.1-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      <path d="M11.7 21.1 8.6 19.3M11.6 22.9 8 23.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-      <path d="M16.5 31.7v5.1M31.5 31.7v5.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-      </g>
-    </svg>
+    <img class="brand-mascot" src={`${base}images/maker-mascot-v2.webp`} alt="" width="320" height="292" />
   </a>
   <div class="header-controls">
     <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
