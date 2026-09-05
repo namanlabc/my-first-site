@@ -30,11 +30,22 @@ main:focus { outline: none; }
 main { flex: 1; min-width: 0; }
 .site-header, .site-footer { width: min(960px, calc(100% - 64px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 104px; position: relative; z-index: 10; }
-.site-brand { position: relative; display: grid; place-items: center; width: 64px; height: 64px; color: var(--ink); text-decoration: none; }
-.site-brand::before { content: ""; position: absolute; inset: 5px; border-radius: 44% 56% 51% 49%; background: color-mix(in srgb, var(--accent) 13%, transparent); transform: rotate(-7deg); }
-.brand-mascot { position: relative; z-index: 1; width: 58px; height: 54px; object-fit: contain; transform-origin: center bottom; animation: mascot-float 4.4s ease-in-out infinite; transition: transform 180ms ease; }
-.site-brand:hover .brand-mascot { transform: translateY(-3px) rotate(-5deg) scale(1.05); }
-@keyframes mascot-float { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -2px; rotate: -1.5deg; } }
+.site-brand { position: relative; display: grid; place-items: center; width: 82px; height: 74px; color: var(--ink); text-decoration: none; isolation: isolate; }
+.site-brand::before { content: ""; position: absolute; inset: 5px 7px 3px; z-index: -1; border-radius: 44% 56% 51% 49%; background: color-mix(in srgb, var(--accent) 14%, transparent); transform: rotate(-7deg); animation: mascot-blob 4.6s ease-in-out infinite; }
+.brand-mascot { position: relative; z-index: 1; width: 74px; height: 68px; object-fit: contain; transform-origin: 48% 82%; animation: mascot-alive 3.2s ease-in-out infinite; transition: filter 180ms ease; }
+.site-brand:hover .brand-mascot, .site-brand:focus-visible .brand-mascot { animation: mascot-excited 620ms ease-in-out infinite alternate; filter: drop-shadow(0 5px 5px rgb(0 0 0 / .12)); }
+.mascot-sparks { position: absolute; top: 10px; left: 0; z-index: 2; width: 26px; height: 28px; transform: rotate(-8deg); }
+.mascot-sparks i { position: absolute; width: 3px; height: 9px; border-radius: 999px; background: #c8a33a; transform-origin: center bottom; animation: mascot-spark 1.7s ease-in-out infinite; }
+.mascot-sparks i:nth-child(1) { top: 9px; left: 2px; transform: rotate(-68deg); }
+.mascot-sparks i:nth-child(2) { top: 1px; left: 11px; transform: rotate(-22deg); animation-delay: 140ms; }
+.mascot-sparks i:nth-child(3) { top: 2px; left: 22px; transform: rotate(28deg); animation-delay: 280ms; }
+.mascot-hello { position: absolute; z-index: 3; top: -13px; left: 55px; padding: 3px 7px 4px; border: 1px solid var(--rule); border-radius: 10px 10px 10px 2px; background: var(--paper); color: var(--ink); font-size: 11px; font-weight: 650; line-height: 1; white-space: nowrap; opacity: 0; transform: translateY(4px) rotate(4deg) scale(.8); animation: mascot-hello 7s ease-in-out infinite; }
+.site-brand:hover .mascot-hello, .site-brand:focus-visible .mascot-hello { opacity: 1; transform: translateY(0) rotate(4deg) scale(1); animation: none; }
+@keyframes mascot-alive { 0%, 100% { transform: translateY(0) rotate(0); } 12% { transform: translateY(-4px) rotate(-4deg); } 21% { transform: translateY(-1px) rotate(2deg); } 45%, 72% { transform: translateY(0) rotate(0); } 58% { transform: translateY(-2px) rotate(-1deg); } }
+@keyframes mascot-excited { from { transform: translateY(-2px) rotate(-4deg) scale(1.03); } to { transform: translateY(-6px) rotate(3deg) scale(1.08); } }
+@keyframes mascot-blob { 0%, 100% { transform: rotate(-7deg) scale(1); border-radius: 44% 56% 51% 49%; } 50% { transform: rotate(-3deg) scale(1.04); border-radius: 55% 45% 43% 57%; } }
+@keyframes mascot-spark { 0%, 100% { opacity: .35; scale: .72; } 48% { opacity: 1; scale: 1.18; } }
+@keyframes mascot-hello { 0%, 7%, 25%, 100% { opacity: 0; transform: translateY(4px) rotate(4deg) scale(.8); } 11%, 20% { opacity: 1; transform: translateY(0) rotate(4deg) scale(1); } }
 .header-controls, .desktop-nav { display: flex; align-items: center; gap: 28px; }
 .desktop-nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding-block: 12px; }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--ink); }
@@ -129,8 +140,9 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
   .mobile-menu nav { position: absolute; top: 100%; right: 0; min-width: 190px; display: grid; background: var(--paper); border: 1px solid var(--rule); padding: 8px; border-radius: 4px; }
   .mobile-menu nav a { text-decoration: none; padding: 12px; font-size: 15px; }.mobile-menu nav a[aria-current="page"] { color: var(--accent); }
   .portfolio-intro { display: block; padding: 40px 0 48px; }
-  .site-brand { width: 60px; height: 60px; }
-  .brand-mascot { width: 55px; height: 51px; }
+  .site-brand { width: 76px; height: 70px; }
+  .brand-mascot { width: 69px; height: 63px; }
+  .mascot-hello { left: 50px; }
   .intro-illustration { width: 190px; height: 238px; margin: 24px 0 0 auto; }
   .portfolio-intro h1, .page-hero h1 { font-size: 36px; margin-bottom: 16px; }
   .portfolio-intro > p { font-size: 19px; }.portfolio-intro .intro-description { font-size: 16px; line-height: 1.65; }
