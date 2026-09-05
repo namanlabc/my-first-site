@@ -44,8 +44,8 @@ main { flex: 1; min-width: 0; }
 .portfolio { padding-bottom: 88px; }
 .portfolio-intro { display: grid; grid-template-columns: minmax(0, 1fr) 210px; align-items: center; gap: 58px; padding: 72px 0 76px; }
 .intro-copy { min-width: 0; }
-.intro-illustration { position: relative; width: 210px; margin: 0; }
-.intro-illustration img { width: 100%; mix-blend-mode: multiply; }
+.intro-illustration { position: relative; width: 176px; height: 270px; margin: 0; }
+.intro-illustration img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; mix-blend-mode: multiply; }
 .intro-illustration figcaption { position: absolute; right: -6px; bottom: -8px; color: var(--muted); font-family: var(--serif); font-size: 12px; font-style: italic; transform: rotate(-5deg); }
 :root.dark .intro-illustration img { mix-blend-mode: normal; }
 h1, h2, h3 { font-weight: 550; color: var(--ink); }
@@ -128,7 +128,7 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
   .mobile-menu nav { position: absolute; top: 100%; right: 0; min-width: 190px; display: grid; background: var(--paper); border: 1px solid var(--rule); padding: 8px; border-radius: 4px; }
   .mobile-menu nav a { text-decoration: none; padding: 12px; font-size: 15px; }.mobile-menu nav a[aria-current="page"] { color: var(--accent); }
   .portfolio-intro { display: block; padding: 40px 0 48px; }
-  .intro-illustration { width: min(190px, 68%); margin: 34px auto 0; }
+  .intro-illustration { width: 145px; height: 230px; margin: 28px 8px 0 auto; }
   .intro-illustration figcaption { right: -14px; }
   .portfolio-intro h1, .page-hero h1 { font-size: 36px; margin-bottom: 16px; }
   .portfolio-intro > p { font-size: 19px; }.portfolio-intro .intro-description { font-size: 16px; line-height: 1.65; }
