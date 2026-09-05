@@ -1,24 +1,7 @@
 ---
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-
 <footer class="site-footer">
-  <div>
-    <a class="footer-brand" href={base}>naman.blog</a>
-    <p>Useful things, unfinished thoughts, and the notes in between.</p>
-    <div class="palette-footer" role="group" aria-label="Choose an accent colour">
-      <span class="hand-note">a little colour?</span>
-      {['coral', 'blue', 'green', 'yellow'].map(colour => <button class={`dot dot--${colour}`} data-accent-choice={colour} type="button" aria-label={`Use ${colour} accent`} aria-pressed="false"></button>)}
-    </div>
-  </div>
-  <nav aria-label="Footer navigation">
-    <a href={`${base}projects/`}>Projects</a>
-    <a href={`${base}archive/`}>Writing</a>
-    <a href={`${base}about/`}>About</a>
-    <a href={`${base}rss.xml`}>RSS</a>
-    <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
-  </nav>
-  <p class="site-footer__year">© {new Date().getFullYear()} Naman Patel</p>
+  <p>© {new Date().getFullYear()} Naman Patel</p>
+  <nav aria-label="Footer navigation"><a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X</a><a href={`${base}rss.xml`}>RSS</a></nav>
 </footer>

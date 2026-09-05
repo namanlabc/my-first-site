@@ -1,62 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-
-<Layout title="About" description="About Naman, the things he keeps building, and what usually sends him down a new rabbit hole.">
-  <div class="inner-page about-page">
-    <section class="page-hero page-hero--split" aria-labelledby="about-title">
-      <div>
-        <p class="page-kicker">About / one curious person</p>
-        <h1 id="about-title">I like turning small ideas into real things.</h1>
-      </div>
-      <div class="page-hero__aside about-intro">
-        <img src={`${base}images/avatar.webp`} alt="Naman Patel" width="192" height="192" />
-        <p>I’m Naman. Most of what I know came from building a version, breaking something, and staying curious long enough to understand it.</p>
-      </div>
-    </section>
-
-    <div class="about-layout">
-      <div class="about-story">
-        <section>
-          <p class="section-number">01 / the pattern</p>
-          <h2>Build first. Figure out the edges on the way.</h2>
-          <p>That is how this site, Get Random Letter, and most of my experiments started. I find something interesting or annoying, build a version, test it, improve it, and write down what I learned.</p>
-          <p>I like useful things, clear interfaces, weird little ideas, and the final ten percent that makes something feel finished instead of merely functional.</p>
-        </section>
-
-        <section>
-          <p class="section-number">02 / what pulls me in</p>
-          <h2>Search, products, tools, and the systems between them.</h2>
-          <p>SEO is a big part of my work: technical fixes, content, search data, and figuring out why a useful page is not getting found. Building products pulled me deeper into web development, Android, automation, AI-assisted workflows, QA, and releases.</p>
-          <p>I care less about which tool won the week than whether it helped make something genuinely useful.</p>
-        </section>
-
-        <section>
-          <p class="section-number">03 / off screen</p>
-          <h2>A little ambition, a little chaos, plenty of chai.</h2>
-          <p><em>One Piece</em> is the permanent favorite. I like stories with ridiculous ambition, strange crews, and a world that keeps getting bigger the farther you go. Chai helps with the parts of building that somehow become 2 AM problems.</p>
-        </section>
-
-        <section>
-          <p class="section-number">04 / why this site exists</p>
-          <h2>I do not want everything I make to disappear into a feed.</h2>
-          <p>I want one place where an Android utility can sit next to an open-source SEO tool, a weird browser experiment, an unfinished idea, and a post I still like six months later.</p>
-          <p>Naman.blog is built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>, mostly plain CSS, and a small amount of JavaScript. The setup stays intentionally boring so the things on the site can be less boring.</p>
-        </section>
-      </div>
-
-      <aside class="now-card" aria-label="What Naman is doing now">
-        <div><span>currently active</span><i></i></div>
-        <dl>
-          <dt>Making</dt><dd>Products, tools, and experiments</dd>
-          <dt>Working on</dt><dd>SEO + search projects</dd>
-          <dt>Writing</dt><dd>What I learn while doing it</dd>
-          <dt>Recharging</dt><dd>One Piece + chai</dd>
-        </dl>
-      </aside>
+<Layout title="About" description="Naman Patel works on SEO, builds software, and writes about what he learns.">
+  <div class="inner-page">
+    <header class="page-hero"><h1>About me</h1><p>I’m Naman. I work on SEO and build software.</p></header>
+    <div class="about-story">
+      <p>My work started with content and search: understanding what people need, making useful pages, and figuring out why those pages do or don’t get found.</p>
+      <p>That led me into building products of my own. SmallMB handles everyday photo and PDF tasks on Android. Astro SEO Audit checks websites before they ship. Get Random Letter started as a wheel and grew into six browser tools.</p>
+      <p>I’m largely self-taught. I learn by making something, using it, and fixing the parts that don’t work well. I write about that process here, including the mistakes.</p>
+      <h2>Outside of work</h2><p>I’m a <em>One Piece</em> fan, and I like a good cup of chai. This site is a place for those interests too.</p>
+      <p>You can browse my <a href={`${base}projects/`}>projects</a>, read my <a href={`${base}archive/`}>writing</a>, or find me on <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X</a>.</p>
     </div>
   </div>
 </Layout>

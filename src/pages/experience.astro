@@ -1,63 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-
-<Layout title="Experience" description="Naman Patel’s hands-on experience across SEO, content, web products, Android, AI-assisted development, automation, QA, and release workflows.">
-  <div class="inner-page experience-page">
-    <section class="page-hero page-hero--split" aria-labelledby="experience-title">
-      <div>
-        <p class="page-kicker">Experience / built, broken, shipped</p>
-        <h1 id="experience-title">The skills only make sense when they connect.</h1>
-      </div>
-      <div class="page-hero__aside">
-        <p>I’m largely self-taught. I care less about collecting tool names than moving from a messy problem to something useful, tested, and live.</p>
-        <a href={`${base}projects/`}>See the work ↗</a>
-      </div>
-    </section>
-
-    <section class="evidence-line" aria-label="Selected evidence">
-      <article><strong>~1M</strong><p>monthly visitors at the peak of one content project</p></article>
-      <article><strong>Acquired</strong><p>a US entertainment project I worked on was later acquired</p></article>
-      <article><strong>Shipping</strong><p>products, open-source tools, and Android utilities now</p></article>
-    </section>
-
-    <section class="page-section" aria-labelledby="trail-title">
-      <header class="section-intro">
-        <p>01 / the work trail</p>
-        <div><h2 id="trail-title">One problem kept leading to the next skill.</h2></div>
-      </header>
-
-      <div class="experience-trail">
-        <article>
-          <span>01</span>
-          <div><p>Search → content → measurement</p><h3>SEO taught me to start with what people actually need.</h3></div>
-          <p>Keyword research, search intent, content structure, on-page work, WordPress publishing, technical cleanup, Search Console, analytics, and diagnosing why a page stopped working.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <div><p>Idea → interface → code → deploy</p><h3>Eventually I wanted to build the thing, not only grow it.</h3></div>
-          <p>That pushed me into Astro, HTML, CSS, responsive interfaces, GitHub, debugging, deployment, and product decisions.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <div><p>Issue → agents → QA → release</p><h3>Now the work crosses AI, Android, automation, and releases.</h3></div>
-          <p>I use AI coding tools as part of a supervised build loop, alongside Kotlin, Gradle, emulator testing, workflows, build artifacts, and release checks.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="stack-section" aria-labelledby="stack-title">
-      <p class="section-number">02 / working stack</p>
-      <h2 id="stack-title">Tools are useful when they disappear into the work.</h2>
-      <dl>
-        <div><dt>Search / publish</dt><dd>Search Console · WordPress · technical SEO · content systems</dd></div>
-        <div><dt>Build / ship</dt><dd>Astro · HTML · CSS · JavaScript · Git · GitHub · deployments</dd></div>
-        <div><dt>Android / QA</dt><dd>Kotlin · Android Studio · Gradle · emulator testing · release checks</dd></div>
-        <div><dt>AI / agents</dt><dd>Codex · Claude · OpenRouter · model routing · supervised workflows</dd></div>
-      </dl>
-    </section>
+<Layout title="Experience" description="Naman Patel’s experience in SEO, content, web development, and Android software.">
+  <div class="inner-page">
+    <header class="page-hero"><h1>Experience</h1><p>My background is in SEO and content. Today, I also build and maintain software.</p></header>
+    <div class="experience-list">
+      <section><h2>SEO & content</h2><p>Keyword research, search intent, on-page SEO, technical fixes, and content publishing. I use Search Console and analytics to understand what’s working and where to improve.</p><p>I worked on a content project that reached roughly one million monthly visitors at its peak, and a US entertainment project that was later acquired.</p><p class="tool-list">Search Console · WordPress · Technical SEO · Analytics</p></section>
+      <section><h2>Web development</h2><p>Building responsive websites and browser tools, from the first interface through debugging, deployment, and ongoing maintenance.</p><p class="tool-list">Astro · HTML · CSS · JavaScript · Git · GitHub</p></section>
+      <section><h2>Android & development workflows</h2><p>Building on-device utilities with Kotlin, testing with emulators, and preparing releases. I also use AI coding tools and supervised agent workflows as part of development.</p><p class="tool-list">Kotlin · Android Studio · Gradle · Codex · Claude</p></section>
+    </div>
+    <a class="text-link" href={`${base}projects/`}>View my projects <span aria-hidden="true">→</span></a>
   </div>
 </Layout>

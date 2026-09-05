@@ -2,73 +2,13 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import WritingItem from '../components/WritingItem.astro';
-
-const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const [latestPost, ...olderPosts] = sortedPosts;
-const postsByYear: Record<number, typeof posts> = {};
-
-for (const post of olderPosts) {
-  const year = post.data.pubDate.getFullYear();
-  postsByYear[year] ??= [];
-  postsByYear[year].push(post);
-}
-
-const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const posts = (await getCollection('blog')).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const years = [...new Set(posts.map(post=>post.data.pubDate.getFullYear()))];
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-
-<Layout title="Writing archive" description="A chronological archive of everything Naman has published on Naman.blog.">
-  <div class="inner-page archive-page">
-    <section class="page-hero page-hero--split" aria-labelledby="archive-title">
-      <div>
-        <p class="page-kicker">Writing / notes from the process</p>
-        <h1 id="archive-title">Things worth writing down before I forget.</h1>
-      </div>
-      <div class="page-hero__aside">
-        <p>Build notes, SEO lessons, experiments, and whatever became clearer after trying it for real.</p>
-        <span>{sortedPosts.length} notes · newest first</span>
-      </div>
-    </section>
-
-    {latestPost && (
-      <section class="latest-note" aria-labelledby="latest-note-title">
-        <div class="latest-note__image">
-          {latestPost.data.image ? (
-            <img src={`${base}${latestPost.data.image.replace(/^\//, '')}`} alt={latestPost.data.imageAlt ?? ''} width="1536" height="1024" />
-          ) : <span aria-hidden="true">new<br />note</span>}
-        </div>
-        <div>
-          <p class="page-kicker">Latest note</p>
-          <h2 id="latest-note-title"><a href={`${base}blog/${latestPost.id}/`}>{latestPost.data.title}</a></h2>
-          <p>{latestPost.data.description}</p>
-          <a href={`${base}blog/${latestPost.id}/`}>Read it ↗</a>
-        </div>
-      </section>
-    )}
-
-    <div class="archive-years">
-      {years.length === 0 ? (
-        <p class="empty-state">The rest of the archive is still taking shape.</p>
-      ) : years.map((year) => (
-        <section class="archive-year" aria-labelledby={`year-${year}`}>
-          <h2 id={`year-${year}`}>{year}</h2>
-          <div class="writing-list">
-            {postsByYear[year].map((post) => (
-              <WritingItem
-                title={post.data.title}
-                description={post.data.description}
-                pubDate={post.data.pubDate}
-                href={`${base}blog/${post.id}/`}
-                tags={post.data.tags}
-                compact
-              />
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
+<Layout title="Writing" description="Notes on SEO, building software, and personal interests by Naman Patel.">
+  <div class="inner-page">
+    <header class="page-hero"><h1>Writing</h1><p>Notes on search, software, and things I find interesting.</p></header>
+    {years.map(year => <section class="archive-year" aria-labelledby={`year-${year}`}><h2 id={`year-${year}`}>{year}</h2><div>{posts.filter(post=>post.data.pubDate.getFullYear()===year).map(post=><WritingItem title={post.data.title} pubDate={post.data.pubDate} href={`${base}blog/${post.id}/`} />)}</div></section>)}
   </div>
 </Layout>

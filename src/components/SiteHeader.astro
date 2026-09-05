@@ -1,52 +1,14 @@
 ---
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const path = Astro.url.pathname;
-
-const navItems = [
-  { href: `${base}projects/`, label: 'Projects', active: path.startsWith(`${base}projects`) },
-  {
-    href: `${base}archive/`,
-    label: 'Writing',
-    active: path.startsWith(`${base}archive`) || path.startsWith(`${base}blog/`),
-  },
-  { href: `${base}experience/`, label: 'Experience', active: path.startsWith(`${base}experience`) },
-  { href: `${base}about/`, label: 'About', active: path.startsWith(`${base}about`) },
-];
+const navItems = [{href:`${base}projects/`,label:'Projects'},{href:`${base}archive/`,label:'Writing'},{href:`${base}experience/`,label:'Experience'},{href:`${base}about/`,label:'About'}];
+const active = (href: string) => path.startsWith(href) || (href.endsWith('archive/') && path.startsWith(`${base}blog/`));
 ---
-
 <header class="site-header">
-  <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="site-header__inner">
-    <nav class="primary-nav primary-nav--left" aria-label="Primary navigation">
-      {navItems.slice(0, 2).map((item) => (
-        <a href={item.href} aria-current={item.active ? 'page' : undefined}>{item.label}</a>
-      ))}
-    </nav>
-
-    <a class="site-brand" href={base} aria-label="Naman.blog home">
-      <span>naman</span><b>.blog</b>
-    </a>
-
-    <div class="site-header__right">
-      <nav class="primary-nav" aria-label="More navigation">
-        {navItems.slice(2).map((item) => (
-          <a href={item.href} aria-current={item.active ? 'page' : undefined}>{item.label}</a>
-        ))}
-      </nav>
-      <a class="header-social" href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer" aria-label="Naman on GitHub">G↗</a>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
-        <span aria-hidden="true">◐</span>
-      </button>
-      <details class="mobile-menu">
-        <summary aria-label="Open navigation"><span></span><span></span></summary>
-        <nav aria-label="Mobile navigation">
-          {navItems.map((item) => <a href={item.href} aria-current={item.active ? 'page' : undefined}>{item.label}</a>)}
-          <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X ↗</a>
-        </nav>
-      </details>
-    </div>
+  <a class="site-brand" href={base} aria-label="Naman.blog home">naman.blog</a>
+  <div class="header-controls">
+    <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><span aria-hidden="true">◐</span></button>
+    <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav></details>
   </div>
 </header>

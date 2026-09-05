@@ -3,33 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import ProjectItem from '../components/ProjectItem.astro';
 import { projects } from '../data/projects';
 ---
-
-<Layout title="Projects" description="The websites, open-source tools, and experiments Naman keeps building and improving.">
-  <div class="inner-page projects-page">
-    <section class="page-hero page-hero--split" aria-labelledby="projects-title">
-      <div>
-        <p class="page-kicker">Projects / things that escaped the notes app</p>
-        <h1 id="projects-title">A small pile of things I decided should exist.</h1>
-      </div>
-      <div class="page-hero__aside">
-        <p>Some are useful. Some are odd. The best ones tend to be both.</p>
-        <span>{projects.length} current projects</span>
-      </div>
-    </section>
-
-    <section class="page-section" aria-labelledby="project-list-title">
-      <header class="section-intro">
-        <p>01 / current work</p>
-        <div><h2 id="project-list-title">Built to be used, not displayed.</h2></div>
-      </header>
-      <div class="project-list">
-        {projects.map((project, index) => <ProjectItem project={project} index={index} />)}
-      </div>
-    </section>
-
-    <aside class="margin-note">
-      <span>small note</span>
-      <p>Finished is usually temporary around here.</p>
-    </aside>
-  </div>
+<Layout title="Projects" description="Software, websites, and open-source tools built by Naman Patel.">
+  <div class="inner-page"><header class="page-hero"><h1>Projects</h1><p>Software and websites I’m building and maintaining.</p></header><div class="project-list">{projects.map(project => <ProjectItem project={project} />)}</div></div>
 </Layout>

@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import '../styles/inventions.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -35,7 +34,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta id="theme-color" name="theme-color" content="#d9d6cf" />
+    <meta id="theme-color" name="theme-color" content="#fafaf8" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
     <link rel="canonical" href={canonical} />
@@ -56,13 +55,10 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <script is:inline>
       (() => {
         let savedTheme = null;
-        let savedAccent = null;
-        try { savedTheme = localStorage.getItem('theme'); savedAccent = localStorage.getItem('accent'); } catch {}
+        try { savedTheme = localStorage.getItem('theme'); } catch {}
         const isDark = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const allowedAccents = ['coral', 'blue', 'green', 'yellow'];
         document.documentElement.classList.toggle('dark', isDark);
-        document.documentElement.dataset.accent = allowedAccents.includes(savedAccent) ? savedAccent : 'blue';
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#24231f' : '#d9d6cf');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#191c1a' : '#fafaf8');
       })();
     </script>
   </head>
@@ -83,7 +79,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         const isDark = document.documentElement.classList.contains('dark');
         themeButton?.setAttribute('aria-pressed', String(isDark));
         themeButton?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#24231f' : '#d9d6cf');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#191c1a' : '#fafaf8');
       }
 
       updateThemeControl();
@@ -93,22 +89,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         updateThemeControl();
       });
 
-      document.querySelectorAll<HTMLButtonElement>('[data-accent-choice]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const accent = button.dataset.accentChoice;
-          if (!accent) return;
-          document.documentElement.dataset.accent = accent;
-          try { localStorage.setItem('accent', accent); } catch {}
-          document.querySelectorAll('[data-accent-choice]').forEach((item) => {
-            item.setAttribute('aria-pressed', String(item === button));
-          });
-        });
-      });
-
-      const activeAccent = document.documentElement.dataset.accent;
-      document.querySelectorAll<HTMLElement>('[data-accent-choice]').forEach((item) => {
-        item.setAttribute('aria-pressed', String(item.dataset.accentChoice === activeAccent));
-      });
     </script>
   </body>
 </html>
