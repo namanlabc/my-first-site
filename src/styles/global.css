@@ -84,10 +84,47 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
 .recent-writing a { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: baseline; gap: 28px; padding: 18px 0; text-decoration: none; }
 .recent-writing h3 { margin: 0; font-size: 17px; font-weight: 450; line-height: 1.5; letter-spacing: -.015em; }
 .recent-writing time { color: var(--muted); font-size: 13px; white-space: nowrap; }
-.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 0 34px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+.site-footer { color: var(--muted); font-size: 13px; }
+.footer-scene { position: relative; height: 90px; overflow: hidden; border-top: 1px solid var(--rule); pointer-events: none; }
+.footer-landscape { position: absolute; left: 50%; bottom: 0; width: 960px; height: 90px; max-width: none; transform: translateX(-50%); overflow: visible; }
+.footer-landscape path, .footer-landscape ellipse { vector-effect: non-scaling-stroke; }
+.footer-cloud { fill: color-mix(in srgb, var(--rule) 45%, transparent); stroke: var(--rule); stroke-width: 1.5; animation: footer-cloud-drift 24s linear infinite; }
+.footer-wind { fill: none; stroke: var(--rule); stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 34 18; animation: footer-wind-flow 7s linear infinite; }
+.footer-tree { transform-box: fill-box; transform-origin: center bottom; animation: footer-tree-sway 4.6s ease-in-out infinite alternate; }
+.footer-tree--right { animation-delay: -2.1s; animation-duration: 5.4s; }
+.footer-trunk { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+.footer-canopy { fill: color-mix(in srgb, var(--accent) 12%, var(--paper)); stroke: var(--accent); stroke-width: 1.5; }
+.footer-grass { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; transform-box: fill-box; transform-origin: center bottom; animation: footer-grass-sway 2.4s ease-in-out infinite alternate; }
+.footer-grass--two { animation-delay: -1.2s; }
+.footer-bank { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-linecap: round; }
+.footer-water { fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 28 15; animation: footer-water-flow 8s linear infinite; opacity: .72; }
+.footer-stones { fill: var(--paper); stroke: var(--muted); stroke-width: 1.3; }
+.footer-leaf { fill: #c8a33a; transform-box: fill-box; transform-origin: center; animation: footer-leaf-fall 9s ease-in-out infinite; }
+.footer-mascot { --footer-dot-x: 50%; position: absolute; left: var(--footer-dot-x); bottom: 15px; width: 38px; height: 38px; transform: translateX(-50%) translateY(52px) rotate(-20deg); transition: left 680ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.9,.2,1); pointer-events: auto; cursor: pointer; }
+.site-footer.is-awake .footer-mascot { transform: translateX(-50%) translateY(0) rotate(0); }
+.footer-mascot svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.footer-dot-disc { fill: var(--ink); transform-box: fill-box; transform-origin: center; }
+.footer-dot-eyes { transform-box: fill-box; transform-origin: center; animation: footer-dot-watch 9s ease-in-out infinite; }
+.footer-dot-eye { fill: var(--paper); transform-box: fill-box; transform-origin: center; animation: footer-dot-blink 5.2s ease-in-out infinite; }
+.footer-dot-eye--late { animation-delay: 70ms; }
+.footer-mascot.is-rolling .footer-dot-disc { animation: footer-dot-roll 680ms ease-in-out; }
+.footer-mascot.is-jumping { animation: footer-dot-jump 680ms cubic-bezier(.2,.85,.25,1); }
+.footer-mascot.is-jumping .footer-dot-eye { animation: footer-dot-surprise 680ms ease; }
+.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0 34px; }
 .site-footer p { margin: 0; }
 .site-footer nav { display: flex; gap: 24px; }
 .site-footer a { text-decoration: none; padding-block: 10px; }
+@keyframes footer-tree-sway { from { transform: rotate(-1.8deg); } to { transform: rotate(2.2deg); } }
+@keyframes footer-grass-sway { from { transform: skewX(-5deg); } to { transform: skewX(8deg); } }
+@keyframes footer-water-flow { to { stroke-dashoffset: -86; } }
+@keyframes footer-wind-flow { to { stroke-dashoffset: -104; } }
+@keyframes footer-cloud-drift { 0% { transform: translateX(-95px); opacity: 0; } 12%, 84% { opacity: .8; } 100% { transform: translateX(145px); opacity: 0; } }
+@keyframes footer-leaf-fall { 0%, 12% { transform: translate(0, -7px) rotate(0); opacity: 0; } 20% { opacity: 1; } 72% { opacity: 1; } 86%, 100% { transform: translate(88px, 35px) rotate(250deg); opacity: 0; } }
+@keyframes footer-dot-watch { 0%, 18%, 62%, 100% { transform: translateX(0); } 24%, 45% { transform: translateX(-3px); } 70%, 88% { transform: translate(3px, -1px); } }
+@keyframes footer-dot-blink { 0%, 40%, 44%, 100% { transform: scaleY(1); } 42% { transform: scaleY(.08); } }
+@keyframes footer-dot-roll { 0% { transform: rotate(0) scale(1); } 48% { transform: rotate(190deg) scale(.92,1.08); } 100% { transform: rotate(360deg) scale(1); } }
+@keyframes footer-dot-jump { 0%, 100% { translate: 0 0; rotate: 0deg; } 45% { translate: 0 -18px; rotate: -13deg; } 72% { translate: 0 2px; rotate: 5deg; } }
+@keyframes footer-dot-surprise { 0%, 100% { transform: scale(1); } 30%, 72% { transform: scale(1.28); } }
 .inner-page { padding-bottom: 88px; }
 .page-hero { padding: 64px 0 52px; }
 .page-hero > p { margin: 0; max-width: 580px; color: var(--muted); font-size: 18px; line-height: 1.65; }
@@ -158,7 +195,7 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
   .portfolio-section + .portfolio-section { margin-top: 44px; }
   .recent-writing a { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; }.recent-writing h3 { font-size: 17px; }
   .portfolio, .inner-page { padding-bottom: 56px; }
-  .site-footer { align-items: baseline; gap: 16px; padding-block: 22px 28px; font-size: 12px; }.site-footer nav { gap: 16px; }
+  .site-footer { font-size: 12px; }.footer-scene { height: 76px; }.footer-landscape { height: 76px; bottom: -4px; }.footer-mascot { bottom: 10px; width: 34px; height: 34px; }.footer-row { align-items: baseline; gap: 16px; padding: 16px 0 28px; }.site-footer nav { gap: 16px; }
   .page-hero { padding: 40px 0; }.page-hero > p { font-size: 17px; }
   .project-item-heading { display: block; }.project-item-heading > span { display: block; margin-top: 5px; }.project-item h2 { font-size: 22px; }
   .project-item > p, .about-story p, .experience-list p { font-size: 16px; }
