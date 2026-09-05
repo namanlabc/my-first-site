@@ -1,133 +1,56 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ProjectItem from '../components/ProjectItem.astro';
+import Invention from '../components/Invention.astro';
 import WritingItem from '../components/WritingItem.astro';
-import { projects } from '../data/projects';
-
-const posts = await getCollection('blog');
-const recentPosts = posts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
-const featured = projects.slice(0, 3);
-const base = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const inventions = [
+  {kind:'smallmb' as const, name:'SmallMB', line:'Big files. Small problem.', description:'Photos and PDFs, made small enough to send. An Android utility that keeps the work on your device.', href:'https://smallmb.com/', link:'Meet SmallMB'},
+  {kind:'audit' as const, name:'Astro SEO Audit', line:'A second pair of eyes.', description:'A check on the HTML your Astro site actually ships. Because the tiny things are easy to miss.', href:'https://github.com/namanlabc/astro-seo-audit', link:'See the open-source tool'},
+  {kind:'wheel' as const, name:'Get Random Letter', line:'A useful bit of nonsense.', description:'One alphabet wheel became a collection of browser tools for games, classrooms, and little decisions.', href:'https://getrandomletter.com/', link:'Play with the real thing'},
+];
 ---
-
 <Layout>
-  <div class="home-page">
-    <section class="home-stage" aria-labelledby="home-title">
-      <div class="stage-copy">
-        <p class="stage-kicker">Naman notices a small problem</p>
-        <h1 id="home-title">and builds<br />something around it.</h1>
+  <section class="inventions-home" aria-labelledby="home-title">
+    <header class="inventions-intro">
+      <div><p class="small-label">Naman Patel / independent maker</p><h1 id="home-title">Small inventions.<br /><em>Long rabbit holes.</em></h1></div>
+      <div class="intro-note"><p>I work on search, build things I want to use, and write about what happens along the way.</p><a href={`${base}about/`}>A little about me ↗</a></div>
+    </header>
+    <div class="inventions-heading"><p><span class="hand-note">Please do touch.</span> Three things you can try right here.</p><span class="small-label">Selected work / 01—03</span></div>
+    <div class="inventions-stage" data-stage>
+      <nav class="invention-selector" aria-label="Choose a project to try">
+        {inventions.map((item, i) => <button type="button" data-select={item.kind} aria-controls={`home-${item.kind}`} aria-pressed={i === 0 ? 'true' : 'false'}><span>0{i+1}</span>{i === 1 ? 'SEO Audit' : i === 2 ? 'Letter wheel' : item.name}</button>)}
+      </nav>
+      <div class="inventions-grid">
+        {inventions.map((item, i) => <article id={`home-${item.kind}`} data-panel={item.kind} class:list={['invention-chapter', {'is-selected': i === 0}]}>
+          <Invention kind={item.kind} id={`home-${item.kind}`} />
+          <div class="invention-story"><h2>{item.line}</h2><p>{item.description}</p><a href={item.href} target="_blank" rel="noopener noreferrer">{item.link} ↗</a></div>
+        </article>)}
       </div>
-
-      <div class="stage-art">
-        <img
-          src={`${base}images/observer-maker.webp`}
-          alt="An abstract figure arranging a page, a wheel, and a file into a small tower."
-          width="1280"
-          height="853"
-          fetchpriority="high"
-        />
-      </div>
-
-      <div class="stage-bottom">
-        <div class="stage-intro">
-          <h2>Naman Patel</h2>
-          <p>I work on SEO, build useful software, and write down what the rabbit holes teach me.</p>
-        </div>
-
-        <nav class="stage-actions" aria-label="Start exploring">
-          <a href={`${base}projects/`}>See the work</a>
-          <a href={`${base}archive/`}>Read the notes</a>
-          <button id="thought-button" type="button">Another thought</button>
-        </nav>
-
-        <div class="stage-palette" aria-label="Choose an accent colour">
-          <span>pick a colour</span>
-          <div>
-            <button class="dot dot--coral" data-accent-choice="coral" type="button" aria-label="Use coral accent" aria-pressed="false"></button>
-            <button class="dot dot--blue" data-accent-choice="blue" type="button" aria-label="Use blue accent" aria-pressed="true"></button>
-            <button class="dot dot--green" data-accent-choice="green" type="button" aria-label="Use green accent" aria-pressed="false"></button>
-            <button class="dot dot--yellow" data-accent-choice="yellow" type="button" aria-label="Use yellow accent" aria-pressed="false"></button>
-          </div>
-        </div>
-      </div>
-
-      <p class="floating-thought" id="floating-thought" aria-live="polite">make the useful thing feel obvious</p>
-    </section>
-
-    <section class="identity-strip" aria-label="What I work on">
-      <span>SEO</span><i></i><span>software</span><i></i><span>open source</span><i></i><span>small internet experiments</span>
-    </section>
-
-    <section class="home-section" aria-labelledby="selected-work-title">
-      <header class="section-intro">
-        <p>01 / selected work</p>
-        <div>
-          <h2 id="selected-work-title">A few things that made it out of my head.</h2>
-          <a href={`${base}projects/`}>All projects ↗</a>
-        </div>
-      </header>
-      <div class="project-list project-list--home">
-        {featured.map((project, index) => <ProjectItem project={project} index={index} />)}
-      </div>
-    </section>
-
-    <section class="desk-note" aria-labelledby="desk-note-title">
-      <p>the usual sequence</p>
-      <h2 id="desk-note-title">Notice it. Pull the thread. Build too much. Remove half. Ship it.</h2>
-      <span>Sometimes in that order.</span>
-    </section>
-
-    <section class="home-section" aria-labelledby="latest-writing-title">
-      <header class="section-intro">
-        <p>02 / latest writing</p>
-        <div>
-          <h2 id="latest-writing-title">Notes before I forget the useful part.</h2>
-          <a href={`${base}archive/`}>Full archive ↗</a>
-        </div>
-      </header>
-      <div class="writing-list">
-        {recentPosts.map((post) => (
-          <WritingItem
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            href={`${base}blog/${post.id}/`}
-            tags={post.data.tags}
-          />
-        ))}
-      </div>
-    </section>
-
-    <section class="home-closing">
-      <p>There is more context behind all this.</p>
-      <a href={`${base}about/`}>A little about me <span>→</span></a>
-    </section>
-  </div>
-
+    </div>
+    <div class="stage-colophon"><a href={`${base}projects/`}>The rest of the projects →</a><p>Some useful. Some odd. All mine.</p></div>
+  </section>
+  <section class="notes-section" aria-labelledby="writing-title">
+    <header class="notes-heading"><div><p class="small-label">From the notebook</p><h2 id="writing-title">The things I learned<br /><em>by doing the thing.</em></h2></div><a href={`${base}archive/`}>All writing ↗</a></header>
+    {posts[0] && <a class="featured-dispatch" href={`${base}blog/${posts[0].id}/`}>
+      {posts[0].data.image && <img src={`${base}${posts[0].data.image.replace(/^\//, '')}`} alt={posts[0].data.imageAlt ?? ''} width="1536" height="1024" loading="lazy" />}
+      <div><span class="hand-note">the latest rabbit hole</span><h3>{posts[0].data.title}</h3><p>{posts[0].data.description}</p><span class="dispatch-link">Read the note ↗</span></div>
+    </a>}
+    <div class="writing-list">{posts.slice(1).map(post => <WritingItem title={post.data.title} pubDate={post.data.pubDate} href={`${base}blog/${post.id}/`} tags={post.data.tags} />)}</div>
+  </section>
+  <section class="maker-signoff">
+    <img src={`${base}images/observer-maker.webp`} alt="" width="1280" height="853" loading="lazy" />
+    <div><span class="hand-note">still pulling the thread.</span><h2>Behind the work,<br />there’s just me.</h2><p>SEO, software, One Piece, and a reliably unfinished cup of chai.</p><a href={`${base}about/`}>Meet Naman →</a></div>
+  </section>
   <script>
-    const thoughts = [
-      'make the useful thing feel obvious',
-      'the last ten percent is mostly noticing',
-      'small ideas deserve real versions',
-      'clarity is a feature',
-      'one more rabbit hole, apparently',
-    ];
-    const thought = document.querySelector<HTMLElement>('#floating-thought');
-    const thoughtButton = document.querySelector<HTMLButtonElement>('#thought-button');
-    let thoughtIndex = 0;
-
-    thoughtButton?.addEventListener('click', () => {
-      thoughtIndex = (thoughtIndex + 1) % thoughts.length;
-      if (!thought) return;
-      thought.classList.remove('thought-pop');
-      requestAnimationFrame(() => {
-        thought.textContent = thoughts[thoughtIndex];
-        thought.classList.add('thought-pop');
+    document.querySelectorAll<HTMLElement>('[data-stage]').forEach(stage => {
+      stage.classList.add('is-interactive');
+      stage.querySelectorAll<HTMLButtonElement>('[data-select]').forEach(button => {
+        button.addEventListener('click', () => {
+          stage.querySelectorAll<HTMLButtonElement>('[data-select]').forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+          stage.querySelectorAll<HTMLElement>('[data-panel]').forEach(panel => panel.classList.toggle('is-selected', panel.dataset.panel === button.dataset.select));
+        });
       });
     });
   </script>

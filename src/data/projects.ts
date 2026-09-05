@@ -15,6 +15,8 @@ export const projects: Project[] = [
     description:
       'A private Android utility for shrinking photos and PDFs, resizing images, and converting files — all on-device.',
     status: 'Launching',
+    href: 'https://smallmb.com/',
+    external: true,
     kind: 'Android app',
     details: ['On-device processing', 'Image + PDF tools', 'No account needed'],
     visual: 'smallmb',

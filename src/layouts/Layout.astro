@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/inventions.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -54,9 +55,10 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
     <script is:inline>
       (() => {
-        const savedTheme = localStorage.getItem('theme');
+        let savedTheme = null;
+        let savedAccent = null;
+        try { savedTheme = localStorage.getItem('theme'); savedAccent = localStorage.getItem('accent'); } catch {}
         const isDark = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const savedAccent = localStorage.getItem('accent');
         const allowedAccents = ['coral', 'blue', 'green', 'yellow'];
         document.documentElement.classList.toggle('dark', isDark);
         document.documentElement.dataset.accent = allowedAccents.includes(savedAccent) ? savedAccent : 'blue';
@@ -87,7 +89,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       updateThemeControl();
       themeButton?.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch {}
         updateThemeControl();
       });
 
@@ -96,7 +98,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
           const accent = button.dataset.accentChoice;
           if (!accent) return;
           document.documentElement.dataset.accent = accent;
-          localStorage.setItem('accent', accent);
+          try { localStorage.setItem('accent', accent); } catch {}
           document.querySelectorAll('[data-accent-choice]').forEach((item) => {
             item.setAttribute('aria-pressed', String(item === button));
           });
