@@ -6,22 +6,11 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
 ---
 <header class="site-header">
   <a class="site-brand" href={base} aria-label="Naman.blog home">
-    <svg class="brand-mascot" viewBox="0 0 92 82" role="img" aria-hidden="true">
-      <g class="mascot-bob">
-        <path class="mascot-pack" d="M62 35c9 1 14 8 13 18l-2 12c-1 5-5 8-10 7l-6-2 5-35Z" />
-        <path class="mascot-leg" d="M35 67c0 6-3 9-9 9" />
-        <path class="mascot-leg" d="M52 68c2 5 6 7 11 6" />
-        <path class="mascot-body" d="M27 24c5-8 18-11 27-5 10 6 13 20 10 34-3 15-13 21-25 18-13-3-19-13-17-28 1-8 2-14 5-19Z" />
-        <path class="mascot-cap" d="M28 23c4-10 17-14 27-8l1 7c-9-3-18-3-28 1Z" />
-        <path class="mascot-cap-brim" d="M27 23c11-3 22-3 32 0" />
-        <ellipse class="mascot-eye" cx="37" cy="35" rx="2.2" ry="2.6" />
-        <ellipse class="mascot-eye mascot-eye--late" cx="50" cy="35" rx="2.2" ry="2.6" />
-        <path class="mascot-smile" d="M39 43c3 3 7 3 10 0" />
-        <path class="mascot-strap" d="M56 32c-6 7-7 19-4 29" />
-        <g class="mascot-wave">
-          <path class="mascot-arm" d="M25 37c-8-4-10-11-7-17" />
-          <path class="mascot-hand" d="M18 20c-2-4-1-7 1-7 2 0 2 4 2 5 0-5 2-8 4-7 2 1 0 5 0 7 2-4 4-5 5-3 1 2-2 6-5 9" />
-        </g>
+    <svg class="brand-mascot" viewBox="0 0 72 72" aria-hidden="true">
+      <circle class="mascot-dot" cx="36" cy="36" r="25" />
+      <g class="mascot-eyes">
+        <ellipse class="mascot-eye" cx="29" cy="34" rx="4.5" ry="6" />
+        <ellipse class="mascot-eye mascot-eye--late" cx="44" cy="34" rx="4.5" ry="6" />
       </g>
     </svg>
   </a>
@@ -31,3 +20,58 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav></details>
   </div>
 </header>
+
+<script>
+  const brand = document.querySelector<HTMLElement>('.site-brand');
+  const themeButton = document.querySelector<HTMLElement>('#theme-toggle');
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+
+  if (brand) {
+    let trackingTimer = 0;
+    let reactionTimer = 0;
+    let scrollTimer = 0;
+    let lastScrollY = window.scrollY;
+
+    const react = (name: string, duration = 520) => {
+      window.clearTimeout(reactionTimer);
+      brand.classList.remove('is-poked', 'is-celebrating');
+      brand.classList.add(name);
+      reactionTimer = window.setTimeout(() => brand.classList.remove(name), duration);
+    };
+
+    window.addEventListener('pointermove', (event) => {
+      const rect = brand.getBoundingClientRect();
+      const dx = event.clientX - (rect.left + rect.width / 2);
+      const dy = event.clientY - (rect.top + rect.height / 2);
+      const distance = Math.max(36, Math.hypot(dx, dy));
+      brand.style.setProperty('--eye-x', `${(dx / distance) * 3.4}px`);
+      brand.style.setProperty('--eye-y', `${(dy / distance) * 2.6}px`);
+      brand.classList.add('is-tracking');
+      window.clearTimeout(trackingTimer);
+      trackingTimer = window.setTimeout(() => brand.classList.remove('is-tracking'), 1200);
+    }, { passive: true });
+
+    brand.addEventListener('pointerdown', () => react('is-poked', 460));
+
+    window.addEventListener('scroll', () => {
+      const direction = window.scrollY > lastScrollY ? 1 : -1;
+      lastScrollY = window.scrollY;
+      brand.style.setProperty('--scroll-eye-y', `${direction * 3}px`);
+      brand.classList.add('is-scrolling');
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => brand.classList.remove('is-scrolling'), 260);
+    }, { passive: true });
+  }
+
+  themeButton?.addEventListener('click', () => {
+    if (!brand) return;
+    window.setTimeout(() => {
+      brand.classList.remove('is-celebrating');
+      void brand.offsetWidth;
+      brand.classList.add('is-celebrating');
+      window.setTimeout(() => brand.classList.remove('is-celebrating'), 760);
+    });
+  });
+
+  menu?.addEventListener('toggle', () => brand?.classList.toggle('is-menu-watching', menu.open));
+</script>

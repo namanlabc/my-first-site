@@ -30,26 +30,29 @@ main:focus { outline: none; }
 main { flex: 1; min-width: 0; }
 .site-header, .site-footer { width: min(960px, calc(100% - 64px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 104px; position: relative; z-index: 10; }
-.site-brand { display: grid; place-items: center; width: 82px; height: 74px; color: var(--ink); text-decoration: none; }
-.brand-mascot { width: 78px; height: 70px; overflow: visible; filter: drop-shadow(0 4px 5px rgb(20 25 22 / .1)); --mascot-body: #252925; --mascot-face: #fafaf7; }
-:root.dark .brand-mascot { --mascot-body: #eef0eb; --mascot-face: #1b1e1c; filter: drop-shadow(0 5px 7px rgb(0 0 0 / .35)); }
-.mascot-bob { transform-origin: 44px 72px; animation: mascot-bob 3.8s ease-in-out infinite; }
-.mascot-body { fill: var(--mascot-body); }
-.mascot-pack { fill: #477260; stroke: var(--mascot-body); stroke-width: 2.4; }
-.mascot-cap { fill: #5876b2; stroke: var(--mascot-body); stroke-width: 2.4; stroke-linejoin: round; }
-.mascot-cap-brim, .mascot-leg, .mascot-smile, .mascot-strap, .mascot-arm, .mascot-hand { fill: none; stroke: var(--mascot-body); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
-.mascot-eye { fill: var(--mascot-face); transform-box: fill-box; transform-origin: center; animation: mascot-blink 4.8s ease-in-out infinite; }
+.site-brand { display: grid; place-items: center; width: 68px; height: 68px; color: var(--ink); text-decoration: none; }
+.brand-mascot { width: 62px; height: 62px; overflow: visible; --mascot-body: #202321; --mascot-eye: #fafaf8; animation: mascot-float 4.2s ease-in-out infinite; transform-origin: center; }
+:root.dark .brand-mascot { --mascot-body: #e9ece8; --mascot-eye: #191c1a; }
+.mascot-dot { fill: var(--mascot-body); transform-box: fill-box; transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
+.mascot-eyes { transform-box: fill-box; transform-origin: center; transition: transform 120ms ease-out; }
+.site-brand:not(.is-tracking, .is-scrolling, .is-menu-watching) .mascot-eyes { animation: mascot-look 5.4s ease-in-out infinite; }
+.site-brand.is-tracking .mascot-eyes { transform: translate(var(--eye-x), var(--eye-y)); }
+.site-brand.is-scrolling .mascot-eyes { transform: translateY(var(--scroll-eye-y)); }
+.site-brand.is-menu-watching .mascot-eyes { transform: translate(4px, -1px); }
+.mascot-eye { fill: var(--mascot-eye); transform-box: fill-box; transform-origin: center; animation: mascot-blink 4.8s ease-in-out infinite; }
 .mascot-eye--late { animation-delay: 60ms; }
-.mascot-smile { stroke: var(--mascot-face); stroke-width: 2.2; }
-.mascot-strap { stroke: var(--mascot-face); stroke-width: 2.2; opacity: .72; }
-.mascot-wave { transform-box: fill-box; transform-origin: 92% 90%; animation: mascot-wave 3.8s ease-in-out infinite; }
-.site-brand:hover .mascot-bob, .site-brand:focus-visible .mascot-bob { animation: mascot-hop 520ms ease-in-out infinite alternate; }
-.site-brand:hover .mascot-wave, .site-brand:focus-visible .mascot-wave { animation: mascot-wave-fast 420ms ease-in-out infinite alternate; }
-@keyframes mascot-bob { 0%, 46%, 100% { transform: translateY(0) rotate(0); } 52% { transform: translateY(-3px) rotate(-2deg); } 60% { transform: translateY(0) rotate(1deg); } }
-@keyframes mascot-wave { 0%, 8%, 30%, 100% { transform: rotate(0); } 13% { transform: rotate(-18deg); } 18% { transform: rotate(12deg); } 23% { transform: rotate(-15deg); } }
-@keyframes mascot-wave-fast { from { transform: rotate(-18deg); } to { transform: rotate(16deg); } }
-@keyframes mascot-hop { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-5px) rotate(2deg); } }
+.site-brand:hover .mascot-dot, .site-brand:focus-visible .mascot-dot { transform: scale(1.08, .94); }
+.site-brand:not(.is-tracking):hover .mascot-eyes, .site-brand:not(.is-tracking):focus-visible .mascot-eyes { transform: translate(3px, -1px); }
+.site-brand.is-poked .mascot-dot { transform: scale(1.14, .82); }
+.site-brand.is-poked .mascot-eye { animation: mascot-surprised 460ms ease; }
+.site-brand.is-celebrating .brand-mascot { animation: mascot-celebrate 720ms cubic-bezier(.2,.9,.25,1); }
+.site-brand.is-celebrating .mascot-eye { animation: mascot-happy-eyes 720ms ease; }
+@keyframes mascot-float { 0%, 42%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } 58% { transform: translateY(0); } }
+@keyframes mascot-look { 0%, 18%, 48%, 100% { transform: translateX(0); } 24%, 40% { transform: translateX(3px); } 72%, 84% { transform: translateX(-2px); } }
 @keyframes mascot-blink { 0%, 44%, 48%, 100% { transform: scaleY(1); } 46% { transform: scaleY(.08); } }
+@keyframes mascot-surprised { 0%, 100% { transform: scale(1); } 35%, 70% { transform: scale(1.32); } }
+@keyframes mascot-celebrate { 0% { transform: translateY(0) rotate(0) scale(1); } 38% { transform: translateY(-9px) rotate(-12deg) scale(1.08); } 68% { transform: translateY(-3px) rotate(9deg) scale(.98); } 100% { transform: translateY(0) rotate(0) scale(1); } }
+@keyframes mascot-happy-eyes { 0%, 100% { transform: scaleY(1); } 28%, 72% { transform: scaleY(.2) translateY(5px); } }
 .header-controls, .desktop-nav { display: flex; align-items: center; gap: 28px; }
 .desktop-nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding-block: 12px; }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--ink); }
@@ -144,8 +147,8 @@ h1, h2, h3 { font-weight: 550; color: var(--ink); }
   .mobile-menu nav { position: absolute; top: 100%; right: 0; min-width: 190px; display: grid; background: var(--paper); border: 1px solid var(--rule); padding: 8px; border-radius: 4px; }
   .mobile-menu nav a { text-decoration: none; padding: 12px; font-size: 15px; }.mobile-menu nav a[aria-current="page"] { color: var(--accent); }
   .portfolio-intro { display: block; padding: 40px 0 48px; }
-  .site-brand { width: 76px; height: 70px; }
-  .brand-mascot { width: 72px; height: 66px; }
+  .site-brand { width: 64px; height: 64px; }
+  .brand-mascot { width: 58px; height: 58px; }
   .intro-illustration { width: 190px; height: 238px; margin: 24px 0 0 auto; }
   .portfolio-intro h1, .page-hero h1 { font-size: 36px; margin-bottom: 16px; }
   .portfolio-intro > p { font-size: 19px; }.portfolio-intro .intro-description { font-size: 16px; line-height: 1.65; }
