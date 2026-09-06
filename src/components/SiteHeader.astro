@@ -1,11 +1,12 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const path = Astro.url.pathname;
+const isHome = path === base;
 const navItems = [{href:`${base}projects/`,label:'Projects'},{href:`${base}archive/`,label:'Writing'},{href:`${base}experience/`,label:'Experience'},{href:`${base}about/`,label:'About'}];
 const active = (href: string) => path.startsWith(href) || (href.endsWith('archive/') && path.startsWith(`${base}blog/`));
 ---
 <header class="site-header">
-  <a class="site-brand" href={base} aria-label="Naman.blog home" data-is-home={path === base ? 'true' : 'false'}>
+  <a class="site-brand" href={base} aria-label="Naman.blog home" data-is-home={isHome ? 'true' : 'false'}>
     <svg class="brand-mascot" viewBox="0 0 72 72" aria-hidden="true">
       <circle class="mascot-dot" cx="36" cy="36" r="25" />
       <g class="mascot-eyes">
@@ -13,7 +14,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
         <ellipse class="mascot-eye mascot-eye--late" cx="44" cy="34" rx="4.5" ry="6" />
       </g>
     </svg>
-    <span class="brand-wordmark"><span>Hi, I’m</span> Naman.</span>
+    {!isHome && <span class="brand-wordmark">Naman Patel</span>}
   </a>
   <div class="header-controls">
     <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>

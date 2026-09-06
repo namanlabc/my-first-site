@@ -62,7 +62,6 @@ main { flex: 1; min-width: 0; }
 .site-brand { display: flex; align-items: center; gap: 9px; min-height: 52px; color: var(--ink); text-decoration: none; }
 .brand-mascot { flex: 0 0 auto; width: 42px; height: 42px; overflow: visible; --mascot-body: var(--ink); --mascot-eye: var(--paper); transform-origin: center; }
 .brand-wordmark { font-size: 14px; font-weight: 620; letter-spacing: -.018em; white-space: nowrap; }
-.brand-wordmark span { color: var(--muted); font-weight: 430; }
 .mascot-dot { fill: var(--mascot-body); transform-box: fill-box; transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
 .mascot-eyes { transform-box: fill-box; transform-origin: center; transition: transform 120ms ease-out; }
 .site-brand:not(.is-tracking, .is-scrolling, .is-menu-watching) .mascot-eyes { animation: mascot-look 5.4s ease-in-out infinite; }
