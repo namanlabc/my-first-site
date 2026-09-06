@@ -59,8 +59,10 @@ main:focus { outline: none; }
 main { flex: 1; min-width: 0; }
 .site-header, .site-footer { width: min(960px, calc(100% - 64px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 104px; position: relative; z-index: 10; }
-.site-brand { display: grid; place-items: center; width: 52px; height: 52px; color: var(--ink); text-decoration: none; }
-.brand-mascot { width: 46px; height: 46px; overflow: visible; --mascot-body: var(--ink); --mascot-eye: var(--paper); transform-origin: center; }
+.site-brand { display: flex; align-items: center; gap: 9px; min-height: 52px; color: var(--ink); text-decoration: none; }
+.brand-mascot { flex: 0 0 auto; width: 42px; height: 42px; overflow: visible; --mascot-body: var(--ink); --mascot-eye: var(--paper); transform-origin: center; }
+.brand-wordmark { font-size: 14px; font-weight: 620; letter-spacing: -.018em; white-space: nowrap; }
+.brand-wordmark span { color: var(--muted); font-weight: 430; }
 .mascot-dot { fill: var(--mascot-body); transform-box: fill-box; transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
 .mascot-eyes { transform-box: fill-box; transform-origin: center; transition: transform 120ms ease-out; }
 .site-brand:not(.is-tracking, .is-scrolling, .is-menu-watching) .mascot-eyes { animation: mascot-look 5.4s ease-in-out infinite; }
@@ -175,6 +177,8 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
 .article-header h1 { font-size: clamp(32px, 4vw, 46px); font-weight: 650; line-height: 1.12; letter-spacing: -.04em; margin: 0 0 24px; }
 .article-header > p { font-size: 18px; color: var(--muted); line-height: 1.65; margin: 0 0 22px; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--muted); }
+.article-author { color: var(--ink); font-weight: 540; text-decoration: none; }
+.article-author:hover { color: var(--accent); }
 .article-featured { margin: 0 0 42px; }
 .article-featured img { width: 100%; border: 1px solid var(--rule); border-radius: 14px; }
 .prose { font-size: 18px; line-height: 1.8; letter-spacing: -.005em; overflow-wrap: anywhere; }
@@ -204,8 +208,9 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
   .mobile-menu nav { position: absolute; top: 100%; right: 0; min-width: 190px; display: grid; background: var(--paper); border: 1px solid var(--rule); padding: 8px; border-radius: 4px; }
   .mobile-menu nav a { text-decoration: none; padding: 12px; font-size: 15px; }.mobile-menu nav a[aria-current="page"] { color: var(--accent); }
   .portfolio-intro { display: block; padding: 40px 0 48px; }
-  .site-brand { width: 48px; height: 48px; }
-  .brand-mascot { width: 44px; height: 44px; }
+  .site-brand { gap: 7px; min-height: 48px; }
+  .brand-mascot { width: 40px; height: 40px; }
+  .brand-wordmark { font-size: 13px; }
   .intro-illustration { width: 190px; height: 238px; margin: 24px 0 0 auto; }
   .portfolio-intro h1, .page-hero h1 { font-size: 36px; margin-bottom: 16px; }
   .portfolio-intro > p { font-size: 19px; }.portfolio-intro .intro-description { font-size: 16px; line-height: 1.65; }

@@ -38,6 +38,8 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
           <h1>{title}</h1>
           <p>{description}</p>
           <div class="article-meta">
+            <a class="article-author" href={`${base}about/`}>By Naman Patel</a>
+            <span aria-hidden="true">·</span>
             <time datetime={pubDate.toISOString()}>{formattedDate}</time>
             <span aria-hidden="true">·</span>
             <span>{readingTime} min read</span>

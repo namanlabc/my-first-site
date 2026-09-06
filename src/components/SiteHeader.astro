@@ -13,6 +13,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
         <ellipse class="mascot-eye mascot-eye--late" cx="44" cy="34" rx="4.5" ry="6" />
       </g>
     </svg>
+    <span class="brand-wordmark"><span>Hi, I’m</span> Naman.</span>
   </a>
   <div class="header-controls">
     <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
@@ -27,6 +28,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
 
   if (brand) {
+    const mascot = brand.querySelector<SVGElement>('.brand-mascot');
     let trackingTimer = 0;
     let reactionTimer = 0;
     let scrollTimer = 0;
@@ -52,7 +54,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     };
 
     window.addEventListener('pointermove', (event) => {
-      const rect = brand.getBoundingClientRect();
+      const rect = mascot?.getBoundingClientRect() ?? brand.getBoundingClientRect();
       const dx = event.clientX - (rect.left + rect.width / 2);
       const dy = event.clientY - (rect.top + rect.height / 2);
       const distance = Math.max(44, Math.hypot(dx, dy));
