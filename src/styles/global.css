@@ -33,11 +33,11 @@
 }
 :root.dark {
   color-scheme: dark;
-  --paper: #171a18;
-  --paper-soft: #202420;
-  --ink: #f0f1ec;
-  --muted: #a8aea8;
-  --rule: #363c37;
+  --paper: #111311;
+  --paper-soft: #191c19;
+  --ink: #f3f4ef;
+  --muted: #a4aaa4;
+  --rule: #2a2f2b;
   --accent: #9bc8b0;
   --coral: #dc777d;
   --cobalt: #8fa8db;
