@@ -5,7 +5,7 @@ const navItems = [{href:`${base}projects/`,label:'Projects'},{href:`${base}archi
 const active = (href: string) => path.startsWith(href) || (href.endsWith('archive/') && path.startsWith(`${base}blog/`));
 ---
 <header class="site-header">
-  <a class="site-brand" href={base} aria-label="Naman.blog home">
+  <a class="site-brand" href={base} aria-label="Naman.blog home" data-is-home={path === base ? 'true' : 'false'}>
     <svg class="brand-mascot" viewBox="0 0 72 72" aria-hidden="true">
       <circle class="mascot-dot" cx="36" cy="36" r="25" />
       <g class="mascot-eyes">
@@ -30,6 +30,9 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     let trackingTimer = 0;
     let reactionTimer = 0;
     let scrollTimer = 0;
+    let blinkTimer = 0;
+    let pokeResetTimer = 0;
+    let pokeCount = 0;
     let lastScrollY = window.scrollY;
 
     const react = (name: string, duration = 520) => {
@@ -39,19 +42,46 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
       reactionTimer = window.setTimeout(() => brand.classList.remove(name), duration);
     };
 
+    const scheduleBlink = () => {
+      window.clearTimeout(blinkTimer);
+      blinkTimer = window.setTimeout(() => {
+        brand.classList.add('is-blinking');
+        window.setTimeout(() => brand.classList.remove('is-blinking'), 125);
+        scheduleBlink();
+      }, 2200 + Math.random() * 4200);
+    };
+
     window.addEventListener('pointermove', (event) => {
       const rect = brand.getBoundingClientRect();
       const dx = event.clientX - (rect.left + rect.width / 2);
       const dy = event.clientY - (rect.top + rect.height / 2);
-      const distance = Math.max(36, Math.hypot(dx, dy));
-      brand.style.setProperty('--eye-x', `${(dx / distance) * 3.4}px`);
-      brand.style.setProperty('--eye-y', `${(dy / distance) * 2.6}px`);
+      const distance = Math.max(44, Math.hypot(dx, dy));
+      brand.style.setProperty('--eye-x', `${(dx / distance) * 2.8}px`);
+      brand.style.setProperty('--eye-y', `${(dy / distance) * 2.1}px`);
       brand.classList.add('is-tracking');
       window.clearTimeout(trackingTimer);
       trackingTimer = window.setTimeout(() => brand.classList.remove('is-tracking'), 1200);
     }, { passive: true });
 
-    brand.addEventListener('pointerdown', () => react('is-poked', 460));
+    brand.addEventListener('pointerdown', (event) => {
+      react('is-poked', 420);
+      if (brand.dataset.isHome !== 'true') return;
+      event.preventDefault();
+      pokeCount += 1;
+      window.clearTimeout(pokeResetTimer);
+      pokeResetTimer = window.setTimeout(() => { pokeCount = 0; }, 1800);
+      if (pokeCount === 5) {
+        pokeCount = 0;
+        window.clearTimeout(reactionTimer);
+        brand.classList.remove('is-poked');
+        void brand.offsetWidth;
+        brand.classList.add('is-dizzy');
+        reactionTimer = window.setTimeout(() => brand.classList.remove('is-dizzy'), 1450);
+      }
+    });
+    brand.addEventListener('click', (event) => {
+      if (brand.dataset.isHome === 'true') event.preventDefault();
+    });
 
     window.addEventListener('scroll', () => {
       const direction = window.scrollY > lastScrollY ? 1 : -1;
@@ -61,6 +91,8 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(() => brand.classList.remove('is-scrolling'), 260);
     }, { passive: true });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) scheduleBlink();
   }
 
   themeButton?.addEventListener('click', () => {

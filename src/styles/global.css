@@ -59,26 +59,28 @@ main:focus { outline: none; }
 main { flex: 1; min-width: 0; }
 .site-header, .site-footer { width: min(960px, calc(100% - 64px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 104px; position: relative; z-index: 10; }
-.site-brand { display: grid; place-items: center; width: 68px; height: 68px; color: var(--ink); text-decoration: none; }
-.brand-mascot { width: 62px; height: 62px; overflow: visible; --mascot-body: var(--ink); --mascot-eye: var(--paper); animation: mascot-float 4.2s ease-in-out infinite; transform-origin: center; }
+.site-brand { display: grid; place-items: center; width: 52px; height: 52px; color: var(--ink); text-decoration: none; }
+.brand-mascot { width: 46px; height: 46px; overflow: visible; --mascot-body: var(--ink); --mascot-eye: var(--paper); transform-origin: center; }
 .mascot-dot { fill: var(--mascot-body); transform-box: fill-box; transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
 .mascot-eyes { transform-box: fill-box; transform-origin: center; transition: transform 120ms ease-out; }
 .site-brand:not(.is-tracking, .is-scrolling, .is-menu-watching) .mascot-eyes { animation: mascot-look 5.4s ease-in-out infinite; }
 .site-brand.is-tracking .mascot-eyes { transform: translate(var(--eye-x), var(--eye-y)); }
 .site-brand.is-scrolling .mascot-eyes { transform: translateY(var(--scroll-eye-y)); }
 .site-brand.is-menu-watching .mascot-eyes { transform: translate(4px, -1px); }
-.mascot-eye { fill: var(--mascot-eye); transform-box: fill-box; transform-origin: center; animation: mascot-blink 4.8s ease-in-out infinite; }
-.mascot-eye--late { animation-delay: 60ms; }
+.mascot-eye { fill: var(--mascot-eye); transform-box: fill-box; transform-origin: center; }
 .site-brand:hover .mascot-dot, .site-brand:focus-visible .mascot-dot { transform: scale(1.08, .94); }
 .site-brand:not(.is-tracking):hover .mascot-eyes, .site-brand:not(.is-tracking):focus-visible .mascot-eyes { transform: translate(3px, -1px); }
 .site-brand.is-poked .mascot-dot { transform: scale(1.14, .82); }
 .site-brand.is-poked .mascot-eye { animation: mascot-surprised 460ms ease; }
+.site-brand.is-blinking .mascot-eye { transform: scaleY(.08); }
+.site-brand.is-dizzy .brand-mascot { animation: mascot-dizzy 1.4s cubic-bezier(.22,.8,.2,1); }
+.site-brand.is-dizzy .mascot-eyes { animation: mascot-dizzy-eyes 1.4s ease-in-out; }
 .site-brand.is-celebrating .brand-mascot { animation: mascot-celebrate 720ms cubic-bezier(.2,.9,.25,1); }
 .site-brand.is-celebrating .mascot-eye { animation: mascot-happy-eyes 720ms ease; }
-@keyframes mascot-float { 0%, 42%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } 58% { transform: translateY(0); } }
 @keyframes mascot-look { 0%, 18%, 48%, 100% { transform: translateX(0); } 24%, 40% { transform: translateX(3px); } 72%, 84% { transform: translateX(-2px); } }
-@keyframes mascot-blink { 0%, 44%, 48%, 100% { transform: scaleY(1); } 46% { transform: scaleY(.08); } }
 @keyframes mascot-surprised { 0%, 100% { transform: scale(1); } 35%, 70% { transform: scale(1.32); } }
+@keyframes mascot-dizzy { 0% { transform: translateY(0) rotate(0); } 20% { transform: translateY(-5px) rotate(-14deg); } 72% { transform: translateY(-5px) rotate(374deg); } 88% { transform: translateY(2px) rotate(354deg) scale(1.08,.9); } 100% { transform: translateY(0) rotate(360deg); } }
+@keyframes mascot-dizzy-eyes { 0%, 18%, 82%, 100% { transform: translate(0); } 34% { transform: translate(5px, -3px) scaleY(.65); } 52% { transform: translate(-5px, 3px) scaleY(.65); } 68% { transform: translate(4px, 2px) scaleY(.65); } }
 @keyframes mascot-celebrate { 0% { transform: translateY(0) rotate(0) scale(1); } 38% { transform: translateY(-9px) rotate(-12deg) scale(1.08); } 68% { transform: translateY(-3px) rotate(9deg) scale(.98); } 100% { transform: translateY(0) rotate(0) scale(1); } }
 @keyframes mascot-happy-eyes { 0%, 100% { transform: scaleY(1); } 28%, 72% { transform: scaleY(.2) translateY(5px); } }
 .header-controls, .desktop-nav { display: flex; align-items: center; gap: 28px; }
@@ -113,10 +115,8 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
 .recent-writing h3 { margin: 0; font-size: 17px; font-weight: 520; line-height: 1.5; letter-spacing: -.018em; }
 .recent-writing time { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .site-footer { color: var(--muted); font-size: 13px; }
-.footer-life { display: block; width: 100%; height: 112px; margin: 0; padding: 0; overflow: hidden; border: 0; border-radius: 0; color: inherit; background: transparent; cursor: pointer; touch-action: manipulation; }
-.footer-life:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.footer-life-canvas { display: block; width: 100%; height: 100%; }
-.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0 34px; }
+.footer-note { padding-top: 18px; font-size: 12px; }
+.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 8px 0 34px; }
 .site-footer p { margin: 0; }
 .site-footer nav { display: flex; gap: 24px; }
 .site-footer a { text-decoration: none; padding-block: 10px; }
@@ -204,8 +204,8 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
   .mobile-menu nav { position: absolute; top: 100%; right: 0; min-width: 190px; display: grid; background: var(--paper); border: 1px solid var(--rule); padding: 8px; border-radius: 4px; }
   .mobile-menu nav a { text-decoration: none; padding: 12px; font-size: 15px; }.mobile-menu nav a[aria-current="page"] { color: var(--accent); }
   .portfolio-intro { display: block; padding: 40px 0 48px; }
-  .site-brand { width: 64px; height: 64px; }
-  .brand-mascot { width: 58px; height: 58px; }
+  .site-brand { width: 48px; height: 48px; }
+  .brand-mascot { width: 44px; height: 44px; }
   .intro-illustration { width: 190px; height: 238px; margin: 24px 0 0 auto; }
   .portfolio-intro h1, .page-hero h1 { font-size: 36px; margin-bottom: 16px; }
   .portfolio-intro > p { font-size: 19px; }.portfolio-intro .intro-description { font-size: 16px; line-height: 1.65; }
@@ -215,7 +215,7 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
   .portfolio-section + .portfolio-section { margin-top: 44px; }
   .recent-writing a { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; }.recent-writing h3 { font-size: 17px; }
   .portfolio, .inner-page { padding-bottom: 56px; }
-  .site-footer { font-size: 12px; }.footer-life { height: 92px; }.footer-row { align-items: baseline; gap: 16px; padding: 15px 0 28px; }.site-footer nav { gap: 16px; }
+  .site-footer { font-size: 12px; }.footer-note { padding-top: 14px; }.footer-row { align-items: baseline; gap: 16px; padding: 6px 0 28px; }.site-footer nav { gap: 16px; }
   .page-hero { padding: 40px 0; }.page-hero > p { font-size: 17px; }
   .project-item-heading { display: block; }.project-item-heading > span { display: block; margin-top: 5px; }.project-item h2 { font-size: 22px; }
   .project-item > p, .about-story p, .experience-list p { font-size: 16px; }
