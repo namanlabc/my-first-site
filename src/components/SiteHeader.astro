@@ -7,14 +7,14 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
 ---
 <header class="site-header">
   <a class="site-brand" href={base} aria-label="Naman.blog home" data-is-home={isHome ? 'true' : 'false'}>
-    <svg class="brand-mascot" viewBox="0 0 72 72" aria-hidden="true">
+    <span class="brand-wordmark">naman</span>
+    <svg class="brand-mascot" viewBox="8 8 56 56" aria-hidden="true">
       <circle class="mascot-dot" cx="36" cy="36" r="25" />
       <g class="mascot-eyes">
         <ellipse class="mascot-eye" cx="29" cy="34" rx="4.5" ry="6" />
         <ellipse class="mascot-eye mascot-eye--late" cx="44" cy="34" rx="4.5" ry="6" />
       </g>
     </svg>
-    {!isHome && <span class="brand-wordmark">Naman Patel</span>}
   </a>
   <div class="header-controls">
     <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map(item => <a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}</nav>
