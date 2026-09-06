@@ -6,9 +6,30 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div class="inner-page">
     <header class="page-hero"><h1>Experience</h1><p>My background is in SEO and content. Today, I also build and maintain software.</p></header>
     <div class="experience-list">
-      <section><h2>SEO & content</h2><p>Keyword research, search intent, on-page SEO, technical fixes, and content publishing. I use Search Console and analytics to understand what’s working and where to improve.</p><p>I worked on a content project that reached roughly one million monthly visitors at its peak, and a US entertainment project that was later acquired.</p><p class="tool-list">Search Console · WordPress · Technical SEO · Analytics</p></section>
-      <section><h2>Web development</h2><p>Building responsive websites and browser tools, from the first interface through debugging, deployment, and ongoing maintenance.</p><p class="tool-list">Astro · HTML · CSS · JavaScript · Git · GitHub</p></section>
-      <section><h2>Android & development workflows</h2><p>Building on-device utilities with Kotlin, testing with emulators, and preparing releases. I also use AI coding tools and supervised agent workflows as part of development.</p><p class="tool-list">Kotlin · Android Studio · Gradle · Codex · Claude</p></section>
+      <section>
+        <span class="experience-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="7.5" /><path d="m19.5 19.5 6 6M11 14h6M14 11v6" />
+          </svg>
+        </span>
+        <h2>SEO & content</h2><p>Keyword research, search intent, on-page SEO, technical fixes, and content publishing. I use Search Console and analytics to understand what’s working and where to improve.</p><p>I worked on a content project that reached roughly one million monthly visitors at its peak, and a US entertainment project that was later acquired.</p><p class="tool-list">Search Console · WordPress · Technical SEO · Analytics</p>
+      </section>
+      <section>
+        <span class="experience-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4.5" y="6" width="23" height="19" rx="2.5" /><path d="M4.5 11h23M9 8.5h.01M13 8.5h.01M12.5 16l-3 2.5 3 2.5M19.5 16l3 2.5-3 2.5" />
+          </svg>
+        </span>
+        <h2>Web development</h2><p>Building responsive websites and browser tools, from the first interface through debugging, deployment, and ongoing maintenance.</p><p class="tool-list">Astro · HTML · CSS · JavaScript · Git · GitHub</p>
+      </section>
+      <section>
+        <span class="experience-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8.5" y="3.5" width="15" height="25" rx="3" /><path d="M13 6.5h6M14.5 25.5h3" /><circle cx="16" cy="16" r="4.5" /><path d="M16 13.5v5M13.5 16h5" />
+          </svg>
+        </span>
+        <h2>Android & development workflows</h2><p>Building on-device utilities with Kotlin, testing with emulators, and preparing releases. I also use AI coding tools and supervised agent workflows as part of development.</p><p class="tool-list">Kotlin · Android Studio · Gradle · Codex · Claude</p>
+      </section>
     </div>
     <a class="text-link" href={`${base}projects/`}>View my projects <span aria-hidden="true">→</span></a>
   </div>
