@@ -26,6 +26,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       velocityY: 0, speed: 178, spawnIn: 270, score: 0, best: 0,
       manual: false, crashedUntil: 0, lastTime: performance.now(),
       blinkAt: performance.now() + 1300 + Math.random() * 2200, blinkUntil: 0,
+      nextAutoHop: performance.now() + 700, landedAt: 0, scoredAt: 0,
       obstacles: [] as Array<{ x: number; width: number; height: number; kind: number; color: number; passed: boolean }>,
     };
 
@@ -52,9 +53,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       state.playerY = state.ground - state.radius;
       state.velocityY = 0;
       state.speed = 178;
-      state.spawnIn = Math.max(230, state.width * .46);
+      state.spawnIn = random(245, 325);
       state.score = 0;
       state.crashedUntil = 0;
+      state.nextAutoHop = performance.now() + random(650, 1250);
+      if (state.width > 220) addObstacle(state.width * random(.62, .78));
     };
 
     const resize = () => {
@@ -74,11 +77,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       draw(performance.now());
     };
 
-    const addObstacle = () => {
+    const addObstacle = (startX = state.width + 20) => {
       const kind = Math.floor(Math.random() * 3);
       const height = kind === 0 ? random(15, 24) : kind === 1 ? random(20, 30) : random(17, 25);
       const width = kind === 0 ? random(17, 28) : kind === 1 ? random(13, 18) : random(20, 29);
-      state.obstacles.push({ x: state.width + 20, width, height, kind, color: Math.floor(Math.random() * 4), passed: false });
+      state.obstacles.push({ x: startX, width, height, kind, color: Math.floor(Math.random() * 4), passed: false });
       const pace = Math.min(36, state.score * 1.25);
       state.spawnIn = random(235, 340) + state.speed * .24 - pace;
     };
@@ -112,41 +115,92 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const x = obstacle.x;
       const y = state.ground - obstacle.height;
       context.strokeStyle = obstacleColor(obstacle.color);
-      context.fillStyle = colors.paper;
+      context.fillStyle = obstacleColor(obstacle.color);
       context.lineWidth = 1.6;
 
       if (obstacle.kind === 0) {
         roundedRect(x, y, obstacle.width, obstacle.height, Math.min(6, obstacle.width / 3));
-        context.fill(); context.stroke();
+        context.globalAlpha = .12; context.fill(); context.globalAlpha = .9; context.stroke(); context.globalAlpha = 1;
         context.beginPath(); context.moveTo(x + 5, y + 6); context.lineTo(x + obstacle.width - 5, y + 6); context.stroke();
       } else if (obstacle.kind === 1) {
         roundedRect(x, y + 6, obstacle.width, obstacle.height - 6, 3);
-        context.fill(); context.stroke();
+        context.globalAlpha = .12; context.fill(); context.globalAlpha = .9; context.stroke(); context.globalAlpha = 1;
         roundedRect(x + 3, y, obstacle.width - 6, 10, 3);
-        context.fill(); context.stroke();
+        context.globalAlpha = .12; context.fill(); context.globalAlpha = .9; context.stroke(); context.globalAlpha = 1;
       } else {
         context.beginPath(); context.moveTo(x, state.ground); context.lineTo(x + obstacle.width * .5, y);
-        context.lineTo(x + obstacle.width, state.ground); context.closePath(); context.fill(); context.stroke();
+        context.lineTo(x + obstacle.width, state.ground); context.closePath();
+        context.globalAlpha = .12; context.fill(); context.globalAlpha = .9; context.stroke(); context.globalAlpha = 1;
       }
     };
 
     const drawMascot = (now: number) => {
       const radius = state.radius;
-      const squish = state.crashedUntil ? .82 : onGround() ? 1 : .96;
+      const airborne = !onGround();
+      const justLanded = now - state.landedAt < 150;
+      const squish = state.crashedUntil ? .76 : justLanded ? .82 : airborne && state.velocityY < 0 ? 1.08 : 1;
+
+      const height = Math.max(0, state.ground - radius - state.playerY);
+      context.save();
+      context.globalAlpha = Math.max(.06, .18 - height / 500);
+      context.fillStyle = colors.ink;
+      context.beginPath();
+      context.ellipse(state.playerX, state.ground + 1, radius * Math.max(.45, 1 - height / 90), 2.2, 0, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+
+      if (airborne) {
+        context.fillStyle = colors.accent;
+        context.globalAlpha = .24;
+        context.beginPath(); context.arc(state.playerX - radius - 7, state.playerY + 5, 2.2, 0, Math.PI * 2); context.fill();
+        context.beginPath(); context.arc(state.playerX - radius - 14, state.playerY + 8, 1.3, 0, Math.PI * 2); context.fill();
+        context.globalAlpha = 1;
+      }
       context.save();
       context.translate(state.playerX, state.playerY + radius * (1 - squish));
       context.scale(1 / squish, squish);
       context.fillStyle = colors.ink;
       context.beginPath(); context.arc(0, 0, radius, 0, Math.PI * 2); context.fill();
 
-      const blinking = now < state.blinkUntil;
-      const eyeHeight = blinking ? .8 : Math.max(3.4, radius * .31);
-      const eyeWidth = Math.max(2.2, radius * .2);
-      const glance = state.crashedUntil ? 2 : !onGround() ? 1.2 : 0;
-      context.fillStyle = colors.paper;
-      roundedRect(-radius * .43 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
-      roundedRect(radius * .18 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
+      if (state.crashedUntil) {
+        context.strokeStyle = colors.paper;
+        context.lineWidth = 1.8;
+        for (const eyeX of [-radius * .28, radius * .3]) {
+          context.beginPath(); context.moveTo(eyeX - 2, -3); context.lineTo(eyeX + 2, 1); context.moveTo(eyeX + 2, -3); context.lineTo(eyeX - 2, 1); context.stroke();
+        }
+      } else {
+        const blinking = now < state.blinkUntil;
+        const eyeHeight = blinking ? .8 : Math.max(3.4, radius * .31);
+        const eyeWidth = Math.max(2.2, radius * .2);
+        const next = state.obstacles.find((obstacle) => obstacle.x + obstacle.width >= state.playerX);
+        const danger = next ? Math.max(0, Math.min(1, 1 - (next.x - state.playerX) / 220)) : 0;
+        const glance = airborne ? 1 : danger * 2.4;
+        context.fillStyle = colors.paper;
+        roundedRect(-radius * .43 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
+        roundedRect(radius * .18 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
+      }
       context.restore();
+
+      if (justLanded) {
+        const progress = (now - state.landedAt) / 150;
+        context.strokeStyle = colors.muted;
+        context.globalAlpha = (1 - progress) * .5;
+        context.lineWidth = 1;
+        context.beginPath();
+        context.moveTo(state.playerX - radius - 4, state.ground - 2); context.lineTo(state.playerX - radius - 9 - progress * 5, state.ground - 5);
+        context.moveTo(state.playerX + radius + 4, state.ground - 2); context.lineTo(state.playerX + radius + 9 + progress * 5, state.ground - 5);
+        context.stroke();
+        context.globalAlpha = 1;
+      }
+
+      if (now - state.scoredAt < 260) {
+        const progress = (now - state.scoredAt) / 260;
+        context.strokeStyle = colors.accent;
+        context.globalAlpha = (1 - progress) * .45;
+        context.lineWidth = 1.2;
+        context.beginPath(); context.arc(state.playerX, state.playerY, radius + 4 + progress * 10, 0, Math.PI * 2); context.stroke();
+        context.globalAlpha = 1;
+      }
     };
 
     const draw = (now: number) => {
@@ -161,7 +215,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       context.globalAlpha = .8;
       context.font = '11px Geist, sans-serif';
       context.textAlign = 'right';
-      const label = reducedMotion ? 'resting' : state.crashedUntil ? 'bonk.' : state.manual ? String(state.score).padStart(3, '0') : 'tap / space';
+      const label = reducedMotion ? 'resting' : state.crashedUntil ? 'bonk!' : state.manual ? String(state.score).padStart(3, '0') : 'auto · tap to play';
       context.fillText(label, state.width - 2, 16);
       context.globalAlpha = 1;
     };
@@ -176,9 +230,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       }
 
       if (!state.crashedUntil) {
+        const wasGrounded = onGround();
         state.velocityY += 1160 * delta;
         state.playerY = Math.min(state.ground - state.radius, state.playerY + state.velocityY * delta);
         if (onGround()) state.velocityY = 0;
+        if (!wasGrounded && onGround()) state.landedAt = now;
 
         state.spawnIn -= state.speed * delta;
         if (state.spawnIn <= 0) addObstacle();
@@ -187,7 +243,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           obstacle.x -= state.speed * delta;
           if (!obstacle.passed && obstacle.x + obstacle.width < state.playerX - state.radius) {
             obstacle.passed = true;
-            if (state.manual) state.score += 1;
+            if (state.manual) {
+              state.score += 1;
+              state.scoredAt = now;
+            }
           }
         }
         state.obstacles = state.obstacles.filter((obstacle) => obstacle.x + obstacle.width > -10);
@@ -195,7 +254,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         const next = state.obstacles.find((obstacle) => obstacle.x + obstacle.width >= state.playerX - state.radius);
         if (!state.manual && next && onGround()) {
           const distance = next.x - (state.playerX + state.radius);
-          if (distance < 82 + state.speed * .11) state.velocityY = state.width < 520 ? -405 : -430;
+          if (distance < 88 + state.speed * .11) {
+            state.velocityY = state.width < 520 ? -405 : -430;
+            state.nextAutoHop = now + random(1500, 2500);
+          }
+        } else if (!state.manual && onGround() && now >= state.nextAutoHop && (!next || next.x - state.playerX > 330)) {
+          state.velocityY = state.width < 520 ? -350 : -370;
+          state.nextAutoHop = now + random(1500, 2600);
         }
 
         if (state.manual) state.speed = Math.min(235, 178 + state.score * 3.2);
@@ -214,7 +279,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         state.blinkAt = now + 1800 + Math.random() * 3200;
       }
       draw(now);
-      if (game.dataset.visible === 'true') requestAnimationFrame(tick);
     };
 
     game.addEventListener('pointerdown', (event) => { event.preventDefault(); jump(); });
@@ -232,13 +296,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       draw(performance.now());
     } else {
       new IntersectionObserver(([entry]) => {
-        const wasVisible = game.dataset.visible === 'true';
         game.dataset.visible = String(entry.isIntersecting);
-        if (entry.isIntersecting && !wasVisible) {
-          state.lastTime = performance.now();
-          requestAnimationFrame(tick);
-        }
+        if (entry.isIntersecting) state.lastTime = performance.now();
       }, { threshold: .05 }).observe(game);
+      window.setInterval(() => {
+        if (game.dataset.visible === 'true') tick(performance.now());
+      }, 1000 / 60);
     }
   }
 </script>
