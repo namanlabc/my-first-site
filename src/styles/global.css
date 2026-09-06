@@ -17,11 +17,11 @@
 }
 :root {
   color-scheme: light;
-  --paper: #f8f7f2;
-  --paper-soft: #efeee8;
+  --paper: #ffffff;
+  --paper-soft: #f4f6f3;
   --ink: #181a18;
-  --muted: #626761;
-  --rule: #d9dbd4;
+  --muted: #626762;
+  --rule: #e5e8e3;
   --accent: #356551;
   --coral: #b94b52;
   --cobalt: #536fa8;
