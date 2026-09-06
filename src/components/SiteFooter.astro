@@ -2,56 +2,10 @@
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <footer class="site-footer">
-  <div class="footer-scene" aria-hidden="true">
-    <svg class="footer-landscape" viewBox="0 0 960 90">
-      <g class="footer-cloud">
-        <path d="M414 18c4-8 17-8 21 1 8-5 19 1 18 10h-48c-1-5 3-10 9-11Z" />
-      </g>
-
-      <g class="footer-wind">
-        <path d="M202 27c31-9 61-8 89 2" />
-        <path d="M230 36c24-5 45-3 64 5" />
-        <path d="M691 22c22-7 43-6 62 1" />
-      </g>
-
-      <g class="footer-tree footer-tree--left">
-        <path class="footer-trunk" d="M322 68c3-17 3-28 0-43M322 43l-12-10M323 49l14-13" />
-        <path class="footer-canopy" d="M322 12c-13 0-23 9-22 19-8 5-4 16 7 17 5 8 18 7 22 1 10 4 20-3 17-12 8-8 1-20-10-18-1-10-7-17-14-17Z" />
-      </g>
-
-      <g class="footer-tree footer-tree--right">
-        <path class="footer-trunk" d="M657 68c-2-14-1-25 2-37M658 45l-11-8M658 51l12-10" />
-        <path class="footer-canopy" d="M659 19c-10-5-21 2-21 12-10 1-13 13-5 18 1 9 13 13 20 7 7 8 20 5 21-5 10-3 10-17 1-21-1-7-8-12-16-11Z" />
-      </g>
-
-      <g class="footer-grass footer-grass--one"><path d="M276 70c-1-8-4-12-7-16M277 69c2-8 5-12 9-16M277 69c0-10 1-16 3-21" /></g>
-      <g class="footer-grass footer-grass--two"><path d="M705 70c-1-8-4-12-7-16M706 69c2-8 5-12 9-16M706 69c0-10 1-16 3-21" /></g>
-      <path class="footer-bank" d="M160 70c102-5 196-2 270 0 81 2 180-6 359 0" />
-
-      <g class="footer-water">
-        <path d="M193 77h116m48 0h151m48 0h200" />
-        <path d="M241 84h154m48 0h108m38 0h125" />
-      </g>
-
-      <g class="footer-stones">
-        <ellipse cx="420" cy="68" rx="12" ry="3.5" />
-        <ellipse cx="480" cy="70" rx="14" ry="4" />
-        <ellipse cx="543" cy="68" rx="11" ry="3.5" />
-      </g>
-
-      <path class="footer-leaf" d="M370 28c9-1 14 3 14 9-8 2-13-1-14-9Z" />
-    </svg>
-
-    <span class="footer-mascot" title="poke me">
-      <svg viewBox="0 0 44 44">
-        <circle class="footer-dot-disc" cx="22" cy="22" r="18" />
-        <g class="footer-dot-eyes">
-          <ellipse class="footer-dot-eye" cx="17" cy="21" rx="3.2" ry="4.6" />
-          <ellipse class="footer-dot-eye footer-dot-eye--late" cx="28" cy="21" rx="3.2" ry="4.6" />
-        </g>
-      </svg>
-    </span>
-  </div>
+  <button class="footer-game" type="button" aria-label="Play the jumping dot game. Tap or press Space to jump.">
+    <canvas class="footer-game-canvas" aria-hidden="true">A little circle jumping over obstacles.</canvas>
+  </button>
+  <span class="visually-hidden footer-game-announcer" aria-live="polite"></span>
 
   <div class="footer-row">
     <p>© {new Date().getFullYear()} Naman Patel</p>
@@ -60,49 +14,231 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 </footer>
 
 <script>
-  const footer = document.querySelector<HTMLElement>('.site-footer');
-  const scene = footer?.querySelector<HTMLElement>('.footer-scene');
-  const dot = footer?.querySelector<HTMLElement>('.footer-mascot');
-  const links = footer?.querySelectorAll<HTMLAnchorElement>('nav a');
-  let settleTimer = 0;
-  let jumpTimer = 0;
+  const game = document.querySelector<HTMLButtonElement>('.footer-game');
+  const canvas = game?.querySelector<HTMLCanvasElement>('.footer-game-canvas');
+  const announcer = document.querySelector<HTMLElement>('.footer-game-announcer');
+  const context = canvas?.getContext('2d');
 
-  const moveDot = (target: HTMLElement) => {
-    if (!scene || !dot) return;
-    const sceneBox = scene.getBoundingClientRect();
-    const targetBox = target.getBoundingClientRect();
-    const x = ((targetBox.left + targetBox.width / 2 - sceneBox.left) / sceneBox.width) * 100;
-    dot.style.setProperty('--footer-dot-x', `${Math.max(8, Math.min(92, x))}%`);
-    dot.classList.add('is-rolling');
-    window.clearTimeout(settleTimer);
-    settleTimer = window.setTimeout(() => dot.classList.remove('is-rolling'), 720);
-  };
+  if (game && canvas && context) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const state = {
+      width: 0, height: 0, ground: 0, radius: 14, playerX: 58, playerY: 0,
+      velocityY: 0, speed: 178, spawnIn: 270, score: 0, best: 0,
+      manual: false, crashedUntil: 0, lastTime: performance.now(),
+      blinkAt: performance.now() + 1300 + Math.random() * 2200, blinkUntil: 0,
+      obstacles: [] as Array<{ x: number; width: number; height: number; kind: number; color: number; passed: boolean }>,
+    };
 
-  links?.forEach((link) => {
-    link.addEventListener('pointerenter', () => moveDot(link));
-    link.addEventListener('focus', () => moveDot(link));
-  });
+    let colors = {
+      paper: '#fff', ink: '#181a18', muted: '#626762', rule: '#e5e8e3',
+      accent: '#356551', cobalt: '#536fa8', mustard: '#bd9632', coral: '#b94b52',
+    };
 
-  footer?.addEventListener('pointerleave', () => {
-    if (!dot) return;
-    dot.style.setProperty('--footer-dot-x', '50%');
-    dot.classList.add('is-rolling');
-    window.clearTimeout(settleTimer);
-    settleTimer = window.setTimeout(() => dot.classList.remove('is-rolling'), 720);
-  });
+    const refreshColors = () => {
+      const style = getComputedStyle(document.documentElement);
+      colors = {
+        paper: style.getPropertyValue('--paper').trim(), ink: style.getPropertyValue('--ink').trim(),
+        muted: style.getPropertyValue('--muted').trim(), rule: style.getPropertyValue('--rule').trim(),
+        accent: style.getPropertyValue('--accent').trim(), cobalt: style.getPropertyValue('--cobalt').trim(),
+        mustard: style.getPropertyValue('--mustard').trim(), coral: style.getPropertyValue('--coral').trim(),
+      };
+    };
 
-  dot?.addEventListener('pointerdown', () => {
-    window.clearTimeout(jumpTimer);
-    dot.classList.remove('is-jumping');
-    void dot.offsetWidth;
-    dot.classList.add('is-jumping');
-    jumpTimer = window.setTimeout(() => dot.classList.remove('is-jumping'), 680);
-  });
+    const random = (min: number, max: number) => min + Math.random() * (max - min);
+    const onGround = () => state.playerY >= state.ground - state.radius - .5;
 
-  if (footer) {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) footer.classList.add('is-awake');
-    }, { threshold: .25 });
-    observer.observe(footer);
+    const resetRound = () => {
+      state.obstacles = [];
+      state.playerY = state.ground - state.radius;
+      state.velocityY = 0;
+      state.speed = 178;
+      state.spawnIn = Math.max(230, state.width * .46);
+      state.score = 0;
+      state.crashedUntil = 0;
+    };
+
+    const resize = () => {
+      const box = game.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      state.width = Math.max(1, box.width);
+      state.height = Math.max(1, box.height);
+      state.ground = state.height - 19;
+      state.radius = state.width < 520 ? 12 : 14;
+      state.playerX = state.width < 520 ? 38 : 58;
+      canvas.width = Math.round(state.width * ratio);
+      canvas.height = Math.round(state.height * ratio);
+      canvas.style.width = `${state.width}px`;
+      canvas.style.height = `${state.height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      resetRound();
+      draw(performance.now());
+    };
+
+    const addObstacle = () => {
+      const kind = Math.floor(Math.random() * 3);
+      const height = kind === 0 ? random(15, 24) : kind === 1 ? random(20, 30) : random(17, 25);
+      const width = kind === 0 ? random(17, 28) : kind === 1 ? random(13, 18) : random(20, 29);
+      state.obstacles.push({ x: state.width + 20, width, height, kind, color: Math.floor(Math.random() * 4), passed: false });
+      const pace = Math.min(36, state.score * 1.25);
+      state.spawnIn = random(235, 340) + state.speed * .24 - pace;
+    };
+
+    const jump = () => {
+      if (reducedMotion) return;
+      if (!state.manual) {
+        state.manual = true;
+        state.score = 0;
+        game.classList.add('is-playing');
+        if (announcer) announcer.textContent = 'You are controlling the dot.';
+      }
+      if (!state.crashedUntil && onGround()) state.velocityY = state.width < 520 ? -405 : -430;
+    };
+
+    const crash = (now: number) => {
+      state.best = Math.max(state.best, state.score);
+      state.crashedUntil = now + 760;
+      state.velocityY = 0;
+      game.classList.add('is-crashed');
+      if (announcer) announcer.textContent = `Bumped at ${state.score}. The game will restart.`;
+    };
+
+    const obstacleColor = (index: number) => [colors.accent, colors.cobalt, colors.mustard, colors.coral][index];
+    const roundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
+      context.beginPath();
+      context.roundRect(x, y, width, height, radius);
+    };
+
+    const drawObstacle = (obstacle: typeof state.obstacles[number]) => {
+      const x = obstacle.x;
+      const y = state.ground - obstacle.height;
+      context.strokeStyle = obstacleColor(obstacle.color);
+      context.fillStyle = colors.paper;
+      context.lineWidth = 1.6;
+
+      if (obstacle.kind === 0) {
+        roundedRect(x, y, obstacle.width, obstacle.height, Math.min(6, obstacle.width / 3));
+        context.fill(); context.stroke();
+        context.beginPath(); context.moveTo(x + 5, y + 6); context.lineTo(x + obstacle.width - 5, y + 6); context.stroke();
+      } else if (obstacle.kind === 1) {
+        roundedRect(x, y + 6, obstacle.width, obstacle.height - 6, 3);
+        context.fill(); context.stroke();
+        roundedRect(x + 3, y, obstacle.width - 6, 10, 3);
+        context.fill(); context.stroke();
+      } else {
+        context.beginPath(); context.moveTo(x, state.ground); context.lineTo(x + obstacle.width * .5, y);
+        context.lineTo(x + obstacle.width, state.ground); context.closePath(); context.fill(); context.stroke();
+      }
+    };
+
+    const drawMascot = (now: number) => {
+      const radius = state.radius;
+      const squish = state.crashedUntil ? .82 : onGround() ? 1 : .96;
+      context.save();
+      context.translate(state.playerX, state.playerY + radius * (1 - squish));
+      context.scale(1 / squish, squish);
+      context.fillStyle = colors.ink;
+      context.beginPath(); context.arc(0, 0, radius, 0, Math.PI * 2); context.fill();
+
+      const blinking = now < state.blinkUntil;
+      const eyeHeight = blinking ? .8 : Math.max(3.4, radius * .31);
+      const eyeWidth = Math.max(2.2, radius * .2);
+      const glance = state.crashedUntil ? 2 : !onGround() ? 1.2 : 0;
+      context.fillStyle = colors.paper;
+      roundedRect(-radius * .43 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
+      roundedRect(radius * .18 + glance, -1 - eyeHeight / 2, eyeWidth, eyeHeight, eyeWidth); context.fill();
+      context.restore();
+    };
+
+    const draw = (now: number) => {
+      context.clearRect(0, 0, state.width, state.height);
+      context.strokeStyle = colors.rule;
+      context.lineWidth = 1;
+      context.beginPath(); context.moveTo(0, state.ground + .5); context.lineTo(state.width, state.ground + .5); context.stroke();
+      state.obstacles.forEach(drawObstacle);
+      drawMascot(now);
+
+      context.fillStyle = colors.muted;
+      context.globalAlpha = .8;
+      context.font = '11px Geist, sans-serif';
+      context.textAlign = 'right';
+      const label = reducedMotion ? 'resting' : state.crashedUntil ? 'bonk.' : state.manual ? String(state.score).padStart(3, '0') : 'tap / space';
+      context.fillText(label, state.width - 2, 16);
+      context.globalAlpha = 1;
+    };
+
+    const tick = (now: number) => {
+      const delta = Math.min((now - state.lastTime) / 1000, .032);
+      state.lastTime = now;
+
+      if (state.crashedUntil && now >= state.crashedUntil) {
+        game.classList.remove('is-crashed');
+        resetRound();
+      }
+
+      if (!state.crashedUntil) {
+        state.velocityY += 1160 * delta;
+        state.playerY = Math.min(state.ground - state.radius, state.playerY + state.velocityY * delta);
+        if (onGround()) state.velocityY = 0;
+
+        state.spawnIn -= state.speed * delta;
+        if (state.spawnIn <= 0) addObstacle();
+
+        for (const obstacle of state.obstacles) {
+          obstacle.x -= state.speed * delta;
+          if (!obstacle.passed && obstacle.x + obstacle.width < state.playerX - state.radius) {
+            obstacle.passed = true;
+            if (state.manual) state.score += 1;
+          }
+        }
+        state.obstacles = state.obstacles.filter((obstacle) => obstacle.x + obstacle.width > -10);
+
+        const next = state.obstacles.find((obstacle) => obstacle.x + obstacle.width >= state.playerX - state.radius);
+        if (!state.manual && next && onGround()) {
+          const distance = next.x - (state.playerX + state.radius);
+          if (distance < 82 + state.speed * .11) state.velocityY = state.width < 520 ? -405 : -430;
+        }
+
+        if (state.manual) state.speed = Math.min(235, 178 + state.score * 3.2);
+
+        if (next) {
+          const closestX = Math.max(next.x, Math.min(state.playerX, next.x + next.width));
+          const closestY = Math.max(state.ground - next.height, Math.min(state.playerY, state.ground));
+          const dx = state.playerX - closestX;
+          const dy = state.playerY - closestY;
+          if (dx * dx + dy * dy < (state.radius - 2) * (state.radius - 2)) crash(now);
+        }
+      }
+
+      if (now >= state.blinkAt) {
+        state.blinkUntil = now + 110;
+        state.blinkAt = now + 1800 + Math.random() * 3200;
+      }
+      draw(now);
+      if (game.dataset.visible === 'true') requestAnimationFrame(tick);
+    };
+
+    game.addEventListener('pointerdown', (event) => { event.preventDefault(); jump(); });
+    game.addEventListener('keydown', (event) => {
+      if ((event.key === ' ' || event.key === 'ArrowUp') && !event.repeat) { event.preventDefault(); jump(); }
+    });
+
+    new MutationObserver(refreshColors).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    new ResizeObserver(resize).observe(game);
+    refreshColors();
+    resize();
+
+    if (reducedMotion) {
+      state.playerX = state.width / 2;
+      draw(performance.now());
+    } else {
+      new IntersectionObserver(([entry]) => {
+        const wasVisible = game.dataset.visible === 'true';
+        game.dataset.visible = String(entry.isIntersecting);
+        if (entry.isIntersecting && !wasVisible) {
+          state.lastTime = performance.now();
+          requestAnimationFrame(tick);
+        }
+      }, { threshold: .05 }).observe(game);
+    }
   }
 </script>
