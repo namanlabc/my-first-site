@@ -138,33 +138,28 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
 .about-story p, .experience-list p { margin: 0 0 22px; font-size: 17px; line-height: 1.8; color: var(--muted); }
 .about-story h2, .experience-list h2 { font-size: 23px; font-weight: 620; margin: 40px 0 18px; letter-spacing: -.025em; }
 .about-story a { color: var(--ink); }
-.experience-list section { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 0 24px; padding: 0 0 34px; margin-bottom: 34px; border-bottom: 1px solid var(--rule); }
+.experience-list section { padding: 0 0 34px; margin-bottom: 34px; border-bottom: 1px solid var(--rule); }
 .experience-list section:last-child { margin-bottom: 0; }
-.experience-icon { grid-column: 1; grid-row: 1 / span 4; display: grid; place-items: center; width: 48px; height: 48px; margin-top: 1px; border-radius: 50%; color: var(--experience-color); background: color-mix(in srgb, var(--experience-color) 11%, var(--paper)); transition: transform 220ms cubic-bezier(.2,.8,.2,1), background-color 220ms ease; }
-.experience-icon svg { width: 25px; height: 25px; overflow: visible; }
-.experience-icon path, .experience-icon circle, .experience-icon rect, .experience-icon line { vector-effect: non-scaling-stroke; }
-.experience-list section:nth-child(1) { --experience-color: var(--accent); }
-.experience-list section:nth-child(2) { --experience-color: var(--cobalt); }
-.experience-list section:nth-child(3) { --experience-color: var(--mustard); }
-.experience-list h2, .experience-list p { grid-column: 2; }
 .experience-list h2 { margin: 0 0 14px; }
-.tool-icons { grid-column: 2; display: flex; align-items: center; flex-wrap: wrap; gap: 15px; min-height: 24px; }
-.tool-mark { display: block; width: 20px; height: 20px; color: var(--experience-color); background: currentColor; opacity: .82; -webkit-mask: var(--tool-icon) center / contain no-repeat; mask: var(--tool-icon) center / contain no-repeat; transition: opacity 160ms ease, transform 160ms ease; }
-.tool-mark:hover { opacity: 1; transform: translateY(-2px); }
-.tool-mark--search-console { --tool-icon: url('/icons/tech/googlesearchconsole.svg'); }
-.tool-mark--wordpress { --tool-icon: url('/icons/tech/wordpress.svg'); }
-.tool-mark--analytics { --tool-icon: url('/icons/tech/googleanalytics.svg'); }
-.tool-mark--astro { --tool-icon: url('/icons/tech/astro.svg'); }
-.tool-mark--html { --tool-icon: url('/icons/tech/html5.svg'); }
-.tool-mark--css { --tool-icon: url('/icons/tech/css.svg'); }
-.tool-mark--javascript { --tool-icon: url('/icons/tech/javascript.svg'); }
-.tool-mark--github { --tool-icon: url('/icons/tech/github.svg'); }
-.tool-mark--kotlin { --tool-icon: url('/icons/tech/kotlin.svg'); }
-.tool-mark--android-studio { --tool-icon: url('/icons/tech/androidstudio.svg'); }
-.tool-mark--gradle { --tool-icon: url('/icons/tech/gradle.svg'); }
-.tool-mark--openai { --tool-icon: url('/icons/tech/openai.svg'); }
-.tool-mark--claude { --tool-icon: url('/icons/tech/claude.svg'); }
-.experience-list section:hover .experience-icon { transform: translateY(-2px) rotate(-2deg); background: color-mix(in srgb, var(--experience-color) 16%, var(--paper)); }
+.tool-icons { display: flex; align-items: center; flex-wrap: wrap; gap: 13px 22px; min-height: 24px; }
+.tool-brand { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; line-height: 1; white-space: nowrap; }
+.tool-mark { display: block; width: 20px; height: 20px; color: var(--brand-color); background: currentColor; -webkit-mask: var(--tool-icon) center / contain no-repeat; mask: var(--tool-icon) center / contain no-repeat; transition: transform 160ms ease; }
+.tool-brand:hover .tool-mark { transform: translateY(-2px); }
+.tool-mark--search-console { --tool-icon: url('/icons/tech/googlesearchconsole.svg'); --brand-color: #458cf5; }
+.tool-mark--wordpress { --tool-icon: url('/icons/tech/wordpress.svg'); --brand-color: #21759b; }
+.tool-mark--analytics { --tool-icon: url('/icons/tech/googleanalytics.svg'); --brand-color: #e37400; }
+.tool-mark--astro { --tool-icon: url('/icons/tech/astro.svg'); --brand-color: #bc52ee; }
+.tool-mark--html { --tool-icon: url('/icons/tech/html5.svg'); --brand-color: #e34f26; }
+.tool-mark--css { --tool-icon: url('/icons/tech/css.svg'); --brand-color: #663399; }
+.tool-mark--javascript { --tool-icon: url('/icons/tech/javascript.svg'); --brand-color: #f7df1e; }
+.tool-mark--github { --tool-icon: url('/icons/tech/github.svg'); --brand-color: #181717; }
+.tool-mark--kotlin { --tool-icon: url('/icons/tech/kotlin.svg'); --brand-color: #7f52ff; }
+.tool-mark--android-studio { --tool-icon: url('/icons/tech/androidstudio.svg'); --brand-color: #3ddc84; }
+.tool-mark--gradle { --tool-icon: url('/icons/tech/gradle.svg'); --brand-color: #02303a; }
+.tool-mark--openai { --tool-icon: url('/icons/tech/openai.svg'); --brand-color: #10a37f; }
+.tool-mark--claude { --tool-icon: url('/icons/tech/claude.svg'); --brand-color: #d97757; }
+:root.dark .tool-mark--github { --brand-color: #f0f1ec; }
+:root.dark .tool-mark--gradle { --brand-color: #2eb182; }
 .archive-year { margin-bottom: 40px; }
 .archive-year > h2 { font-size: 14px; color: var(--muted); margin: 0 0 12px; font-weight: 450; }
 .writing-item > a { display: grid; grid-template-columns: 104px minmax(0,1fr) 16px; gap: 22px; align-items: baseline; text-decoration: none; padding: 24px 0; border-bottom: 1px solid var(--rule); }
@@ -225,11 +220,10 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
   .page-hero { padding: 40px 0; }.page-hero > p { font-size: 17px; }
   .project-item-heading { display: block; }.project-item-heading > span { display: block; margin-top: 5px; }.project-item h2 { font-size: 22px; }
   .project-item > p, .about-story p, .experience-list p { font-size: 16px; }
-  .experience-list section { grid-template-columns: 42px minmax(0, 1fr); gap: 0 16px; padding-bottom: 28px; margin-bottom: 28px; }
-  .experience-icon { width: 40px; height: 40px; }
-  .experience-icon svg { width: 22px; height: 22px; }
+  .experience-list section { padding-bottom: 28px; margin-bottom: 28px; }
   .experience-list h2 { font-size: 21px; margin-bottom: 12px; }
-  .tool-icons { gap: 14px; }
+  .tool-icons { gap: 12px 18px; }
+  .tool-brand { font-size: 11.5px; }
   .tool-mark { width: 19px; height: 19px; }
   .writing-item > a { grid-template-columns: minmax(0,1fr) 16px; gap: 6px 16px; padding-block: 20px; }.writing-item time { grid-column: 1 / -1; }.writing-item h3 { font-size: 17px; }
   .article-shell { padding-top: 28px; }.article-header { margin-top: 30px; }.article-header h1 { font-size: 32px; }.article-header > p { font-size: 17px; }
