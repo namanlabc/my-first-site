@@ -765,10 +765,14 @@ body:has(.quiet-home) .site-header { justify-content: flex-end; }
 .quiet-colophon a { text-decoration-line: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .theme-toggle,
 body:has(.quiet-home) .theme-toggle { width: 42px; height: 42px; font-size: 20px; line-height: 1; }
+.theme-icon { display: block; width: 22px; height: 22px; overflow: visible; }
+.theme-icon circle { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.theme-icon path { fill: currentColor; }
 
 @media (max-width: 640px) {
   .brand-wordmark { font-size: 17px; }
   .home-mascot { width: 30px; height: 30px; margin-bottom: 10px; }
   .theme-toggle,
   body:has(.quiet-home) .theme-toggle { width: 40px; height: 40px; font-size: 19px; }
+  .theme-icon { width: 22px; height: 22px; }
 }
