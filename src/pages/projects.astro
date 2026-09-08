@@ -4,5 +4,5 @@ import ProjectItem from '../components/ProjectItem.astro';
 import { projects } from '../data/projects';
 ---
 <Layout title="Projects" description="Software, websites, and open-source tools built by Naman Patel.">
-  <div class="quiet-page"><header class="quiet-page-header"><p class="quiet-page-mark" aria-hidden="true">01</p><h1>Projects</h1><p>Software, websites, and small tools I’ve made because I wanted them to exist.</p></header><div class="project-list quiet-project-page-list">{projects.map((project, index) => <ProjectItem project={project} index={index} />)}</div></div>
+  <div class="quiet-page"><header class="quiet-page-header"><h1>Projects</h1><p>Software, websites, and small tools I’ve made because I wanted them to exist.</p></header><div class="project-list quiet-project-page-list">{projects.map((project, index) => <ProjectItem project={project} index={index} />)}</div></div>
 </Layout>

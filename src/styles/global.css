@@ -254,7 +254,6 @@ html { background: var(--paper); }
 
 .quiet-page { width: min(600px, calc(100% - 40px)); margin-inline: auto; padding: 18px 0 100px; }
 .quiet-page-header { margin-bottom: 45px; }
-.quiet-page-mark { display: grid; width: 27px; height: 27px; margin: 0 0 13px; place-items: center; border: 1px solid var(--ink); border-radius: 50%; color: var(--muted); font-family: var(--mono); font-size: 8px; transform: rotate(-6deg); }
 .quiet-page-header h1 { margin: 0; font-family: var(--sans); font-size: 18px; font-weight: 600; line-height: 1.4; letter-spacing: -.018em; }
 .quiet-page-header > p:last-child { max-width: 545px; margin: 2px 0 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
 
