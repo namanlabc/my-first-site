@@ -3,14 +3,14 @@ import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Layout title="About" description="Naman Patel works on SEO, builds software, and writes about what he learns.">
-  <div class="inner-page">
-    <header class="page-hero"><h1>About me</h1><p>I’m Naman. I work on SEO and build software.</p></header>
+  <div class="quiet-page">
+    <header class="quiet-page-header"><p class="quiet-page-mark" aria-hidden="true">04</p><h1>About me</h1><p>I’m Naman. I notice small problems, build software for them, and write down what I learn.</p></header>
     <div class="about-story">
       <p>My work started with content and search: understanding what people need, making useful pages, and figuring out why those pages do or don’t get found.</p>
       <p>That led me into building products of my own. SmallMB handles everyday photo and PDF tasks on Android. Astro SEO Audit checks websites before they ship. Get Random Letter started as a wheel and grew into six browser tools.</p>
       <p>I’m largely self-taught. I learn by making something, using it, and fixing the parts that don’t work well. I write about that process here, including the mistakes.</p>
       <h2>Outside of work</h2><p>I’m a <em>One Piece</em> fan, and I like a good cup of chai. This site is a place for those interests too.</p>
-      <p>You can browse my <a href={`${base}projects/`}>projects</a>, read my <a href={`${base}archive/`}>writing</a>, or find me on <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X</a>.</p>
+      <p>You can browse my <a href={`${base}projects/`}>projects</a>, see my <a href={`${base}experience/`}>experience</a>, read my <a href={`${base}archive/`}>writing</a>, or find me on <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer">X</a>.</p>
     </div>
   </div>
 </Layout>

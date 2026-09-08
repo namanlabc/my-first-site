@@ -7,8 +7,8 @@ const years = [...new Set(posts.map(post=>post.data.pubDate.getFullYear()))];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Layout title="Writing" description="Notes on SEO, building software, and personal interests by Naman Patel.">
-  <div class="inner-page">
-    <header class="page-hero"><h1>Writing</h1><p>Notes on search, software, and things I find interesting.</p></header>
+  <div class="quiet-page">
+    <header class="quiet-page-header"><p class="quiet-page-mark" aria-hidden="true">02</p><h1>Writing</h1><p>Notes on search, software, things I built, and the parts that went wrong.</p></header>
     {years.map(year => <section class="archive-year" aria-labelledby={`year-${year}`}><h2 id={`year-${year}`}>{year}</h2><div>{posts.filter(post=>post.data.pubDate.getFullYear()===year).map(post=><WritingItem title={post.data.title} pubDate={post.data.pubDate} href={`${base}blog/${post.id}/`} />)}</div></section>)}
   </div>
 </Layout>

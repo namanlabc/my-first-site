@@ -1,11 +1,11 @@
 ---
 import type { Project } from '../data/projects';
 interface Props { project: Project; index?: number; }
-const { project } = Astro.props;
+const { project, index = 0 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const href = project.href?.startsWith('/') ? `${base}${project.href.slice(1)}` : project.href;
 ---
 <article class="project-item">
-  <div class="project-item-heading"><h2>{href ? <a href={href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>{project.name} <span aria-hidden="true">↗</span></a> : project.name}</h2><span>{project.kind}</span></div>
-  <p>{project.description}</p>
+  <span class="project-item-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+  <div><div class="project-item-heading"><h2>{href ? <a href={href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>{project.name} <span aria-hidden="true">↗</span></a> : project.name}</h2><span>{project.kind}</span></div><p>{project.description}</p></div>
 </article>
