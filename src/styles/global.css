@@ -750,3 +750,25 @@ body:has(.quiet-home) .site-footer { display: none; }
   .quiet-article-page .article-header > p { font-size: 15px; }
   .quiet-article-page .prose { font-size: 16.5px; }
 }
+
+/* Identity details: one wordmark, and the dot-eyed maker where it belongs. */
+.brand-wordmark { font-family: var(--sans); font-size: 17px; font-weight: 650; letter-spacing: -.045em; }
+body:has(.quiet-home) .site-brand { display: none; }
+body:has(.quiet-home) .site-header { justify-content: flex-end; }
+.home-mascot { display: block; width: 31px; height: 31px; margin-bottom: 12px; overflow: visible; }
+.home-mascot-dot { fill: var(--ink); }
+.home-mascot-eyes { fill: var(--paper); transform-box: fill-box; transform-origin: center; animation: home-mascot-look 5.4s ease-in-out infinite; }
+@keyframes home-mascot-look { 0%, 18%, 48%, 100% { transform: translateX(0); } 24%, 40% { transform: translateX(2px); } 72%, 84% { transform: translateX(-1.5px); } }
+.quiet-prose a,
+.quiet-contact a,
+.quiet-more,
+.quiet-colophon a { text-decoration-line: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.theme-toggle,
+body:has(.quiet-home) .theme-toggle { width: 42px; height: 42px; font-size: 20px; line-height: 1; }
+
+@media (max-width: 640px) {
+  .brand-wordmark { font-size: 17px; }
+  .home-mascot { width: 30px; height: 30px; margin-bottom: 10px; }
+  .theme-toggle,
+  body:has(.quiet-home) .theme-toggle { width: 40px; height: 40px; font-size: 19px; }
+}
