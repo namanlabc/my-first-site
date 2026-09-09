@@ -2,35 +2,24 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PreferredSource from '../components/PreferredSource.astro';
+import HomeMascot from '../components/HomeMascot.astro';
+import ProjectGlyph from '../components/ProjectGlyph.astro';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const recentPosts = posts.slice(0, 3);
 
 const work = [
-  { name: 'SmallMB', detail: 'Android app', status: 'Live', className: 'smallmb', href: 'https://smallmb.com/' },
-  { name: 'Astro SEO Audit', detail: 'Open-source CLI', status: 'npm', className: 'audit', href: 'https://github.com/namanlabc/astro-seo-audit' },
-  { name: 'Get Random Letter', detail: 'Browser tools', status: 'Live', className: 'letters', href: 'https://getrandomletter.com/' },
+  { name: 'SmallMB', detail: 'Android app', status: 'Live', className: 'smallmb' as const, href: 'https://smallmb.com/' },
+  { name: 'Astro SEO Audit', detail: 'Open-source CLI', status: 'npm', className: 'audit' as const, href: 'https://github.com/namanlabc/astro-seo-audit' },
+  { name: 'Get Random Letter', detail: 'Browser tools', status: 'Live', className: 'letters' as const, href: 'https://getrandomletter.com/' },
 ];
 ---
 
 <Layout>
   <article class="quiet-home">
     <section class="quiet-intro" aria-labelledby="home-title">
-      <div class="mascot-wrap" aria-hidden="true">
-        <svg class="home-mascot" viewBox="5 5 62 62" role="presentation">
-          <circle class="home-mascot-halo" cx="36" cy="36" r="29" />
-          <circle class="home-mascot-dot" cx="36" cy="36" r="25" />
-          <g class="home-mascot-eyes">
-            <ellipse class="home-eye home-eye--left" cx="29" cy="34" rx="4.5" ry="6" />
-            <ellipse class="home-eye home-eye--right" cx="44" cy="34" rx="4.5" ry="6" />
-          </g>
-          <g class="home-mascot-spark">
-            <path d="M58 12v5" />
-            <path d="M55.5 14.5h5" />
-          </g>
-        </svg>
-      </div>
+      <HomeMascot />
 
       <h1 id="home-title">Hey, I’m Naman.</h1>
       <p class="quiet-subtitle">I make useful little things for the internet.</p>
@@ -46,43 +35,7 @@ const work = [
       <div class="quiet-work-list">
         {work.map(project => (
           <a class="quiet-work-row" href={project.href} target="_blank" rel="noopener noreferrer">
-            <span class:list={['project-glyph', `project-glyph--${project.className}`]} aria-hidden="true">
-              {project.className === 'smallmb' && (
-                <svg viewBox="0 0 24 24" role="presentation">
-                  <path class="smallmb-file" d="M7.2 4.8h6.2l3.4 3.4v10.9H7.2z" />
-                  <path class="smallmb-fold" d="M13.4 4.8v3.4h3.4" />
-                  <path class="smallmb-line smallmb-line--top" d="M9.6 11.2h4.8" />
-                  <path class="smallmb-line smallmb-line--bottom" d="M10.5 14.1h3" />
-                  <path class="smallmb-compress smallmb-compress--top" d="M5.2 8.1l1.4 1.4 1.4-1.4" />
-                  <path class="smallmb-compress smallmb-compress--bottom" d="M5.2 15.9l1.4-1.4 1.4 1.4" />
-                </svg>
-              )}
-
-              {project.className === 'audit' && (
-                <svg viewBox="0 0 24 24" role="presentation">
-                  <rect class="audit-window" x="4.5" y="5.2" width="15" height="13.5" rx="2.1" />
-                  <path class="audit-bar" d="M4.8 8.6h14.4" />
-                  <circle class="audit-dot" cx="7.1" cy="6.9" r=".7" />
-                  <circle class="audit-dot" cx="9.3" cy="6.9" r=".7" />
-                  <path class="audit-check" d="M8 13.4l2.2 2.1 5-5" />
-                  <path class="audit-scan" d="M6.3 11h11.4" />
-                </svg>
-              )}
-
-              {project.className === 'letters' && (
-                <svg viewBox="0 0 24 24" role="presentation">
-                  <g class="letters-face letters-face--a">
-                    <path d="M8.3 16.7 11.2 8h1.6l2.9 8.7" />
-                    <path d="M9.4 13.5h5.2" />
-                  </g>
-                  <g class="letters-face letters-face--z">
-                    <path d="M8.4 8.3h7.2l-7.2 8.4h7.2" />
-                  </g>
-                  <path class="letters-orbit" d="M5.4 8.3c1.5-2.2 3.8-3.4 6.6-3.4 2.6 0 5 1.1 6.5 3.1" />
-                  <path class="letters-arrow" d="m17.1 5.8 1.7 2.4-2.8.3" />
-                </svg>
-              )}
-            </span>
+            <ProjectGlyph kind={project.className} />
             <span class="quiet-project-name">{project.name}<small>{project.detail}</small></span>
             <span class="quiet-project-status">{project.status}</span>
             <span class="quiet-arrow" aria-hidden="true">›</span>
@@ -119,135 +72,15 @@ const work = [
 </Layout>
 
 <style>
-  .mascot-wrap {
-    width: 38px;
-    height: 38px;
-    margin-bottom: 9px;
+  .quiet-home .quiet-work-row {
+    grid-template-columns: 30px minmax(0, 1fr) auto 12px;
+    gap: 11px;
+    min-height: 52px;
   }
 
-  .home-mascot {
-    display: block;
-    width: 38px;
-    height: 38px;
-    margin: 0;
-    overflow: visible;
-    transform-origin: center;
-    animation: mascot-float 5.8s ease-in-out infinite;
+  .quiet-home .quiet-project-name {
+    line-height: 1.25;
   }
-
-  .home-mascot-halo {
-    fill: none;
-    stroke: color-mix(in srgb, var(--ink) 13%, transparent);
-    stroke-width: 1;
-    stroke-dasharray: 2.2 5.4;
-    transform-origin: 36px 36px;
-    animation: mascot-halo 18s linear infinite;
-  }
-
-  .home-mascot-dot {
-    fill: var(--ink);
-    transform-origin: 36px 36px;
-    animation: mascot-breathe 5.8s ease-in-out infinite;
-  }
-
-  .home-mascot-eyes {
-    fill: var(--paper);
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: mascot-look-custom 6.8s ease-in-out infinite;
-  }
-
-  .home-eye {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: mascot-blink 5.6s ease-in-out infinite;
-  }
-
-  .home-eye--right { animation-delay: .03s; }
-
-  .home-mascot-spark {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    opacity: .65;
-    transform-origin: 58px 14.5px;
-    animation: mascot-spark 3.6s ease-in-out infinite;
-  }
-
-  .mascot-wrap:hover .home-mascot { animation: mascot-hello 620ms cubic-bezier(.2,.9,.2,1) both; }
-  .mascot-wrap:hover .home-mascot-eyes { animation: none; transform: translate(2px, -1px); }
-  .mascot-wrap:hover .home-mascot-spark { opacity: 1; transform: scale(1.24) rotate(18deg); }
-
-  .project-glyph {
-    display: grid;
-    width: 24px;
-    height: 24px;
-    place-items: center;
-    overflow: hidden;
-    border-radius: 6px;
-    flex: 0 0 24px;
-    transition: transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms ease;
-  }
-
-  .project-glyph svg {
-    width: 20px;
-    height: 20px;
-    overflow: visible;
-  }
-
-  .project-glyph--smallmb { background: #2f8068; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .09); }
-  .project-glyph--audit { background: #181a18; color: #f7f5ef; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
-  .project-glyph--letters { background: #e8cd55; color: #30321f; box-shadow: inset 0 0 0 1px rgb(48 50 31 / .08); }
-
-  :global(:root.dark) .project-glyph--audit { background: #f0f1ec; color: #171816; }
-  :global(:root.dark) .project-glyph--smallmb { background: #397f6b; }
-  :global(:root.dark) .project-glyph--letters { background: #d8bb47; }
-
-  .project-glyph path,
-  .project-glyph rect {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .smallmb-file { fill: color-mix(in srgb, currentColor 9%, transparent) !important; }
-  .smallmb-line { stroke-width: 1.25 !important; }
-  .smallmb-compress { stroke-width: 1.35 !important; transition: transform 180ms ease; }
-  .smallmb-compress--top { transform-origin: center; }
-  .smallmb-compress--bottom { transform-origin: center; }
-  .smallmb-file,
-  .smallmb-fold,
-  .smallmb-line { transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
-
-  .audit-window { fill: color-mix(in srgb, currentColor 4%, transparent) !important; }
-  .audit-dot { fill: currentColor !important; stroke: none !important; opacity: .55; }
-  .audit-check { stroke-width: 1.8 !important; transition: stroke-dashoffset 260ms ease; stroke-dasharray: 11; stroke-dashoffset: 0; }
-  .audit-scan { opacity: .28; transform-origin: center; }
-
-  .letters-face { transform-origin: 12px 12px; }
-  .letters-face--a { opacity: 1; }
-  .letters-face--z { opacity: 0; transform: rotateY(90deg); }
-  .letters-orbit { opacity: .46; }
-  .letters-arrow { opacity: .72; }
-
-  .quiet-work-row:hover .project-glyph { transform: translateY(-1px) scale(1.06); box-shadow: 0 4px 9px rgb(0 0 0 / .09); }
-
-  .quiet-work-row:hover .project-glyph--smallmb .smallmb-file,
-  .quiet-work-row:hover .project-glyph--smallmb .smallmb-fold,
-  .quiet-work-row:hover .project-glyph--smallmb .smallmb-line { animation: smallmb-squish 520ms cubic-bezier(.2,.8,.2,1); }
-  .quiet-work-row:hover .project-glyph--smallmb .smallmb-compress--top { animation: compress-top 520ms cubic-bezier(.2,.8,.2,1); }
-  .quiet-work-row:hover .project-glyph--smallmb .smallmb-compress--bottom { animation: compress-bottom 520ms cubic-bezier(.2,.8,.2,1); }
-
-  .quiet-work-row:hover .project-glyph--audit .audit-scan { animation: audit-scan 780ms ease-in-out; }
-  .quiet-work-row:hover .project-glyph--audit .audit-check { animation: audit-check 620ms ease both; }
-
-  .quiet-work-row:hover .project-glyph--letters .letters-face--a { animation: letter-a-out 650ms cubic-bezier(.2,.8,.2,1) both; }
-  .quiet-work-row:hover .project-glyph--letters .letters-face--z { animation: letter-z-in 650ms cubic-bezier(.2,.8,.2,1) both; }
-  .quiet-work-row:hover .project-glyph--letters .letters-orbit,
-  .quiet-work-row:hover .project-glyph--letters .letters-arrow { animation: letters-orbit-spin 650ms cubic-bezier(.2,.8,.2,1); transform-origin: 12px 12px; }
 
   .writing-actions {
     display: flex;
@@ -264,106 +97,21 @@ const work = [
     font-size: 14px;
   }
 
-  @keyframes mascot-float {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-1.6px) rotate(-1deg); }
-  }
-
-  @keyframes mascot-breathe {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.025, .985); }
-  }
-
-  @keyframes mascot-halo { to { transform: rotate(360deg); } }
-
-  @keyframes mascot-look-custom {
-    0%, 16%, 46%, 100% { transform: translate(0); }
-    22%, 36% { transform: translateX(2.3px); }
-    67%, 80% { transform: translate(-1.5px, 1px); }
-  }
-
-  @keyframes mascot-blink {
-    0%, 43%, 46%, 100% { transform: scaleY(1); }
-    44.5% { transform: scaleY(.08); }
-  }
-
-  @keyframes mascot-spark {
-    0%, 100% { opacity: .35; transform: scale(.78) rotate(0); }
-    45% { opacity: .9; transform: scale(1.08) rotate(12deg); }
-  }
-
-  @keyframes mascot-hello {
-    0% { transform: translateY(0) rotate(0) scale(1); }
-    38% { transform: translateY(-4px) rotate(-8deg) scale(1.06); }
-    68% { transform: translateY(-1px) rotate(5deg) scale(.99); }
-    100% { transform: translateY(0) rotate(0) scale(1); }
-  }
-
-  @keyframes smallmb-squish {
-    0%, 100% { transform: scaleY(1); }
-    48% { transform: scaleY(.82); }
-  }
-
-  @keyframes compress-top {
-    0%, 100% { transform: translateY(0); }
-    48% { transform: translateY(1.3px); }
-  }
-
-  @keyframes compress-bottom {
-    0%, 100% { transform: translateY(0); }
-    48% { transform: translateY(-1.3px); }
-  }
-
-  @keyframes audit-scan {
-    0% { transform: translateY(-2.5px); opacity: 0; }
-    24% { opacity: .5; }
-    75% { opacity: .5; }
-    100% { transform: translateY(5px); opacity: 0; }
-  }
-
-  @keyframes audit-check {
-    0% { stroke-dashoffset: 11; }
-    45%, 100% { stroke-dashoffset: 0; }
-  }
-
-  @keyframes letter-a-out {
-    0%, 28% { opacity: 1; transform: rotateY(0); }
-    55%, 100% { opacity: 0; transform: rotateY(90deg); }
-  }
-
-  @keyframes letter-z-in {
-    0%, 38% { opacity: 0; transform: rotateY(-90deg); }
-    68%, 100% { opacity: 1; transform: rotateY(0); }
-  }
-
-  @keyframes letters-orbit-spin {
-    0% { transform: rotate(0); }
-    100% { transform: rotate(360deg); }
-  }
-
   @media (max-width: 640px) {
     :global(body:has(.quiet-home) .site-header) { min-height: 58px; }
-    .quiet-intro { margin-bottom: 29px; }
+    .quiet-intro { margin-bottom: 30px; }
     .quiet-prose { margin-top: 17px; }
     .quiet-prose p { margin-bottom: 10px; }
+    .quiet-home .quiet-work-row {
+      grid-template-columns: 29px minmax(0, 1fr) auto 12px;
+      gap: 10px;
+      min-height: 53px;
+    }
     .writing-actions { gap: 10px; margin-top: 10px; }
     .quiet-contact { margin-top: 34px; }
-    .project-glyph { width: 23px; height: 23px; flex-basis: 23px; border-radius: 6px; }
-    .project-glyph svg { width: 19px; height: 19px; }
   }
 
   @media (max-width: 350px) {
     .writing-actions { align-items: flex-start; flex-direction: column; gap: 8px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .home-mascot,
-    .home-mascot-halo,
-    .home-mascot-dot,
-    .home-mascot-eyes,
-    .home-eye,
-    .home-mascot-spark,
-    .project-glyph,
-    .project-glyph * { animation: none !important; transition: none !important; }
   }
 </style>
