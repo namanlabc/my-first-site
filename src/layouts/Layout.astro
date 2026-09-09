@@ -30,170 +30,134 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
 <style is:global>
   :root {
-    --theme-reveal-x: calc(100vw - 42px);
-    --theme-reveal-y: 52px;
-    --theme-reveal-radius: 150vmax;
-    --theme-frame-x: calc(100% - 22px);
-    --theme-frame-y: 32px;
-    --theme-frame-radius: 150vmax;
-    --theme-rim: rgb(155 200 176 / .38);
-    --theme-bloom: rgb(155 200 176 / .14);
+    --theme-blink-cover: #090a09;
+    --theme-blink-line: rgb(155 200 176 / .34);
+    --theme-blink-open-brightness: .94;
   }
 
-  .site-frame {
-    view-transition-name: theme-shell;
+  /* The page itself blinks with the mascot. The theme changes while shut. */
+  ::view-transition {
+    background: var(--theme-blink-cover);
   }
 
   ::view-transition-group(root) {
-    animation-duration: 720ms;
-    animation-timing-function: cubic-bezier(.22, .78, .2, 1);
+    animation-duration: 780ms;
+    animation-timing-function: linear;
   }
 
-  ::view-transition-group(theme-shell) {
-    animation-duration: 980ms;
-    animation-timing-function: cubic-bezier(.16, .86, .22, 1);
+  ::view-transition-image-pair(root) {
+    isolation: isolate;
   }
 
   ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-old(theme-shell),
-  ::view-transition-new(theme-shell) {
+  ::view-transition-new(root) {
     mix-blend-mode: normal;
     backface-visibility: hidden;
+    transform-origin: 50% 50%;
   }
 
   ::view-transition-old(root) {
-    z-index: 0;
-    animation: theme-canvas-out 720ms cubic-bezier(.22, .78, .2, 1) both;
+    z-index: 2;
+    animation: naman-theme-blink-close 780ms cubic-bezier(.62, .02, .36, 1) both;
   }
 
   ::view-transition-new(root) {
-    z-index: 1;
-    animation: theme-canvas-in 720ms cubic-bezier(.22, .78, .2, 1) both;
-  }
-
-  ::view-transition-old(theme-shell) {
-    z-index: 2;
-    animation: theme-shell-recede 900ms cubic-bezier(.22, .78, .2, 1) both;
-  }
-
-  ::view-transition-new(theme-shell) {
     z-index: 3;
-    animation-duration: 980ms;
-    animation-timing-function: cubic-bezier(.16, .86, .22, 1);
-    animation-fill-mode: both;
-    transform-origin: var(--theme-frame-x) var(--theme-frame-y);
+    animation: naman-theme-blink-open 780ms cubic-bezier(.22, .78, .24, 1) both;
   }
 
-  :root[data-theme-target='dark']::view-transition-new(theme-shell) {
-    animation-name: theme-shell-to-dark;
+  :root[data-theme-target='dark']::view-transition-new(root) {
+    --theme-blink-open-brightness: .88;
   }
 
-  :root[data-theme-target='light']::view-transition-new(theme-shell) {
-    animation-name: theme-shell-to-light;
+  :root[data-theme-target='light']::view-transition-new(root) {
+    --theme-blink-open-brightness: 1.12;
   }
 
-  @keyframes theme-canvas-out {
-    0% { opacity: 1; filter: brightness(1) saturate(1); }
-    100% { opacity: .86; filter: brightness(.96) saturate(.92); }
-  }
-
-  @keyframes theme-canvas-in {
-    0% { opacity: .28; filter: brightness(.9) saturate(.88); }
-    44% { opacity: .72; }
-    100% { opacity: 1; filter: none; }
-  }
-
-  @keyframes theme-shell-recede {
-    0% { transform: scale(1); filter: brightness(1) saturate(1); }
-    64% { transform: scale(.998); filter: brightness(.975) saturate(.95); }
-    100% { transform: scale(.998); filter: brightness(.965) saturate(.93); }
-  }
-
-  @keyframes theme-shell-to-dark {
+  @keyframes naman-theme-blink-close {
     0% {
-      clip-path: circle(0 at var(--theme-frame-x) var(--theme-frame-y));
-      transform: scale(1.004);
-      filter:
-        brightness(.8)
-        saturate(.72)
-        drop-shadow(0 0 0 transparent);
+      clip-path: ellipse(112% 112% at 50% 50%);
+      transform: scale(1);
+      filter: brightness(1) saturate(1);
+      opacity: 1;
     }
-    24% {
-      filter:
-        brightness(.92)
-        saturate(.84)
-        drop-shadow(0 0 13px var(--theme-rim));
+    29% {
+      clip-path: ellipse(112% 44% at 50% 50%);
+      transform: scaleX(1.002) scaleY(.998);
+      filter: brightness(.985) saturate(.98);
+      opacity: 1;
     }
-    58% {
-      filter:
-        brightness(1.015)
-        saturate(.98)
-        drop-shadow(0 0 24px var(--theme-rim))
-        drop-shadow(0 0 46px var(--theme-bloom));
+    43% {
+      clip-path: ellipse(114% 3.8% at 50% 50%);
+      transform: scaleX(1.008) scaleY(.995);
+      filter: brightness(.92) saturate(.9) drop-shadow(0 0 5px var(--theme-blink-line));
+      opacity: 1;
     }
-    82% {
-      clip-path: circle(calc(var(--theme-frame-radius) * .985) at var(--theme-frame-x) var(--theme-frame-y));
-      transform: scale(1.001);
-      filter:
-        brightness(1.005)
-        saturate(1)
-        drop-shadow(0 0 10px var(--theme-rim));
+    49% {
+      clip-path: ellipse(116% .34% at 50% 50%);
+      transform: scaleX(1.012) scaleY(.994);
+      filter: brightness(.84) saturate(.82) drop-shadow(0 0 9px var(--theme-blink-line));
+      opacity: 1;
+    }
+    50%, 100% {
+      clip-path: ellipse(116% .18% at 50% 50%);
+      transform: scaleX(1.012) scaleY(.994);
+      filter: brightness(.8) saturate(.8);
+      opacity: 0;
+    }
+  }
+
+  @keyframes naman-theme-blink-open {
+    0%, 48% {
+      clip-path: ellipse(116% .18% at 50% 50%);
+      transform: scaleX(1.012) scaleY(.994);
+      filter: brightness(var(--theme-blink-open-brightness)) saturate(.88);
+      opacity: 0;
+    }
+    50% {
+      clip-path: ellipse(116% .34% at 50% 50%);
+      transform: scaleX(1.012) scaleY(.994);
+      filter: brightness(var(--theme-blink-open-brightness)) saturate(.9) drop-shadow(0 0 10px var(--theme-blink-line));
+      opacity: 1;
+    }
+    57% {
+      clip-path: ellipse(114% 5.5% at 50% 50%);
+      transform: scaleX(1.007) scaleY(.996);
+      filter: brightness(calc((var(--theme-blink-open-brightness) + 1) / 2)) saturate(.94) drop-shadow(0 0 5px var(--theme-blink-line));
+      opacity: 1;
+    }
+    73% {
+      clip-path: ellipse(112% 52% at 50% 50%);
+      transform: scaleX(1.002) scaleY(.999);
+      filter: brightness(1.015) saturate(1.01);
+      opacity: 1;
     }
     100% {
-      clip-path: circle(var(--theme-frame-radius) at var(--theme-frame-x) var(--theme-frame-y));
+      clip-path: ellipse(112% 112% at 50% 50%);
       transform: scale(1);
       filter: none;
+      opacity: 1;
     }
   }
 
-  @keyframes theme-shell-to-light {
-    0% {
-      clip-path: circle(0 at var(--theme-frame-x) var(--theme-frame-y));
-      transform: scale(1.004);
-      filter:
-        brightness(1.24)
-        saturate(.9)
-        sepia(.1)
-        drop-shadow(0 0 0 transparent);
-    }
-    22% {
-      filter:
-        brightness(1.17)
-        saturate(.98)
-        sepia(.07)
-        drop-shadow(0 0 15px var(--theme-rim));
-    }
-    56% {
-      filter:
-        brightness(1.07)
-        saturate(1.02)
-        sepia(.035)
-        drop-shadow(0 0 28px var(--theme-rim))
-        drop-shadow(0 0 52px var(--theme-bloom));
-    }
-    82% {
-      clip-path: circle(calc(var(--theme-frame-radius) * .985) at var(--theme-frame-x) var(--theme-frame-y));
-      transform: scale(1.001);
-      filter:
-        brightness(1.015)
-        saturate(1.01)
-        drop-shadow(0 0 10px var(--theme-rim));
-    }
-    100% {
-      clip-path: circle(var(--theme-frame-radius) at var(--theme-frame-x) var(--theme-frame-y));
-      transform: scale(1);
-      filter: none;
-    }
+  /* Keep the mascot's eyes shut for the same physical beat as the page. */
+  .site-brand.is-theme-blinking .mascot-eyes {
+    animation: none !important;
+    transform: translate(0) !important;
+  }
+
+  .site-brand.is-theme-blinking .mascot-eye {
+    transform: scaleY(.07) !important;
+    transition: transform 105ms cubic-bezier(.55, 0, .45, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .site-frame { view-transition-name: none; }
     ::view-transition-old(root),
-    ::view-transition-new(root),
-    ::view-transition-old(theme-shell),
-    ::view-transition-new(theme-shell) {
+    ::view-transition-new(root) {
       animation: none !important;
+    }
+    .site-brand.is-theme-blinking .mascot-eye {
+      transition: none !important;
     }
   }
 </style>
@@ -245,7 +209,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <script>
       const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
       const root = document.documentElement;
-      const siteFrame = document.querySelector<HTMLElement>('.site-frame');
 
       function updateThemeControl() {
         const isDark = root.classList.contains('dark');
@@ -277,29 +240,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
           return;
         }
 
-        const buttonRect = themeButton.getBoundingClientRect();
-        const x = buttonRect.left + buttonRect.width / 2;
-        const y = buttonRect.top + buttonRect.height / 2;
-        const farX = Math.max(x, window.innerWidth - x);
-        const farY = Math.max(y, window.innerHeight - y);
-        const radius = Math.hypot(farX, farY) + 32;
-
-        const frameRect = siteFrame?.getBoundingClientRect();
-        const frameX = frameRect ? x - frameRect.left : x;
-        const frameY = frameRect ? y - frameRect.top : y;
-        const frameFarX = frameRect ? Math.max(frameX, frameRect.width - frameX) : farX;
-        const frameFarY = frameRect ? Math.max(frameY, frameRect.height - frameY) : farY;
-        const frameRadius = Math.hypot(frameFarX, frameFarY) + 28;
-
         root.dataset.themeTarget = target;
-        root.style.setProperty('--theme-reveal-x', `${x}px`);
-        root.style.setProperty('--theme-reveal-y', `${y}px`);
-        root.style.setProperty('--theme-reveal-radius', `${radius}px`);
-        root.style.setProperty('--theme-frame-x', `${frameX}px`);
-        root.style.setProperty('--theme-frame-y', `${frameY}px`);
-        root.style.setProperty('--theme-frame-radius', `${frameRadius}px`);
-        root.style.setProperty('--theme-rim', target === 'dark' ? 'rgb(155 200 176 / .42)' : 'rgb(214 183 92 / .42)');
-        root.style.setProperty('--theme-bloom', target === 'dark' ? 'rgb(155 200 176 / .15)' : 'rgb(255 230 164 / .22)');
+        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#090a09' : '#d9d6cf');
+        root.style.setProperty('--theme-blink-line', target === 'dark' ? 'rgb(155 200 176 / .34)' : 'rgb(214 183 92 / .32)');
 
         announceThemeTransition('start', target);
         const transition = startViewTransition.call(document, applyNextTheme);
