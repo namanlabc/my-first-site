@@ -1,11 +1,63 @@
 ---
 import type { Project } from '../data/projects';
+import ProjectGlyph from './ProjectGlyph.astro';
+
 interface Props { project: Project; index?: number; }
-const { project, index = 0 } = Astro.props;
+const { project } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const href = project.href?.startsWith('/') ? `${base}${project.href.slice(1)}` : project.href;
+
+const glyphKind = project.visual === 'audit'
+  ? 'audit'
+  : project.visual === 'wheel'
+    ? 'letters'
+    : project.visual === 'calm'
+      ? 'calm'
+      : project.visual === 'notes'
+        ? 'notes'
+        : 'smallmb';
 ---
-<article class="project-item">
-  <span class="project-item-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-  <div><div class="project-item-heading"><h2>{href ? <a href={href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>{project.name} <span aria-hidden="true">↗</span></a> : project.name}</h2><span>{project.kind}</span></div><p>{project.description}</p></div>
+
+<article class="project-item project-item--with-glyph">
+  <div class="project-item-glyph">
+    <ProjectGlyph kind={glyphKind} />
+  </div>
+
+  <div class="project-item-content">
+    <div class="project-item-heading">
+      <h2>
+        {href
+          ? <a href={href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}>{project.name} <span aria-hidden="true">↗</span></a>
+          : project.name}
+      </h2>
+      <span>{project.kind}</span>
+    </div>
+    <p>{project.description}</p>
+  </div>
 </article>
+
+<style>
+  .project-item--with-glyph {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  .project-item-glyph {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 3px;
+  }
+
+  .project-item-content { min-width: 0; }
+
+  @media (max-width: 640px) {
+    .project-item--with-glyph {
+      grid-template-columns: 31px minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .project-item-glyph { padding-top: 2px; }
+  }
+</style>
