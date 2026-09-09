@@ -38,6 +38,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     let pokeResetTimer = 0;
     let pokeCount = 0;
     let lastScrollY = window.scrollY;
+    let themeBlinking = false;
 
     const react = (name: string, duration = 520) => {
       window.clearTimeout(reactionTimer);
@@ -49,13 +50,18 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     const scheduleBlink = () => {
       window.clearTimeout(blinkTimer);
       blinkTimer = window.setTimeout(() => {
-        brand.classList.add('is-blinking');
-        window.setTimeout(() => brand.classList.remove('is-blinking'), 125);
+        if (!themeBlinking) {
+          brand.classList.add('is-blinking');
+          window.setTimeout(() => {
+            if (!themeBlinking) brand.classList.remove('is-blinking');
+          }, 125);
+        }
         scheduleBlink();
       }, 2200 + Math.random() * 4200);
     };
 
     window.addEventListener('pointermove', (event) => {
+      if (themeBlinking) return;
       const rect = mascot?.getBoundingClientRect() ?? brand.getBoundingClientRect();
       const dx = event.clientX - (rect.left + rect.width / 2);
       const dy = event.clientY - (rect.top + rect.height / 2);
@@ -68,6 +74,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     }, { passive: true });
 
     brand.addEventListener('pointerdown', (event) => {
+      if (themeBlinking) return;
       react('is-poked', 420);
       if (brand.dataset.isHome !== 'true') return;
       event.preventDefault();
@@ -88,6 +95,7 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     });
 
     window.addEventListener('scroll', () => {
+      if (themeBlinking) return;
       const direction = window.scrollY > lastScrollY ? 1 : -1;
       lastScrollY = window.scrollY;
       brand.style.setProperty('--scroll-eye-y', `${direction * 3}px`);
@@ -96,13 +104,17 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
       scrollTimer = window.setTimeout(() => brand.classList.remove('is-scrolling'), 260);
     }, { passive: true });
 
-    document.addEventListener('theme-transition-complete', () => {
+    document.addEventListener('theme-transition-start', () => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      themeBlinking = true;
       window.clearTimeout(reactionTimer);
-      brand.classList.remove('is-celebrating');
-      void brand.offsetWidth;
-      brand.classList.add('is-celebrating');
-      reactionTimer = window.setTimeout(() => brand.classList.remove('is-celebrating'), 760);
+      brand.classList.remove('is-poked', 'is-celebrating', 'is-dizzy', 'is-tracking', 'is-scrolling', 'is-blinking');
+      brand.classList.add('is-theme-blinking');
+    });
+
+    document.addEventListener('theme-transition-complete', () => {
+      themeBlinking = false;
+      brand.classList.remove('is-theme-blinking', 'is-blinking');
     });
 
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) scheduleBlink();
