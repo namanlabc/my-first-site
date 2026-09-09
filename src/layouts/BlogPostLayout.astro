@@ -13,6 +13,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const featuredImage = image ? `${base}${image.replace(/^\//, '')}` : undefined;
+const isAiSpectacle = post.id === 'ai-is-not-magic-it-is-leverage';
 
 const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
@@ -30,12 +31,13 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 ---
 
 <Layout title={title} description={description} type="article" image={image}>
-  <div class="quiet-article-page">
+  <div class:list={["quiet-article-page", { "ai-spectacle": isAiSpectacle }]}>
     <div class="article-shell">
       <a class="back-link" href={`${base}archive/`}><span aria-hidden="true">←</span> All writing</a>
 
       <article>
         <header class="article-header">
+          {isAiSpectacle && <span class="article-kicker">FIELD NOTE / AI / 2026</span>}
           <h1>{title}</h1>
           <p>{description}</p>
           <div class="article-meta">
@@ -93,7 +95,273 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     border-top: 0;
   }
 
+  :global(.ai-spectacle) {
+    width: min(880px, calc(100% - 40px));
+  }
+
+  :global(.ai-spectacle .article-shell) {
+    width: 100%;
+  }
+
+  :global(.ai-spectacle .back-link),
+  :global(.ai-spectacle .article-header),
+  :global(.ai-spectacle .prose),
+  :global(.ai-spectacle .post-nav) {
+    width: min(600px, 100%);
+    margin-inline: auto;
+  }
+
+  :global(.ai-spectacle .article-kicker) {
+    display: block;
+    margin-bottom: 13px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .14em;
+  }
+
+  :global(.ai-spectacle .article-header h1) {
+    max-width: 580px;
+    font-size: clamp(36px, 6vw, 54px);
+    font-weight: 680;
+    letter-spacing: -.055em;
+    line-height: 1.02;
+  }
+
+  :global(.ai-spectacle .article-featured) {
+    width: min(880px, calc(100vw - 56px));
+    margin: 0 50% 48px;
+    transform: translateX(-50%);
+  }
+
+  :global(.ai-spectacle .article-featured img) {
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgb(0 0 0 / .16);
+  }
+
+  :global(.ai-spectacle .prose > p:first-child) {
+    font-size: 20px;
+    line-height: 1.55;
+    letter-spacing: -.02em;
+  }
+
+  :global(.ai-spectacle .prose h2) {
+    margin-top: 58px;
+    font-size: 27px;
+    letter-spacing: -.035em;
+  }
+
+  :global(.ai-spectacle .prose strong) {
+    font-weight: 680;
+  }
+
+  :global(.ai-spectacle .prose .ai-breakout) {
+    width: min(820px, calc(100vw - 56px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  :global(.ai-thesis) {
+    margin-top: 38px;
+    margin-bottom: 42px;
+    padding: 28px 30px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, var(--paper)), var(--paper));
+  }
+
+  :global(.ai-thesis .ai-eyebrow),
+  :global(.ai-formula-stack .ai-eyebrow) {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .13em;
+  }
+
+  :global(.ai-thesis strong) {
+    display: block;
+    font-family: var(--mono);
+    font-size: clamp(18px, 3vw, 27px);
+    line-height: 1.35;
+    letter-spacing: -.035em;
+  }
+
+  :global(.ai-thesis small) {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  :global(.ai-thesis--inverse) {
+    color: #eef3ed;
+    border-color: #263129;
+    background: #0f1310;
+  }
+
+  :global(.ai-thesis--inverse strong) { color: #eef3ed; }
+  :global(.ai-thesis--inverse small),
+  :global(.ai-thesis--inverse .ai-eyebrow) { color: #91a096; }
+
+  :global(.ai-equation) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    overflow: hidden;
+    margin-top: 38px;
+    margin-bottom: 42px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: var(--rule);
+  }
+
+  :global(.ai-equation > div) {
+    padding: 24px;
+    background: var(--paper-soft);
+  }
+
+  :global(.ai-equation span) {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+  }
+
+  :global(.ai-equation strong) {
+    display: block;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 560;
+    line-height: 1.65;
+  }
+
+  :global(.ai-matrix) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    margin-top: 38px;
+    margin-bottom: 42px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: var(--rule);
+  }
+
+  :global(.ai-matrix > div) {
+    min-height: 120px;
+    padding: 20px 22px;
+    background: var(--paper-soft);
+  }
+
+  :global(.ai-matrix .ai-matrix__corner) {
+    display: none;
+  }
+
+  :global(.ai-matrix span) {
+    display: block;
+    margin-bottom: 23px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+  }
+
+  :global(.ai-matrix strong) {
+    display: block;
+    font-size: 20px;
+    letter-spacing: -.025em;
+  }
+
+  :global(.ai-matrix .is-hot) {
+    color: #eef3ed;
+    background: #101411;
+  }
+
+  :global(.ai-matrix .is-hot span) { color: #8eb49d; }
+  :global(.ai-matrix .is-hot strong) { color: #eef3ed; }
+
+  :global(.ai-formula-stack) {
+    margin-top: 38px;
+    margin-bottom: 44px;
+    padding: 27px 30px 29px;
+    border: 1px solid #28342c;
+    border-radius: 14px;
+    color: #eef3ed;
+    background: #0f1310;
+  }
+
+  :global(.ai-formula-stack p) {
+    margin: 0;
+    color: inherit;
+    font-family: var(--mono);
+    font-size: clamp(16px, 2.6vw, 22px);
+    line-height: 1.5;
+  }
+
+  :global(.ai-formula-stack p.muted) {
+    margin-top: 13px;
+    color: #92a097;
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  :global(.ai-final-equation) {
+    margin-top: 46px;
+    margin-bottom: 42px;
+    padding: 34px 30px;
+    border-radius: 14px;
+    color: #edf3ed;
+    background:
+      radial-gradient(circle at 82% 24%, rgb(126 190 151 / .18), transparent 35%),
+      #0d110e;
+  }
+
+  :global(.ai-final-equation span) {
+    display: block;
+    margin-bottom: 15px;
+    color: #8eb49d;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+  }
+
+  :global(.ai-final-equation strong) {
+    display: block;
+    color: #edf3ed;
+    font-size: clamp(25px, 5vw, 42px);
+    line-height: 1.07;
+    letter-spacing: -.05em;
+  }
+
   @media (max-width: 640px) {
     :global(.quiet-article-page .post-nav) { margin-top: 27px; }
+    :global(.ai-spectacle) { width: calc(100% - 40px); }
+    :global(.ai-spectacle .article-header h1) { font-size: 39px; }
+    :global(.ai-spectacle .article-featured),
+    :global(.ai-spectacle .prose .ai-breakout) {
+      width: calc(100vw - 32px);
+    }
+    :global(.ai-spectacle .article-featured) { margin-bottom: 38px; }
+    :global(.ai-spectacle .prose > p:first-child) { font-size: 18px; }
+    :global(.ai-spectacle .prose h2) { margin-top: 48px; font-size: 24px; }
+    :global(.ai-equation) { grid-template-columns: 1fr; }
+    :global(.ai-equation > div),
+    :global(.ai-thesis),
+    :global(.ai-formula-stack),
+    :global(.ai-final-equation) { padding: 22px; }
+    :global(.ai-matrix > div) { min-height: 108px; padding: 18px; }
+    :global(.ai-matrix strong) { font-size: 17px; }
   }
 </style>
