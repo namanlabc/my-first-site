@@ -85,3 +85,15 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     </div>
   </div>
 </Layout>
+
+<style>
+  :global(.quiet-article-page .post-nav) {
+    margin-top: 32px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  @media (max-width: 640px) {
+    :global(.quiet-article-page .post-nav) { margin-top: 27px; }
+  }
+</style>
