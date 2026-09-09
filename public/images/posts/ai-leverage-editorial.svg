@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 960" role="img" aria-labelledby="title desc">
+  <title id="title">AI as leverage</title>
+  <desc id="desc">A quiet editorial illustration of a small dot-eyed person using a long lever to lift a much larger stack of work.</desc>
+  <rect width="1536" height="960" rx="34" fill="#f4f1e9"/>
+  <circle cx="1252" cy="183" r="78" fill="#e7aa86" opacity=".9"/>
+  <path d="M82 171c175-76 334-73 486 1M1067 721c155 49 281 38 389-34" fill="none" stroke="#d9d3c8" stroke-width="3" stroke-linecap="round"/>
+  <g fill="none" stroke="#c9c2b6" stroke-width="2" stroke-linecap="round">
+    <path d="M116 115l14 14m0-14l-14 14M1401 231l14 14m0-14l-14 14M1294 736l12 12m0-12l-12 12M300 780l11 11m0-11l-11 11"/>
+  </g>
+
+  <g transform="translate(164 470)">
+    <circle cx="95" cy="95" r="72" fill="#171816"/>
+    <ellipse cx="72" cy="86" rx="9" ry="15" fill="#f4f1e9"/>
+    <ellipse cx="118" cy="86" rx="9" ry="15" fill="#f4f1e9"/>
+    <path d="M58 166c21 15 54 15 75 0" fill="none" stroke="#171816" stroke-width="14" stroke-linecap="round"/>
+    <path d="M52 175c-9 39-4 79 17 114M138 175c12 38 8 77-12 113" fill="none" stroke="#171816" stroke-width="11" stroke-linecap="round"/>
+    <path d="M67 290l-27 60M123 290l31 58" fill="none" stroke="#171816" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <path d="M316 613L1263 322" fill="none" stroke="#1a1b19" stroke-width="16" stroke-linecap="round"/>
+  <path d="M732 664l114-203 116 203z" fill="#c9d8cc" stroke="#1a1b19" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="846" cy="461" r="27" fill="#416b5a" stroke="#1a1b19" stroke-width="5"/>
+  <text x="846" y="470" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="20" font-weight="700" fill="#f4f1e9">AI</text>
+
+  <g transform="translate(1085 214)">
+    <g transform="rotate(-7 160 130)">
+      <rect x="74" y="122" width="260" height="178" rx="20" fill="#d6b75c" stroke="#1a1b19" stroke-width="5"/>
+      <path d="M109 176h138M109 214h175M109 252h104" stroke="#1a1b19" stroke-width="9" stroke-linecap="round" opacity=".74"/>
+    </g>
+    <g transform="rotate(4 135 90)">
+      <rect x="42" y="66" width="260" height="178" rx="20" fill="#d98287" stroke="#1a1b19" stroke-width="5"/>
+      <circle cx="87" cy="111" r="8" fill="#1a1b19"/><circle cx="116" cy="111" r="8" fill="#1a1b19"/><circle cx="145" cy="111" r="8" fill="#1a1b19"/>
+      <path d="M86 153h166M86 191h121" stroke="#1a1b19" stroke-width="9" stroke-linecap="round" opacity=".72"/>
+    </g>
+    <g transform="rotate(-2 105 50)">
+      <rect x="12" y="7" width="260" height="178" rx="20" fill="#9bc8b0" stroke="#1a1b19" stroke-width="5"/>
+      <path d="M58 61h170M58 99h132M58 137h188" stroke="#1a1b19" stroke-width="9" stroke-linecap="round" opacity=".72"/>
+    </g>
+  </g>
+
+  <g font-family="Georgia,'Times New Roman',serif" font-style="italic" fill="#171816">
+    <text x="145" y="388" font-size="46">taste + intent</text>
+    <text x="1072" y="659" font-size="46">more reach</text>
+  </g>
+  <g fill="none" stroke="#416b5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M330 402c95 1 154 23 214 71"/>
+    <path d="M529 452l18 23-29 2"/>
+    <path d="M1054 636c76-23 127-69 157-138"/>
+    <path d="M1193 508l20-18 5 27"/>
+  </g>
+
+  <g transform="translate(145 785)" font-family="ui-monospace,SFMono-Regular,Consolas,monospace">
+    <text x="0" y="0" font-size="22" letter-spacing="2" fill="#74756f">THE BET</text>
+    <text x="0" y="55" font-size="35" font-weight="700" fill="#171816">small human × strong leverage → unreasonable capability</text>
+  </g>
+</svg>

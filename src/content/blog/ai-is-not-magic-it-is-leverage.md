@@ -1,10 +1,10 @@
 ---
 title: "AI Is Not Magic. It Is Leverage."
-description: "AI did not remove the need to think. It moved the bottleneck from knowing how to deciding what, why, and whether the result is actually good."
+description: "AI makes execution cheap. That makes taste, judgment, curiosity and agency more valuable—not less."
 pubDate: 2026-09-09
 tags: ["AI", "building", "opinion", "internet"]
-image: "/images/posts/ai-leverage-machine.svg"
-imageAlt: "A dark editorial diagram showing a dot-eyed human operator directing an AI leverage engine through taste, context, tools and verification toward shipped work."
+image: "/images/posts/ai-leverage-editorial.svg"
+imageAlt: "A quiet editorial illustration of a small dot-eyed person using a long lever to lift a much larger stack of work."
 ---
 
 I use AI a lot.
