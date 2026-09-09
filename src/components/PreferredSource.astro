@@ -96,8 +96,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
           window.__namanPreferredSourceClient = import('https://news.google.com/swg/js/v1/publisher.mjs')
             .then(({ preferredSource }) => {
               preferredSource.init({
-                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
-                lang: document.documentElement.lang || 'en'
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light'
               });
               return preferredSource;
             });
