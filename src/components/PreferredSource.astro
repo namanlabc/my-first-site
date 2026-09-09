@@ -1,0 +1,244 @@
+---
+interface Props {
+  variant?: 'inline' | 'article';
+  domain?: string;
+}
+
+const { variant = 'inline', domain = 'naman.blog' } = Astro.props;
+const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encodeURIComponent(domain)}`;
+---
+
+{variant === 'inline' ? (
+  <a
+    class="preferred-source preferred-source--inline"
+    href={preferredSourceUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Make ${domain} a preferred source on Google`}
+  >
+    <span class="google-mark google-mark--small" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="presentation">
+        <path fill="#4285F4" d="M21.6 12.227c0-.709-.064-1.391-.182-2.045H12v3.868h5.382a4.6 4.6 0 0 1-1.996 3.018v2.509h3.232c1.891-1.741 2.982-4.309 2.982-7.35Z" />
+        <path fill="#34A853" d="M12 22c2.7 0 4.964-.895 6.618-2.423l-3.232-2.509c-.895.6-2.041.955-3.386.955-2.605 0-4.809-1.759-5.596-4.123H3.064v2.591A9.997 9.997 0 0 0 12 22Z" />
+        <path fill="#FBBC05" d="M6.404 13.9A6.01 6.01 0 0 1 6.091 12c0-.659.113-1.3.313-1.9V7.509H3.064A9.997 9.997 0 0 0 2 12c0 1.613.386 3.141 1.064 4.491L6.404 13.9Z" />
+        <path fill="#EA4335" d="M12 5.977c1.468 0 2.786.505 3.823 1.496l2.868-2.868C16.959 2.991 14.695 2 12 2A9.997 9.997 0 0 0 3.064 7.509L6.404 10.1C7.191 7.736 9.395 5.977 12 5.977Z" />
+      </svg>
+    </span>
+    <span class="preferred-inline-text">Preferred source<span class="preferred-inline-long"> on Google</span></span>
+    <span class="preferred-inline-arrow" aria-hidden="true">↗</span>
+  </a>
+) : (
+  <aside class="preferred-source preferred-source--article" aria-label="Google preferred source">
+    <div class="source-bridge" aria-hidden="true">
+      <span class="source-mascot">
+        <svg viewBox="8 8 56 56" role="presentation">
+          <circle cx="36" cy="36" r="25" />
+          <g class="source-mascot-eyes">
+            <ellipse cx="29" cy="34" rx="4.5" ry="6" />
+            <ellipse cx="44" cy="34" rx="4.5" ry="6" />
+          </g>
+        </svg>
+      </span>
+      <span class="bridge-dots"><i></i><i></i><i></i></span>
+      <span class="google-mark google-mark--large">
+        <svg viewBox="0 0 24 24" role="presentation">
+          <path fill="#4285F4" d="M21.6 12.227c0-.709-.064-1.391-.182-2.045H12v3.868h5.382a4.6 4.6 0 0 1-1.996 3.018v2.509h3.232c1.891-1.741 2.982-4.309 2.982-7.35Z" />
+          <path fill="#34A853" d="M12 22c2.7 0 4.964-.895 6.618-2.423l-3.232-2.509c-.895.6-2.041.955-3.386.955-2.605 0-4.809-1.759-5.596-4.123H3.064v2.591A9.997 9.997 0 0 0 12 22Z" />
+          <path fill="#FBBC05" d="M6.404 13.9A6.01 6.01 0 0 1 6.091 12c0-.659.113-1.3.313-1.9V7.509H3.064A9.997 9.997 0 0 0 2 12c0 1.613.386 3.141 1.064 4.491L6.404 13.9Z" />
+          <path fill="#EA4335" d="M12 5.977c1.468 0 2.786.505 3.823 1.496l2.868-2.868C16.959 2.991 14.695 2 12 2A9.997 9.997 0 0 0 3.064 7.509L6.404 10.1C7.191 7.736 9.395 5.977 12 5.977Z" />
+        </svg>
+      </span>
+    </div>
+
+    <div class="preferred-article-copy">
+      <span class="preferred-kicker">ONE MORE THING</span>
+      <h2>Want more from here?</h2>
+      <p>If this note was useful, you can mark <strong>{domain}</strong> as a preferred source on Google.</p>
+      <a
+        class="preferred-article-cta"
+        href={preferredSourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>Make {domain} a preferred source</span>
+        <span class="preferred-cta-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </aside>
+)}
+
+<style>
+  .preferred-source { font-family: var(--sans); }
+
+  .google-mark {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--rule) 78%, transparent);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .04);
+  }
+
+  .google-mark svg { display: block; width: 68%; height: 68%; }
+  .google-mark--small { width: 18px; height: 18px; }
+  .google-mark--large { width: 31px; height: 31px; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
+
+  .preferred-source--inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .preferred-source--inline:hover { color: var(--ink); }
+  .preferred-inline-text { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .preferred-inline-arrow { font-size: 10px; transition: transform 150ms ease; }
+  .preferred-source--inline:hover .preferred-inline-arrow { transform: translate(2px, -2px); }
+
+  .preferred-source--article {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+    margin-top: 58px;
+    padding: 24px 0 27px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .source-bridge {
+    display: flex;
+    width: 82px;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .source-mascot {
+    display: block;
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+  }
+
+  .source-mascot svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .source-mascot circle { fill: var(--ink); }
+  .source-mascot-eyes { fill: var(--paper); transform-box: fill-box; transform-origin: center; transition: transform 180ms cubic-bezier(.2,.8,.2,1); }
+
+  .bridge-dots {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding-inline: 3px;
+  }
+
+  .bridge-dots i {
+    display: block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--muted) 58%, transparent);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .preferred-source--article:hover .source-mascot-eyes { transform: translateX(2px); }
+  .preferred-source--article:hover .google-mark--large { transform: translateX(2px) rotate(2deg); }
+  .preferred-source--article:hover .bridge-dots i:nth-child(1) { transform: translateX(1px); }
+  .preferred-source--article:hover .bridge-dots i:nth-child(2) { transform: translateX(2px); }
+  .preferred-source--article:hover .bridge-dots i:nth-child(3) { transform: translateX(3px); }
+
+  .preferred-article-copy { min-width: 0; }
+  .preferred-kicker {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .075em;
+  }
+
+  .preferred-article-copy h2 {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 620;
+    line-height: 1.25;
+    letter-spacing: -.025em;
+  }
+
+  .preferred-article-copy p {
+    max-width: 480px;
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .preferred-article-copy strong { color: var(--ink); font-weight: 600; }
+
+  .preferred-article-cta {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    gap: 9px;
+    margin-top: 13px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 150ms ease, opacity 150ms ease;
+  }
+
+  .preferred-article-cta:hover {
+    color: var(--paper);
+    opacity: .86;
+    transform: translateY(-1px);
+  }
+
+  .preferred-cta-arrow { font-size: 10px; transition: transform 150ms ease; }
+  .preferred-article-cta:hover .preferred-cta-arrow { transform: translate(2px, -2px); }
+
+  @media (max-width: 640px) {
+    .preferred-source--article {
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 15px;
+      margin-top: 45px;
+      padding: 21px 0 23px;
+    }
+
+    .source-bridge { width: 70px; }
+    .source-mascot { width: 28px; height: 28px; flex-basis: 28px; }
+    .google-mark--large { width: 28px; height: 28px; }
+    .bridge-dots { padding-inline: 2px; }
+    .preferred-article-copy h2 { font-size: 16.5px; }
+    .preferred-article-copy p { font-size: 12.5px; }
+    .preferred-article-cta { min-height: 33px; margin-top: 11px; padding-inline: 11px; font-size: 11px; }
+  }
+
+  @media (max-width: 370px) {
+    .preferred-source--article { grid-template-columns: 1fr; gap: 10px; }
+    .source-bridge { padding-top: 0; }
+    .preferred-inline-long { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .source-mascot-eyes,
+    .google-mark--large,
+    .bridge-dots i,
+    .preferred-inline-arrow,
+    .preferred-article-cta,
+    .preferred-cta-arrow { transition: none; }
+  }
+</style>
