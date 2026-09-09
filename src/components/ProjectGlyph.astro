@@ -1,6 +1,6 @@
 ---
 interface Props {
-  kind: 'smallmb' | 'audit' | 'letters';
+  kind: 'smallmb' | 'audit' | 'letters' | 'calm' | 'notes';
 }
 
 const { kind } = Astro.props;
@@ -52,6 +52,37 @@ const { kind } = Astro.props;
       <circle class="letters-spark" cx="24.7" cy="7.4" r="1.2" />
     </svg>
   )}
+
+  {kind === 'calm' && (
+    <svg viewBox="0 0 32 32" role="presentation">
+      <rect class="glyph-tile" x="1" y="1" width="30" height="30" rx="8" />
+      <g class="calm-page">
+        <rect class="calm-sheet" x="8.3" y="6.8" width="15.4" height="18.4" rx="3" />
+        <path class="calm-line calm-line--one" d="M11.6 12.2h8.8" />
+        <path class="calm-line calm-line--two" d="M11.6 15.5h6.8" />
+        <path class="calm-line calm-line--three" d="M11.6 18.8h8" />
+      </g>
+      <circle class="calm-breath" cx="21.8" cy="9.2" r="1.45" />
+    </svg>
+  )}
+
+  {kind === 'notes' && (
+    <svg viewBox="0 0 32 32" role="presentation">
+      <rect class="glyph-tile" x="1" y="1" width="30" height="30" rx="8" />
+      <g class="notes-orbit">
+        <circle class="notes-ring" cx="16" cy="16" r="9.2" />
+        <circle class="notes-orbit-dot" cx="16" cy="6.8" r="1" />
+      </g>
+      <g class="notes-face">
+        <circle class="notes-body" cx="16" cy="16" r="7.1" />
+        <g class="notes-eyes">
+          <ellipse cx="13.6" cy="15.5" rx="1.55" ry="2.15" />
+          <ellipse cx="18.5" cy="15.5" rx="1.55" ry="2.15" />
+        </g>
+      </g>
+      <path class="notes-spark" d="M24.8 7.1v3.1M23.25 8.65h3.1" />
+    </svg>
+  )}
 </span>
 
 <style>
@@ -68,30 +99,33 @@ const { kind } = Astro.props;
     transition: transform 180ms cubic-bezier(.2,.8,.2,1), filter 180ms ease;
   }
 
-  .project-glyph svg {
-    display: block;
-    width: 30px;
-    height: 30px;
-    overflow: visible;
-  }
-
+  .project-glyph svg { display: block; width: 30px; height: 30px; overflow: visible; }
   .glyph-tile { stroke: none; }
+
   .project-glyph--smallmb .glyph-tile { fill: #2f8068; }
   .project-glyph--audit .glyph-tile { fill: #171916; }
   .project-glyph--letters .glyph-tile { fill: #ead05a; }
+  .project-glyph--calm .glyph-tile { fill: #dce7df; }
+  .project-glyph--notes .glyph-tile { fill: #ebe6dc; }
 
   :global(:root.dark) .project-glyph--smallmb .glyph-tile { fill: #3b846f; }
   :global(:root.dark) .project-glyph--audit .glyph-tile { fill: #f1f2ed; }
   :global(:root.dark) .project-glyph--letters .glyph-tile { fill: #d8bc47; }
+  :global(:root.dark) .project-glyph--calm .glyph-tile { fill: #26352d; }
+  :global(:root.dark) .project-glyph--notes .glyph-tile { fill: #252824; }
 
   .project-glyph--smallmb { color: #fff; }
   .project-glyph--audit { color: #f7f5ef; }
   .project-glyph--letters { color: #30321f; }
+  .project-glyph--calm { color: #355848; }
+  .project-glyph--notes { color: #1b1d1a; }
   :global(:root.dark) .project-glyph--audit { color: #171916; }
+  :global(:root.dark) .project-glyph--calm { color: #b6d1c0; }
+  :global(:root.dark) .project-glyph--notes { color: #f1f2ed; }
 
   .project-glyph path,
   .project-glyph rect:not(.glyph-tile),
-  .project-glyph circle:not(.letters-spark):not(.audit-dot):not(.smallmb-core) {
+  .project-glyph circle:not(.letters-spark):not(.audit-dot):not(.smallmb-core):not(.calm-breath):not(.notes-body):not(.notes-orbit-dot) {
     fill: none;
     stroke: currentColor;
     stroke-width: 1.55;
@@ -100,12 +134,9 @@ const { kind } = Astro.props;
   }
 
   .project-glyph:hover,
-  .project-glyph:active {
-    transform: translateY(-1.5px) scale(1.07);
-    filter: drop-shadow(0 5px 6px rgb(0 0 0 / .12));
-  }
+  .project-glyph:active { transform: translateY(-1.5px) scale(1.07); filter: drop-shadow(0 5px 6px rgb(0 0 0 / .12)); }
 
-  /* SmallMB — abstract nested mark: always alive, never literal. */
+  /* SmallMB */
   .smallmb-mark { transform-origin: 16px 16px; animation: smallmb-mark-breathe 3.8s ease-in-out infinite; }
   .smallmb-ring { transform-box: fill-box; transform-origin: center; }
   .smallmb-ring--outer { stroke-width: 1.45 !important; opacity: .95; animation: smallmb-outer 3.8s ease-in-out infinite; }
@@ -113,104 +144,67 @@ const { kind } = Astro.props;
   .smallmb-ring--inner { stroke-width: 1.3 !important; opacity: .48; animation: smallmb-inner 3.8s .34s ease-in-out infinite; }
   .smallmb-core { fill: currentColor; stroke: none; transform-box: fill-box; transform-origin: center; animation: smallmb-core-pulse 1.9s ease-in-out infinite; }
 
-  /* Audit — continuous scanner + rhythmic check redraw. */
+  /* Audit */
   .audit-window { fill: rgb(255 255 255 / .025) !important; }
   :global(:root.dark) .audit-window { fill: rgb(0 0 0 / .025) !important; }
   .audit-topbar, .audit-copy { opacity: .72; stroke-width: 1.25 !important; }
   .audit-dot { fill: currentColor; stroke: none; opacity: .48; }
   .audit-dot--two { opacity: .28; }
-  .audit-scan {
-    stroke: #8fd0af !important;
-    opacity: .8;
-    transform-origin: center;
-    animation: audit-scan-loop 2.8s ease-in-out infinite;
-  }
+  .audit-scan { stroke: #8fd0af !important; opacity: .8; transform-origin: center; animation: audit-scan-loop 2.8s ease-in-out infinite; }
   :global(:root.dark) .audit-scan { stroke: #416b5a !important; }
-  .audit-check {
-    stroke: #8fd0af !important;
-    stroke-width: 1.8 !important;
-    stroke-dasharray: 10;
-    stroke-dashoffset: 0;
-    animation: audit-check-loop 2.8s ease-in-out infinite;
-  }
+  .audit-check { stroke: #8fd0af !important; stroke-width: 1.8 !important; stroke-dasharray: 10; stroke-dashoffset: 0; animation: audit-check-loop 2.8s ease-in-out infinite; }
   :global(:root.dark) .audit-check { stroke: #416b5a !important; }
 
-  /* Random Letter — orbit never stops; A and Z continuously trade places. */
-  .letters-orbit {
-    transform-origin: 16px 16px;
-    opacity: .62;
-    animation: letters-orbit-loop 5.8s linear infinite;
-  }
+  /* Random Letter */
+  .letters-orbit { transform-origin: 16px 16px; opacity: .62; animation: letters-orbit-loop 5.8s linear infinite; }
   .letters-orbit path { stroke-width: 1.35 !important; }
   .letters-face { transform-origin: 16px 16px; }
   .letters-face path { stroke-width: 1.65 !important; }
   .letters-face--a { animation: letter-a-loop 5.8s ease-in-out infinite; }
   .letters-face--z { opacity: 0; transform: rotateY(-90deg); animation: letter-z-loop 5.8s ease-in-out infinite; }
-  .letters-spark {
-    fill: #fff7bd;
-    stroke: none;
-    opacity: .4;
-    animation: letter-spark-loop 2.9s ease-in-out infinite;
-  }
+  .letters-spark { fill: #fff7bd; stroke: none; opacity: .4; animation: letter-spark-loop 2.9s ease-in-out infinite; }
 
-  @keyframes smallmb-mark-breathe {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(.96) rotate(2deg); }
-  }
+  /* Calm WP — gentle reading rhythm. */
+  .calm-page { transform-origin: 16px 16px; animation: calm-page-float 4.6s ease-in-out infinite; }
+  .calm-sheet { fill: color-mix(in srgb, currentColor 6%, transparent) !important; stroke-width: 1.35 !important; }
+  .calm-line { transform-box: fill-box; transform-origin: left center; stroke-width: 1.3 !important; opacity: .72; }
+  .calm-line--one { animation: calm-line-one 3.6s ease-in-out infinite; }
+  .calm-line--two { animation: calm-line-two 3.6s .35s ease-in-out infinite; }
+  .calm-line--three { animation: calm-line-three 3.6s .7s ease-in-out infinite; }
+  .calm-breath { fill: currentColor; stroke: none; transform-box: fill-box; transform-origin: center; animation: calm-breath 2.3s ease-in-out infinite; }
 
-  @keyframes smallmb-outer {
-    0%, 100% { transform: scale(1); opacity: .95; }
-    50% { transform: scale(.9); opacity: .78; }
-  }
+  /* naman.blog — mini mascot identity. */
+  .notes-orbit { transform-origin: 16px 16px; animation: notes-orbit-spin 12s linear infinite; }
+  .notes-ring { opacity: .27; stroke-width: 1 !important; stroke-dasharray: 1.4 3.4; }
+  .notes-orbit-dot { fill: var(--accent); stroke: none; }
+  .notes-face { transform-origin: 16px 16px; animation: notes-face-breathe 4.8s ease-in-out infinite; }
+  .notes-body { fill: currentColor; stroke: none; }
+  .notes-eyes { fill: #ebe6dc; transform-box: fill-box; transform-origin: center; animation: notes-eyes-look 5.4s ease-in-out infinite; }
+  :global(:root.dark) .notes-eyes { fill: #252824; }
+  .notes-spark { stroke: var(--coral) !important; stroke-width: 1.25 !important; transform-box: fill-box; transform-origin: center; animation: notes-spark-pulse 2.7s ease-in-out infinite; }
 
-  @keyframes smallmb-middle {
-    0%, 100% { transform: scale(1); opacity: .72; }
-    50% { transform: scale(.82); opacity: .9; }
-  }
+  @keyframes smallmb-mark-breathe { 0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(.96) rotate(2deg)} }
+  @keyframes smallmb-outer { 0%,100%{transform:scale(1);opacity:.95} 50%{transform:scale(.9);opacity:.78} }
+  @keyframes smallmb-middle { 0%,100%{transform:scale(1);opacity:.72} 50%{transform:scale(.82);opacity:.9} }
+  @keyframes smallmb-inner { 0%,100%{transform:scale(1);opacity:.48} 50%{transform:scale(.72);opacity:1} }
+  @keyframes smallmb-core-pulse { 0%,100%{transform:scale(.82);opacity:.68} 50%{transform:scale(1.28);opacity:1} }
+  @keyframes audit-scan-loop { 0%{transform:translateY(-2.2px);opacity:.15} 25%{opacity:.9} 50%{transform:translateY(7px);opacity:.9} 75%{opacity:.35} 100%{transform:translateY(-2.2px);opacity:.15} }
+  @keyframes audit-check-loop { 0%,18%{stroke-dashoffset:10;opacity:.45} 38%,72%{stroke-dashoffset:0;opacity:1} 92%,100%{stroke-dashoffset:10;opacity:.45} }
+  @keyframes letters-orbit-loop { to { transform: rotate(360deg); } }
+  @keyframes letter-a-loop { 0%,34%{opacity:1;transform:rotateY(0)} 48%,52%{opacity:0;transform:rotateY(90deg)} 66%,100%{opacity:1;transform:rotateY(0)} }
+  @keyframes letter-z-loop { 0%,34%,66%,100%{opacity:0;transform:rotateY(-90deg)} 48%,52%{opacity:1;transform:rotateY(0)} }
+  @keyframes letter-spark-loop { 0%,100%{opacity:.25;transform:scale(.8)} 50%{opacity:1;transform:scale(1.35)} }
 
-  @keyframes smallmb-inner {
-    0%, 100% { transform: scale(1); opacity: .48; }
-    50% { transform: scale(.72); opacity: 1; }
-  }
+  @keyframes calm-page-float { 0%,100%{transform:translateY(.4px)} 50%{transform:translateY(-.7px)} }
+  @keyframes calm-line-one { 0%,100%{transform:scaleX(.76);opacity:.5} 50%{transform:scaleX(1);opacity:.92} }
+  @keyframes calm-line-two { 0%,100%{transform:scaleX(1);opacity:.76} 50%{transform:scaleX(.72);opacity:.42} }
+  @keyframes calm-line-three { 0%,100%{transform:scaleX(.82);opacity:.5} 50%{transform:scaleX(1);opacity:.85} }
+  @keyframes calm-breath { 0%,100%{transform:scale(.7);opacity:.28} 50%{transform:scale(1.2);opacity:.88} }
 
-  @keyframes smallmb-core-pulse {
-    0%, 100% { transform: scale(.82); opacity: .68; }
-    50% { transform: scale(1.28); opacity: 1; }
-  }
-
-  @keyframes audit-scan-loop {
-    0% { transform: translateY(-2.2px); opacity: .15; }
-    25% { opacity: .9; }
-    50% { transform: translateY(7px); opacity: .9; }
-    75% { opacity: .35; }
-    100% { transform: translateY(-2.2px); opacity: .15; }
-  }
-
-  @keyframes audit-check-loop {
-    0%, 18% { stroke-dashoffset: 10; opacity: .45; }
-    38%, 72% { stroke-dashoffset: 0; opacity: 1; }
-    92%, 100% { stroke-dashoffset: 10; opacity: .45; }
-  }
-
-  @keyframes letters-orbit-loop {
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes letter-a-loop {
-    0%, 34% { opacity: 1; transform: rotateY(0); }
-    48%, 52% { opacity: 0; transform: rotateY(90deg); }
-    66%, 100% { opacity: 1; transform: rotateY(0); }
-  }
-
-  @keyframes letter-z-loop {
-    0%, 34%, 66%, 100% { opacity: 0; transform: rotateY(-90deg); }
-    48%, 52% { opacity: 1; transform: rotateY(0); }
-  }
-
-  @keyframes letter-spark-loop {
-    0%, 100% { opacity: .25; transform: scale(.8); }
-    50% { opacity: 1; transform: scale(1.35); }
-  }
+  @keyframes notes-orbit-spin { to { transform: rotate(360deg); } }
+  @keyframes notes-face-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.035,.975)} }
+  @keyframes notes-eyes-look { 0%,18%,46%,100%{transform:translate(0)} 25%,38%{transform:translateX(1.1px)} 64%,78%{transform:translate(-.8px,.45px)} 84%{transform:scaleY(.12)} 88%{transform:scaleY(1)} }
+  @keyframes notes-spark-pulse { 0%,100%{opacity:.25;transform:scale(.75) rotate(0)} 50%{opacity:.95;transform:scale(1.18) rotate(10deg)} }
 
   @media (max-width: 640px) {
     .project-glyph, .project-glyph svg { width: 29px; height: 29px; }
