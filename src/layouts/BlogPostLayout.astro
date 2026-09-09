@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
+import PreferredSource from '../components/PreferredSource.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -63,6 +64,8 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
         <div class="prose">
           <slot />
         </div>
+
+        <PreferredSource variant="article" />
       </article>
 
       <nav class="post-nav" aria-label="More writing">
