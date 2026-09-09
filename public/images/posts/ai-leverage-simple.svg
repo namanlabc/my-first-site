@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">AI as leverage</title>
+  <desc id="desc">A tiny dot-eyed operator controls an oversized mechanical arm assembling a few simple work blocks.</desc>
+  <rect width="1200" height="720" rx="28" fill="#f5f1e8"/>
+
+  <circle cx="988" cy="146" r="78" fill="#efb18d" opacity=".7"/>
+  <path d="M82 575H1118" stroke="#d9d2c6" stroke-width="2"/>
+
+  <g transform="translate(100 430)">
+    <circle cx="58" cy="45" r="33" fill="#171917"/>
+    <ellipse cx="47" cy="42" rx="4" ry="7" fill="#f5f1e8"/>
+    <ellipse cx="69" cy="42" rx="4" ry="7" fill="#f5f1e8"/>
+    <path d="M58 78v52" stroke="#171917" stroke-width="8" stroke-linecap="round"/>
+    <path d="M58 99l32 22" stroke="#171917" stroke-width="8" stroke-linecap="round"/>
+    <path d="M58 128l-22 32M58 128l22 32" stroke="#171917" stroke-width="8" stroke-linecap="round"/>
+    <rect x="86" y="112" width="54" height="46" rx="10" fill="#91b7a2" stroke="#171917" stroke-width="4"/>
+    <path d="M113 111v-24" stroke="#171917" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="113" cy="82" r="7" fill="#171917"/>
+  </g>
+
+  <g fill="none" stroke="#1c211e" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M248 520L390 385"/>
+    <path d="M390 385L610 250"/>
+    <path d="M610 250L830 286"/>
+  </g>
+
+  <g fill="#f5f1e8" stroke="#1c211e" stroke-width="8">
+    <circle cx="390" cy="385" r="42"/>
+    <circle cx="610" cy="250" r="42"/>
+    <circle cx="830" cy="286" r="34"/>
+  </g>
+
+  <g transform="translate(845 256)" stroke="#1c211e" stroke-width="12" stroke-linecap="round">
+    <path d="M0 28l70 10"/>
+    <path d="M68 38l34-14"/>
+    <path d="M68 38l22 36"/>
+  </g>
+
+  <g>
+    <rect x="882" y="188" width="116" height="92" rx="14" fill="#8fb9a3" transform="rotate(-5 940 234)"/>
+    <rect x="962" y="250" width="116" height="92" rx="14" fill="#e7b26a" transform="rotate(5 1020 296)"/>
+    <rect x="870" y="320" width="116" height="92" rx="14" fill="#d98682" transform="rotate(4 928 366)"/>
+    <rect x="980" y="382" width="116" height="92" rx="14" fill="#aeb9d6" transform="rotate(-4 1038 428)"/>
+  </g>
+
+  <g stroke="#1c211e" stroke-width="7" stroke-linecap="round">
+    <path d="M906 220h52M906 240h38"/>
+    <path d="M994 282h52M994 302h34"/>
+    <path d="M900 352h52M900 372h42"/>
+    <path d="M1010 414h52M1010 434h36"/>
+  </g>
+
+  <g fill="#6e8d7b" opacity=".8">
+    <circle cx="746" cy="158" r="7"/>
+    <circle cx="1064" cy="160" r="5"/>
+    <circle cx="1038" cy="522" r="6"/>
+  </g>
+</svg>
