@@ -12,8 +12,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
   <a
     class="preferred-source preferred-source--inline"
     href={preferredSourceUrl}
-    target="_blank"
-    rel="noopener noreferrer"
+    data-google-preferred-source
     aria-label={`Make ${domain} a preferred source on Google`}
   >
     <span class="google-mark google-mark--small" aria-hidden="true">
@@ -53,12 +52,12 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
     <div class="preferred-article-copy">
       <span class="preferred-kicker">ONE MORE THING</span>
       <h2>Want more from here?</h2>
-      <p>If this note was useful, you can mark <strong>{domain}</strong> as a preferred source on Google.</p>
+      <p>If this note was useful, mark <strong>{domain}</strong> as a preferred source on Google.</p>
       <a
         class="preferred-article-cta"
         href={preferredSourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        data-google-preferred-source
+        aria-label={`Make ${domain} a preferred source on Google`}
       >
         <span>Make {domain} a preferred source</span>
         <span class="preferred-cta-arrow" aria-hidden="true">↗</span>
@@ -66,6 +65,55 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
     </div>
   </aside>
 )}
+
+<script is:inline>
+  (() => {
+    if (window.__namanPreferredSourceHandler) return;
+    window.__namanPreferredSourceHandler = true;
+
+    document.addEventListener('click', async (event) => {
+      if (!(event.target instanceof Element)) return;
+      const trigger = event.target.closest('[data-google-preferred-source]');
+      if (!trigger) return;
+
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) return;
+
+      event.preventDefault();
+      if (trigger.dataset.loading === 'true') return;
+
+      trigger.dataset.loading = 'true';
+      trigger.setAttribute('aria-busy', 'true');
+
+      try {
+        if (!window.__namanPreferredSourceClient) {
+          window.__namanPreferredSourceClient = import('https://news.google.com/swg/js/v1/publisher.mjs')
+            .then(({ preferredSource }) => {
+              preferredSource.init({
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+                lang: document.documentElement.lang || 'en'
+              });
+              return preferredSource;
+            });
+        }
+
+        const client = await window.__namanPreferredSourceClient;
+        await Promise.resolve(client.addPreferredSource());
+      } catch (error) {
+        window.location.assign(trigger.href);
+      } finally {
+        delete trigger.dataset.loading;
+        trigger.removeAttribute('aria-busy');
+      }
+    });
+  })();
+</script>
 
 <style>
   .preferred-source { font-family: var(--sans); }
@@ -99,6 +147,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
   .preferred-inline-text { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
   .preferred-inline-arrow { font-size: 10px; transition: transform 150ms ease; }
   .preferred-source--inline:hover .preferred-inline-arrow { transform: translate(2px, -2px); }
+  .preferred-source--inline[data-loading='true'] { opacity: .58; cursor: progress; }
 
   .preferred-source--article {
     display: grid;
@@ -144,7 +193,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
     height: 2px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--muted) 58%, transparent);
-    transition: transform 180ms ease, opacity 180ms ease;
+    transition: transform 180ms ease;
   }
 
   .preferred-source--article:hover .source-mascot-eyes { transform: translateX(2px); }
@@ -154,6 +203,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
   .preferred-source--article:hover .bridge-dots i:nth-child(3) { transform: translateX(3px); }
 
   .preferred-article-copy { min-width: 0; }
+
   .preferred-kicker {
     display: block;
     margin-bottom: 5px;
@@ -207,6 +257,7 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
     transform: translateY(-1px);
   }
 
+  .preferred-article-cta[data-loading='true'] { opacity: .58; cursor: progress; transform: none; }
   .preferred-cta-arrow { font-size: 10px; transition: transform 150ms ease; }
   .preferred-article-cta:hover .preferred-cta-arrow { transform: translate(2px, -2px); }
 
