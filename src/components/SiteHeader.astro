@@ -27,7 +27,6 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
 
 <script>
   const brand = document.querySelector<HTMLElement>('.site-brand');
-  const themeButton = document.querySelector<HTMLElement>('#theme-toggle');
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
 
   if (brand) {
@@ -97,18 +96,17 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
       scrollTimer = window.setTimeout(() => brand.classList.remove('is-scrolling'), 260);
     }, { passive: true });
 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) scheduleBlink();
-  }
-
-  themeButton?.addEventListener('click', () => {
-    if (!brand) return;
-    window.setTimeout(() => {
+    document.addEventListener('theme-transition-complete', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.clearTimeout(reactionTimer);
       brand.classList.remove('is-celebrating');
       void brand.offsetWidth;
       brand.classList.add('is-celebrating');
-      window.setTimeout(() => brand.classList.remove('is-celebrating'), 760);
+      reactionTimer = window.setTimeout(() => brand.classList.remove('is-celebrating'), 760);
     });
-  });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) scheduleBlink();
+  }
 
   menu?.addEventListener('toggle', () => brand?.classList.toggle('is-menu-watching', menu.open));
 </script>
