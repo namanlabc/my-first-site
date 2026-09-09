@@ -24,12 +24,13 @@ const work = [
         </g>
       </svg>
       <h1 id="home-title">Hey, I’m Naman.</h1>
-      <p class="quiet-subtitle">I make small, useful software.</p>
+      <p class="quiet-subtitle">I build small internet things that solve annoyingly specific problems.</p>
 
       <div class="quiet-prose">
-        <p>Most of my projects start with me being annoyed by something. <a href="https://smallmb.com/">SmallMB</a> came from stubborn file-size limits. <a href="https://github.com/namanlabc/astro-seo-audit">Astro SEO Audit</a> came from checking SEO by hand.</p>
-        <p><a href="https://getrandomletter.com/">Get Random Letter</a> came from needing one random letter and apparently not knowing when to stop.</p>
-        <p>I also <a href={`${base}archive/`}>write</a> about building, SEO, and the useful parts of getting things wrong. The résumé-shaped version is on my <a href={`${base}experience/`}>experience page</a>.</p>
+        <p>I don’t have a grand thesis behind everything I make. Usually I notice something clunky, build the version I’d rather use, and put it on the internet.</p>
+        <p><a href="https://smallmb.com/">SmallMB</a> started with stubborn file-size limits. <a href="https://github.com/namanlabc/astro-seo-audit">Astro SEO Audit</a> started because checking SEO by hand was boring. <a href="https://getrandomletter.com/">Get Random Letter</a> started because I needed one random letter — then I kept adding tools because apparently I don’t know when to stop.</p>
+        <p>Some things work, some don’t. I’d rather ship, learn, and make something useful than pretend every project is a revolution.</p>
+        <p>I also <a href={`${base}archive/`}>write</a> about building, SEO, experiments, and mistakes worth remembering. The résumé-shaped version is on my <a href={`${base}experience/`}>experience page</a>.</p>
       </div>
     </section>
 
@@ -59,13 +60,127 @@ const work = [
         ))}
       </div>
       <a class="quiet-more" href={`${base}archive/`}>Read every note</a>
+
+      <div class="preferred-source-callout">
+        <div class="preferred-source-copy">
+          <strong>Read this stuff on Google, too.</strong>
+          <span>Make naman.blog one of your preferred sources.</span>
+        </div>
+        <a
+          class="preferred-source-button"
+          href="https://www.google.com/preferences/source?q=naman.blog"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Add naman.blog as a preferred source on Google"
+        >
+          <span class="preferred-google-mark" aria-hidden="true">G</span>
+          <span>Preferred source on Google</span>
+          <span class="preferred-source-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
     </section>
 
     <section class="quiet-contact" aria-label="Contact Naman">
-      <p>Want to discuss a useful little product, argue about a tiny detail, or just say hi? <a href="mailto:contact@naman.blog?subject=Hello%20Naman">Send me an email</a>.</p>
+      <p>If you’re making something useful, have a sharp disagreement, or just want to say hi, <a href="mailto:contact@naman.blog?subject=Hello%20Naman">send me an email</a>.</p>
       <p>You can also find me on <a href="https://x.com/namanlabs">X</a>, <a href="https://github.com/namanlabc/">GitHub</a>, or follow the <a href={`${base}rss.xml`}>RSS feed</a>.</p>
     </section>
 
     <p class="quiet-colophon">Mandla, India · <a href={`${base}about/`}>about me</a> · <a href={`${base}experience/`}>experience</a></p>
   </article>
 </Layout>
+
+<style>
+  .preferred-source-callout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 26px;
+    padding: 17px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .preferred-source-copy {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .preferred-source-copy strong {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+
+  .preferred-source-copy span {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .quiet-home .preferred-source-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 11px;
+    border: 1px solid color-mix(in srgb, var(--ink) 18%, var(--rule));
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--paper) 94%, var(--paper-soft));
+    color: var(--ink);
+    box-shadow: 0 1px 0 rgb(0 0 0 / .035), 0 4px 14px rgb(0 0 0 / .035);
+    font-size: 11.5px;
+    font-weight: 560;
+    letter-spacing: -.005em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .quiet-home .preferred-source-button:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--ink) 34%, var(--rule));
+    background: var(--paper-soft);
+    color: var(--ink);
+    box-shadow: 0 1px 0 rgb(0 0 0 / .04), 0 7px 18px rgb(0 0 0 / .055);
+  }
+
+  .preferred-google-mark {
+    display: grid;
+    width: 21px;
+    height: 21px;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / .08);
+    color: #4285f4;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .preferred-source-arrow {
+    margin-left: 1px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  @media (max-width: 640px) {
+    .preferred-source-callout {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 23px;
+      padding: 15px 0 16px;
+    }
+
+    .quiet-home .preferred-source-button {
+      min-height: 39px;
+    }
+  }
+</style>
