@@ -3,8 +3,8 @@ title: "AI Is Not Magic. It Is Leverage."
 description: "AI makes execution cheap. That makes taste, judgment, curiosity and agency more valuable—not less."
 pubDate: 2026-09-09
 tags: ["AI", "building", "opinion", "internet"]
-image: "/images/posts/ai-leverage-clean.webp"
-imageAlt: "A small dot-eyed operator controls a large mechanical arm assembling a few simple blocks of work."
+image: "/images/posts/ai-leverage-illustration.webp"
+imageAlt: "A small dot-eyed figure uses a lever to lift a much larger green block."
 ---
 
 I use AI a lot.
