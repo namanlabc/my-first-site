@@ -33,41 +33,166 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     --theme-reveal-x: calc(100vw - 42px);
     --theme-reveal-y: 52px;
     --theme-reveal-radius: 150vmax;
+    --theme-frame-x: calc(100% - 22px);
+    --theme-frame-y: 32px;
+    --theme-frame-radius: 150vmax;
+    --theme-rim: rgb(155 200 176 / .38);
+    --theme-bloom: rgb(155 200 176 / .14);
+  }
+
+  .site-frame {
+    view-transition-name: theme-shell;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: 720ms;
+    animation-timing-function: cubic-bezier(.22, .78, .2, 1);
+  }
+
+  ::view-transition-group(theme-shell) {
+    animation-duration: 980ms;
+    animation-timing-function: cubic-bezier(.16, .86, .22, 1);
   }
 
   ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 760ms;
-    animation-timing-function: cubic-bezier(.22, .84, .22, 1);
+  ::view-transition-new(root),
+  ::view-transition-old(theme-shell),
+  ::view-transition-new(theme-shell) {
+    mix-blend-mode: normal;
+    backface-visibility: hidden;
   }
 
   ::view-transition-old(root) {
-    z-index: 1;
-    animation: none;
+    z-index: 0;
+    animation: theme-canvas-out 720ms cubic-bezier(.22, .78, .2, 1) both;
   }
 
   ::view-transition-new(root) {
-    z-index: 2;
-    animation-name: theme-eclipse-reveal;
+    z-index: 1;
+    animation: theme-canvas-in 720ms cubic-bezier(.22, .78, .2, 1) both;
   }
 
-  @keyframes theme-eclipse-reveal {
+  ::view-transition-old(theme-shell) {
+    z-index: 2;
+    animation: theme-shell-recede 900ms cubic-bezier(.22, .78, .2, 1) both;
+  }
+
+  ::view-transition-new(theme-shell) {
+    z-index: 3;
+    animation-duration: 980ms;
+    animation-timing-function: cubic-bezier(.16, .86, .22, 1);
+    animation-fill-mode: both;
+    transform-origin: var(--theme-frame-x) var(--theme-frame-y);
+  }
+
+  :root[data-theme-target='dark']::view-transition-new(theme-shell) {
+    animation-name: theme-shell-to-dark;
+  }
+
+  :root[data-theme-target='light']::view-transition-new(theme-shell) {
+    animation-name: theme-shell-to-light;
+  }
+
+  @keyframes theme-canvas-out {
+    0% { opacity: 1; filter: brightness(1) saturate(1); }
+    100% { opacity: .86; filter: brightness(.96) saturate(.92); }
+  }
+
+  @keyframes theme-canvas-in {
+    0% { opacity: .28; filter: brightness(.9) saturate(.88); }
+    44% { opacity: .72; }
+    100% { opacity: 1; filter: none; }
+  }
+
+  @keyframes theme-shell-recede {
+    0% { transform: scale(1); filter: brightness(1) saturate(1); }
+    64% { transform: scale(.998); filter: brightness(.975) saturate(.95); }
+    100% { transform: scale(.998); filter: brightness(.965) saturate(.93); }
+  }
+
+  @keyframes theme-shell-to-dark {
     0% {
-      clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y));
-      filter: brightness(.9) saturate(.86);
+      clip-path: circle(0 at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1.004);
+      filter:
+        brightness(.8)
+        saturate(.72)
+        drop-shadow(0 0 0 transparent);
+    }
+    24% {
+      filter:
+        brightness(.92)
+        saturate(.84)
+        drop-shadow(0 0 13px var(--theme-rim));
     }
     58% {
-      filter: brightness(1.015) saturate(1.02);
+      filter:
+        brightness(1.015)
+        saturate(.98)
+        drop-shadow(0 0 24px var(--theme-rim))
+        drop-shadow(0 0 46px var(--theme-bloom));
+    }
+    82% {
+      clip-path: circle(calc(var(--theme-frame-radius) * .985) at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1.001);
+      filter:
+        brightness(1.005)
+        saturate(1)
+        drop-shadow(0 0 10px var(--theme-rim));
     }
     100% {
-      clip-path: circle(var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y));
+      clip-path: circle(var(--theme-frame-radius) at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1);
+      filter: none;
+    }
+  }
+
+  @keyframes theme-shell-to-light {
+    0% {
+      clip-path: circle(0 at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1.004);
+      filter:
+        brightness(1.24)
+        saturate(.9)
+        sepia(.1)
+        drop-shadow(0 0 0 transparent);
+    }
+    22% {
+      filter:
+        brightness(1.17)
+        saturate(.98)
+        sepia(.07)
+        drop-shadow(0 0 15px var(--theme-rim));
+    }
+    56% {
+      filter:
+        brightness(1.07)
+        saturate(1.02)
+        sepia(.035)
+        drop-shadow(0 0 28px var(--theme-rim))
+        drop-shadow(0 0 52px var(--theme-bloom));
+    }
+    82% {
+      clip-path: circle(calc(var(--theme-frame-radius) * .985) at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1.001);
+      filter:
+        brightness(1.015)
+        saturate(1.01)
+        drop-shadow(0 0 10px var(--theme-rim));
+    }
+    100% {
+      clip-path: circle(var(--theme-frame-radius) at var(--theme-frame-x) var(--theme-frame-y));
+      transform: scale(1);
       filter: none;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .site-frame { view-transition-name: none; }
     ::view-transition-old(root),
-    ::view-transition-new(root) {
+    ::view-transition-new(root),
+    ::view-transition-old(theme-shell),
+    ::view-transition-new(theme-shell) {
       animation: none !important;
     }
   }
@@ -120,6 +245,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <script>
       const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
       const root = document.documentElement;
+      const siteFrame = document.querySelector<HTMLElement>('.site-frame');
 
       function updateThemeControl() {
         const isDark = root.classList.contains('dark');
@@ -134,29 +260,54 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         updateThemeControl();
       }
 
+      function announceThemeTransition(name: 'start' | 'complete', target: 'dark' | 'light') {
+        document.dispatchEvent(new CustomEvent(`theme-transition-${name}`, { detail: { theme: target } }));
+      }
+
       updateThemeControl();
 
       themeButton?.addEventListener('click', () => {
+        const target: 'dark' | 'light' = root.classList.contains('dark') ? 'light' : 'dark';
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const startViewTransition = (document as any).startViewTransition;
 
         if (reduceMotion || typeof startViewTransition !== 'function') {
           applyNextTheme();
+          announceThemeTransition('complete', target);
           return;
         }
 
-        const rect = themeButton.getBoundingClientRect();
-        const x = rect.left + rect.width / 2;
-        const y = rect.top + rect.height / 2;
+        const buttonRect = themeButton.getBoundingClientRect();
+        const x = buttonRect.left + buttonRect.width / 2;
+        const y = buttonRect.top + buttonRect.height / 2;
         const farX = Math.max(x, window.innerWidth - x);
         const farY = Math.max(y, window.innerHeight - y);
-        const radius = Math.hypot(farX, farY) + 24;
+        const radius = Math.hypot(farX, farY) + 32;
 
+        const frameRect = siteFrame?.getBoundingClientRect();
+        const frameX = frameRect ? x - frameRect.left : x;
+        const frameY = frameRect ? y - frameRect.top : y;
+        const frameFarX = frameRect ? Math.max(frameX, frameRect.width - frameX) : farX;
+        const frameFarY = frameRect ? Math.max(frameY, frameRect.height - frameY) : farY;
+        const frameRadius = Math.hypot(frameFarX, frameFarY) + 28;
+
+        root.dataset.themeTarget = target;
         root.style.setProperty('--theme-reveal-x', `${x}px`);
         root.style.setProperty('--theme-reveal-y', `${y}px`);
         root.style.setProperty('--theme-reveal-radius', `${radius}px`);
+        root.style.setProperty('--theme-frame-x', `${frameX}px`);
+        root.style.setProperty('--theme-frame-y', `${frameY}px`);
+        root.style.setProperty('--theme-frame-radius', `${frameRadius}px`);
+        root.style.setProperty('--theme-rim', target === 'dark' ? 'rgb(155 200 176 / .42)' : 'rgb(214 183 92 / .42)');
+        root.style.setProperty('--theme-bloom', target === 'dark' ? 'rgb(155 200 176 / .15)' : 'rgb(255 230 164 / .22)');
 
-        startViewTransition.call(document, applyNextTheme);
+        announceThemeTransition('start', target);
+        const transition = startViewTransition.call(document, applyNextTheme);
+
+        Promise.resolve(transition.finished).finally(() => {
+          announceThemeTransition('complete', target);
+          delete root.dataset.themeTarget;
+        });
       });
     </script>
   </body>
