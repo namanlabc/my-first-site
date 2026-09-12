@@ -30,6 +30,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
 <style is:global>
   :root {
+    --canvas: #fff;
+    --paper: #fff;
+    --paper-soft: #fff;
     --theme-blink-cover: #090a09;
     --theme-blink-line: rgb(155 200 176 / .34);
     --theme-blink-open-brightness: .94;
@@ -168,7 +171,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta id="theme-color" name="theme-color" content="#d9d6cf" />
+    <meta id="theme-color" name="theme-color" content="#fff" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
     <link rel="canonical" href={canonical} />
@@ -192,7 +195,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         try { savedTheme = localStorage.getItem('theme'); } catch {}
         const isDark = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.classList.toggle('dark', isDark);
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#090a09' : '#d9d6cf');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#090a09' : '#fff');
       })();
     </script>
   </head>
@@ -214,7 +217,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         const isDark = root.classList.contains('dark');
         themeButton?.setAttribute('aria-pressed', String(isDark));
         themeButton?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#090a09' : '#d9d6cf');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#090a09' : '#fff');
       }
 
       function applyNextTheme() {
@@ -241,7 +244,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         }
 
         root.dataset.themeTarget = target;
-        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#090a09' : '#d9d6cf');
+        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#090a09' : '#fff');
         root.style.setProperty('--theme-blink-line', target === 'dark' ? 'rgb(155 200 176 / .34)' : 'rgb(214 183 92 / .32)');
 
         announceThemeTransition('start', target);
