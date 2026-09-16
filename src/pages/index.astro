@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import InkWanderer from '../components/InkWanderer.astro';
+import ReferenceArt from '../components/ReferenceArt.astro';
+import ReferenceProjectMark from '../components/ReferenceProjectMark.astro';
+import '../styles/reference.css';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const recentPosts = posts.slice(0, 3);
@@ -10,158 +12,78 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const work = [
   {
     name: 'SmallMB',
-    meta: 'Android · live',
-    copy: 'Files get too big. SmallMB makes them smaller — photos, PDFs and everyday file jobs handled locally, without turning a basic utility into an account.',
+    detail: 'Android file utility',
     href: 'https://smallmb.com/',
-    art: 'push' as const,
+    kind: 'smallmb' as const,
   },
   {
     name: 'Astro SEO Audit',
-    meta: 'Open source · npm',
-    copy: 'I got tired of SEO mistakes hiding in the HTML a site actually ships, so I built a CLI that looks at the final output and catches them before deploy.',
+    detail: 'Open-source SEO tool',
     href: 'https://github.com/namanlabc/astro-seo-audit',
-    art: 'hero' as const,
+    kind: 'audit' as const,
   },
   {
     name: 'Get Random Letter',
-    meta: 'Web tools · live',
-    copy: 'One random-letter wheel escaped containment and became a small collection of browser tools for games, classrooms, quick decisions and harmless nonsense.',
+    detail: 'Browser tools',
     href: 'https://getrandomletter.com/',
-    art: 'notes' as const,
+    kind: 'letters' as const,
   },
-];
-
-const lab = [
-  { mark: 'still sanding it', kind: 'WordPress theme', name: 'Calm WP', copy: 'A quieter reading-first theme, kept deliberately simple.' },
-  { mark: 'you are here', kind: 'Personal web', name: 'Naman.blog', copy: 'The permanent experiment: writing, projects and whatever I am learning next.', href: `${base}about/` },
-  { mark: 'open source', kind: 'Developer tool', name: 'Astro SEO Audit', copy: 'A small CLI with a surprisingly stubborn obsession with final HTML.', href: 'https://github.com/namanlabc/astro-seo-audit' },
-  { mark: '6 tiny tools', kind: 'Browser experiment', name: 'Get Random Letter', copy: 'Proof that a one-page idea can keep growing if people find it useful.', href: 'https://getrandomletter.com/' },
 ];
 ---
 
-<Layout description="Naman builds useful little software, web tools, open-source projects, and writes field notes about the process.">
-  <article class="field-home">
-    <section class="field-hero" aria-labelledby="home-title">
-      <div class="field-hero-copy">
-        <p class="field-kicker"><span class="signal">●</span> Naman · somewhere on the internet</p>
-        <h1 id="home-title">I build <em>small things</em> for a very big internet.</h1>
-        <p class="field-hero-lede">Tools, experiments and notes from trying to remove one stubborn little friction at a time.</p>
-        <a class="field-hero-link" href="#work">see what escaped the laptop</a>
+<Layout description="Naman Patel builds software and websites, and writes about what he learns.">
+  <article class="reference-home">
+    <section class="reference-hero" aria-labelledby="home-title">
+      <div class="reference-hero__copy">
+        <h1 id="home-title">Naman Patel</h1>
+        <p class="reference-hero__lead">Software, websites and writing.</p>
+        <p class="reference-hero__sub">I build useful tools and write about what I learn.</p>
       </div>
 
-      <div class="field-hero-art">
-        <InkWanderer variant="hero" />
+      <div class="reference-hero__art">
+        <ReferenceArt variant="hero" />
       </div>
-
-      <span class="field-scroll-cue" aria-hidden="true">keep wandering</span>
     </section>
 
-    <section class="field-section" id="work" aria-labelledby="work-title">
-      <div class="field-section-head">
-        <div>
-          <span class="field-index">01 / WORK</span>
-          <h2 id="work-title">A few things escaped my laptop.</h2>
-        </div>
-        <p>I like software with a clear job. No theatre. No ten-step ritual. Just a problem, a tool, and hopefully fewer annoying minutes in someone’s day.</p>
+    <section class="reference-section" aria-labelledby="made-title">
+      <div class="reference-section__head">
+        <span class="reference-section__index">01</span>
+        <h2 id="made-title">Things I’ve made</h2>
       </div>
 
-      <div class="field-work">
+      <div class="reference-projects">
         {work.map(project => (
-          <article class="field-project">
-            <div class="field-project-art">
-              <InkWanderer variant={project.art} />
-            </div>
-            <div class="field-project-copy">
-              <div class="field-project-meta">{project.meta}</div>
-              <h3>{project.name}</h3>
-              <p>{project.copy}</p>
-              <a href={project.href} target="_blank" rel="noopener noreferrer">open the thing <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
+          <a class="reference-project" href={project.href} target="_blank" rel="noopener noreferrer">
+            <ReferenceProjectMark kind={project.kind} />
+            <span class="reference-project__copy">
+              <strong>{project.name}</strong>
+              <small>{project.detail}</small>
+            </span>
+            <span class="reference-arrow" aria-hidden="true">→</span>
+          </a>
         ))}
       </div>
     </section>
 
-    <section class="field-section field-lab" aria-labelledby="lab-title">
-      <div class="field-section-head">
-        <div>
-          <span class="field-index">02 / THE LAB</span>
-          <h2 id="lab-title">The drawer where the smaller experiments live.</h2>
-        </div>
-        <p>Not everything needs a launch cinematic. Some things are just interesting enough to make, break, rebuild and leave fingerprints on.</p>
+    <section class="reference-section" aria-labelledby="writing-title">
+      <div class="reference-section__head">
+        <span class="reference-section__index">02</span>
+        <h2 id="writing-title">Recent writing</h2>
       </div>
 
-      <div class="field-lab-grid">
-        {lab.map(item => item.href ? (
-          <a class="field-lab-item" data-mark={item.mark} href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-            <small>{item.kind}</small>
-            <strong>{item.name} ↗</strong>
-            <p>{item.copy}</p>
+      <div class="reference-writing">
+        {recentPosts.map(post => (
+          <a class="reference-writing-row" href={`${base}blog/${post.id}/`}>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+            </time>
+            <strong>{post.data.title}</strong>
+            <span class="reference-arrow" aria-hidden="true">→</span>
           </a>
-        ) : (
-          <div class="field-lab-item" data-mark={item.mark}>
-            <small>{item.kind}</small>
-            <strong>{item.name}</strong>
-            <p>{item.copy}</p>
-          </div>
         ))}
       </div>
-    </section>
 
-    <section class="field-section" aria-labelledby="notes-title">
-      <div class="field-section-head">
-        <div>
-          <span class="field-index">03 / NOTES</span>
-          <h2 id="notes-title">Things worth leaving in the margin.</h2>
-        </div>
-        <p>I write when a build teaches me something, when an idea refuses to leave, or when the mistake is useful enough to keep.</p>
-      </div>
-
-      <div class="field-notes-wrap">
-        <div class="field-notes-list">
-          {recentPosts.map(post => (
-            <a class="field-note" href={`${base}blog/${post.id}/`}>
-              <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}</time>
-              <strong>{post.data.title}</strong>
-              <span aria-hidden="true">↗</span>
-            </a>
-          ))}
-          <a class="field-note" href={`${base}archive/`}>
-            <time>archive</time>
-            <strong>Every note, including the ones with rough edges.</strong>
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
-
-        <div class="field-notes-art">
-          <InkWanderer variant="notes" />
-        </div>
-      </div>
-    </section>
-
-    <section class="field-section field-about" aria-labelledby="about-title">
-      <div>
-        <span class="field-index">04 / THE PERSON</span>
-        <h2 id="about-title">I’m Naman.</h2>
-      </div>
-      <div class="field-about-copy">
-        <p>I notice small problems, get mildly obsessed with them, and usually end up building something.</p>
-        <p>I started around search and content, then kept following the interesting problems until they turned into websites, Android apps, open-source tools and an unreasonable number of browser tabs.</p>
-        <p>This site is the evidence cabinet. <a href={`${base}about/`}>More about me →</a></p>
-      </div>
-    </section>
-
-    <section class="field-contact" aria-labelledby="contact-title">
-      <div class="field-contact-copy">
-        <span class="field-index">05 / END OF THIS PAGE</span>
-        <h2 id="contact-title">You made it all the way down<span>.</span></h2>
-        <p>If you are building something interesting, found a strange little problem, or just want to say hello, my inbox is less dramatic than this page.</p>
-        <a class="field-contact-link" href="mailto:contact@naman.blog?subject=Hello%20Naman">contact@naman.blog ↗</a>
-      </div>
-
-      <div class="field-contact-art">
-        <InkWanderer variant="end" />
-      </div>
+      <a class="reference-all-writing" href={`${base}archive/`}>All writing <span aria-hidden="true">→</span></a>
     </section>
   </article>
 </Layout>
