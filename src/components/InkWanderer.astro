@@ -1,0 +1,246 @@
+---
+interface Props {
+  variant?: 'hero' | 'push' | 'notes' | 'end';
+  class?: string;
+}
+
+const { variant = 'hero', class: className = '' } = Astro.props;
+---
+
+<div class:list={['ink-wanderer', `ink-wanderer--${variant}`, className]} aria-hidden="true">
+  <svg viewBox="0 0 420 420" role="presentation">
+    <defs>
+      <filter id={`rough-${variant}`} x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed={variant === 'hero' ? 7 : variant === 'push' ? 13 : variant === 'notes' ? 21 : 31} result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+
+    {variant === 'hero' && (
+      <g class="scene scene--hero" filter={`url(#rough-${variant})`}>
+        <path class="ground" d="M42 345c73-5 160 4 330-2" />
+        <path class="scribble scribble--one" d="M92 83c14-12 30-15 43-7" />
+        <path class="scribble scribble--two" d="M327 112c13 5 21 14 24 28" />
+
+        <g class="pencil">
+          <path d="M126 70 155 246" />
+          <path d="m120 70 12-2 5 19-12 2z" />
+          <path class="accent-fill" d="m120 70 12-2-2-14-8 1z" />
+          <path d="m155 246 7 21-13-18z" />
+        </g>
+
+        <g class="wanderer wanderer--hero">
+          <path class="leg" d="M205 303c-2 15-1 28-5 38" />
+          <path class="leg" d="M243 302c3 13 7 26 9 39" />
+          <path class="shoe" d="M189 344c13-4 20-3 26 1" />
+          <path class="shoe" d="M241 344c13-3 22-2 28 2" />
+
+          <path class="body-white" d="M191 207c17-10 50-11 69 2l-2 98c-20 9-47 9-67-1z" />
+          <path class="arm" d="M192 220c-20 6-31 20-43 39" />
+          <path class="hand" d="M149 259c-4 5-5 13-1 18 5-1 8-5 10-10" />
+          <path class="arm" d="M258 222c17 8 26 18 37 31" />
+
+          <path class="coat accent-fill" d="M199 208c8-12 19-20 32-22 14 6 25 15 33 28 25 23 53 44 78 69-15 1-27 7-35 18-23-6-43-15-61-26l7 35c-16 5-31 6-44 2-4-33-10-66-10-104z" />
+          <path class="coat-detail" d="M221 209c12 18 21 36 29 58M238 203c19 17 31 34 43 54M257 220c21 19 42 37 66 52" />
+
+          <path class="head" d="M194 148c3-27 20-45 44-44 24 1 40 19 39 45-1 27-17 45-41 45-25 0-45-18-42-46z" />
+          <path class="hair" d="M196 143c3-25 20-43 44-42 15 0 27 7 35 20-12-4-21-4-30 1-15 8-28 16-49 21z" />
+          <ellipse class="eye" cx="218" cy="151" rx="4.5" ry="6" />
+          <ellipse class="eye" cx="250" cy="151" rx="4.5" ry="6" />
+          <path class="mouth" d="M231 170c5 2 10 2 15-1" />
+          <path class="neck" d="M224 190c0 8-1 14-4 21M248 190c1 8 3 14 6 20" />
+        </g>
+      </g>
+    )}
+
+    {variant === 'push' && (
+      <g class="scene scene--push" filter={`url(#rough-${variant})`}>
+        <path class="ground" d="M40 342c80-4 180 2 340 0" />
+        <g class="file-monolith">
+          <path class="file-paper" d="M214 98h119l37 39v154H214z" />
+          <path d="M333 99v39h36" />
+          <path d="M245 178h94M245 201h74M245 224h86" />
+          <text x="245" y="265" class="svg-label">MB</text>
+        </g>
+        <g class="wanderer wanderer--push">
+          <path class="head" d="M103 184c2-24 16-39 36-39 21 0 35 16 35 39 0 23-14 39-35 39-22 0-38-16-36-39z" />
+          <path class="hair" d="M104 179c4-21 18-35 37-35 12 0 22 5 29 15-11-2-18-1-26 4-12 7-23 12-40 16z" />
+          <ellipse class="eye" cx="124" cy="184" rx="3.6" ry="5" />
+          <ellipse class="eye" cx="150" cy="184" rx="3.6" ry="5" />
+          <path class="body-white" d="M101 230c16-8 42-8 57 0l8 78c-17 7-41 7-58 1z" />
+          <path class="coat accent-fill" d="M111 230c9-11 20-15 31-14 15 8 24 20 29 36l8 49c-13 8-26 11-40 8l-4-50c-5 18-12 34-23 47-7-23-8-48-1-76z" />
+          <path class="arm" d="M160 242c18-9 31-7 49-3M166 261c17-6 29-4 45 1" />
+          <path class="leg" d="M119 308c-4 14-8 25-14 34M150 307c4 13 10 24 17 34" />
+          <path class="shoe" d="M94 344c12-3 19-2 27 1M156 343c12-2 21-1 29 2" />
+        </g>
+        <path class="motion" d="M71 255c10-6 18-9 27-8M70 274c8-3 15-4 24-3" />
+      </g>
+    )}
+
+    {variant === 'notes' && (
+      <g class="scene scene--notes" filter={`url(#rough-${variant})`}>
+        <path class="ground" d="M51 318c101-3 192 3 317 0" />
+        <g class="wanderer wanderer--notes">
+          <path class="head" d="M165 143c2-25 17-41 39-41 21 0 36 17 35 41-1 24-15 40-37 40-22 0-39-16-37-40z" />
+          <path class="hair" d="M166 138c4-22 19-37 39-37 12 0 22 5 29 15-12-3-19-1-27 3-13 8-24 14-41 19z" />
+          <ellipse class="eye" cx="186" cy="143" rx="3.6" ry="5" />
+          <ellipse class="eye" cx="214" cy="143" rx="3.6" ry="5" />
+          <path class="body-white" d="M163 190c16-8 42-8 58 1l6 72c-18 7-40 7-58 0z" />
+          <path class="coat accent-fill" d="M172 189c8-10 18-15 30-15 14 6 25 18 31 34l8 52c-12 7-25 9-38 7l-5-46c-6 17-14 31-24 42-6-25-7-49-2-74z" />
+          <path class="arm" d="M177 219c15 9 26 17 39 29M221 215c-7 11-12 23-15 36" />
+          <path class="notebook" d="M189 238c18-7 34-5 49 4l-12 38c-15-7-29-8-44-3z" />
+          <path d="M211 243c-3 12-7 24-10 36" />
+          <path class="leg" d="M179 263c-9 16-19 31-31 49M214 264c14 12 25 26 34 43" />
+          <path class="shoe" d="M136 316c12-4 22-3 29 1M238 312c12-2 21-1 29 3" />
+        </g>
+        <path class="tiny-note" d="M271 117c18 4 34 13 46 29" />
+        <path class="tiny-note" d="M276 142c13 3 24 9 33 17" />
+      </g>
+    )}
+
+    {variant === 'end' && (
+      <g class="scene scene--end" filter={`url(#rough-${variant})`}>
+        <path class="ground" d="M38 340c92-4 202 4 345 0" />
+        <g class="wanderer wanderer--end">
+          <path class="head" d="M183 151c2-24 17-40 38-40 22 0 37 16 36 40-1 24-15 40-37 40-22 0-39-16-37-40z" />
+          <path class="hair" d="M184 146c4-22 18-36 38-36 12 0 22 5 29 15-11-3-19-1-27 4-12 7-23 12-40 17z" />
+          <ellipse class="eye" cx="205" cy="151" rx="3.6" ry="5" />
+          <ellipse class="eye" cx="232" cy="151" rx="3.6" ry="5" />
+          <path class="body-white" d="M182 198c16-8 42-8 57 1l7 83c-17 7-41 7-58 0z" />
+          <path class="coat accent-fill" d="M191 198c8-10 18-15 30-15 14 6 25 18 31 34l12 57c-12 8-25 11-39 9l-8-48c-5 17-12 32-22 44-7-24-9-52-4-81z" />
+          <path class="arm" d="M237 216c18 9 29 24 38 44" />
+          <path class="arm" d="M190 218c-12 10-20 23-25 40" />
+          <path class="leg" d="M202 282c-6 17-12 34-18 55M232 281c8 16 17 31 28 47" />
+          <path class="shoe" d="M171 340c12-3 22-2 29 2M250 332c12-2 21 0 28 4" />
+          <path class="bag" d="M263 247c22 0 36 8 43 24l-12 47c-17 4-34 2-49-7l5-44c2-11 6-17 13-20z" />
+          <path d="M261 247c0-13 8-22 21-24 12 1 19 9 20 22" />
+        </g>
+        <path class="motion" d="M111 286c21-4 38-4 53-1M92 309c24-4 43-3 58 1" />
+      </g>
+    )}
+  </svg>
+</div>
+
+<style>
+  .ink-wanderer {
+    width: 100%;
+    color: var(--ink);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .ink-wanderer svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .scene { transform-origin: center bottom; }
+  .scene path,
+  .scene ellipse,
+  .scene circle {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .scene path,
+  .scene ellipse {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 4.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ground { stroke-width: 3 !important; opacity: .9; }
+  .head,
+  .body-white,
+  .file-paper,
+  .notebook,
+  .bag { fill: var(--paper) !important; }
+  .hair,
+  .eye { fill: var(--ink) !important; }
+  .accent-fill { fill: var(--signal) !important; }
+  .coat { stroke-width: 5 !important; }
+  .coat-detail { stroke-width: 2.6 !important; opacity: .78; }
+  .arm,
+  .leg,
+  .shoe,
+  .hand,
+  .neck,
+  .mouth { stroke-width: 4 !important; }
+  .scribble,
+  .motion,
+  .tiny-note { stroke-width: 2.4 !important; opacity: .5; }
+  .pencil path { stroke-width: 4 !important; }
+  .file-monolith path { stroke-width: 4 !important; }
+  .svg-label {
+    fill: var(--ink);
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -.08em;
+  }
+
+  .wanderer,
+  .pencil,
+  .file-monolith,
+  .bag {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+  }
+
+  .ink-wanderer--hero .wanderer { animation: wanderer-breathe 6s ease-in-out infinite; }
+  .ink-wanderer--hero .coat { animation: coat-flick 5.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 35% 50%; }
+  .ink-wanderer--hero .pencil { animation: pencil-tilt 7s ease-in-out infinite; }
+  .ink-wanderer--push .wanderer { animation: push-breathe 4.4s ease-in-out infinite; }
+  .ink-wanderer--push .file-monolith { animation: file-nudge 4.4s ease-in-out infinite; }
+  .ink-wanderer--notes .notebook { animation: notebook-bob 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .ink-wanderer--end .wanderer { animation: end-step 5.5s ease-in-out infinite; }
+  .ink-wanderer--end .bag { animation: bag-swing 5.5s ease-in-out infinite; transform-box: fill-box; transform-origin: top center; }
+
+  @keyframes wanderer-breathe {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-2px) rotate(.35deg); }
+  }
+
+  @keyframes coat-flick {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    48% { transform: rotate(.8deg) translateX(1px); }
+    58% { transform: rotate(-.7deg) translateX(-1px); }
+  }
+
+  @keyframes pencil-tilt {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-1.2deg); }
+  }
+
+  @keyframes push-breathe {
+    0%, 100% { transform: translateX(0); }
+    48% { transform: translateX(2px); }
+  }
+
+  @keyframes file-nudge {
+    0%, 100% { transform: translateX(0); }
+    48% { transform: translateX(1.5px); }
+  }
+
+  @keyframes notebook-bob {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-1px) rotate(-.7deg); }
+  }
+
+  @keyframes end-step {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-2px) rotate(.3deg); }
+  }
+
+  @keyframes bag-swing {
+    0%, 100% { transform: rotate(0); }
+    50% { transform: rotate(1.5deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-wanderer * { animation: none !important; }
+  }
+</style>
