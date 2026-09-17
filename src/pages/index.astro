@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ReferenceArt from '../components/ReferenceArt.astro';
-import ReferenceProjectMark from '../components/ReferenceProjectMark.astro';
-import '../styles/reference.css';
+import HomeMascot from '../components/HomeMascot.astro';
+import SiteIcon from '../components/SiteIcon.astro';
+import '../styles/home.css';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const recentPosts = posts.slice(0, 3);
@@ -14,76 +14,86 @@ const work = [
     name: 'SmallMB',
     detail: 'Android file utility',
     href: 'https://smallmb.com/',
-    kind: 'smallmb' as const,
+    icon: 'android' as const,
   },
   {
     name: 'Astro SEO Audit',
     detail: 'Open-source SEO tool',
     href: 'https://github.com/namanlabc/astro-seo-audit',
-    kind: 'audit' as const,
+    icon: 'audit' as const,
   },
   {
     name: 'Get Random Letter',
     detail: 'Browser tools',
     href: 'https://getrandomletter.com/',
-    kind: 'letters' as const,
+    icon: 'shuffle' as const,
   },
 ];
 ---
 
-<Layout description="Naman Patel builds software and websites, and writes about what he learns.">
-  <article class="reference-home">
-    <section class="reference-hero" aria-labelledby="home-title">
-      <div class="reference-hero__copy">
-        <h1 id="home-title">Naman Patel</h1>
-        <p class="reference-hero__lead">Software, websites and writing.</p>
-        <p class="reference-hero__sub">I build useful tools and write about what I learn.</p>
+<Layout description="Naman Patel makes software, works on websites, and writes about what he learns.">
+  <article class="bear-home">
+    <section class="bear-intro" aria-labelledby="home-title">
+      <HomeMascot />
+      <h1 id="home-title">Hi, I’m Naman.</h1>
+      <div class="bear-intro__copy">
+        <p>I make apps, websites and small tools. I also write about what I learn while making them — usually the part that took longer than expected.</p>
+        <p>I started with blogging, wandered into search and code, and never quite stopped opening new tabs.</p>
       </div>
-
-      <div class="reference-hero__art">
-        <ReferenceArt variant="hero" />
-      </div>
+      <p class="bear-now"><SiteIcon name="spark" /> <span>Right now I’m improving SmallMB and writing a fantasy novel. They require very different kinds of patience.</span></p>
     </section>
 
-    <section class="reference-section" aria-labelledby="made-title">
-      <div class="reference-section__head">
-        <span class="reference-section__index">01</span>
-        <h2 id="made-title">Things I’ve made</h2>
+    <section class="bear-section" aria-labelledby="made-title">
+      <div class="bear-section__head">
+        <SiteIcon name="work" />
+        <h2 id="made-title">Work</h2>
       </div>
 
-      <div class="reference-projects">
+      <div class="bear-links">
         {work.map(project => (
-          <a class="reference-project" href={project.href} target="_blank" rel="noopener noreferrer">
-            <ReferenceProjectMark kind={project.kind} />
-            <span class="reference-project__copy">
+          <a class="bear-link" href={project.href} target="_blank" rel="noopener noreferrer">
+            <span class="bear-link__icon"><SiteIcon name={project.icon} /></span>
+            <span class="bear-link__copy">
               <strong>{project.name}</strong>
               <small>{project.detail}</small>
             </span>
-            <span class="reference-arrow" aria-hidden="true">→</span>
+            <SiteIcon name="external" />
           </a>
         ))}
       </div>
+      <a class="bear-more" href={`${base}projects/`}>All projects <span aria-hidden="true">→</span></a>
     </section>
 
-    <section class="reference-section" aria-labelledby="writing-title">
-      <div class="reference-section__head">
-        <span class="reference-section__index">02</span>
-        <h2 id="writing-title">Recent writing</h2>
+    <section class="bear-section" aria-labelledby="writing-title">
+      <div class="bear-section__head">
+        <SiteIcon name="writing" />
+        <h2 id="writing-title">Recent notes</h2>
       </div>
 
-      <div class="reference-writing">
+      <div class="bear-writing">
         {recentPosts.map(post => (
-          <a class="reference-writing-row" href={`${base}blog/${post.id}/`}>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
-            </time>
+          <a class="bear-writing__row" href={`${base}blog/${post.id}/`}>
             <strong>{post.data.title}</strong>
-            <span class="reference-arrow" aria-hidden="true">→</span>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+            </time>
           </a>
         ))}
       </div>
 
-      <a class="reference-all-writing" href={`${base}archive/`}>All writing <span aria-hidden="true">→</span></a>
+      <a class="bear-more" href={`${base}archive/`}>All writing <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="bear-section bear-section--last" aria-labelledby="about-title">
+      <div class="bear-section__head">
+        <SiteIcon name="book" />
+        <h2 id="about-title">A little more</h2>
+      </div>
+      <div class="bear-paragraphs">
+        <p>I live in Mandla, India. Outside software, I like long stories, a good cup of chai, and following an idea further than was probably necessary.</p>
+        <p>This site holds the useful parts: projects, notes, and the occasional detour.</p>
+      </div>
+      <a class="bear-more" href={`${base}about/`}>About me <span aria-hidden="true">→</span></a>
     </section>
   </article>
 </Layout>
