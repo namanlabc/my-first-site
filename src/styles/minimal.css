@@ -354,7 +354,6 @@ a:hover {
 .quiet-page .experience-list .tool-icons {
   gap: 10px 15px;
   margin-top: 1px;
-  filter: grayscale(1);
 }
 
 .quiet-page .experience-list .tool-brand {
@@ -365,6 +364,7 @@ a:hover {
 .quiet-page .experience-list .tool-mark {
   width: 16px;
   height: 16px;
+  opacity: .82;
 }
 
 .quiet-page > .text-link {

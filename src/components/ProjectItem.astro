@@ -33,6 +33,10 @@ const glyphKind = project.visual === 'audit'
       <span>{project.kind}</span>
     </div>
     <p>{project.description}</p>
+    <div class="project-item-meta" aria-label={`${project.name} details`}>
+      <span>{project.status}</span>
+      {project.details.map(detail => <span>{detail}</span>)}
+    </div>
   </div>
 </article>
 
@@ -51,6 +55,27 @@ const glyphKind = project.visual === 'audit'
   }
 
   .project-item-content { min-width: 0; }
+
+  .project-item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 0;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .project-item-meta span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .project-item-meta span + span::before {
+    content: '·';
+    margin: 0 7px;
+    color: var(--rule);
+  }
 
   @media (max-width: 640px) {
     .project-item--with-glyph {
