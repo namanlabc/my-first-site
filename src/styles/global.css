@@ -866,15 +866,15 @@ body:has(.quiet-home) .theme-toggle { position: relative; overflow: visible; }
   }
 }
 
-body:has(.quiet-home) .site-brand,
-body:has(.quiet-home) .desktop-nav,
-body:has(.quiet-home) .mobile-menu { display: none !important; }
-body:has(.quiet-home) .site-header {
+body:has(.bear-home) .site-brand,
+body:has(.bear-home) .desktop-nav,
+body:has(.bear-home) .mobile-menu { display: none !important; }
+body:has(.bear-home) .site-header {
   min-height: 72px !important;
   justify-content: flex-end !important;
   border-bottom: 0 !important;
 }
-body:has(.quiet-home) .header-controls { margin-left: auto !important; }
+body:has(.bear-home) .header-controls { margin-left: auto !important; }
 
 @media (max-width: 640px) {
   .brand-wordmark { font-size: 17px; }
@@ -882,5 +882,5 @@ body:has(.quiet-home) .header-controls { margin-left: auto !important; }
   .theme-toggle,
   body:has(.quiet-home) .theme-toggle { width: 40px; height: 40px; font-size: 19px; }
   .theme-icon { width: 22px; height: 22px; }
-  body:has(.quiet-home) .site-header { min-height: 64px !important; }
+  body:has(.bear-home) .site-header { min-height: 64px !important; }
 }
