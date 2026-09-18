@@ -35,8 +35,9 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
       <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
-        <path d="M12 4.5a7.5 7.5 0 0 1 0 15Z" fill="currentColor" stroke="none"></path>
+        <path class="theme-icon__mass" d="M12 4.5a7.5 7.5 0 0 1 0 15Z" fill="currentColor" stroke="none"></path>
         <path class="theme-icon__fissure" d="M18.4 8.4l1.6-1.1 1.1.15" fill="none" stroke="currentColor"></path>
+        <path class="theme-icon__tendril" d="M18.5 8.2c1.6-1.2 1.35-3.15 3.8-4.35 1.05-.5 1.55-1.25 1.35-2.1" fill="none" stroke="currentColor"></path>
         <circle class="theme-icon__spore" cx="21.25" cy="7.45" r=".65"></circle>
       </svg>
     </button>
