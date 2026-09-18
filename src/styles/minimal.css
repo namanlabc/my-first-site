@@ -216,7 +216,14 @@ a:hover {
 
 .project-item-glyph {
   padding-top: 1px !important;
-  filter: grayscale(1);
+}
+
+.quiet-page .project-list-note {
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .quiet-project-page-list .project-item-heading {
