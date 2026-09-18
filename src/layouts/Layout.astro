@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
-import '../styles/field.css';
-import '../styles/field-article.css';
+import '../styles/minimal.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -32,18 +31,18 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
 <style is:global>
   :root {
-    --canvas: #f7f6ef;
-    --paper: #f7f6ef;
-    --paper-soft: #efeee6;
-    --theme-blink-cover: #0d0d0c;
-    --theme-blink-line: rgb(225 38 28 / .34);
+    --canvas: #ffffff;
+    --paper: #ffffff;
+    --paper-soft: #f6f6f4;
+    --theme-blink-cover: #111110;
+    --theme-blink-line: rgb(0 0 0 / .18);
     --theme-blink-open-brightness: .96;
   }
 
   :root.dark {
-    --canvas: #0d0d0c;
-    --paper: #0d0d0c;
-    --paper-soft: #171715;
+    --canvas: #111110;
+    --paper: #111110;
+    --paper-soft: #191918;
   }
 
   ::view-transition {
@@ -108,7 +107,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta id="theme-color" name="theme-color" content="#f7f6ef" />
+    <meta id="theme-color" name="theme-color" content="#ffffff" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
     <link rel="canonical" href={canonical} />
@@ -132,7 +131,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         try { savedTheme = localStorage.getItem('theme'); } catch {}
         const isDark = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.classList.toggle('dark', isDark);
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#0d0d0c' : '#f7f6ef');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#111110' : '#ffffff');
       })();
     </script>
   </head>
@@ -154,7 +153,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         const isDark = root.classList.contains('dark');
         themeButton?.setAttribute('aria-pressed', String(isDark));
         themeButton?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
-        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#0d0d0c' : '#f7f6ef');
+        document.querySelector('#theme-color')?.setAttribute('content', isDark ? '#111110' : '#ffffff');
       }
 
       function applyNextTheme() {
@@ -176,7 +175,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         }
 
         root.dataset.themeTarget = target;
-        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#0d0d0c' : '#f7f6ef');
+        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#111110' : '#ffffff');
         const transition = startViewTransition.call(document, applyNextTheme);
 
         Promise.resolve(transition.finished).finally(() => {
