@@ -780,6 +780,59 @@ body:has(.quiet-home) .theme-toggle { width: 42px; height: 42px; font-size: 20px
 .theme-icon { display: block; width: 22px; height: 22px; overflow: visible; }
 .theme-icon circle { fill: none; stroke: currentColor; stroke-width: 1.5; }
 .theme-icon path { fill: currentColor; }
+.theme-toggle,
+body:has(.quiet-home) .theme-toggle { position: relative; overflow: visible; }
+.theme-icon__fissure {
+  fill: none !important;
+  stroke: currentColor;
+  stroke-width: .7;
+  stroke-linecap: round;
+  opacity: .18;
+  transform-origin: 18.4px 8.4px;
+  animation: theme-fissure 13s ease-in-out infinite;
+}
+.theme-icon .theme-icon__spore {
+  fill: currentColor;
+  stroke: none;
+  opacity: .22;
+  transform-origin: 12px 12px;
+  animation: theme-spore 13s ease-in-out infinite;
+}
+.theme-toggle:hover .theme-icon__fissure,
+.theme-toggle:focus-visible .theme-icon__fissure { opacity: .72; transform: scaleX(1.18); }
+.theme-toggle:hover .theme-icon__spore,
+.theme-toggle:focus-visible .theme-icon__spore { opacity: .9; }
+.theme-toggle.is-infecting .theme-icon { animation: theme-infected 310ms steps(2, end) 2; }
+
+@keyframes theme-fissure {
+  0%, 78%, 86%, 100% { opacity: .18; transform: scaleX(1); }
+  80% { opacity: .62; transform: scaleX(1.28) rotate(-3deg); }
+  82% { opacity: .12; transform: scaleX(.72) rotate(2deg); }
+  84% { opacity: .48; transform: scaleX(1.12); }
+}
+
+@keyframes theme-spore {
+  0%, 77%, 87%, 100% { opacity: .22; transform: rotate(0deg) translate(0); }
+  80% { opacity: .78; transform: rotate(7deg) translate(1px, -1px); }
+  82% { opacity: .14; transform: rotate(-5deg) translate(-.5px, .5px); }
+  85% { opacity: .58; transform: rotate(3deg) translate(.5px, 0); }
+}
+
+@keyframes theme-infected {
+  0%, 100% { transform: translate(0, 0); }
+  35% { transform: translate(-.65px, .35px) skewX(-1deg); }
+  70% { transform: translate(.55px, -.25px) skewY(1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon__fissure,
+  .theme-icon .theme-icon__spore { animation: none; opacity: .32; }
+  .theme-toggle.is-infecting .theme-icon { animation: theme-infected-reduced 260ms ease-out 1; }
+  @keyframes theme-infected-reduced {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .55; }
+  }
+}
 
 @media (max-width: 640px) {
   .brand-wordmark { font-size: 17px; }

@@ -42,131 +42,25 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     --paper-soft: #191918;
   }
 
-  .theme-virus {
-    --virus-color: #111110;
-    --virus-x: 50vw;
-    --virus-y: 50vh;
-    --virus-scale: 1;
+  .theme-infection {
     position: fixed;
     inset: 0;
     z-index: 2147483646;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    will-change: opacity;
   }
 
-  .theme-virus.is-active {
+  .theme-infection.is-active {
+    opacity: 1;
     visibility: visible;
   }
 
-  .theme-virus__core,
-  .theme-virus__cell {
-    position: absolute;
-    left: var(--virus-x);
-    top: var(--virus-y);
-    display: block;
-    background: var(--virus-color);
-    will-change: transform, opacity, border-radius;
-  }
-
-  .theme-virus__core {
-    width: 64px;
-    height: 64px;
-    margin: -32px;
-    border-radius: 44% 56% 51% 49% / 58% 42% 58% 42%;
-    transform: scale(.01);
-  }
-
-  .theme-virus.is-active .theme-virus__core {
-    animation: theme-virus-core 780ms cubic-bezier(.62, .02, .22, 1) both;
-  }
-
-  .theme-virus__core::before,
-  .theme-virus__core::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: inherit;
-  }
-
-  .theme-virus__core::before {
-    width: 42%;
-    height: 38%;
-    left: -18%;
-    top: 12%;
-  }
-
-  .theme-virus__core::after {
-    width: 34%;
-    height: 46%;
-    right: -14%;
-    bottom: 8%;
-  }
-
-  .theme-virus__cell {
-    width: var(--cell-size, 13px);
-    height: var(--cell-size, 13px);
-    margin: calc(var(--cell-size, 13px) / -2);
-    border-radius: 46% 54% 42% 58% / 55% 44% 56% 45%;
-    opacity: 0;
-    transform: scale(.1);
-  }
-
-  .theme-virus.is-active .theme-virus__cell {
-    animation: theme-virus-cell 580ms var(--cell-delay, 0ms) cubic-bezier(.2, .72, .28, 1) both;
-  }
-
-  @keyframes theme-virus-core {
-    0% {
-      opacity: 1;
-      border-radius: 44% 56% 51% 49% / 58% 42% 58% 42%;
-      transform: scale(.01) rotate(0deg);
-    }
-    24% {
-      border-radius: 61% 39% 43% 57% / 39% 61% 46% 54%;
-      transform: scale(.72) rotate(-9deg);
-    }
-    46% {
-      border-radius: 55% 45% 62% 38% / 44% 58% 42% 56%;
-      transform: scale(3.8) rotate(-3deg);
-    }
-    68%, 82% {
-      opacity: 1;
-      border-radius: 48% 52% 60% 40% / 55% 45% 51% 49%;
-      transform: scale(var(--virus-scale)) rotate(18deg);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(var(--virus-scale)) rotate(18deg);
-    }
-  }
-
-  @keyframes theme-virus-cell {
-    0% { opacity: 0; transform: translate(0, 0) scale(.1) rotate(0); }
-    14% { opacity: 1; }
-    64% { opacity: 1; transform: translate(var(--cell-x), var(--cell-y)) scale(var(--cell-scale, 1.8)) rotate(35deg); }
-    100% { opacity: 0; transform: translate(var(--cell-x), var(--cell-y)) scale(var(--cell-scale, 1.8)) rotate(55deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .theme-virus.is-active .theme-virus__core {
-      animation: theme-virus-core-reduced 320ms ease-out both;
-    }
-
-    .theme-virus__cell:nth-of-type(n + 5) {
-      display: none;
-    }
-
-    .theme-virus.is-active .theme-virus__cell {
-      animation-duration: 230ms;
-    }
-
-    @keyframes theme-virus-core-reduced {
-      0% { opacity: 1; transform: scale(.01); }
-      42% { opacity: 1; transform: scale(2.5); }
-      72%, 84% { opacity: 1; transform: scale(var(--virus-scale)); }
-      100% { opacity: 0; transform: scale(var(--virus-scale)); }
-    }
+  html[data-theme-target] .theme-toggle {
+    color: var(--ink);
   }
 </style>
 
@@ -206,16 +100,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div id="theme-virus" class="theme-virus" aria-hidden="true">
-      <span class="theme-virus__core"></span>
-      <span class="theme-virus__cell" style="--cell-x:-9vw;--cell-y:-4vh;--cell-size:11px;--cell-scale:2.1;--cell-delay:10ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:7vw;--cell-y:-6vh;--cell-size:8px;--cell-scale:2.5;--cell-delay:35ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:11vw;--cell-y:3vh;--cell-size:14px;--cell-scale:1.7;--cell-delay:20ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:5vw;--cell-y:9vh;--cell-size:9px;--cell-scale:2.2;--cell-delay:55ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:-7vw;--cell-y:8vh;--cell-size:15px;--cell-scale:1.5;--cell-delay:25ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:-12vw;--cell-y:3vh;--cell-size:7px;--cell-scale:2.6;--cell-delay:70ms"></span>
-      <span class="theme-virus__cell" style="--cell-x:2vw;--cell-y:-10vh;--cell-size:12px;--cell-scale:1.8;--cell-delay:45ms"></span>
-    </div>
+    <canvas id="theme-infection" class="theme-infection" aria-hidden="true"></canvas>
     <div class="site-frame">
       <SiteHeader />
       <main id="main-content" tabindex="-1">
@@ -226,9 +111,10 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
     <script>
       const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
-      const themeVirus = document.querySelector<HTMLElement>('#theme-virus');
+      const themeInfection = document.querySelector<HTMLCanvasElement>('#theme-infection');
       const root = document.documentElement;
       let themeIsChanging = false;
+      let infectionFrame = 0;
 
       function updateThemeControl() {
         const isDark = root.classList.contains('dark');
@@ -245,13 +131,142 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
       updateThemeControl();
 
+      type Point = { x: number; y: number };
+      type Vein = { points: Point[]; width: number; delay: number };
+
+      const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+      const easeInOut = (value: number) => {
+        const t = clamp(value);
+        return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+      const easeOut = (value: number) => 1 - Math.pow(1 - clamp(value), 3);
+
+      function seededRandom(seed: number) {
+        let value = seed >>> 0;
+        return () => {
+          value = (value * 1664525 + 1013904223) >>> 0;
+          return value / 4294967296;
+        };
+      }
+
+      function makeVeins(x: number, y: number, radius: number, sparse = false): Vein[] {
+        const random = seededRandom(Math.round(x * 31 + y * 17));
+        const count = sparse ? 6 : 13;
+        const veins: Vein[] = [];
+
+        for (let index = 0; index < count; index++) {
+          const angle = (Math.PI * 2 * index) / count + (random() - .5) * .62;
+          const length = radius * (.24 + random() * .52);
+          const steps = sparse ? 4 : 6;
+          const points: Point[] = [{ x, y }];
+          let px = x;
+          let py = y;
+
+          for (let step = 1; step <= steps; step++) {
+            const distance = length * (step / steps);
+            const kink = (random() - .5) * radius * .055;
+            const taper = 1 - step / (steps + 1);
+            px = x + Math.cos(angle) * distance + Math.cos(angle + Math.PI / 2) * kink * taper;
+            py = y + Math.sin(angle) * distance + Math.sin(angle + Math.PI / 2) * kink * taper;
+            points.push({ x: px, y: py });
+          }
+
+          veins.push({ points, width: .55 + random() * .9, delay: random() * .2 });
+
+          if (!sparse && index % 2 === 0) {
+            const splitAt = 2 + Math.floor(random() * 2);
+            const origin = points[splitAt];
+            const branchAngle = angle + (random() > .5 ? 1 : -1) * (.22 + random() * .42);
+            const branchLength = length * (.18 + random() * .2);
+            veins.push({
+              points: [
+                origin,
+                {
+                  x: origin.x + Math.cos(branchAngle) * branchLength * .48,
+                  y: origin.y + Math.sin(branchAngle) * branchLength * .48,
+                },
+                {
+                  x: origin.x + Math.cos(branchAngle) * branchLength,
+                  y: origin.y + Math.sin(branchAngle) * branchLength,
+                },
+              ],
+              width: .4 + random() * .38,
+              delay: .12 + random() * .22,
+            });
+          }
+        }
+
+        return veins;
+      }
+
+      function drawVein(ctx: CanvasRenderingContext2D, vein: Vein, progress: number) {
+        const amount = clamp((progress - vein.delay) / (1 - vein.delay));
+        if (amount <= 0) return;
+
+        const segmentProgress = amount * (vein.points.length - 1);
+        const finalSegment = Math.min(vein.points.length - 2, Math.floor(segmentProgress));
+        ctx.beginPath();
+        ctx.moveTo(vein.points[0].x, vein.points[0].y);
+
+        for (let index = 1; index <= finalSegment + 1; index++) {
+          const point = vein.points[index];
+          if (index === finalSegment + 1) {
+            const previous = vein.points[index - 1];
+            const partial = segmentProgress - finalSegment;
+            ctx.lineTo(
+              previous.x + (point.x - previous.x) * partial,
+              previous.y + (point.y - previous.y) * partial,
+            );
+          } else {
+            ctx.lineTo(point.x, point.y);
+          }
+        }
+
+        ctx.lineWidth = vein.width;
+        ctx.stroke();
+      }
+
+      function drawMembrane(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        radius: number,
+        progress: number,
+        time: number,
+      ) {
+        if (progress <= 0) return;
+        const growth = easeInOut(progress);
+        const baseRadius = radius * (.008 + growth * 1.13);
+        const points = 196;
+        const edgeLife = 1 - growth * .68;
+        ctx.beginPath();
+
+        for (let index = 0; index <= points; index++) {
+          const angle = (index / points) * Math.PI * 2;
+          const noise =
+            Math.sin(angle * 3 + .8) * .035 +
+            Math.sin(angle * 7 - 1.9) * .022 +
+            Math.sin(angle * 13 + time * .004) * .012 +
+            Math.sin(angle * 23 - time * .006) * .006;
+          const capillary = Math.max(0, Math.sin(angle * 11 + 2.2)) ** 18 * .07 * edgeLife;
+          const currentRadius = baseRadius * (1 + noise * edgeLife + capillary);
+          const px = x + Math.cos(angle) * currentRadius;
+          const py = y + Math.sin(angle) * currentRadius;
+          if (index === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+
+        ctx.closePath();
+        ctx.fill();
+      }
+
       themeButton?.addEventListener('click', () => {
         if (themeIsChanging) return;
 
         const target: 'dark' | 'light' = root.classList.contains('dark') ? 'light' : 'dark';
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (!themeVirus) {
+        if (!themeInfection) {
           applyNextTheme();
           return;
         }
@@ -261,24 +276,70 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         const y = rect.top + rect.height / 2;
         const farthestX = Math.max(x, window.innerWidth - x);
         const farthestY = Math.max(y, window.innerHeight - y);
-        const coverRadius = Math.hypot(farthestX, farthestY);
+        const coverRadius = Math.hypot(farthestX, farthestY) * 1.04;
+        const context = themeInfection.getContext('2d');
+
+        if (!context) {
+          applyNextTheme();
+          return;
+        }
 
         themeIsChanging = true;
         root.dataset.themeTarget = target;
-        themeVirus.style.setProperty('--virus-color', target === 'dark' ? '#111110' : '#ffffff');
-        themeVirus.style.setProperty('--virus-x', `${x}px`);
-        themeVirus.style.setProperty('--virus-y', `${y}px`);
-        themeVirus.style.setProperty('--virus-scale', String((coverRadius * 2.35) / 64));
-        themeVirus.classList.remove('is-active');
-        void themeVirus.offsetWidth;
-        themeVirus.classList.add('is-active');
+        themeButton.classList.add('is-infecting');
+        themeInfection.classList.add('is-active');
 
-        window.setTimeout(applyNextTheme, reduceMotion ? 235 : 545);
-        window.setTimeout(() => {
-          themeVirus.classList.remove('is-active');
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        themeInfection.width = Math.round(window.innerWidth * ratio);
+        themeInfection.height = Math.round(window.innerHeight * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const color = target === 'dark' ? '#111110' : '#ffffff';
+        const duration = reduceMotion ? 760 : 1720;
+        const themeAt = reduceMotion ? .7 : .74;
+        const veins = makeVeins(x, y, coverRadius, reduceMotion);
+        const startedAt = performance.now();
+        let themeApplied = false;
+
+        const animate = (now: number) => {
+          const progress = clamp((now - startedAt) / duration);
+          context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          context.fillStyle = color;
+          context.strokeStyle = color;
+          context.lineCap = 'round';
+          context.lineJoin = 'round';
+
+          const veinProgress = easeOut(clamp(progress / (reduceMotion ? .42 : .48)));
+          veins.forEach(vein => drawVein(context, vein, veinProgress));
+
+          const membraneProgress = clamp((progress - (reduceMotion ? .1 : .16)) / (themeAt - (reduceMotion ? .1 : .16)));
+          drawMembrane(context, x, y, coverRadius, membraneProgress, now - startedAt);
+
+          if (!themeApplied && progress >= themeAt) {
+            applyNextTheme();
+            themeApplied = true;
+          }
+
+          if (progress >= .88) {
+            themeInfection.style.opacity = String(1 - easeOut((progress - .88) / .12));
+          }
+
+          if (progress < 1) {
+            infectionFrame = requestAnimationFrame(animate);
+            return;
+          }
+
+          if (!themeApplied) applyNextTheme();
+          context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          themeInfection.classList.remove('is-active');
+          themeInfection.style.removeProperty('opacity');
+          themeButton.classList.remove('is-infecting');
           delete root.dataset.themeTarget;
           themeIsChanging = false;
-        }, reduceMotion ? 370 : 840);
+        };
+
+        cancelAnimationFrame(infectionFrame);
+        infectionFrame = requestAnimationFrame(animate);
       });
     </script>
   </body>
