@@ -126,6 +126,10 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       border-radius: 61% 39% 43% 57% / 39% 61% 46% 54%;
       transform: scale(.72) rotate(-9deg);
     }
+    46% {
+      border-radius: 55% 45% 62% 38% / 44% 58% 42% 56%;
+      transform: scale(3.8) rotate(-3deg);
+    }
     68%, 82% {
       opacity: 1;
       border-radius: 48% 52% 60% 40% / 55% 45% 51% 49%;
@@ -159,7 +163,8 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
     @keyframes theme-virus-core-reduced {
       0% { opacity: 1; transform: scale(.01); }
-      68%, 82% { opacity: 1; transform: scale(var(--virus-scale)); }
+      42% { opacity: 1; transform: scale(2.5); }
+      72%, 84% { opacity: 1; transform: scale(var(--virus-scale)); }
       100% { opacity: 0; transform: scale(var(--virus-scale)); }
     }
   }
@@ -268,12 +273,12 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         void themeVirus.offsetWidth;
         themeVirus.classList.add('is-active');
 
-        window.setTimeout(applyNextTheme, reduceMotion ? 145 : 500);
+        window.setTimeout(applyNextTheme, reduceMotion ? 235 : 545);
         window.setTimeout(() => {
           themeVirus.classList.remove('is-active');
           delete root.dataset.themeTarget;
           themeIsChanging = false;
-        }, reduceMotion ? 350 : 820);
+        }, reduceMotion ? 370 : 840);
       });
     </script>
   </body>
