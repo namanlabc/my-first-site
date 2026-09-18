@@ -51,15 +51,15 @@ const preferredSourceUrl = `https://www.google.com/preferences/source?q=${encode
 
     <div class="preferred-article-copy">
       <span class="preferred-kicker">ONE MORE THING</span>
-      <h2>Want more from here?</h2>
-      <p>If this note was useful, mark <strong>{domain}</strong> as a preferred source on Google.</p>
+      <h2>Prefer this site on Google</h2>
+      <p>Ask Google to show you more notes from <strong>{domain}</strong>.</p>
       <a
         class="preferred-article-cta"
         href={preferredSourceUrl}
         data-google-preferred-source
         aria-label={`Make ${domain} a preferred source on Google`}
       >
-        <span>Make {domain} a preferred source</span>
+        <span>Add {domain}</span>
         <span class="preferred-cta-arrow" aria-hidden="true">↗</span>
       </a>
     </div>

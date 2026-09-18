@@ -543,9 +543,15 @@ a:hover {
   box-shadow: none !important;
 }
 
-.preferred-source--article .source-bridge,
 .preferred-source--article .preferred-kicker {
   display: none !important;
+}
+
+.preferred-source--article .source-bridge {
+  display: flex !important;
+  width: 82px !important;
+  margin-bottom: 14px;
+  padding-top: 0 !important;
 }
 
 .preferred-source--article .preferred-article-copy {

@@ -34,39 +34,56 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     <div class="article-shell">
       <a class="back-link" href={base + 'archive/'}><span aria-hidden="true">←</span> All writing</a>
 
-      <article>
-        <header class="article-header">
-          <h1>{title}</h1>
-          <p>{description}</p>
-          <div class="article-meta">
-            <a class="article-author" href={base + 'about/'}>By Naman Patel</a>
-            <span aria-hidden="true">·</span>
-            <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-            <span aria-hidden="true">·</span>
-            <span>{readingTime} min read</span>
+      <div class="article-grid">
+        <article class="article-main">
+          <header class="article-header">
+            <h1>{title}</h1>
+            <p>{description}</p>
+            <div class="article-meta">
+              <a class="article-author" href={base + 'about/'}>By Naman Patel</a>
+              <span aria-hidden="true">·</span>
+              <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+              <span aria-hidden="true">·</span>
+              <span>{readingTime} min read</span>
+            </div>
+          </header>
+
+          {featuredImage && (
+            <figure class="article-featured">
+              <img
+                src={featuredImage}
+                alt={imageAlt ?? ''}
+                width="1536"
+                height="1024"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </figure>
+          )}
+
+          <div class="prose">
+            <slot />
           </div>
-        </header>
+        </article>
 
-        {featuredImage && (
-          <figure class="article-featured">
-            <img
-              src={featuredImage}
-              alt={imageAlt ?? ''}
-              width="1536"
-              height="1024"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </figure>
-        )}
+        <aside class="article-rail" aria-label="Article actions">
+          <button
+            class="article-like"
+            type="button"
+            aria-pressed="false"
+            data-article-like
+            title="Saved only on this device"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path>
+            </svg>
+            <span data-like-label>Like this note</span>
+          </button>
 
-        <div class="prose">
-          <slot />
-        </div>
-
-        <PreferredSource variant="article" />
-      </article>
+          <PreferredSource variant="article" />
+        </aside>
+      </div>
 
       <nav class="post-nav" aria-label="More writing">
         {olderPost ? (
@@ -86,14 +103,140 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   </div>
 </Layout>
 
+<script>
+  const likeButton = document.querySelector<HTMLButtonElement>('[data-article-like]');
+  const likeLabel = likeButton?.querySelector<HTMLElement>('[data-like-label]');
+  const likeKey = 'naman-note-liked:' + window.location.pathname;
+
+  function renderLikeState(liked: boolean) {
+    likeButton?.setAttribute('aria-pressed', String(liked));
+    if (likeLabel) likeLabel.textContent = liked ? 'Liked' : 'Like this note';
+  }
+
+  let liked = false;
+  try { liked = window.localStorage.getItem(likeKey) === 'true'; } catch {}
+  renderLikeState(liked);
+
+  likeButton?.addEventListener('click', () => {
+    liked = !liked;
+    try { window.localStorage.setItem(likeKey, String(liked)); } catch {}
+    renderLikeState(liked);
+  });
+</script>
+
 <style>
+  :global(.quiet-article-page) {
+    width: min(930px, calc(100% - 40px));
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 680px) 198px;
+    gap: 52px;
+    align-items: start;
+  }
+
+  .article-main {
+    min-width: 0;
+  }
+
+  .article-rail {
+    position: sticky;
+    top: 92px;
+    align-self: start;
+    margin-top: 126px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .article-like {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    align-items: center;
+    gap: 9px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--muted);
+    background: transparent;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .article-like:hover,
+  .article-like[aria-pressed='true'] {
+    color: var(--ink);
+  }
+
+  .article-like svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .article-like[aria-pressed='true'] svg {
+    fill: var(--ink);
+  }
+
+  :global(.article-rail .preferred-source--article) {
+    margin: 0 !important;
+    padding: 18px 0 20px !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--rule) !important;
+  }
+
+  :global(.article-rail .preferred-source--article .source-bridge) {
+    margin-bottom: 13px;
+  }
+
+  :global(.article-rail .preferred-source--article h2) {
+    font-size: 13px !important;
+  }
+
+  :global(.article-rail .preferred-source--article p) {
+    font-size: 11.5px !important;
+  }
+
+  :global(.article-rail .preferred-source--article .preferred-article-cta) {
+    font-size: 11px !important;
+  }
+
   :global(.quiet-article-page .post-nav) {
+    width: min(680px, 100%);
     margin-top: 32px;
     padding-top: 0;
     border-top: 0;
   }
 
+  @media (max-width: 960px) {
+    :global(.quiet-article-page) {
+      width: min(680px, calc(100% - 40px));
+    }
+
+    .article-grid {
+      display: block;
+    }
+
+    .article-rail {
+      position: static;
+      margin-top: 48px;
+    }
+  }
+
   @media (max-width: 640px) {
+    :global(.quiet-article-page) {
+      width: calc(100% - 36px);
+    }
+
+    .article-rail {
+      margin-top: 42px;
+    }
+
     :global(.quiet-article-page .post-nav) {
       margin-top: 27px;
     }
