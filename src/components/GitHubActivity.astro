@@ -1,0 +1,109 @@
+---
+const levelByDate: Record<string, number> = {
+  '2026-08-01': 1,
+  '2026-08-02': 1,
+  '2026-08-03': 1,
+  '2026-08-04': 1,
+  '2026-08-05': 1,
+  '2026-08-06': 0,
+  '2026-08-07': 0,
+  '2026-08-08': 1,
+  '2026-08-09': 1,
+  '2026-08-10': 1,
+  '2026-08-11': 1,
+  '2026-08-12': 1,
+  '2026-08-13': 1,
+  '2026-08-14': 1,
+  '2026-08-15': 1,
+  '2026-08-16': 1,
+  '2026-08-17': 1,
+  '2026-08-18': 3,
+  '2026-08-19': 2,
+  '2026-08-20': 4,
+  '2026-08-21': 1,
+  '2026-08-22': 3,
+  '2026-08-23': 4,
+  '2026-08-24': 1,
+  '2026-08-25': 3,
+  '2026-08-26': 2,
+  '2026-08-27': 4,
+  '2026-08-28': 2,
+  '2026-08-29': 1,
+  '2026-08-30': 0,
+  '2026-08-31': 0,
+  '2026-09-01': 0,
+  '2026-09-02': 0,
+  '2026-09-03': 0,
+  '2026-09-04': 0,
+  '2026-09-05': 1,
+  '2026-09-06': 1,
+  '2026-09-07': 0,
+  '2026-09-08': 1,
+  '2026-09-09': 1,
+  '2026-09-10': 0,
+  '2026-09-11': 0,
+  '2026-09-12': 1,
+  '2026-09-13': 0,
+  '2026-09-14': 1,
+  '2026-09-15': 1,
+  '2026-09-16': 1,
+  '2026-09-17': 1,
+  '2026-09-18': 1,
+};
+
+const firstVisibleDay = new Date('2026-07-26T00:00:00Z');
+const lastVisibleDay = new Date('2026-09-19T00:00:00Z');
+const firstActivityDay = '2026-08-01';
+const lastActivityDay = '2026-09-18';
+const days = [];
+
+for (
+  let cursor = new Date(firstVisibleDay);
+  cursor <= lastVisibleDay;
+  cursor.setUTCDate(cursor.getUTCDate() + 1)
+) {
+  const date = cursor.toISOString().slice(0, 10);
+  const visible = date >= firstActivityDay && date <= lastActivityDay;
+  days.push({
+    date,
+    visible,
+    level: visible ? levelByDate[date] ?? 0 : 0,
+    label: cursor.toLocaleDateString('en-US', {
+      timeZone: 'UTC',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }),
+  });
+}
+---
+
+<a
+  class="github-activity"
+  href="https://github.com/namanlabc"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="View Naman Patel on GitHub"
+>
+  <div class="github-activity__months" aria-hidden="true">
+    <span>August</span>
+    <span>September</span>
+  </div>
+
+  <div class="github-activity__grid" role="grid" aria-label="GitHub activity from August 1 to September 18, 2026">
+    {days.map(day => (
+      <span
+        class:list={['github-activity__day', { 'is-blank': !day.visible }]}
+        data-level={day.level}
+        role={day.visible ? 'gridcell' : 'presentation'}
+        aria-label={day.visible ? day.label + ': activity level ' + day.level + ' of 4' : undefined}
+        title={day.visible ? day.label : undefined}
+      ></span>
+    ))}
+  </div>
+
+  <div class="github-activity__foot">
+    <span>Since Aug 2026</span>
+    <span>namanlabc <span aria-hidden="true">↗</span></span>
+  </div>
+</a>

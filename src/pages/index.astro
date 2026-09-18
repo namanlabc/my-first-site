@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import HomeMascot from '../components/HomeMascot.astro';
+import GitHubActivity from '../components/GitHubActivity.astro';
 import SiteIcon from '../components/SiteIcon.astro';
 import '../styles/home.css';
 
@@ -62,6 +63,17 @@ const work = [
         ))}
       </div>
       <a class="bear-more" href={`${base}projects/`}>All projects <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="bear-section" aria-labelledby="github-title">
+      <div class="bear-section__head bear-section__head--split">
+        <span class="bear-section__label">
+          <SiteIcon name="github" />
+          <h2 id="github-title">GitHub</h2>
+        </span>
+        <span class="bear-section__range">Aug — now</span>
+      </div>
+      <GitHubActivity />
     </section>
 
     <section class="bear-section" aria-labelledby="writing-title">
