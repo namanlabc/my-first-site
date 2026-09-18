@@ -34,9 +34,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     --canvas: #ffffff;
     --paper: #ffffff;
     --paper-soft: #f6f6f4;
-    --theme-blink-cover: #111110;
-    --theme-blink-line: rgb(0 0 0 / .18);
-    --theme-blink-open-brightness: .96;
   }
 
   :root.dark {
@@ -45,59 +42,126 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     --paper-soft: #191918;
   }
 
-  ::view-transition {
-    background: var(--theme-blink-cover);
+  .theme-virus {
+    --virus-color: #111110;
+    --virus-x: 50vw;
+    --virus-y: 50vh;
+    --virus-scale: 1;
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
   }
 
-  ::view-transition-group(root) {
-    animation-duration: 620ms;
-    animation-timing-function: linear;
+  .theme-virus.is-active {
+    visibility: visible;
   }
 
-  ::view-transition-image-pair(root) {
-    isolation: isolate;
+  .theme-virus__core,
+  .theme-virus__cell {
+    position: absolute;
+    left: var(--virus-x);
+    top: var(--virus-y);
+    display: block;
+    background: var(--virus-color);
+    will-change: transform, opacity, border-radius;
   }
 
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    mix-blend-mode: normal;
-    backface-visibility: hidden;
-    transform-origin: 50% 50%;
+  .theme-virus__core {
+    width: 64px;
+    height: 64px;
+    margin: -32px;
+    border-radius: 44% 56% 51% 49% / 58% 42% 58% 42%;
+    transform: scale(.01);
   }
 
-  ::view-transition-old(root) {
-    z-index: 2;
-    animation: naman-theme-blink-close 620ms cubic-bezier(.62, .02, .36, 1) both;
+  .theme-virus.is-active .theme-virus__core {
+    animation: theme-virus-core 780ms cubic-bezier(.62, .02, .22, 1) both;
   }
 
-  ::view-transition-new(root) {
-    z-index: 3;
-    animation: naman-theme-blink-open 620ms cubic-bezier(.22, .78, .24, 1) both;
+  .theme-virus__core::before,
+  .theme-virus__core::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: inherit;
   }
 
-  :root[data-theme-target='dark']::view-transition-new(root) {
-    --theme-blink-open-brightness: .9;
+  .theme-virus__core::before {
+    width: 42%;
+    height: 38%;
+    left: -18%;
+    top: 12%;
   }
 
-  :root[data-theme-target='light']::view-transition-new(root) {
-    --theme-blink-open-brightness: 1.06;
+  .theme-virus__core::after {
+    width: 34%;
+    height: 46%;
+    right: -14%;
+    bottom: 8%;
   }
 
-  @keyframes naman-theme-blink-close {
-    0% { clip-path: ellipse(112% 112% at 50% 50%); opacity: 1; }
-    46% { clip-path: ellipse(114% 2.8% at 50% 50%); opacity: 1; }
-    50%, 100% { clip-path: ellipse(116% .18% at 50% 50%); opacity: 0; }
+  .theme-virus__cell {
+    width: var(--cell-size, 13px);
+    height: var(--cell-size, 13px);
+    margin: calc(var(--cell-size, 13px) / -2);
+    border-radius: 46% 54% 42% 58% / 55% 44% 56% 45%;
+    opacity: 0;
+    transform: scale(.1);
   }
 
-  @keyframes naman-theme-blink-open {
-    0%, 48% { clip-path: ellipse(116% .18% at 50% 50%); opacity: 0; }
-    52% { clip-path: ellipse(114% 3.8% at 50% 50%); opacity: 1; }
-    100% { clip-path: ellipse(112% 112% at 50% 50%); opacity: 1; }
+  .theme-virus.is-active .theme-virus__cell {
+    animation: theme-virus-cell 580ms var(--cell-delay, 0ms) cubic-bezier(.2, .72, .28, 1) both;
+  }
+
+  @keyframes theme-virus-core {
+    0% {
+      opacity: 1;
+      border-radius: 44% 56% 51% 49% / 58% 42% 58% 42%;
+      transform: scale(.01) rotate(0deg);
+    }
+    24% {
+      border-radius: 61% 39% 43% 57% / 39% 61% 46% 54%;
+      transform: scale(.72) rotate(-9deg);
+    }
+    68%, 82% {
+      opacity: 1;
+      border-radius: 48% 52% 60% 40% / 55% 45% 51% 49%;
+      transform: scale(var(--virus-scale)) rotate(18deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(var(--virus-scale)) rotate(18deg);
+    }
+  }
+
+  @keyframes theme-virus-cell {
+    0% { opacity: 0; transform: translate(0, 0) scale(.1) rotate(0); }
+    14% { opacity: 1; }
+    64% { opacity: 1; transform: translate(var(--cell-x), var(--cell-y)) scale(var(--cell-scale, 1.8)) rotate(35deg); }
+    100% { opacity: 0; transform: translate(var(--cell-x), var(--cell-y)) scale(var(--cell-scale, 1.8)) rotate(55deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) { animation: none !important; }
+    .theme-virus.is-active .theme-virus__core {
+      animation: theme-virus-core-reduced 320ms ease-out both;
+    }
+
+    .theme-virus__cell:nth-of-type(n + 5) {
+      display: none;
+    }
+
+    .theme-virus.is-active .theme-virus__cell {
+      animation-duration: 230ms;
+    }
+
+    @keyframes theme-virus-core-reduced {
+      0% { opacity: 1; transform: scale(.01); }
+      68%, 82% { opacity: 1; transform: scale(var(--virus-scale)); }
+      100% { opacity: 0; transform: scale(var(--virus-scale)); }
+    }
   }
 </style>
 
@@ -137,6 +201,16 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+    <div id="theme-virus" class="theme-virus" aria-hidden="true">
+      <span class="theme-virus__core"></span>
+      <span class="theme-virus__cell" style="--cell-x:-9vw;--cell-y:-4vh;--cell-size:11px;--cell-scale:2.1;--cell-delay:10ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:7vw;--cell-y:-6vh;--cell-size:8px;--cell-scale:2.5;--cell-delay:35ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:11vw;--cell-y:3vh;--cell-size:14px;--cell-scale:1.7;--cell-delay:20ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:5vw;--cell-y:9vh;--cell-size:9px;--cell-scale:2.2;--cell-delay:55ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:-7vw;--cell-y:8vh;--cell-size:15px;--cell-scale:1.5;--cell-delay:25ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:-12vw;--cell-y:3vh;--cell-size:7px;--cell-scale:2.6;--cell-delay:70ms"></span>
+      <span class="theme-virus__cell" style="--cell-x:2vw;--cell-y:-10vh;--cell-size:12px;--cell-scale:1.8;--cell-delay:45ms"></span>
+    </div>
     <div class="site-frame">
       <SiteHeader />
       <main id="main-content" tabindex="-1">
@@ -147,7 +221,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
     <script>
       const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
+      const themeVirus = document.querySelector<HTMLElement>('#theme-virus');
       const root = document.documentElement;
+      let themeIsChanging = false;
 
       function updateThemeControl() {
         const isDark = root.classList.contains('dark');
@@ -165,22 +241,39 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       updateThemeControl();
 
       themeButton?.addEventListener('click', () => {
+        if (themeIsChanging) return;
+
         const target: 'dark' | 'light' = root.classList.contains('dark') ? 'light' : 'dark';
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const startViewTransition = (document as any).startViewTransition;
 
-        if (reduceMotion || typeof startViewTransition !== 'function') {
+        if (!themeVirus) {
           applyNextTheme();
           return;
         }
 
-        root.dataset.themeTarget = target;
-        root.style.setProperty('--theme-blink-cover', target === 'dark' ? '#111110' : '#ffffff');
-        const transition = startViewTransition.call(document, applyNextTheme);
+        const rect = themeButton.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const farthestX = Math.max(x, window.innerWidth - x);
+        const farthestY = Math.max(y, window.innerHeight - y);
+        const coverRadius = Math.hypot(farthestX, farthestY);
 
-        Promise.resolve(transition.finished).finally(() => {
+        themeIsChanging = true;
+        root.dataset.themeTarget = target;
+        themeVirus.style.setProperty('--virus-color', target === 'dark' ? '#111110' : '#ffffff');
+        themeVirus.style.setProperty('--virus-x', `${x}px`);
+        themeVirus.style.setProperty('--virus-y', `${y}px`);
+        themeVirus.style.setProperty('--virus-scale', String((coverRadius * 2.35) / 64));
+        themeVirus.classList.remove('is-active');
+        void themeVirus.offsetWidth;
+        themeVirus.classList.add('is-active');
+
+        window.setTimeout(applyNextTheme, reduceMotion ? 145 : 500);
+        window.setTimeout(() => {
+          themeVirus.classList.remove('is-active');
           delete root.dataset.themeTarget;
-        });
+          themeIsChanging = false;
+        }, reduceMotion ? 350 : 820);
       });
     </script>
   </body>
