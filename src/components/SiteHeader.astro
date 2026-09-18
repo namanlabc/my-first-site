@@ -33,14 +33,17 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     </nav>
 
     <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
-      <span class="theme-invitation" aria-hidden="true">let it spread</span>
       <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
-        <path class="theme-icon__mass" d="M12 4.5a7.5 7.5 0 0 1 0 15Z" fill="currentColor" stroke="none"></path>
-        <path class="theme-icon__fissure" d="M18.4 8.4l1.6-1.1 1.1.15" fill="none" stroke="currentColor"></path>
-        <path class="theme-icon__tendril theme-icon__tendril--a" d="M18.5 8.2c2.3-1.4 1.7-4.3 5.2-5.7 2.4-1 3.1-2.3 2.5-3.8" fill="none" stroke="currentColor"></path>
-        <path class="theme-icon__tendril theme-icon__tendril--b" d="M19.5 12c2.6-.7 4.1 1.15 7.9-.25 1.2-.45 2.35-.25 3.1.45" fill="none" stroke="currentColor"></path>
-        <path class="theme-icon__tendril theme-icon__tendril--c" d="M18.35 16.2c2.8.45 2.7 3.45 6.3 5.4 1.55.85 2.1 2.2 1.5 3.45" fill="none" stroke="currentColor"></path>
+        <defs>
+          <clipPath id="theme-icon-clip">
+            <path d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 1 1 0-15Z"></path>
+          </clipPath>
+        </defs>
+        <circle class="theme-icon__ring" cx="12" cy="12" r="7.5"></circle>
+        <path class="theme-icon__mass" clip-path="url(#theme-icon-clip)" d="M12 4.5a7.5 7.5 0 0 1 0 15Z"></path>
+        <path class="theme-icon__pressure" clip-path="url(#theme-icon-clip)" d="M12 4.5a7.5 7.5 0 0 1 0 15Z"></path>
+        <circle class="theme-icon__preview" cx="12" cy="12" r="7.5"></circle>
+        <circle class="theme-icon__bite" cx="17.9" cy="8.4" r="1.05"></circle>
       </svg>
     </button>
 

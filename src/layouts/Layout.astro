@@ -130,11 +130,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       }
 
       updateThemeControl();
-      try {
-        if (sessionStorage.getItem('theme-spread-seen') === '1') {
-          themeButton?.classList.add('has-spread');
-        }
-      } catch {}
 
       type Point = { x: number; y: number };
       type Vein = { points: Point[]; width: number; delay: number };
@@ -291,9 +286,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
         themeIsChanging = true;
         root.dataset.themeTarget = target;
-        themeButton.classList.add('has-spread');
         themeButton.classList.add('is-infecting');
-        try { sessionStorage.setItem('theme-spread-seen', '1'); } catch {}
         themeInfection.classList.add('is-active');
 
         const ratio = Math.min(window.devicePixelRatio || 1, 2);
