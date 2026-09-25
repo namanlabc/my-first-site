@@ -523,14 +523,9 @@ body:has(.quiet-home) .header-controls { margin-left: auto; }
 body:has(.quiet-home) .site-footer { display: none; }
 body:has(.quiet-home) .brand-wordmark { font-family: var(--sans); font-size: 17px; font-weight: 650; letter-spacing: -.045em; }
 .brand-mascot { width: 32px; height: 32px; aspect-ratio: 1; margin-top: 0; }
-.mascot-brow,
-.mascot-mouth { fill: none; stroke: var(--mascot-eye); stroke-linecap: round; }
-.mascot-brow { stroke-width: 1.05; opacity: .72; transition: transform 180ms ease; }
-.mascot-mouth { stroke-width: 1.25; opacity: .72; transition: transform 180ms ease, opacity 180ms ease; }
+.mascot-brow { fill: none; stroke: var(--mascot-eye); stroke-width: 1.05; stroke-linecap: round; opacity: .72; transition: transform 180ms ease; }
 .mascot-pupil { fill: var(--mascot-body); }
 .mascot-spark { fill: var(--accent); transform-origin: center; animation: nav-spark 4.8s ease-in-out infinite; }
-.site-brand:hover .mascot-mouth,
-.site-brand:focus-visible .mascot-mouth { opacity: 1; transform: translateY(.45px) scaleX(1.15); }
 .site-brand:hover .mascot-brow--left,
 .site-brand:focus-visible .mascot-brow--left { transform: translateY(-.7px) rotate(-5deg); }
 .site-brand:hover .mascot-brow--right,
