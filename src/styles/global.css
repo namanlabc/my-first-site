@@ -747,7 +747,7 @@ body:has(.quiet-home) .theme-toggle { width: 32px; height: 32px; font-size: 13px
 /* Final shell order: inner pages and articles share the homepage restraint. */
 html { background: var(--paper); }
 .site-frame { width: 100%; min-height: 100vh; margin: 0; border: 0; box-shadow: none; }
-.site-header { width: min(780px, calc(100% - 40px)); min-height: 88px; border-bottom: 0; }
+.site-header { width: min(930px, calc(100% - 40px)); min-height: 88px; border-bottom: 0; }
 .site-footer { width: min(680px, calc(100% - 40px)); }
 .desktop-nav { gap: 21px; }
 .desktop-nav a::before { display: none; }
