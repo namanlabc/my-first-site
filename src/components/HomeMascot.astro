@@ -155,8 +155,17 @@
   @media (prefers-reduced-motion: reduce) {
     .naman-orb *, .naman-orb__body, .naman-orb__orbit, .naman-orb__gaze, .naman-orb__blink { animation: none !important; transition: none !important; }
   }
-  /* Same drawing, more personality: these states only move the original parts. */
-  .naman-orb.is-watching .naman-orb__gaze {
+  /* The original drawing never changes; only its existing parts move. */
+  .naman-orb {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+
+  .naman-orb.is-watching .naman-orb__gaze,
+  .naman-orb.is-theme-watching .naman-orb__gaze {
     animation: none;
     transform: translate(var(--gaze-x, 0), var(--gaze-y, 0));
   }
@@ -171,6 +180,23 @@
   .naman-orb.is-celebrating .naman-orb__spark { animation: orb-firework 820ms ease-out both; }
   .naman-orb.is-scrolling .naman-orb__body { animation: orb-scroll-peek 420ms ease-out both; }
   .naman-orb.is-scrolling .naman-orb__gaze { animation: none; transform: translateY(var(--scroll-look, 1.8px)); }
+
+  .naman-orb.is-orbit-chasing .naman-orb__orbit { animation: orbit-turn 1.15s linear 2; }
+  .naman-orb.is-orbit-chasing .naman-orb__gaze { animation: orb-follow-orbit 2.3s ease-in-out both; }
+  .naman-orb.is-orbit-chasing .naman-orb__body { animation: orb-curious-tilt 2.3s ease-in-out both; }
+
+  .naman-orb.is-napping .naman-orb__body { animation: orb-nap 2.8s ease-in-out infinite; }
+  .naman-orb.is-napping .naman-orb__blink { animation: none; transform: scaleY(.08); }
+  .naman-orb.is-napping .naman-orb__orbit { animation-duration: 42s; opacity: .52; }
+  .naman-orb.is-napping .naman-orb__spark { opacity: .12; animation: none; }
+
+  .naman-orb.is-startled .naman-orb__body { animation: orb-startled 620ms cubic-bezier(.18,.9,.2,1) both; }
+  .naman-orb.is-startled .naman-orb__eye { animation: orb-wide-eyes 620ms ease both; }
+  .naman-orb.is-theme-scared .naman-orb__body { animation: orb-theme-scoot 720ms cubic-bezier(.2,.85,.2,1) both; }
+  .naman-orb.is-theme-scared .naman-orb__gaze { animation: none; transform: translate(2.4px,-1.2px); }
+  .naman-orb.is-adventuring .naman-orb__orbit { animation-duration: .72s; }
+  .naman-orb.is-adventuring .naman-orb__gaze { animation: none; transform: translate(2.4px,0); }
+  .naman-orb.is-lapping .naman-orb__spark { animation: orb-firework 800ms ease-out infinite; }
 
   @keyframes orb-bouncy {
     0%, 100% { transform: translateY(0) scale(1); }
@@ -217,34 +243,287 @@
     48% { transform: translateY(var(--scroll-bob, -2px)) scale(1.03,.97); }
   }
 
+  @keyframes orb-follow-orbit {
+    0%, 100% { transform: translate(0); }
+    18% { transform: translate(2.3px,-1.5px); }
+    42% { transform: translate(2px,1.6px); }
+    66% { transform: translate(-2.1px,1.2px); }
+    84% { transform: translate(-1.6px,-1.5px); }
+  }
+
+  @keyframes orb-curious-tilt {
+    0%, 100% { transform: rotate(0); }
+    28%, 45% { transform: rotate(3deg); }
+    68%, 82% { transform: rotate(-3deg); }
+  }
+
+  @keyframes orb-nap {
+    0%, 100% { transform: translateY(2px) scale(1,.985); }
+    50% { transform: translateY(2.8px) scale(1.01,.975); }
+  }
+
+  @keyframes orb-startled {
+    0%, 100% { transform: translateY(0) scale(1); }
+    22% { transform: translateY(-7px) scale(.92,1.1); }
+    48% { transform: translateY(1px) scale(1.07,.93); }
+    70% { transform: translateY(-2px) scale(.99,1.02); }
+  }
+
+  @keyframes orb-wide-eyes {
+    0%, 100% { transform: scale(1); }
+    24%, 58% { transform: scale(1.13); }
+  }
+
+  @keyframes orb-theme-scoot {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    24% { transform: translateX(-5px) rotate(-7deg) scale(1.03,.97); }
+    48% { transform: translateX(-7px) rotate(-9deg) scale(.98,1.02); }
+    76% { transform: translateX(-2px) rotate(3deg); }
+  }
+
 </style>
 
 <script>
   const orb = document.querySelector<HTMLElement>('.naman-orb');
+  const heading = document.querySelector<HTMLElement>('.bear-intro h1');
+  const themeButton = document.querySelector<HTMLElement>('#theme-toggle');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const activities = [
+  const activityClasses = [
+    'is-bouncy',
+    'is-shy',
+    'is-dizzy',
+    'is-celebrating',
+    'is-orbit-chasing',
+    'is-startled',
+    'is-theme-scared',
+  ];
+  const tapActivities = [
     { name: 'is-bouncy', duration: 780 },
     { name: 'is-shy', duration: 940 },
     { name: 'is-dizzy', duration: 1180 },
     { name: 'is-celebrating', duration: 850 },
   ];
+
   let activityIndex = 0;
   let activityTimer = 0;
   let scrollTimer = 0;
+  let tapTimer = 0;
+  let napTimer = 0;
+  let idleTimer = 0;
+  let signatureTimer = 0;
   let lastScrollY = window.scrollY;
+  let lastHumanActivity = Date.now();
+  let rapidTaps: number[] = [];
+  let currentAnimation: Animation | null = null;
+  let busyKind = '';
+  let adventureStartedAt = 0;
+  let interrupted = false;
 
-  function playActivity(name: string, duration: number) {
-    if (!orb || reducedMotion.matches) return;
-    activities.forEach(activity => orb.classList.remove(activity.name));
-    orb.classList.remove('is-watching', 'is-scrolling');
+  const isVisible = () => {
+    if (!orb || document.hidden) return false;
+    const rect = orb.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  };
+
+  const clearActivityClasses = () => {
+    if (!orb) return;
+    activityClasses.forEach(name => orb.classList.remove(name));
+    orb.classList.remove('is-watching', 'is-scrolling', 'is-theme-watching');
+  };
+
+  const playClassActivity = (name: string, duration: number) => {
+    if (!orb || reducedMotion.matches || busyKind) return;
+    clearActivityClasses();
     void orb.offsetWidth;
     orb.classList.add(name);
     window.clearTimeout(activityTimer);
     activityTimer = window.setTimeout(() => orb.classList.remove(name), duration);
+  };
+
+  const clipPage = (clip: boolean) => {
+    document.documentElement.style.overflowX = clip ? 'clip' : '';
+    document.body.style.overflowX = clip ? 'clip' : '';
+  };
+
+  const finishAdventure = () => {
+    if (!orb) return;
+    currentAnimation = null;
+    busyKind = '';
+    orb.classList.remove('is-adventuring', 'is-lapping');
+    orb.style.removeProperty('transform');
+    orb.style.removeProperty('opacity');
+    clipPage(false);
+  };
+
+  const cancelAdventure = (reaction = true) => {
+    if (!currentAnimation) return;
+    interrupted = true;
+    currentAnimation.cancel();
+    finishAdventure();
+    if (reaction) playClassActivity('is-startled', 640);
+  };
+
+  async function runEscape(wrongSide = false) {
+    if (!orb || reducedMotion.matches || busyKind || !isVisible()) return;
+    busyKind = 'escape';
+    interrupted = false;
+    adventureStartedAt = performance.now();
+    clearActivityClasses();
+    orb.classList.add('is-adventuring');
+    orb.style.setProperty('--gaze-x', '2.4px');
+    orb.style.setProperty('--gaze-y', '0px');
+    clipPage(true);
+
+    const rect = orb.getBoundingClientRect();
+    const exitRight = window.innerWidth - rect.left + 68;
+    const entryLeft = -(rect.right + 68);
+    const leftPeek = -(rect.left + rect.width * .68);
+    const rightPeek = window.innerWidth - rect.left - rect.width * .32;
+
+    const normalFrames: Keyframe[] = [
+      { transform: 'translateX(0) rotate(0deg)', opacity: 1, offset: 0 },
+      { transform: 'translateX(-5px) rotate(-8deg)', opacity: 1, offset: .08 },
+      { transform: 'translateX(2px) rotate(3deg)', opacity: 1, offset: .15 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(760deg)', opacity: 1, offset: .46 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(760deg)', opacity: 0, offset: .47 },
+      { transform: 'translateX(' + entryLeft + 'px) rotate(-720deg)', opacity: 0, offset: .49 },
+      { transform: 'translateX(' + leftPeek + 'px) rotate(-28deg)', opacity: 1, offset: .62 },
+      { transform: 'translateX(' + (leftPeek - 9) + 'px) rotate(-34deg)', opacity: 1, offset: .71 },
+      { transform: 'translateX(' + leftPeek + 'px) rotate(-25deg)', opacity: 1, offset: .78 },
+      { transform: 'translateX(0) rotate(0deg)', opacity: 1, offset: 1 },
+    ];
+
+    const wrongSideFrames: Keyframe[] = [
+      { transform: 'translateX(0) rotate(0deg)', opacity: 1, offset: 0 },
+      { transform: 'translateX(-5px) rotate(-8deg)', opacity: 1, offset: .06 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(720deg)', opacity: 1, offset: .3 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(720deg)', opacity: 0, offset: .31 },
+      { transform: 'translateX(' + rightPeek + 'px) rotate(26deg)', opacity: 0, offset: .34 },
+      { transform: 'translateX(' + rightPeek + 'px) rotate(26deg)', opacity: 1, offset: .43 },
+      { transform: 'translateX(' + (rightPeek + 9) + 'px) rotate(32deg)', opacity: 1, offset: .52 },
+      { transform: 'translateX(' + rightPeek + 'px) rotate(22deg)', opacity: 1, offset: .59 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(160deg)', opacity: 1, offset: .68 },
+      { transform: 'translateX(' + exitRight + 'px) rotate(160deg)', opacity: 0, offset: .69 },
+      { transform: 'translateX(' + entryLeft + 'px) rotate(-540deg)', opacity: 0, offset: .71 },
+      { transform: 'translateX(' + leftPeek + 'px) rotate(-24deg)', opacity: 1, offset: .8 },
+      { transform: 'translateX(0) rotate(0deg)', opacity: 1, offset: 1 },
+    ];
+
+    currentAnimation = orb.animate(wrongSide ? wrongSideFrames : normalFrames, {
+      duration: wrongSide ? 4300 : 3300,
+      easing: 'cubic-bezier(.45,0,.2,1)',
+      fill: 'both',
+    });
+
+    try {
+      await currentAnimation.finished;
+    } catch {}
+    if (!interrupted) finishAdventure();
   }
 
+  async function runHeadingHide() {
+    if (!orb || !heading || reducedMotion.matches || busyKind || !isVisible()) return;
+    busyKind = 'hide';
+    clearActivityClasses();
+    orb.classList.add('is-adventuring');
+    const orbRect = orb.getBoundingClientRect();
+    const headingRect = heading.getBoundingClientRect();
+    const x = Math.min(headingRect.width - orbRect.width * .7, 78);
+    const y = headingRect.top - orbRect.top + headingRect.height * .28;
+
+    currentAnimation = orb.animate([
+      { transform: 'translate(0,0) rotate(0deg)', offset: 0 },
+      { transform: 'translate(' + x + 'px,' + (y - 8) + 'px) rotate(12deg)', offset: .3 },
+      { transform: 'translate(' + x + 'px,' + (y + 10) + 'px) rotate(6deg)', offset: .43 },
+      { transform: 'translate(' + (x + 8) + 'px,' + (y - 5) + 'px) rotate(-5deg)', offset: .61 },
+      { transform: 'translate(' + (x + 8) + 'px,' + (y + 9) + 'px) rotate(4deg)', offset: .72 },
+      { transform: 'translate(0,0) rotate(0deg)', offset: 1 },
+    ], { duration: 2800, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'both' });
+
+    try { await currentAnimation.finished; } catch {}
+    if (!interrupted) finishAdventure();
+  }
+
+  async function runSecretLap() {
+    if (!orb || !heading || reducedMotion.matches) return;
+    cancelAdventure(false);
+    busyKind = 'lap';
+    interrupted = false;
+    clearActivityClasses();
+    orb.classList.add('is-adventuring', 'is-lapping');
+    clipPage(true);
+
+    const orbRect = orb.getBoundingClientRect();
+    const headingRect = heading.getBoundingClientRect();
+    const right = Math.max(72, headingRect.right - orbRect.left - orbRect.width);
+    const down = Math.max(44, headingRect.bottom - orbRect.top + 12);
+
+    currentAnimation = orb.animate([
+      { transform: 'translate(0,0) rotate(0deg)', offset: 0 },
+      { transform: 'translate(' + (right * .48) + 'px,-14px) rotate(180deg)', offset: .2 },
+      { transform: 'translate(' + right + 'px,' + (down * .22) + 'px) rotate(390deg)', offset: .4 },
+      { transform: 'translate(' + (right * .65) + 'px,' + down + 'px) rotate(590deg)', offset: .62 },
+      { transform: 'translate(-14px,' + (down * .72) + 'px) rotate(790deg)', offset: .82 },
+      { transform: 'translate(0,0) rotate(1080deg)', offset: 1 },
+    ], { duration: 2500, easing: 'cubic-bezier(.35,.05,.2,1)', fill: 'both' });
+
+    try { await currentAnimation.finished; } catch {}
+    if (!interrupted) {
+      finishAdventure();
+      playClassActivity('is-celebrating', 850);
+    }
+  }
+
+  const wakeUp = () => {
+    if (!orb?.classList.contains('is-napping')) return;
+    orb.classList.remove('is-napping');
+    playClassActivity('is-startled', 640);
+  };
+
+  const noteHumanActivity = () => {
+    lastHumanActivity = Date.now();
+    wakeUp();
+  };
+
+  const scheduleNapCheck = () => {
+    window.clearTimeout(napTimer);
+    napTimer = window.setTimeout(() => {
+      if (orb && !busyKind && isVisible() && Date.now() - lastHumanActivity >= 58000 && !reducedMotion.matches) {
+        clearActivityClasses();
+        orb.classList.add('is-napping');
+      }
+      scheduleNapCheck();
+    }, 5000);
+  };
+
+  const scheduleIdleQuirk = () => {
+    window.clearTimeout(idleTimer);
+    idleTimer = window.setTimeout(async () => {
+      if (!busyKind && isVisible() && Date.now() - lastHumanActivity > 9000) {
+        if (Math.random() > .48) playClassActivity('is-orbit-chasing', 2350);
+        else await runHeadingHide();
+      }
+      scheduleIdleQuirk();
+    }, 78000 + Math.random() * 52000);
+  };
+
+  const scheduleSignatureEscape = () => {
+    let alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem('naman-mascot-escaped') === 'yes'; } catch {}
+    if (alreadySeen) return;
+    signatureTimer = window.setTimeout(async () => {
+      if (Date.now() - lastHumanActivity < 6500 || !isVisible() || busyKind) {
+        scheduleSignatureEscape();
+        return;
+      }
+      try { sessionStorage.setItem('naman-mascot-escaped', 'yes'); } catch {}
+      await runEscape(Math.random() < .22);
+    }, 28000 + Math.random() * 17000);
+  };
+
   orb?.addEventListener('pointermove', (event) => {
-    if (reducedMotion.matches) return;
+    noteHumanActivity();
+    if (reducedMotion.matches || busyKind) return;
     const rect = orb.getBoundingClientRect();
     const x = Math.max(-2.4, Math.min(2.4, (event.clientX - (rect.left + rect.width / 2)) / 10));
     const y = Math.max(-1.8, Math.min(1.8, (event.clientY - (rect.top + rect.height / 2)) / 12));
@@ -256,13 +535,43 @@
   orb?.addEventListener('pointerleave', () => orb.classList.remove('is-watching'));
 
   orb?.addEventListener('pointerdown', () => {
-    const activity = activities[activityIndex % activities.length];
-    activityIndex += 1;
-    playActivity(activity.name, activity.duration);
+    noteHumanActivity();
+    const now = performance.now();
+    rapidTaps = rapidTaps.filter(time => now - time < 1450);
+    rapidTaps.push(now);
+
+    if (rapidTaps.length >= 5) {
+      rapidTaps = [];
+      window.clearTimeout(tapTimer);
+      runSecretLap();
+      return;
+    }
+
+    window.clearTimeout(tapTimer);
+    tapTimer = window.setTimeout(() => {
+      if (busyKind) return;
+      if (activityIndex < tapActivities.length) {
+        const activity = tapActivities[activityIndex];
+        activityIndex += 1;
+        playClassActivity(activity.name, activity.duration);
+      } else {
+        activityIndex = 0;
+        runEscape(Math.random() < .18);
+      }
+    }, 250);
   });
 
+  document.addEventListener('pointermove', (event) => {
+    if (busyKind !== 'escape' || performance.now() - adventureStartedAt < 520 || !orb) return;
+    const rect = orb.getBoundingClientRect();
+    const distance = Math.hypot(event.clientX - (rect.left + rect.width / 2), event.clientY - (rect.top + rect.height / 2));
+    if (distance < 78) cancelAdventure(true);
+  }, { passive: true });
+
   window.addEventListener('scroll', () => {
+    noteHumanActivity();
     if (!orb || reducedMotion.matches) return;
+    if (busyKind) cancelAdventure(false);
     const goingDown = window.scrollY > lastScrollY;
     lastScrollY = window.scrollY;
     orb.style.setProperty('--scroll-look', goingDown ? '1.8px' : '-1.8px');
@@ -271,4 +580,31 @@
     window.clearTimeout(scrollTimer);
     scrollTimer = window.setTimeout(() => orb.classList.remove('is-scrolling'), 260);
   }, { passive: true });
+
+  themeButton?.addEventListener('pointerenter', () => {
+    if (!orb || busyKind) return;
+    orb.style.setProperty('--gaze-x', '2.4px');
+    orb.style.setProperty('--gaze-y', '-1.2px');
+    orb.classList.add('is-theme-watching');
+  });
+  themeButton?.addEventListener('pointerleave', () => orb?.classList.remove('is-theme-watching'));
+  themeButton?.addEventListener('pointerdown', () => {
+    noteHumanActivity();
+    cancelAdventure(false);
+    playClassActivity('is-theme-scared', 740);
+  });
+
+  ['keydown', 'touchstart'].forEach(type => {
+    window.addEventListener(type, noteHumanActivity, { passive: true });
+  });
+
+  scheduleNapCheck();
+  scheduleIdleQuirk();
+  scheduleSignatureEscape();
+
+  window.addEventListener('pagehide', () => {
+    [activityTimer, scrollTimer, tapTimer, napTimer, idleTimer, signatureTimer].forEach(window.clearTimeout);
+    currentAnimation?.cancel();
+    clipPage(false);
+  }, { once: true });
 </script>
