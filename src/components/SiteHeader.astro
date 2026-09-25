@@ -47,17 +47,73 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
   </div>
 </header>
 
+<style>
+  .site-brand.is-nav-curious .mascot-dot {
+    transform: scale(1.055,.955);
+  }
+
+  .site-brand.is-nav-curious .brand-mascot {
+    animation: nav-mascot-curious 520ms cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  .site-brand.is-arriving .brand-mascot {
+    animation: nav-mascot-arrive 680ms cubic-bezier(.2,.9,.2,1) both;
+  }
+
+  .site-brand.is-departing .brand-mascot {
+    animation: nav-mascot-depart 260ms ease-in both;
+  }
+
+  @keyframes nav-mascot-curious {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    46% { transform: translateY(-2px) rotate(5deg); }
+  }
+
+  @keyframes nav-mascot-arrive {
+    0% { opacity: 0; transform: translateX(17px) rotate(190deg) scale(.78); }
+    62% { opacity: 1; transform: translateX(-2px) rotate(-12deg) scale(1.04); }
+    100% { opacity: 1; transform: translateX(0) rotate(0) scale(1); }
+  }
+
+  @keyframes nav-mascot-depart {
+    to { opacity: .2; transform: translateX(12px) rotate(130deg) scale(.78); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-brand.is-nav-curious .brand-mascot,
+    .site-brand.is-arriving .brand-mascot,
+    .site-brand.is-departing .brand-mascot { animation: none; }
+  }
+</style>
+
 <script>
   const brand = document.querySelector<HTMLElement>('.site-brand');
   const theme = document.querySelector<HTMLElement>('#theme-toggle');
+  const navigation = Array.from(document.querySelectorAll<HTMLElement>('.desktop-nav a'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let blinkTimer = 0;
   let scrollTimer = 0;
+  let curiousTimer = 0;
   let lastY = window.scrollY;
 
   function blink() {
-    brand?.classList.add('is-blinking');
-    window.setTimeout(() => brand?.classList.remove('is-blinking'), 150);
+    if (!document.hidden && !reduceMotion.matches) {
+      brand?.classList.add('is-blinking');
+      window.setTimeout(() => brand?.classList.remove('is-blinking'), 150);
+    }
     blinkTimer = window.setTimeout(blink, 2600 + Math.random() * 4200);
+  }
+
+  function watchElement(element: HTMLElement) {
+    if (!brand) return;
+    const brandRect = brand.getBoundingClientRect();
+    const targetRect = element.getBoundingClientRect();
+    const direction = targetRect.left > brandRect.right ? 3 : -3;
+    brand.style.setProperty('--eye-x', direction + 'px');
+    brand.style.setProperty('--eye-y', '-.7px');
+    brand.classList.add('is-menu-watching', 'is-nav-curious');
+    window.clearTimeout(curiousTimer);
+    curiousTimer = window.setTimeout(() => brand.classList.remove('is-nav-curious'), 540);
   }
 
   brand?.addEventListener('pointermove', (event) => {
@@ -70,7 +126,24 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
   });
 
   brand?.addEventListener('pointerleave', () => brand.classList.remove('is-tracking'));
-  theme?.addEventListener('pointerenter', () => brand?.classList.add('is-menu-watching'));
+  brand?.addEventListener('pointerdown', () => {
+    brand.classList.add('is-poked');
+    window.setTimeout(() => brand.classList.remove('is-poked'), 640);
+  });
+
+  navigation.forEach(link => {
+    link.addEventListener('pointerenter', () => watchElement(link));
+    link.addEventListener('pointerleave', () => brand?.classList.remove('is-menu-watching'));
+    link.addEventListener('pointerdown', () => {
+      if (reduceMotion.matches) return;
+      brand?.classList.add('is-departing');
+      try { sessionStorage.setItem('naman-mascot-travelled', 'yes'); } catch {}
+    });
+  });
+
+  theme?.addEventListener('pointerenter', () => {
+    if (theme) watchElement(theme);
+  });
   theme?.addEventListener('pointerleave', () => brand?.classList.remove('is-menu-watching'));
 
   window.addEventListener('scroll', () => {
@@ -82,6 +155,18 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     scrollTimer = window.setTimeout(() => brand?.classList.remove('is-scrolling'), 240);
   }, { passive: true });
 
+  let travelled = false;
+  try {
+    travelled = sessionStorage.getItem('naman-mascot-travelled') === 'yes';
+    if (travelled) sessionStorage.removeItem('naman-mascot-travelled');
+  } catch {}
+  if (travelled && !reduceMotion.matches) {
+    requestAnimationFrame(() => brand?.classList.add('is-arriving'));
+    window.setTimeout(() => brand?.classList.remove('is-arriving'), 720);
+  }
+
   blinkTimer = window.setTimeout(blink, 1800 + Math.random() * 2200);
-  window.addEventListener('pagehide', () => window.clearTimeout(blinkTimer), { once: true });
+  window.addEventListener('pagehide', () => {
+    [blinkTimer, scrollTimer, curiousTimer].forEach(window.clearTimeout);
+  }, { once: true });
 </script>
