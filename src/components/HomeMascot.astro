@@ -26,17 +26,6 @@
         </g>
       </g>
 
-      <g class="naman-orb__mouth naman-orb__mouth--smile">
-        <path d="M32.8 48.4c3.8 3.2 10.3 3.2 14.2 0"></path>
-      </g>
-      <g class="naman-orb__mouth naman-orb__mouth--grin">
-        <path class="naman-orb__grin-fill" d="M31.5 47.5c4.5 5.9 12.3 5.9 16.9 0-4.5 1.4-12.4 1.4-16.9 0Z"></path>
-        <path class="naman-orb__grin-line" d="M33.6 49.2h12.8"></path>
-      </g>
-      <g class="naman-orb__mouth naman-orb__mouth--oh">
-        <ellipse cx="40" cy="49.5" rx="3.2" ry="4"></ellipse>
-      </g>
-
       <circle class="naman-orb__cheek naman-orb__cheek--left" cx="21.9" cy="45" r="2"></circle>
       <circle class="naman-orb__cheek naman-orb__cheek--right" cx="57.9" cy="45" r="2"></circle>
     </g>
@@ -73,8 +62,7 @@
   .naman-orb__face { fill: var(--ink); }
 
   .naman-orb__shine,
-  .naman-orb__brows,
-  .naman-orb__mouth {
+  .naman-orb__brows {
     fill: none;
     stroke: var(--paper);
     stroke-linecap: round;
@@ -107,19 +95,6 @@
     transform-origin: center;
     animation: mascot-blink 7.1s ease-in-out infinite;
   }
-
-  .naman-orb__mouth {
-    stroke-width: 1.8;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .naman-orb__mouth--smile { animation: mouth-smile 10.4s steps(1,end) infinite; }
-  .naman-orb__mouth--grin { animation: mouth-grin 10.4s steps(1,end) infinite; }
-  .naman-orb__mouth--oh { animation: mouth-oh 10.4s steps(1,end) infinite; }
-  .naman-orb__grin-fill,
-  .naman-orb__mouth--oh ellipse { fill: var(--paper); stroke: none; }
-  .naman-orb__grin-line { stroke: var(--ink); stroke-width: 1; opacity: .6; }
 
   .naman-orb__cheek {
     fill: var(--accent);
@@ -173,14 +148,6 @@
     transform: translate(2px, -1px);
   }
 
-  .naman-orb:hover .naman-orb__mouth--smile,
-  .naman-orb:active .naman-orb__mouth--smile,
-  .naman-orb:hover .naman-orb__mouth--oh,
-  .naman-orb:active .naman-orb__mouth--oh { opacity: 0; }
-
-  .naman-orb:hover .naman-orb__mouth--grin,
-  .naman-orb:active .naman-orb__mouth--grin { opacity: 1; }
-
   .naman-orb:hover .naman-orb__wave,
   .naman-orb:active .naman-orb__wave { animation-duration: 540ms; }
 
@@ -207,21 +174,6 @@
     0%, 38%, 67%, 100% { transform: translateY(0) rotate(0); }
     45%, 59% { transform: translateY(-1.2px) rotate(-2deg); }
     76%, 88% { transform: translateY(-2px) scaleX(1.08); }
-  }
-
-  @keyframes mouth-smile {
-    0%, 39%, 67%, 100% { opacity: 1; }
-    40%, 66%, 68%, 92% { opacity: 0; }
-  }
-
-  @keyframes mouth-grin {
-    0%, 39%, 68%, 100% { opacity: 0; }
-    40%, 66% { opacity: 1; }
-  }
-
-  @keyframes mouth-oh {
-    0%, 67%, 93%, 100% { opacity: 0; }
-    68%, 92% { opacity: 1; }
   }
 
   @keyframes mascot-cheeks {
@@ -258,8 +210,5 @@
       animation: none !important;
       transition: none !important;
     }
-    .naman-orb__mouth--grin,
-    .naman-orb__mouth--oh { opacity: 0; }
-    .naman-orb__mouth--smile { opacity: 1; }
   }
 </style>
