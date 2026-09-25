@@ -12,17 +12,12 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
 
 <header class="site-header">
   <a class="site-brand" href={base} aria-label="Naman.blog home">
-    <svg class="brand-mascot" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <path class="mascot-dot" d="M16 2.6c8.2 0 13.6 5.8 13.2 13.8-.3 7.8-5.8 13-13.5 12.9C7.6 29.2 2.3 23.8 2.7 15.8 3 8.1 8.4 2.6 16 2.6Z"></path>
-      <path class="mascot-brow mascot-brow--left" d="M8.8 10.9c1.4-1 3-.9 4.2-.2"></path>
-      <path class="mascot-brow mascot-brow--right" d="M19 10.7c1.3-.8 2.9-.7 4.2.2"></path>
+    <svg class="brand-mascot" viewBox="0 0 32 32" aria-hidden="true">
+      <circle class="mascot-dot" cx="16" cy="16" r="13.5"></circle>
       <g class="mascot-eyes">
-        <ellipse class="mascot-eye" cx="11.2" cy="15.4" rx="2.7" ry="3.5"></ellipse>
-        <ellipse class="mascot-eye" cx="20.8" cy="15.4" rx="2.7" ry="3.5"></ellipse>
-        <circle class="mascot-pupil" cx="11.8" cy="15.7" r="1"></circle>
-        <circle class="mascot-pupil" cx="21.4" cy="15.7" r="1"></circle>
+        <ellipse class="mascot-eye" cx="11.7" cy="15" rx="2.3" ry="3.1"></ellipse>
+        <ellipse class="mascot-eye" cx="20.3" cy="15" rx="2.3" ry="3.1"></ellipse>
       </g>
-      <circle class="mascot-spark" cx="27.4" cy="5.7" r="1.25"></circle>
     </svg>
     <span class="brand-wordmark">naman<span class="brand-dot">.</span></span>
   </a>
@@ -51,3 +46,42 @@ const active = (href: string) => path.startsWith(href) || (href.endsWith('archiv
     </button>
   </div>
 </header>
+
+<script>
+  const brand = document.querySelector<HTMLElement>('.site-brand');
+  const theme = document.querySelector<HTMLElement>('#theme-toggle');
+  let blinkTimer = 0;
+  let scrollTimer = 0;
+  let lastY = window.scrollY;
+
+  function blink() {
+    brand?.classList.add('is-blinking');
+    window.setTimeout(() => brand?.classList.remove('is-blinking'), 150);
+    blinkTimer = window.setTimeout(blink, 2600 + Math.random() * 4200);
+  }
+
+  brand?.addEventListener('pointermove', (event) => {
+    const rect = brand.getBoundingClientRect();
+    const x = Math.max(-3, Math.min(3, (event.clientX - (rect.left + 16)) / 12));
+    const y = Math.max(-2, Math.min(2, (event.clientY - (rect.top + rect.height / 2)) / 14));
+    brand.style.setProperty('--eye-x', x + 'px');
+    brand.style.setProperty('--eye-y', y + 'px');
+    brand.classList.add('is-tracking');
+  });
+
+  brand?.addEventListener('pointerleave', () => brand.classList.remove('is-tracking'));
+  theme?.addEventListener('pointerenter', () => brand?.classList.add('is-menu-watching'));
+  theme?.addEventListener('pointerleave', () => brand?.classList.remove('is-menu-watching'));
+
+  window.addEventListener('scroll', () => {
+    const goingDown = window.scrollY > lastY;
+    lastY = window.scrollY;
+    brand?.style.setProperty('--scroll-eye-y', goingDown ? '2px' : '-2px');
+    brand?.classList.add('is-scrolling');
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => brand?.classList.remove('is-scrolling'), 240);
+  }, { passive: true });
+
+  blinkTimer = window.setTimeout(blink, 1800 + Math.random() * 2200);
+  window.addEventListener('pagehide', () => window.clearTimeout(blinkTimer), { once: true });
+</script>
