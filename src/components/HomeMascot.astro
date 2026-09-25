@@ -1,48 +1,37 @@
 <div class="naman-orb" aria-hidden="true">
-  <svg viewBox="0 0 80 74" role="presentation">
-    <g class="naman-orb__arms">
-      <path class="naman-orb__arm naman-orb__arm--left" d="M17.5 45.5c-5.4 1.4-7.8 5-8.4 8.7"></path>
-      <g class="naman-orb__wave">
-        <path class="naman-orb__arm naman-orb__arm--right" d="M61.8 42.3c5-2 7.5-6.1 7.6-10.4"></path>
-        <path class="naman-orb__finger" d="M69.4 31.9l-3.2-3.2M69.4 31.9l3.5-2.1"></path>
-      </g>
+  <svg viewBox="0 0 72 72" role="presentation">
+    <g class="naman-orb__orbit">
+      <circle class="naman-orb__ring" cx="36" cy="36" r="30.5" />
+      <circle class="naman-orb__orbit-dot naman-orb__orbit-dot--one" cx="36" cy="5.5" r="1.45" />
+      <circle class="naman-orb__orbit-dot naman-orb__orbit-dot--two" cx="62.4" cy="51.2" r="1.1" />
     </g>
 
     <g class="naman-orb__body">
-      <path class="naman-orb__face" d="M39.8 8.2c16.4 0 27 11.7 26.3 28.3-.6 16-11.6 26.5-27.2 26.2-16.2-.3-26.6-11.3-26-27.4C13.5 19.6 24.3 8.2 39.8 8.2Z"></path>
-      <path class="naman-orb__shine" d="M24 19.9c3-3.7 7-6 11.3-6.7"></path>
-
-      <g class="naman-orb__brows">
-        <path d="M24.3 27.2c2.8-2 6-1.8 8.3-.4"></path>
-        <path d="M47 26.8c2.7-1.6 5.8-1.3 8.2.6"></path>
-      </g>
+      <path class="naman-orb__face" d="M36 9.7C51.1 9.7 62.5 21.3 62.1 36.2C61.7 51.1 50.6 62.2 35.7 62C20.6 61.8 9.6 50.4 9.9 35.5C10.2 20.7 21.3 9.7 36 9.7Z" />
+      <path class="naman-orb__shine" d="M20.4 21.9c2.8-3.7 6.8-6.2 11.4-7" />
 
       <g class="naman-orb__gaze">
         <g class="naman-orb__blink">
-          <ellipse class="naman-orb__eye" cx="29.1" cy="35.3" rx="5.4" ry="6.9"></ellipse>
-          <ellipse class="naman-orb__eye" cx="50.7" cy="35.3" rx="5.4" ry="6.9"></ellipse>
-          <circle class="naman-orb__pupil" cx="30.3" cy="36" r="2"></circle>
-          <circle class="naman-orb__pupil" cx="51.9" cy="36" r="2"></circle>
+          <ellipse class="naman-orb__eye" cx="28.7" cy="34.2" rx="5.5" ry="7" />
+          <ellipse class="naman-orb__eye" cx="44.9" cy="34.2" rx="5.5" ry="7" />
         </g>
       </g>
-
-      <circle class="naman-orb__cheek naman-orb__cheek--left" cx="21.9" cy="45" r="2"></circle>
-      <circle class="naman-orb__cheek naman-orb__cheek--right" cx="57.9" cy="45" r="2"></circle>
     </g>
 
-    <g class="naman-orb__spark">
-      <path d="M66.2 9.3v7.1M62.7 12.8h7.1"></path>
-      <circle cx="73.2" cy="19.8" r="1.15"></circle>
+    <g class="naman-orb__spark naman-orb__spark--main">
+      <path d="M60.7 12.1v6.1M57.7 15.1h6.1" />
     </g>
-    <path class="naman-orb__ground" d="M23.4 67.2c9.8 1.4 23.5 1.4 33.3 0"></path>
+    <g class="naman-orb__spark naman-orb__spark--tiny">
+      <path d="M12.2 54.5v3.7M10.4 56.3h3.7" />
+    </g>
   </svg>
 </div>
 
 <style>
   .naman-orb {
-    width: 58px;
-    height: 54px;
-    margin: 0 0 15px -4px;
+    width: 50px;
+    height: 50px;
+    margin: 0 0 13px -2px;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -54,161 +43,232 @@
     overflow: visible;
   }
 
+  .naman-orb__orbit {
+    transform-origin: 36px 36px;
+    animation: orbit-turn 17s linear infinite;
+  }
+
+  .naman-orb__ring {
+    fill: none;
+    stroke: color-mix(in srgb, var(--ink) 15%, transparent);
+    stroke-width: .9;
+    stroke-dasharray: 2 5.4;
+  }
+
+  .naman-orb__orbit-dot { fill: var(--accent); }
+  .naman-orb__orbit-dot--two { fill: var(--coral); opacity: .8; }
+
   .naman-orb__body {
-    transform-origin: 40px 38px;
-    animation: mascot-breathe 7.8s cubic-bezier(.45,0,.25,1) infinite;
+    transform-origin: 36px 36px;
+    animation: body-alive 7.6s cubic-bezier(.45,0,.25,1) infinite;
   }
 
   .naman-orb__face { fill: var(--ink); }
 
-  .naman-orb__shine,
-  .naman-orb__brows {
-    fill: none;
-    stroke: var(--paper);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
   .naman-orb__shine {
-    opacity: .22;
-    stroke-width: 1.35;
-  }
-
-  .naman-orb__brows {
-    stroke-width: 1.45;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: mascot-brows 10.4s ease-in-out infinite;
+    fill: none;
+    stroke: color-mix(in srgb, var(--paper) 19%, transparent);
+    stroke-width: 1.25;
+    stroke-linecap: round;
   }
 
   .naman-orb__eye { fill: var(--paper); }
-  .naman-orb__pupil { fill: var(--ink); }
 
   .naman-orb__gaze {
     transform-box: fill-box;
     transform-origin: center;
-    animation: mascot-gaze 10.4s cubic-bezier(.45,0,.25,1) infinite;
+    animation: gaze-around 8.8s cubic-bezier(.45,0,.25,1) infinite;
   }
 
   .naman-orb__blink {
     transform-box: fill-box;
     transform-origin: center;
-    animation: mascot-blink 7.1s ease-in-out infinite;
-  }
-
-  .naman-orb__cheek {
-    fill: var(--accent);
-    opacity: .42;
-    animation: mascot-cheeks 10.4s steps(1,end) infinite;
-  }
-
-  .naman-orb__arms,
-  .naman-orb__ground {
-    fill: none;
-    stroke: var(--ink);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .naman-orb__wave {
-    transform-origin: 62px 43px;
-    animation: mascot-wave 5.6s cubic-bezier(.45,0,.25,1) infinite;
-  }
-
-  .naman-orb__finger { stroke-width: 1.55; }
-
-  .naman-orb__ground {
-    opacity: .16;
-    stroke-width: 1;
+    animation: blink 6.1s ease-in-out infinite;
   }
 
   .naman-orb__spark {
     fill: none;
     stroke: var(--accent);
-    stroke-width: 1.55;
+    stroke-width: 1.45;
     stroke-linecap: round;
-    transform-origin: 66px 13px;
-    animation: mascot-spark 4.9s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
   }
 
-  .naman-orb__spark circle {
-    fill: var(--coral);
-    stroke: none;
-  }
+  .naman-orb__spark--main { animation: spark-main 4.8s ease-in-out infinite; }
+  .naman-orb__spark--tiny { stroke: var(--coral); opacity: .5; animation: spark-tiny 5.7s 1.2s ease-in-out infinite; }
 
   .naman-orb:hover .naman-orb__body,
-  .naman-orb:active .naman-orb__body {
-    animation: mascot-hello 620ms cubic-bezier(.2,.9,.2,1) both;
-  }
+  .naman-orb:active .naman-orb__body { animation: hello 620ms cubic-bezier(.2,.9,.2,1) both; }
 
   .naman-orb:hover .naman-orb__gaze,
-  .naman-orb:active .naman-orb__gaze {
-    animation: none;
-    transform: translate(2px, -1px);
+  .naman-orb:active .naman-orb__gaze { animation: none; transform: translate(2.6px, -1.2px); }
+
+  .naman-orb:hover .naman-orb__orbit,
+  .naman-orb:active .naman-orb__orbit { animation-duration: 4.5s; }
+
+  @keyframes orbit-turn { to { transform: rotate(360deg); } }
+
+  @keyframes body-alive {
+    0%, 12%, 100% { transform: translateY(0) rotate(0) scale(1); }
+    44% { transform: translateY(-1.4px) rotate(-.8deg) scale(1.018,.988); }
+    50% { transform: translateY(-1.8px) rotate(.6deg) scale(.992,1.02); }
+    57% { transform: translateY(-1px) rotate(0) scale(1); }
   }
 
-  .naman-orb:hover .naman-orb__wave,
-  .naman-orb:active .naman-orb__wave { animation-duration: 540ms; }
-
-  @keyframes mascot-breathe {
-    0%, 16%, 100% { transform: translateY(0) rotate(0) scale(1); }
-    48% { transform: translateY(-1.4px) rotate(-.7deg) scale(1.018,.988); }
-    55% { transform: translateY(-1.8px) rotate(.5deg) scale(.992,1.02); }
-    62% { transform: translateY(-.8px) rotate(0) scale(1); }
+  @keyframes gaze-around {
+    0%, 15%, 43%, 100% { transform: translate(0); }
+    20%, 34% { transform: translate(2.1px, -.5px); }
+    58%, 70% { transform: translate(-1.8px, 1px); }
+    82%, 90% { transform: translate(.8px, -1.1px); }
   }
 
-  @keyframes mascot-gaze {
-    0%, 15%, 38%, 100% { transform: translate(0); }
-    19%, 31% { transform: translate(2.1px, -.5px); }
-    51%, 64% { transform: translate(-1.9px, .8px); }
-    76%, 88% { transform: translate(.8px, -1.2px); }
+  @keyframes blink {
+    0%, 31%, 34%, 68%, 71%, 100% { transform: scaleY(1); }
+    32.5%, 69.5% { transform: scaleY(.08); }
   }
 
-  @keyframes mascot-blink {
-    0%, 27%, 30%, 66%, 69%, 100% { transform: scaleY(1); }
-    28.5%, 67.5% { transform: scaleY(.08); }
+  @keyframes spark-main {
+    0%, 18%, 100% { opacity: .28; transform: scale(.72) rotate(0); }
+    31% { opacity: 1; transform: scale(1.18) rotate(12deg); }
+    42% { opacity: .5; transform: scale(.9) rotate(18deg); }
   }
 
-  @keyframes mascot-brows {
-    0%, 38%, 67%, 100% { transform: translateY(0) rotate(0); }
-    45%, 59% { transform: translateY(-1.2px) rotate(-2deg); }
-    76%, 88% { transform: translateY(-2px) scaleX(1.08); }
+  @keyframes spark-tiny {
+    0%, 55%, 100% { opacity: .18; transform: scale(.65); }
+    67% { opacity: .72; transform: scale(1.05) rotate(-10deg); }
+    76% { opacity: .3; transform: scale(.8); }
   }
 
-  @keyframes mascot-cheeks {
-    0%, 39%, 68%, 100% { opacity: .18; }
-    40%, 66% { opacity: .55; }
-  }
-
-  @keyframes mascot-wave {
-    0%, 12%, 32%, 100% { transform: rotate(0); }
-    17% { transform: rotate(13deg); }
-    22% { transform: rotate(-9deg); }
-    27% { transform: rotate(10deg); }
-  }
-
-  @keyframes mascot-spark {
-    0%, 18%, 100% { opacity: .3; transform: scale(.74) rotate(0); }
-    31% { opacity: 1; transform: scale(1.16) rotate(12deg); }
-    43% { opacity: .48; transform: scale(.9) rotate(18deg); }
-  }
-
-  @keyframes mascot-hello {
+  @keyframes hello {
     0% { transform: translateY(0) rotate(0) scale(1); }
-    34% { transform: translateY(-4px) rotate(-6deg) scale(1.045,.96); }
-    64% { transform: translateY(-1px) rotate(4deg) scale(.99,1.02); }
+    34% { transform: translateY(-4.5px) rotate(-7deg) scale(1.055,.96); }
+    62% { transform: translateY(-1px) rotate(5deg) scale(.985,1.025); }
+    82% { transform: translateY(-2px) rotate(-2deg) scale(1.015); }
     100% { transform: translateY(0) rotate(0) scale(1); }
   }
 
   @media (max-width: 640px) {
-    .naman-orb { width: 56px; height: 52px; margin-bottom: 14px; }
+    .naman-orb { width: 48px; height: 48px; margin-bottom: 12px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .naman-orb *, .naman-orb__body, .naman-orb__gaze, .naman-orb__blink, .naman-orb__wave {
-      animation: none !important;
-      transition: none !important;
-    }
+    .naman-orb *, .naman-orb__body, .naman-orb__orbit, .naman-orb__gaze, .naman-orb__blink { animation: none !important; transition: none !important; }
   }
+  /* Same drawing, more personality: these states only move the original parts. */
+  .naman-orb.is-watching .naman-orb__gaze {
+    animation: none;
+    transform: translate(var(--gaze-x, 0), var(--gaze-y, 0));
+  }
+
+  .naman-orb.is-bouncy .naman-orb__body { animation: orb-bouncy 760ms cubic-bezier(.2,.9,.2,1) both; }
+  .naman-orb.is-bouncy .naman-orb__orbit { animation-duration: 1.8s; }
+  .naman-orb.is-dizzy .naman-orb__body { animation: orb-dizzy 1.15s cubic-bezier(.4,0,.2,1) both; }
+  .naman-orb.is-dizzy .naman-orb__gaze { animation: orb-dizzy-eyes 1.15s ease-in-out both; }
+  .naman-orb.is-shy .naman-orb__body { animation: orb-shy 920ms cubic-bezier(.2,.8,.2,1) both; }
+  .naman-orb.is-shy .naman-orb__gaze { animation: none; transform: translate(-1px, 2px); }
+  .naman-orb.is-celebrating .naman-orb__body { animation: orb-celebrate 820ms cubic-bezier(.2,.9,.2,1) both; }
+  .naman-orb.is-celebrating .naman-orb__spark { animation: orb-firework 820ms ease-out both; }
+  .naman-orb.is-scrolling .naman-orb__body { animation: orb-scroll-peek 420ms ease-out both; }
+  .naman-orb.is-scrolling .naman-orb__gaze { animation: none; transform: translateY(var(--scroll-look, 1.8px)); }
+
+  @keyframes orb-bouncy {
+    0%, 100% { transform: translateY(0) scale(1); }
+    26% { transform: translateY(-6px) scale(.94,1.07); }
+    48% { transform: translateY(1px) scale(1.08,.91); }
+    68% { transform: translateY(-2px) scale(.98,1.02); }
+  }
+
+  @keyframes orb-dizzy {
+    0%, 100% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-9deg) scale(1.03,.97); }
+    50% { transform: rotate(9deg) scale(.98,1.02); }
+    75% { transform: rotate(-5deg) scale(1.015,.985); }
+  }
+
+  @keyframes orb-dizzy-eyes {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(2px,-2px); }
+    40% { transform: translate(-2px,-1px); }
+    60% { transform: translate(-1px,2px); }
+    80% { transform: translate(2px,1px); }
+  }
+
+  @keyframes orb-shy {
+    0%, 100% { transform: rotate(0) translateY(0); }
+    35%, 72% { transform: rotate(-6deg) translate(-1px,2px) scale(.98); }
+  }
+
+  @keyframes orb-celebrate {
+    0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+    22% { transform: translateY(-5px) rotate(-6deg) scale(1.04,.96); }
+    44% { transform: translateY(-1px) rotate(7deg) scale(.98,1.03); }
+    66% { transform: translateY(-4px) rotate(-3deg) scale(1.025,.98); }
+  }
+
+  @keyframes orb-firework {
+    0% { opacity: .25; transform: scale(.65) rotate(0); }
+    45% { opacity: 1; transform: scale(1.5) rotate(25deg); }
+    100% { opacity: .35; transform: scale(.85) rotate(45deg); }
+  }
+
+  @keyframes orb-scroll-peek {
+    0%, 100% { transform: translateY(0) scale(1); }
+    48% { transform: translateY(var(--scroll-bob, -2px)) scale(1.03,.97); }
+  }
+
 </style>
+
+<script>
+  const orb = document.querySelector<HTMLElement>('.naman-orb');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const activities = [
+    { name: 'is-bouncy', duration: 780 },
+    { name: 'is-shy', duration: 940 },
+    { name: 'is-dizzy', duration: 1180 },
+    { name: 'is-celebrating', duration: 850 },
+  ];
+  let activityIndex = 0;
+  let activityTimer = 0;
+  let scrollTimer = 0;
+  let lastScrollY = window.scrollY;
+
+  function playActivity(name: string, duration: number) {
+    if (!orb || reducedMotion.matches) return;
+    activities.forEach(activity => orb.classList.remove(activity.name));
+    orb.classList.remove('is-watching', 'is-scrolling');
+    void orb.offsetWidth;
+    orb.classList.add(name);
+    window.clearTimeout(activityTimer);
+    activityTimer = window.setTimeout(() => orb.classList.remove(name), duration);
+  }
+
+  orb?.addEventListener('pointermove', (event) => {
+    if (reducedMotion.matches) return;
+    const rect = orb.getBoundingClientRect();
+    const x = Math.max(-2.4, Math.min(2.4, (event.clientX - (rect.left + rect.width / 2)) / 10));
+    const y = Math.max(-1.8, Math.min(1.8, (event.clientY - (rect.top + rect.height / 2)) / 12));
+    orb.style.setProperty('--gaze-x', x + 'px');
+    orb.style.setProperty('--gaze-y', y + 'px');
+    orb.classList.add('is-watching');
+  });
+
+  orb?.addEventListener('pointerleave', () => orb.classList.remove('is-watching'));
+
+  orb?.addEventListener('pointerdown', () => {
+    const activity = activities[activityIndex % activities.length];
+    activityIndex += 1;
+    playActivity(activity.name, activity.duration);
+  });
+
+  window.addEventListener('scroll', () => {
+    if (!orb || reducedMotion.matches) return;
+    const goingDown = window.scrollY > lastScrollY;
+    lastScrollY = window.scrollY;
+    orb.style.setProperty('--scroll-look', goingDown ? '1.8px' : '-1.8px');
+    orb.style.setProperty('--scroll-bob', goingDown ? '2px' : '-2px');
+    orb.classList.add('is-scrolling');
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => orb.classList.remove('is-scrolling'), 260);
+  }, { passive: true });
+</script>
