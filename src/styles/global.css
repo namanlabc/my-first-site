@@ -258,7 +258,7 @@ h1, h2, h3 { font-weight: 600; color: var(--ink); text-wrap: balance; }
 /* The same quiet system across every inner page. */
 html { background: var(--paper); }
 .site-frame { width: 100%; min-height: 100vh; margin: 0; border: 0; box-shadow: none; }
-.site-header { width: min(780px, calc(100% - 40px)); min-height: 88px; border-bottom: 0; }
+.site-header { width: min(930px, calc(100% - 40px)); min-height: 88px; border-bottom: 0; }
 .site-footer { width: min(680px, calc(100% - 40px)); border-color: var(--rule); }
 .desktop-nav { gap: 21px; }
 .desktop-nav a { font-size: 12px; font-weight: 500; }
@@ -522,6 +522,24 @@ body:has(.quiet-home) .mobile-menu { display: none; }
 body:has(.quiet-home) .header-controls { margin-left: auto; }
 body:has(.quiet-home) .site-footer { display: none; }
 body:has(.quiet-home) .brand-wordmark { font-family: var(--sans); font-size: 17px; font-weight: 650; letter-spacing: -.045em; }
+.brand-mascot { width: 32px; height: 32px; aspect-ratio: 1; margin-top: 0; }
+.mascot-brow,
+.mascot-mouth { fill: none; stroke: var(--mascot-eye); stroke-linecap: round; }
+.mascot-brow { stroke-width: 1.05; opacity: .72; transition: transform 180ms ease; }
+.mascot-mouth { stroke-width: 1.25; opacity: .72; transition: transform 180ms ease, opacity 180ms ease; }
+.mascot-pupil { fill: var(--mascot-body); }
+.mascot-spark { fill: var(--accent); transform-origin: center; animation: nav-spark 4.8s ease-in-out infinite; }
+.site-brand:hover .mascot-mouth,
+.site-brand:focus-visible .mascot-mouth { opacity: 1; transform: translateY(.45px) scaleX(1.15); }
+.site-brand:hover .mascot-brow--left,
+.site-brand:focus-visible .mascot-brow--left { transform: translateY(-.7px) rotate(-5deg); }
+.site-brand:hover .mascot-brow--right,
+.site-brand:focus-visible .mascot-brow--right { transform: translateY(-.7px) rotate(5deg); }
+@keyframes nav-spark {
+  0%, 22%, 100% { opacity: .32; transform: scale(.72); }
+  36% { opacity: 1; transform: scale(1.16); }
+  48% { opacity: .5; transform: scale(.9); }
+}
 body:has(.quiet-home) .brand-mascot { width: 22px; height: 22px; }
 body:has(.quiet-home) .theme-toggle { width: 32px; height: 32px; font-size: 13px; }
 
@@ -776,89 +794,69 @@ body:has(.quiet-home) .site-header { justify-content: flex-end; }
 .quiet-more,
 .quiet-colophon a { text-decoration-line: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .theme-toggle,
-body:has(.quiet-home) .theme-toggle { width: 42px; height: 42px; font-size: 20px; line-height: 1; }
-.theme-icon { display: block; width: 22px; height: 22px; overflow: visible; }
-.theme-icon circle { fill: none; stroke: currentColor; stroke-width: 1.5; }
-.theme-icon path { fill: currentColor; }
-.theme-toggle,
-body:has(.quiet-home) .theme-toggle { position: relative; overflow: visible; }
+body:has(.quiet-home) .theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  overflow: visible;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.theme-icon {
+  display: block;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  aspect-ratio: 1;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform 240ms cubic-bezier(.2,.8,.2,1);
+}
+
 .theme-icon__ring {
   fill: none !important;
   stroke: currentColor;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
 }
+
 .theme-icon__mass {
   fill: currentColor !important;
   stroke: none !important;
-  transform-box: fill-box;
-  transform-origin: right center;
-  transition: transform 600ms cubic-bezier(.64, 0, .24, 1);
 }
-.theme-icon { animation: theme-ring-pressure 900ms cubic-bezier(.64, 0, .24, 1) 1.2s 1 both; }
-.theme-icon__pressure {
-  fill: currentColor !important;
-  stroke: none !important;
-  transform-box: fill-box;
-  transform-origin: right center;
-  animation: theme-mass-pressure 900ms cubic-bezier(.64, 0, .24, 1) 1.2s 1 both;
-}
-.theme-icon .theme-icon__preview {
-  fill: currentColor;
-  stroke: none;
-  opacity: 0;
-}
-.theme-icon .theme-icon__bite {
+
+.theme-icon__center {
   fill: var(--paper);
-  stroke: none;
-  opacity: 0;
-  transition: opacity 220ms ease;
-  animation: theme-bite 900ms ease 1.2s 1 both;
-}
-.theme-toggle:hover .theme-icon__mass,
-.theme-toggle:focus-visible .theme-icon__mass { animation: none; transform: scaleX(2); }
-.theme-toggle:hover .theme-icon__pressure,
-.theme-toggle:focus-visible .theme-icon__pressure { opacity: 0; }
-.theme-toggle:hover .theme-icon__bite,
-.theme-toggle:focus-visible .theme-icon__bite { animation: none; opacity: 1; }
-.theme-toggle.is-infecting .theme-icon { animation: theme-release 300ms cubic-bezier(.7, 0, .3, 1) both; }
-.theme-toggle.is-infecting .theme-icon__mass { animation: none; transform: scaleX(2); }
-.theme-toggle.is-infecting .theme-icon__pressure { opacity: 0; }
-
-@keyframes theme-ring-pressure {
-  0%, 100% { transform: scale(1); }
-  42%, 68% { transform: scaleX(.95) scaleY(1.06); }
+  stroke: currentColor;
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
 }
 
-@keyframes theme-mass-pressure {
-  0%, 100% { transform: scaleX(1); }
-  45%, 68% { transform: scaleX(1.42); }
+.theme-toggle:hover .theme-icon,
+.theme-toggle:focus-visible .theme-icon {
+  transform: rotate(18deg);
 }
 
-@keyframes theme-bite {
-  0%, 35%, 100% { opacity: 0; }
-  48%, 72% { opacity: 1; }
+.theme-toggle.is-infecting .theme-icon {
+  animation: theme-release 300ms cubic-bezier(.7,0,.3,1) both;
 }
 
 @keyframes theme-release {
-  0% { transform: scale(1); }
-  45% { transform: scale(1.12); }
-  100% { transform: scale(.08); }
+  0% { transform: rotate(18deg) scale(1); }
+  48% { transform: rotate(32deg) scale(1.12); }
+  100% { transform: rotate(45deg) scale(.08); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-icon__ring,
-  .theme-icon__mass,
-  .theme-icon__pressure,
-  .theme-icon__bite { animation: none; transition: none; }
-  .theme-icon__pressure { display: none; }
-  .theme-icon__preview { animation: theme-preview-reduced 760ms ease 1.2s 1 both; }
-  .theme-toggle:hover .theme-icon__preview,
-  .theme-toggle:focus-visible .theme-icon__preview { opacity: 1; }
-  .theme-toggle:hover .theme-icon__mass,
-  .theme-toggle:focus-visible .theme-icon__mass { transform: none; }
-  .theme-toggle.is-infecting .theme-icon { animation: theme-release-reduced 240ms ease both; }
-  @keyframes theme-preview-reduced {
-    0%, 100% { opacity: 0; }
-    45%, 70% { opacity: .72; }
+  .theme-icon { transition: none; }
+  .theme-toggle:hover .theme-icon,
+  .theme-toggle:focus-visible .theme-icon { transform: none; }
+  .theme-toggle.is-infecting .theme-icon {
+    animation: theme-release-reduced 240ms ease both;
   }
   @keyframes theme-release-reduced {
     0%, 100% { opacity: 1; }
