@@ -6,16 +6,21 @@
 }
 
 .bear-intro {
+  position: relative;
   max-width: 640px;
+  isolation: isolate;
 }
 
 .bear-intro h1 {
+  position: relative;
+  z-index: 2;
   margin: 0 0 17px;
   font-family: var(--font-display);
   font-size: clamp(29px, 5vw, 35px);
   font-weight: 650;
   line-height: 1.14;
   letter-spacing: -.045em;
+  background: var(--paper);
 }
 
 .bear-intro__copy,
