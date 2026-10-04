@@ -1,132 +1,49 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import HomeMascot from '../components/HomeMascot.astro';
+import NovelFeature from '../components/NovelFeature.astro';
 import GitHubActivity from '../components/GitHubActivity.astro';
-import SiteIcon from '../components/SiteIcon.astro';
 import '../styles/home.css';
-
-const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const recentPosts = posts.slice(0, 3);
+const posts = (await getCollection('blog')).sort((a,b) => b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,3);
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-
 const work = [
-  {
-    name: 'SmallMB',
-    detail: 'Android file utility',
-    href: 'https://smallmb.com/',
-    icon: 'android' as const,
-  },
-  {
-    name: 'Astro SEO Audit',
-    detail: 'Open-source SEO tool',
-    href: 'https://github.com/namanlabc/astro-seo-audit',
-    icon: 'audit' as const,
-  },
-  {
-    name: 'Get Random Letter',
-    detail: 'Browser tools',
-    href: 'https://getrandomletter.com/',
-    icon: 'shuffle' as const,
-  },
+ {name:'SmallMB', detail:'Photo and PDF tools for Android.', kind:'Android', href:'https://smallmb.com/'},
+ {name:'Astro SEO Audit', detail:'An open-source tool for finding SEO mistakes.', kind:'Open source', href:'https://github.com/namanlabc/astro-seo-audit'},
+ {name:'Get Random Letter', detail:'Small browser tools for letters, words and numbers.', kind:'Web', href:'https://getrandomletter.com/'},
 ];
 ---
-
-<Layout description="Naman Patel makes software, works on websites, and writes about what he learns.">
-  <article class="bear-home">
-    <section class="bear-intro" aria-labelledby="home-title">
-      <HomeMascot />
-      <h1 id="home-title">Hi, I’m Naman.</h1>
-      <div class="bear-intro__copy">
-        <p>I write, build things on the internet, read manga, and play games.</p>
-        <p>This site has my notes, projects, and other things I wanted to keep.</p>
-      </div>
-      <p class="bear-now"><SiteIcon name="spark" /> <span>Currently improving SmallMB and writing a long-form fantasy novel.</span></p>
-    </section>
-
-    <section class="bear-section" aria-labelledby="made-title">
-      <div class="bear-section__head">
-        <SiteIcon name="work" />
-        <h2 id="made-title">Work</h2>
-      </div>
-
-      <div class="bear-links">
-        {work.map(project => (
-          <a class="bear-link" href={project.href} target="_blank" rel="noopener noreferrer">
-            <span class="bear-link__icon"><SiteIcon name={project.icon} /></span>
-            <span class="bear-link__copy">
-              <strong>{project.name}</strong>
-              <small>{project.detail}</small>
-            </span>
-            <SiteIcon name="external" />
-          </a>
-        ))}
-      </div>
-      <a class="bear-more" href={`${base}projects/`}>Selected projects <span aria-hidden="true">→</span></a>
-    </section>
-
-    <section class="bear-section" aria-labelledby="experience-title">
-      <div class="bear-section__head">
-        <SiteIcon name="about" />
-        <h2 id="experience-title">Experience</h2>
-      </div>
-
-      <a class="bear-experience" href={`${base}experience/`} aria-labelledby="experience-title">
-        <span class="bear-experience__copy">
-          <strong>Search, websites, then software.</strong>
-          <small>I started with SEO and publishing. The tools I wanted eventually pulled me into web and Android development.</small>
-        </span>
-        <span class="bear-experience__tools" aria-label="Tools I work with">
-          <span class="tool-mark tool-mark--search-console" aria-hidden="true"></span>
-          <span class="tool-mark tool-mark--wordpress" aria-hidden="true"></span>
-          <span class="tool-mark tool-mark--astro" aria-hidden="true"></span>
-          <span class="tool-mark tool-mark--kotlin" aria-hidden="true"></span>
-          <span class="tool-mark tool-mark--github" aria-hidden="true"></span>
-        </span>
-        <span class="bear-experience__arrow" aria-hidden="true">→</span>
-      </a>
-    </section>
-
-    <section class="bear-section" aria-labelledby="github-title">
-      <div class="bear-section__head bear-section__head--split">
-        <span class="bear-section__label">
-          <SiteIcon name="github" />
-          <h2 id="github-title">GitHub</h2>
-        </span>
-        <span class="bear-section__range">Aug — now</span>
-      </div>
-      <GitHubActivity />
-    </section>
-
-    <section class="bear-section" aria-labelledby="writing-title">
-      <div class="bear-section__head">
-        <SiteIcon name="writing" />
-        <h2 id="writing-title">Recent notes</h2>
-      </div>
-
-      <div class="bear-writing">
-        {recentPosts.map(post => (
-          <a class="bear-writing__row" href={`${base}blog/${post.id}/`}>
-            <strong>{post.data.title}</strong>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
-            </time>
-          </a>
-        ))}
-      </div>
-
-      <a class="bear-more" href={`${base}archive/`}>All writing <span aria-hidden="true">→</span></a>
-    </section>
-
-    <section class="bear-section bear-section--last" aria-labelledby="about-title">
-      <div class="bear-section__head">
-        <SiteIcon name="book" />
-        <h2 id="about-title">A little more</h2>
-      </div>
-      <div class="bear-paragraphs">
-        <p>I like manga, games, design, and small websites. I’m also writing a fantasy novel.</p>
-      </div>
-      <a class="bear-more" href={`${base}about/`}>About me <span aria-hidden="true">→</span></a>
-    </section>
-  </article>
+<Layout description="Software, stories and notes by Naman Patel. Explore my projects and read The Idiot God, a fantasy adventure.">
+ <article class="bear-home">
+  <section class="bear-intro" aria-labelledby="home-title">
+   <p class="folio-label">Software, stories &amp; other pursuits</p>
+   <h1 id="home-title">Naman Patel<span class="intro-period">.</span></h1>
+   <p class="intro-copy">I build small tools and write about what I learn.<br class="desktop-break"/> Somewhere along the way, I started writing a world of my own.</p>
+   <img class="intro-figure" src={base+'images/pillar-serpent.webp'} alt="" width="1024" height="1536" loading="eager" decoding="async" aria-hidden="true" />
+  </section>
+  <section class="bear-section" aria-labelledby="novel-title">
+   <div class="folio-heading"><h2 id="novel-title">The novel</h2><span>In progress</span></div>
+   <NovelFeature />
+   <img class="section-figure section-figure--shiva" src={base+'images/shiva-fragment.webp'} alt="" width="1024" height="1536" loading="lazy" decoding="async" aria-hidden="true" />
+  </section>
+  <section class="bear-section" aria-labelledby="work-title">
+   <div class="folio-heading"><h2 id="work-title">Selected work</h2><a href={base+'projects/'}>All projects ↗</a></div>
+   <div class="folio-work">{work.map(item => <a href={item.href} target="_blank" rel="noopener noreferrer" class="folio-work-row"><span><strong>{item.name}</strong><small>{item.detail}</small></span><span class="folio-kind">{item.kind} <span aria-hidden="true">↗</span></span></a>)}</div>
+  </section>
+  <section class="bear-section" aria-labelledby="notes-title">
+   <div class="folio-heading"><h2 id="notes-title">Recent notes</h2><a href={base+'archive/'}>All notes ↗</a></div>
+   <div class="folio-notes">{posts.map(post => <a class="folio-note" href={base+'blog/'+post.id+'/'}><strong>{post.data.title}</strong><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</time></a>)}</div>
+  </section>
+  <section class="bear-section" aria-labelledby="background-title">
+   <div class="folio-heading"><h2 id="background-title">A little background</h2><a href={base+'experience/'}>Experience ↗</a></div>
+   <p class="folio-paragraph">I started with writing, search and websites. Wanting better tools eventually led me into web and Android development. I still like the part where an idea becomes something you can use.</p>
+  </section>
+  <section class="bear-section" aria-labelledby="github-title">
+   <div class="folio-heading"><h2 id="github-title">At the workbench</h2><span>GitHub · Aug to now</span></div>
+   <GitHubActivity />
+  </section>
+  <section class="bear-section" aria-labelledby="about-title">
+   <div class="folio-heading"><h2 id="about-title">Away from the keyboard</h2><a href={base+'about/'}>About me ↗</a></div>
+   <p class="folio-paragraph">Manga, games, stories with enormous worlds, and a surprising amount of time spent fixing little details.</p>
+  </section>
+ </article>
 </Layout>
