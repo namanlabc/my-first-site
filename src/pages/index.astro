@@ -16,54 +16,36 @@ const work = [
  {name:'Get Random Letter', detail:'getrandomletter.com', description:'Small browser tools for letters, words and numbers.', type:'Web', status:'Live', href:'https://getrandomletter.com/', filter:'web'},
 ];
 
-const tools = [
- ['Android','androidstudio.svg'],['Kotlin','kotlin.svg'],['Astro','astro.svg'],
- ['WordPress','wordpress.svg'],['GitHub','github.svg'],['Search','googlesearchconsole.svg'],
-];
 ---
 <Layout description="Software, stories and notes by Naman Patel.">
  <div class="directory-home">
   <section class="hero-grid" aria-labelledby="home-title">
    <div class="hero-identity">
-    <h1 id="home-title" class="visually-hidden">Naman Patel</h1>
-    <pre class="ascii-name" aria-hidden="true">███╗   ██╗ █████╗ ███╗   ███╗ █████╗ ███╗   ██╗
-████╗  ██║██╔══██╗████╗ ████║██╔══██╗████╗  ██║
-██╔██╗ ██║███████║██╔████╔██║███████║██╔██╗ ██║
-██║╚██╗██║██╔══██║██║╚██╔╝██║██╔══██║██║╚██╗██║
-██║ ╚████║██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║
-╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝</pre>
+    <h1 id="home-title">Naman<br />Patel<span>.</span></h1>
     <p class="hero-kicker">Software, stories &amp; other pursuits</p>
    </div>
    <p class="hero-copy">I build small tools and write about what I learn. Somewhere along the way, I started writing a world of my own.</p>
 
    <div class="hero-panel">
-    <h2>Currently building</h2>
-    <a class="current-build" href={base+'projects/'}><span><b>$</b> SmallMB · GeoSpoof · CatToy</span><span aria-hidden="true">↗</span></a>
+    <h2>Building now</h2>
+    <a class="current-build" href={base+'projects/'}><span>SmallMB · GeoSpoof · CatToy</span><span aria-hidden="true">↗</span></a>
    </div>
-   <div class="hero-panel hero-tools">
-    <h2>Working with</h2>
-    <div class="tool-strip" aria-label="Tools I work with">
-     {tools.map(([name,icon])=><span title={name}><img src={`${base}icons/tech/${icon}`} alt={name} width="30" height="30" loading="eager" decoding="async" /></span>)}
-    </div>
+   <div class="hero-panel hero-story">
+    <h2>Away from code</h2>
+    <a class="current-build" href="https://www.wattpad.com/story/416937465"><span>The Idiot God · a fantasy in progress</span><span aria-hidden="true">↗</span></a>
    </div>
   </section>
 
   <div class="directory-main">
    <section class="directory-section" aria-labelledby="work-heading">
     <h2 id="work-heading">Selected work</h2>
-    <label class="directory-search"><span aria-hidden="true">⌕</span><input id="directory-filter" type="search" placeholder="Search my work and writing..." autocomplete="off"/><kbd>/</kbd></label>
-    <div class="directory-tabs" aria-label="Project filters">
-     <button class="is-active" type="button" data-filter="all">All</button><button type="button" data-filter="android">Android</button><button type="button" data-filter="web">Web</button><button type="button" data-filter="open-source">Open source</button>
-    </div>
-    <div class="directory-head" aria-hidden="true"><span>#</span><span>Project</span><span>Type</span><span>Status</span></div>
+    <div class="directory-head" aria-hidden="true"><span>Project</span><span>What it does</span><span>State</span></div>
     <div class="directory-list" id="project-list">
-     {work.map((item,index)=><a class="directory-row project-row" href={item.href} data-kind={item.filter} data-search={`${item.name} ${item.detail} ${item.description} ${item.type}`}>
-      <span class="row-index">{String(index+1).padStart(2,'0')}</span>
-      <span class="row-primary"><span><strong>{item.name}</strong><small>{item.detail}</small></span><em>{item.description}</em></span>
-      <span class="row-type">{item.type}</span><span class="row-status"><i></i>{item.status}</span>
+     {work.map((item)=><a class="directory-row project-row" href={item.href}>
+      <span class="row-primary"><span><strong>{item.name}</strong><small>{item.detail}</small></span></span>
+      <span class="row-description">{item.description}</span><span class="row-status">{item.status}</span>
      </a>)}
     </div>
-    <p class="empty-state" id="empty-state" hidden>No matching work or writing. I probably haven’t built it yet.</p>
    </section>
 
    <section class="directory-section writing-directory" aria-labelledby="writing-heading">
@@ -82,22 +64,4 @@ const tools = [
    </section>
   </div>
  </div>
- <script>
-  const input = document.querySelector<HTMLInputElement>('#directory-filter');
-  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
-  const projects = Array.from(document.querySelectorAll<HTMLElement>('.project-row'));
-  const writing = Array.from(document.querySelectorAll<HTMLElement>('.writing-row'));
-  const empty = document.querySelector<HTMLElement>('#empty-state');
-  let kind = 'all';
-  function filterDirectory() {
-   const query = input?.value.trim().toLowerCase() ?? '';
-   let visible = 0;
-   projects.forEach(row => { const show=(kind==='all'||row.dataset.kind===kind)&&(!query||(row.dataset.search??'').toLowerCase().includes(query)); row.hidden=!show; if(show) visible++; });
-   writing.forEach(row => { const show=kind==='all'&&(!query||(row.dataset.search??'').toLowerCase().includes(query)); row.hidden=!show; if(show) visible++; });
-   if(empty) empty.hidden=visible!==0;
-  }
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{kind=tab.dataset.filter??'all';tabs.forEach(item=>item.classList.toggle('is-active',item===tab));filterDirectory();}));
-  input?.addEventListener('input',filterDirectory);
-  document.addEventListener('keydown',event=>{if(event.key==='/'&&document.activeElement!==input){event.preventDefault();input?.focus();}});
- </script>
 </Layout>

@@ -1,15 +1,7 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const groups = [
- {title:'Work',links:[['SmallMB','https://smallmb.com/'],['Projects',base+'projects/'],['Experience',base+'experience/']]},
- {title:'Writing',links:[['Recent notes',base+'archive/'],['The Idiot God','https://www.wattpad.com/story/416937465'],['RSS',base+'rss.xml']]},
- {title:'Elsewhere',links:[['GitHub','https://github.com/namanlabc/'],['X','https://x.com/namanlabs'],['Email','mailto:contact@naman.blog?subject=Hello%20Naman']]},
- {title:'Site',links:[['About',base+'about/'],['Sitemap',base+'sitemap.xml'],['Home',base]]},
-];
 ---
 <footer class="site-footer">
- <div class="footer-grid">
-  {groups.map(group => <section><h2>{group.title}</h2><ul>{group.links.map(([label,href])=><li><a href={href}>{label}</a></li>)}</ul></section>)}
- </div>
- <div class="footer-bottom"><span>© {new Date().getFullYear()} Naman Patel</span><span>Built with Astro. Kept deliberately small.</span></div>
+ <p>© {new Date().getFullYear()} Naman Patel <span>·</span> Apps, notes, and one unfinished fantasy.</p>
+ <nav aria-label="Footer navigation"><a href={base+'projects/'}>Work</a><a href={base+'archive/'}>Writing</a><a href="https://github.com/namanlabc/">GitHub</a><a href="mailto:contact@naman.blog?subject=Hello%20Naman">Email</a></nav>
 </footer>
