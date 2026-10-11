@@ -1,24 +1,15 @@
 ---
-import SiteIcon from './SiteIcon.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const groups = [
+ {title:'Work',links:[['SmallMB','https://smallmb.com/'],['Projects',base+'projects/'],['Experience',base+'experience/']]},
+ {title:'Writing',links:[['Recent notes',base+'archive/'],['The Idiot God','https://www.wattpad.com/story/416937465'],['RSS',base+'rss.xml']]},
+ {title:'Elsewhere',links:[['GitHub','https://github.com/namanlabc/'],['X','https://x.com/namanlabs'],['Email','mailto:contact@naman.blog?subject=Hello%20Naman']]},
+ {title:'Site',links:[['About',base+'about/'],['Sitemap',base+'sitemap.xml'],['Home',base]]},
+];
 ---
-
 <footer class="site-footer">
-  <img class="footer-figure" src={base+'images/serpent-ruins.webp'} alt="" width="1774" height="887" loading="lazy" decoding="async" aria-hidden="true" />
-  <div class="quiet-footer__top">
-    <a class="quiet-footer__email" href="mailto:contact@naman.blog?subject=Hello%20Naman">
-      <SiteIcon name="mail" />
-      <span>contact@naman.blog</span>
-    </a>
-    <nav class="quiet-footer__social" aria-label="Social links">
-      <a href="https://github.com/namanlabc/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><SiteIcon name="github" /></a>
-      <a href="https://x.com/namanlabs" target="_blank" rel="noopener noreferrer" aria-label="X" title="X"><SiteIcon name="x" /></a>
-      <a href={`${base}rss.xml`} aria-label="RSS" title="RSS"><SiteIcon name="rss" /></a>
-    </nav>
-  </div>
-
-  <div class="quiet-footer__bottom">
-    <p>© {new Date().getFullYear()} Naman Patel</p>
-    <p>naman.blog</p>
-  </div>
+ <div class="footer-grid">
+  {groups.map(group => <section><h2>{group.title}</h2><ul>{group.links.map(([label,href])=><li><a href={href}>{label}</a></li>)}</ul></section>)}
+ </div>
+ <div class="footer-bottom"><span>© {new Date().getFullYear()} Naman Patel</span><span>Built with Astro. Kept deliberately small.</span></div>
 </footer>

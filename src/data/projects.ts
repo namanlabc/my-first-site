@@ -14,12 +14,30 @@ export const projects: Project[] = [
     name: 'SmallMB',
     description:
       'A private Android utility for shrinking photos and PDFs, resizing images, and converting files — all on-device.',
-    status: 'Launching',
+    status: 'Live',
     href: 'https://smallmb.com/',
     external: true,
     kind: 'Android app',
     details: ['On-device processing', 'Image + PDF tools', 'No account needed'],
     visual: 'smallmb',
+  },
+  {
+    name: 'GeoSpoof',
+    description:
+      'An Android geotag photo editor for changing GPS location, date and time, map stamps, and EXIF location data.',
+    status: 'Production approved',
+    kind: 'Android app',
+    details: ['Geotag editing', 'Map stamps', 'Live GPS photos'],
+    visual: 'smallmb',
+  },
+  {
+    name: 'CatToy',
+    description:
+      'A minimal hunting game for cats with mice, lizards, flies, fish, and other things worth chasing across a screen.',
+    status: 'Production approved',
+    kind: 'Android game',
+    details: ['Six prey modes', 'Mix mode', 'Made for cats'],
+    visual: 'notes',
   },
   {
     name: 'Astro SEO Audit',
