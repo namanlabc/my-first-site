@@ -5,99 +5,58 @@ import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const posts = (await getCollection('blog'))
- .sort((a,b) => b.data.pubDate.valueOf()-a.data.pubDate.valueOf())
- .slice(0,5);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 
-const work = [
- {name:'SmallMB', detail:'smallmb.com', description:'Photo and PDF tools for stubborn file limits.', type:'Android', status:'Live', href:'https://smallmb.com/', filter:'android'},
- {name:'GeoSpoof', detail:'Geotag photo editor', description:'Edit photo location, date, map stamps and EXIF data.', type:'Android', status:'Production', href:base+'projects/', filter:'android'},
- {name:'CatToy', detail:'A hunting game for cats', description:'A tiny interactive game built for curious paws.', type:'Android', status:'Production', href:base+'projects/', filter:'android'},
- {name:'Astro SEO Audit', detail:'namanlabc/astro-seo-audit', description:'Find SEO problems in the HTML an Astro site ships.', type:'Open source', status:'Live', href:'https://github.com/namanlabc/astro-seo-audit', filter:'open-source'},
- {name:'Get Random Letter', detail:'getrandomletter.com', description:'Small browser tools for letters, words and numbers.', type:'Web', status:'Live', href:'https://getrandomletter.com/', filter:'web'},
-];
-
-const tools = [
- ['Android','androidstudio.svg'],['Kotlin','kotlin.svg'],['Astro','astro.svg'],
- ['WordPress','wordpress.svg'],['GitHub','github.svg'],['Search','googlesearchconsole.svg'],
+const products = [
+  { name: 'SmallMB', note: 'The stubborn file-size fixer', description: 'Compress photos and PDFs, resize images, and convert files without sending them away.', href: 'https://smallmb.com/', className: 'smallmb' },
+  { name: 'GeoSpoof', note: 'A geotag photo editor', description: 'Change GPS location, date, map stamps and EXIF data on Android.', href: `${base}projects/`, className: 'geospoof' },
+  { name: 'CatToy', note: 'Built for a very different user', description: 'A tiny hunting game where cats chase mice, lizards, fish and flies.', href: `${base}projects/`, className: 'cattoy' },
 ];
 ---
-<Layout description="Software, stories and notes by Naman Patel.">
- <div class="directory-home">
-  <section class="hero-grid" aria-labelledby="home-title">
-   <div class="hero-identity">
-    <h1 id="home-title" class="visually-hidden">Naman Patel</h1>
-    <pre class="ascii-name" aria-hidden="true">███╗   ██╗ █████╗ ███╗   ███╗ █████╗ ███╗   ██╗
-████╗  ██║██╔══██╗████╗ ████║██╔══██╗████╗  ██║
-██╔██╗ ██║███████║██╔████╔██║███████║██╔██╗ ██║
-██║╚██╗██║██╔══██║██║╚██╔╝██║██╔══██║██║╚██╗██║
-██║ ╚████║██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║
-╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝</pre>
-    <p class="hero-kicker">Software, stories &amp; other pursuits</p>
-   </div>
-   <p class="hero-copy">I build small tools and write about what I learn. Somewhere along the way, I started writing a world of my own.</p>
 
-   <div class="hero-panel">
-    <h2>Currently building</h2>
-    <a class="current-build" href={base+'projects/'}><span><b>$</b> SmallMB · GeoSpoof · CatToy</span><span aria-hidden="true">↗</span></a>
-   </div>
-   <div class="hero-panel hero-tools">
-    <h2>Working with</h2>
-    <div class="tool-strip" aria-label="Tools I work with">
-     {tools.map(([name,icon])=><span title={name}><img src={`${base}icons/tech/${icon}`} alt={name} width="30" height="30" loading="eager" decoding="async" /></span>)}
-    </div>
-   </div>
-  </section>
+<Layout description="Small useful software, field notes, and one very long fantasy story by Naman Patel.">
+  <div class="home-shell">
+    <section class="personal-hero" aria-labelledby="home-title">
+      <div class="hero-intro">
+        <p class="hero-label">Naman Patel · builder &amp; writer</p>
+        <h1 id="home-title">I make small, useful software.</h1>
+        <p class="hero-lede">Then I write about the parts that surprised me. Occasionally, I disappear into a fantasy world of my own.</p>
+      </div>
+      <aside class="desk-note" aria-label="What Naman is doing now">
+        <span class="desk-note-pin" aria-hidden="true"></span><p>Right now</p>
+        <strong>Shipping Android apps and trying to finish the next chapter.</strong>
+        <a href={base + 'about/'}>More about me →</a>
+      </aside>
+    </section>
 
-  <div class="directory-main">
-   <section class="directory-section" aria-labelledby="work-heading">
-    <h2 id="work-heading">Selected work</h2>
-    <label class="directory-search"><span aria-hidden="true">⌕</span><input id="directory-filter" type="search" placeholder="Search my work and writing..." autocomplete="off"/><kbd>/</kbd></label>
-    <div class="directory-tabs" aria-label="Project filters">
-     <button class="is-active" type="button" data-filter="all">All</button><button type="button" data-filter="android">Android</button><button type="button" data-filter="web">Web</button><button type="button" data-filter="open-source">Open source</button>
-    </div>
-    <div class="directory-head" aria-hidden="true"><span>#</span><span>Project</span><span>Type</span><span>Status</span></div>
-    <div class="directory-list" id="project-list">
-     {work.map((item,index)=><a class="directory-row project-row" href={item.href} data-kind={item.filter} data-search={`${item.name} ${item.detail} ${item.description} ${item.type}`}>
-      <span class="row-index">{String(index+1).padStart(2,'0')}</span>
-      <span class="row-primary"><span><strong>{item.name}</strong><small>{item.detail}</small></span><em>{item.description}</em></span>
-      <span class="row-type">{item.type}</span><span class="row-status"><i></i>{item.status}</span>
-     </a>)}
-    </div>
-    <p class="empty-state" id="empty-state" hidden>No matching work or writing. I probably haven’t built it yet.</p>
-   </section>
+    <section class="workbench" aria-labelledby="work-title">
+      <header class="section-intro"><div><span>01</span><h2 id="work-title">On my workbench</h2></div><a href={base + 'projects/'}>Everything I’ve made →</a></header>
+      <div class="project-stories">
+        {products.map((product) => (
+          <article class:list={['project-story', `project-story--${product.className}`]}>
+            <a class="story-art" href={product.href} aria-label={`View ${product.name}`}>
+              {product.className === 'smallmb' && <><div class="file file--large"><span>12.4</span><small>MB</small></div><div class="compression-line">→</div><div class="file file--small"><span>842</span><small>KB</small></div></>}
+              {product.className === 'geospoof' && <><div class="map-grid"></div><div class="map-route"></div><div class="map-pin"><i></i></div><span class="coordinates">22.5972° N<br />80.3714° E</span></>}
+              {product.className === 'cattoy' && <><div class="mouse"><i></i><b></b><span></span></div><div class="paw paw--one">●</div><div class="paw paw--two">●</div><div class="chase-line"></div></>}
+            </a>
+            <div class="story-copy"><span>{product.note}</span><h3><a href={product.href}>{product.name}</a></h3><p>{product.description}</p><a class="story-link" href={product.href}>See the project ↗</a></div>
+          </article>
+        ))}
+      </div>
+    </section>
 
-   <section class="directory-section writing-directory" aria-labelledby="writing-heading">
-    <div class="section-heading-line"><h2 id="writing-heading">Recent writing</h2><a href={base+'archive/'}>All writing ↗</a></div>
-    <div class="writing-head" aria-hidden="true"><span>Date</span><span>Article</span><span>Read</span></div>
-    <div class="directory-list" id="writing-list">
-     {posts.map(post=><a class="writing-row" href={`${base}blog/${post.id}/`} data-search={`${post.data.title} ${post.data.description ?? ''} ${(post.data.tags ?? []).join(' ')}`}>
-      <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US',{month:'short',day:'2-digit'})}</time><strong>{post.data.title}</strong><span aria-hidden="true">↗</span>
-     </a>)}
-    </div>
-   </section>
+    <section class="notebook" aria-labelledby="notes-title">
+      <header class="section-intro"><div><span>02</span><h2 id="notes-title">From the notebook</h2></div><a href={base + 'archive/'}>Read all notes →</a></header>
+      <div class="note-list">
+        {posts.map((post) => <a class="note-entry" href={`${base}blog/${post.id}/`}><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}</time><span>{post.data.title}</span><b aria-hidden="true">↗</b></a>)}
+      </div>
+    </section>
 
-   <section class="directory-section elsewhere" aria-labelledby="elsewhere-heading">
-    <h2 id="elsewhere-heading">Writing elsewhere</h2>
-    <a class="elsewhere-row" href="https://www.wattpad.com/story/416937465" target="_blank" rel="noopener noreferrer"><span><strong>The Idiot God</strong><small>A fantasy adventure I’m writing</small></span><span>In progress</span><span>Wattpad ↗</span></a>
-   </section>
+    <section class="fiction-shelf" aria-labelledby="fiction-title">
+      <div class="fiction-mark" aria-hidden="true"><span>十</span></div>
+      <div class="fiction-copy"><span>03 · Somewhere beyond the software</span><h2 id="fiction-title">The Idiot God</h2><p>A long fantasy adventure I’m writing about distant kingdoms, dangerous seas and a power called Shinzui.</p></div>
+      <a href="https://www.wattpad.com/story/416937465" target="_blank" rel="noopener noreferrer">Read on Wattpad ↗</a>
+    </section>
   </div>
- </div>
- <script>
-  const input = document.querySelector<HTMLInputElement>('#directory-filter');
-  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
-  const projects = Array.from(document.querySelectorAll<HTMLElement>('.project-row'));
-  const writing = Array.from(document.querySelectorAll<HTMLElement>('.writing-row'));
-  const empty = document.querySelector<HTMLElement>('#empty-state');
-  let kind = 'all';
-  function filterDirectory() {
-   const query = input?.value.trim().toLowerCase() ?? '';
-   let visible = 0;
-   projects.forEach(row => { const show=(kind==='all'||row.dataset.kind===kind)&&(!query||(row.dataset.search??'').toLowerCase().includes(query)); row.hidden=!show; if(show) visible++; });
-   writing.forEach(row => { const show=kind==='all'&&(!query||(row.dataset.search??'').toLowerCase().includes(query)); row.hidden=!show; if(show) visible++; });
-   if(empty) empty.hidden=visible!==0;
-  }
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{kind=tab.dataset.filter??'all';tabs.forEach(item=>item.classList.toggle('is-active',item===tab));filterDirectory();}));
-  input?.addEventListener('input',filterDirectory);
-  document.addEventListener('keydown',event=>{if(event.key==='/'&&document.activeElement!==input){event.preventDefault();input?.focus();}});
- </script>
 </Layout>
