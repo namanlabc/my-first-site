@@ -36,18 +36,8 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#11110f" id="theme-color" />
-    <script is:inline>
-      (() => {
-        try {
-          const saved = localStorage.getItem('naman-theme');
-          const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-          document.documentElement.classList.toggle('dark', dark);
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#11110f' : '#f5f3ed');
-        } catch {}
-      })();
-    </script>
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
     <link rel="canonical" href={canonical} />
@@ -75,22 +65,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       </main>
       <SiteFooter />
     </div>
-    <script is:inline>
-      (() => {
-        const button = document.querySelector('#theme-toggle');
-        const update = () => {
-          const dark = document.documentElement.classList.contains('dark');
-          button?.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#11110f' : '#f5f3ed');
-        };
-        update();
-        button?.addEventListener('click', () => {
-          const dark = !document.documentElement.classList.contains('dark');
-          document.documentElement.classList.toggle('dark', dark);
-          try { localStorage.setItem('naman-theme', dark ? 'dark' : 'light'); } catch {}
-          update();
-        });
-      })();
-    </script>
+
   </body>
 </html>

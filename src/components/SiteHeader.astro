@@ -11,14 +11,9 @@ const active = (href:string) => path.startsWith(href) || (href.endsWith('archive
 ---
 <header class="site-header">
  <a class="site-brand" href={base} aria-label="Naman.blog home">
-  <span class="brand-mark" aria-hidden="true"></span><span>Naman.blog</span>
+  <span class="brand-mark" aria-hidden="true">N</span><span class="brand-slash" aria-hidden="true">/</span><span>Naman</span>
  </a>
- <div class="header-actions">
-  <nav class="desktop-nav" aria-label="Primary navigation">
-   {navItems.map(item=><a href={item.href} target={item.external?'_blank':undefined} rel={item.external?'noopener noreferrer':undefined} aria-current={!item.external&&active(item.href)?'page':undefined}>{item.label}</a>)}
-  </nav>
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch colour theme">
-   <span class="theme-sun" aria-hidden="true">☼</span><span class="theme-moon" aria-hidden="true">◐</span>
-  </button>
- </div>
+ <nav class="desktop-nav" aria-label="Primary navigation">
+  {navItems.map(item=><a href={item.href} target={item.external?'_blank':undefined} rel={item.external?'noopener noreferrer':undefined} aria-current={!item.external&&active(item.href)?'page':undefined}>{item.label}</a>)}
+ </nav>
 </header>
